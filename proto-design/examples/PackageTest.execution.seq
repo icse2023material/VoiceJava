@@ -1,0 +1,81 @@
+1. define package org dot elastic search dot search
+package org.elasticsearch.search 
+_
+2. import static java dot lang dot system dot star 
+package org.elasticsearch.search 
+import static java.lang.System.*
+_
+3. define public class package test 
+package org.elasticsearch.search 
+import static java.lang.System.*
+public class PackageTest {
+  _
+}
+4. define public static function main 
+package org.elasticsearch.search 
+import static java.lang.System.*
+public class PackageTest {
+  public static _ main(){
+
+	}
+}
+5. type void
+package org.elasticsearch.search 
+import static java.lang.System.*
+public class PackageTest {
+  public static void main(_){
+
+	}
+}
+6. type string list name args
+package org.elasticsearch.search 
+import static java.lang.System.*
+public class PackageTest {
+  public static void main(String[] args){
+    _
+	}
+}
+7. out call println
+package org.elasticsearch.search 
+import static java.lang.System.*
+public class PackageTest {
+  public static void main(String[] args){
+    out.println(_);
+	}
+}
+8. string hello world // 感叹号如何输入?
+package org.elasticsearch.search 
+import static java.lang.System.*
+public class PackageTest {
+  public static void main(String[] args){
+    out.println("Hello World!");
+		_
+	}
+}
+9. move next 
+package org.elasticsearch.search 
+import static java.lang.System.*
+public class PackageTest {
+  public static void main(String[] args){
+    out.println("Hello World!");
+	}
+	_
+}
+10. move next 
+package org.elasticsearch.search 
+import static java.lang.System.*
+public class PackageTest {
+  public static void main(String[] args){
+    out.println("Hello World!");
+	}
+}
+
+
+
+
+
+
+
+
+
+
