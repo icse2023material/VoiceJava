@@ -1,0 +1,559 @@
+1. define public class puppy 
+   => public class Puppy { 
+		     _ 
+		  }
+2. define int variable puppy age 
+   => public class Puppy {
+        int puppyAge = _;
+			}
+3. move next
+    => public class Puppy {
+        int puppyAge;
+				_
+			}
+4. define constructor
+    => public class Puppy {
+        int puppyAge;
+				
+				public Puppy(_){
+
+				}
+			}
+5. type string name name
+    => public class Puppy {
+        int puppyAge;
+				
+				public Puppy(String name, _){
+
+				}
+			}
+6. move next 
+    => public class Puppy {
+        int puppyAge;
+				
+				public Puppy(String name){
+				  _	
+				}
+			}
+7. println
+    => public class Puppy {
+        int puppyAge;
+				
+				public Puppy(String name){
+				  System.out.println(_);
+				}
+			}
+8. name
+    => public class Puppy {
+        int puppyAge;
+				
+				public Puppy(String name){
+				  System.out.println(name);
+					_
+				}
+			}
+9. move next
+    => public class Puppy {
+        int puppyAge;
+				
+				public Puppy(String name){
+				  System.out.println(name);
+				}
+				_
+			}
+10. define public function set age 
+    => public class Puppy {
+        int puppyAge;
+				
+				public Puppy(String name){
+				  System.out.println(name);
+				}
+				
+				public _ setAge(){
+
+				}
+			}
+11. type void
+    => public class Puppy {
+        int puppyAge;
+				
+				public Puppy(String name){
+				  System.out.println(name);
+				}
+				
+				public void setAge(_){
+					
+				}
+			}
+12. type int name age
+    => public class Puppy {
+        int puppyAge;
+				
+				public Puppy(String name){
+				  System.out.println(name);
+				}
+				
+				public void setAge(int age, _){
+
+				}
+			}
+13. move next 
+    => public class Puppy {
+        int puppyAge;
+				
+				public Puppy(String name){
+				  System.out.println(name);
+				}
+				
+				public void setAge(int age){
+					_
+				}
+			}
+14. set puppy age to age
+    => public class Puppy {
+        int puppyAge;
+				
+				public Puppy(String name){
+				  System.out.println(name);
+				}
+				
+				public void setAge(int age){
+					puppyAge = age;
+					_
+				}
+			}
+15. move next
+    => public class Puppy {
+        int puppyAge;
+				
+				public Puppy(String name){
+				  System.out.println(name);
+				}
+				
+				public void setAge(int age){
+					puppyAge = age;
+				}
+
+				_
+			}
+16. define public function get age 
+    => public class Puppy {
+        int puppyAge;
+				
+				public Puppy(String name){
+				  System.out.println(name);
+				}
+				
+				public void setAge(int age){
+					puppyAge = age;
+				}
+
+				public _ getAge(){
+
+				}
+			}
+17. type int
+    => public class Puppy {
+        int puppyAge;
+				
+				public Puppy(String name){
+				  System.out.println(name);
+				}
+				
+				public void setAge(int age){
+					puppyAge = age;
+				}
+
+				public int getAge(_){
+					
+				}
+			}
+18. move next
+    => public class Puppy {
+        int puppyAge;
+				
+				public Puppy(String name){
+				  System.out.println(name);
+				}
+				
+				public void setAge(int age){
+					puppyAge = age;
+				}
+
+				public int getAge(){
+					_
+				}
+			}
+19. println
+    => public class Puppy {
+        int puppyAge;
+				
+				public Puppy(String name){
+				  System.out.println(name);
+				}
+				
+				public void setAge(int age){
+					puppyAge = age;
+				}
+
+				public int getAge(){
+					System.out.println(_)
+				}
+			}
+20. puppy age
+    => public class Puppy {
+        int puppyAge;
+				
+				public Puppy(String name){
+				  System.out.println(name);
+				}
+				
+				public void setAge(int age){
+					puppyAge = age;
+				}
+
+				public int getAge(){
+					System.out.println(puppyAge);
+					_
+				}
+			}
+21. return puppy age
+    => public class Puppy {
+        int puppyAge;
+				
+				public Puppy(String name){
+				  System.out.println(name);
+				}
+				
+				public void setAge(int age){
+					puppyAge = age;
+				}
+
+				public int getAge(){
+					System.out.println(puppyAge);
+					return puppyAge;
+				}
+				_
+			}
+22. define public static function main 
+    => public class Puppy {
+        int puppyAge;
+				
+				public Puppy(String name){
+				  System.out.println(name);
+				}
+				
+				public void setAge(int age){
+					puppyAge = age;
+				}
+
+				public int getAge(){
+					System.out.println(puppyAge);
+					return puppyAge;
+				}
+				
+				public static _ main(){
+
+				}
+			}
+23. type void
+    => public class Puppy {
+        int puppyAge;
+				
+				public Puppy(String name){
+				  System.out.println(name);
+				}
+				
+				public void setAge(int age){
+					puppyAge = age;
+				}
+
+				public int getAge(){
+					System.out.println(puppyAge);
+					return puppyAge;
+				}
+				
+				public static void main(_){
+					
+				}
+			}
+24. type string list name args
+    => public class Puppy {
+        int puppyAge;
+				
+				public Puppy(String name){
+				  System.out.println(name);
+				}
+				
+				public void setAge(int age){
+					puppyAge = age;
+				}
+
+				public int getAge(){
+					System.out.println(puppyAge);
+					return puppyAge;
+				}
+				
+				public static void main(String[] args, _){
+					
+				}
+			}
+25. move next 
+    => public class Puppy {
+        int puppyAge;
+				
+				public Puppy(String name){
+				  System.out.println(name);
+				}
+				
+				public void setAge(int age){
+					puppyAge = age;
+				}
+
+				public int getAge(){
+					System.out.println(puppyAge);
+					return puppyAge;
+				}
+				
+				public static void main(String[] args){
+					_
+				}
+			}
+26. define puppy variable my puppy 
+    => public class Puppy {
+        int puppyAge;
+				
+				public Puppy(String name){
+				  System.out.println(name);
+				}
+				
+				public void setAge(int age){
+					puppyAge = age;
+				}
+
+				public int getAge(){
+					System.out.println(puppyAge);
+					return puppyAge;
+				}
+				
+				public static void main(String[] args){
+					Puppy myPuppy = _;
+				}
+			}
+27. new instance puppy 
+    => public class Puppy {
+        int puppyAge;
+				
+				public Puppy(String name){
+				  System.out.println(name);
+				}
+				
+				public void setAge(int age){
+					puppyAge = age;
+				}
+
+				public int getAge(){
+					System.out.println(puppyAge);
+					return puppyAge;
+				}
+				
+				public static void main(String[] args){
+					Puppy myPuppy = new Puppy(_);
+				}
+			}
+
+28. string tommy
+    => public class Puppy {
+        int puppyAge;
+				
+				public Puppy(String name){
+				  System.out.println(name);
+				}
+				
+				public void setAge(int age){
+					puppyAge = age;
+				}
+
+				public int getAge(){
+					System.out.println(puppyAge);
+					return puppyAge;
+				}
+				
+				public static void main(String[] args){
+					// 1. 对于新单词tommy可能会识别不出来，如何处理?
+					// 2. 根据构造函数定义，可知没有第二个参数，因此直接跳到下一个hole
+					Puppy myPuppy = new Puppy("tommy"); 
+					_
+				}
+			}
+29. my puppy call set age 
+    => public class Puppy {
+        int puppyAge;
+				
+				public Puppy(String name){
+				  System.out.println(name);
+				}
+				
+				public void setAge(int age){
+					puppyAge = age;
+				}
+
+				public int getAge(){
+					System.out.println(puppyAge);
+					return puppyAge;
+				}
+				
+				public static void main(String[] args){
+					Puppy myPuppy = new Puppy("tommy"); 
+					myPuppy.setAge(_);
+				}
+			}
+30.  int 2
+    => public class Puppy {
+        int puppyAge;
+				
+				public Puppy(String name){
+				  System.out.println(name);
+				}
+				
+				public void setAge(int age){
+					puppyAge = age;
+				}
+
+				public int getAge(){
+					System.out.println(puppyAge);
+					return puppyAge;
+				}
+				
+				public static void main(String[] args){
+					Puppy myPuppy = new Puppy("tommy"); 
+					myPuppy.setAge(2);
+					_
+				}
+			}
+31. my puppy call get age
+    => public class Puppy {
+        int puppyAge;
+				
+				public Puppy(String name){
+				  System.out.println(name);
+				}
+				
+				public void setAge(int age){
+					puppyAge = age;
+				}
+
+				public int getAge(){
+					System.out.println(puppyAge);
+					return puppyAge;
+				}
+				
+				public static void main(String[] args){
+					Puppy myPuppy = new Puppy("tommy"); 
+					myPuppy.setAge(2);
+					myPuppy.getAge();
+					_
+				}
+			}
+32. println
+    => public class Puppy {
+        int puppyAge;
+				
+				public Puppy(String name){
+				  System.out.println(name);
+				}
+				
+				public void setAge(int age){
+					puppyAge = age;
+				}
+
+				public int getAge(){
+					System.out.println(puppyAge);
+					return puppyAge;
+				}
+				
+				public static void main(String[] args){
+					Puppy myPuppy = new Puppy("tommy"); 
+					myPuppy.setAge(2);
+					myPuppy.getAge();
+					System.out.println(_);
+				}
+			}
+33. my puppy call puppy age
+    => public class Puppy {
+        int puppyAge;
+				
+				public Puppy(String name){
+				  System.out.println(name);
+				}
+				
+				public void setAge(int age){
+					puppyAge = age;
+				}
+
+				public int getAge(){
+					System.out.println(puppyAge);
+					return puppyAge;
+				}
+				
+				public static void main(String[] args){
+					Puppy myPuppy = new Puppy("tommy"); 
+					myPuppy.setAge(2);
+					myPuppy.getAge();
+					System.out.println(myPuppy.puppyAge);
+					_
+				}
+			}
+34. move next
+    => public class Puppy {
+        int puppyAge;
+				
+				public Puppy(String name){
+				  System.out.println(name);
+				}
+				
+				public void setAge(int age){
+					puppyAge = age;
+				}
+
+				public int getAge(){
+					System.out.println(puppyAge);
+					return puppyAge;
+				}
+				
+				public static void main(String[] args){
+					Puppy myPuppy = new Puppy("tommy"); 
+					myPuppy.setAge(2);
+					myPuppy.getAge();
+					System.out.println(myPuppy.puppyAge);
+				}
+
+				_
+			}
+35. move next 
+    => public class Puppy {
+        int puppyAge;
+				
+				public Puppy(String name){
+				  System.out.println(name);
+				}
+				
+				public void setAge(int age){
+					puppyAge = age;
+				}
+
+				public int getAge(){
+					System.out.println(puppyAge);
+					return puppyAge;
+				}
+				
+				public static void main(String[] args){
+					Puppy myPuppy = new Puppy("tommy"); 
+					myPuppy.setAge(2);
+					myPuppy.getAge();
+					System.out.println(myPuppy.puppyAge);
+				}
+			}
+
+
+

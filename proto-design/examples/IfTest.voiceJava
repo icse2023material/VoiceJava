@@ -1,0 +1,21 @@
+define public class if test 
+define public static function main 
+type void
+type string list name args 
+define int variable n 
+int 90
+define if
+n greater than 90
+println
+string excellent
+move next 
+n greater equal 60
+println
+string good 
+move next 
+move next 
+println
+string fail 
+move next 
+move next 
+move next

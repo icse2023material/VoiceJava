@@ -1,0 +1,27 @@
+define public class while test 
+define public static function main 
+type void 
+type string list name args 
+move next 
+define int variable sum 
+int 0
+define int variable n 
+int 0 
+define while 
+n less equal int 100 
+n plus plus 
+set num to num plus n 
+move next 
+println 
+variable sum 
+set sum to int 0 
+set n to int 1 
+define do while 
+set sum to sum plus n 
+n plus plus 
+move next 
+n less equal int 100
+println 
+variable sum 
+move next 
+move next 

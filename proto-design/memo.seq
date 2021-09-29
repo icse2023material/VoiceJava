@@ -1,0 +1,156 @@
+// 1. final | static type
+// private|public|protected final|static int allClicks = 0;
+
+define final double variable pi 
+
+// 2. 3.1415927 
+
+// 3. -45.89f
+
+// 4. int i = 128;
+//    byte b = (byte)i;
+define int variable i 
+128
+move next 
+define byte variable b 
+xxxxxx
+i
+
+
+// 5. int a, b, c 
+
+// 6. int d = 3, e = 4, f = 5;
+
+
+// 7. import java.io.*
+import java dot io dot star 
+
+// 8. package com.runoob.test;
+package com dot runoob dot test 
+
+
+// 9. expression: num++;
+
+// 10. for loop
+// for (int i = 0; i < 500; ++i){
+//	 new InstanceCounter(); 
+// }
+define for loop 
+
+// 10.2
+// for(String name: names){
+//	 System.out.println(name);
+// }
+define enhanced for loop
+define string variable name 
+move next 
+names 
+move next 
+...
+
+
+// 11. i++; ++i;
+
+
+// 12. class SubClass extends SuperClass
+define class sub class extends super class 
+
+
+// 13. while ( x < 20){
+//	 x++;
+// }
+define while loop 
+x less than 20
+move next 
+x plus plus 
+move next
+
+
+// 14. do {
+// x++
+// } while(x < 20)
+define do while loop
+x plus plus 
+move next 
+move next 
+x less than 20
+move next 
+
+
+// 15.1 if
+// if( x == 30){ break; }
+define if 
+x double equal 30
+move next 
+break
+move next //到else if的conditional部分
+          //如果用jump out ? 直接退出在整个if 
+
+// 15.2
+// if ( x < 30){} else if (x == 30) {} else {}
+define if 
+x less than 30
+move next 
+...
+move next 
+x double equal 30
+move next 
+...
+move next// 到else if ()的条件部分
+move next // 自动消除条件?到body部分？
+
+// 难点：还可能有嵌套的if-else
+
+// 16.1
+// a(b(c(d(e))))
+function call a
+function call b
+function call c
+function call d
+e
+move next
+move next
+move next 
+move next 
+or jump out
+
+// 16.2
+// return Settings.builder()
+//            .put(super.nodeSettings(nodeOrdinal, otherSettings))
+//            .build();
+return Settings call builder call put call build
+super call node settings
+node ordinal 
+move next 
+other settings 
+move next
+
+// 17. Collection<Class<? extends Plugin>>
+type Collection
+type Class
+type question extends Plugin
+
+// 18. return Collections.singleton(ScriptedBlockPlugin.class);
+return Collections call singleton
+ScriptedBlockPlugin dot class
+
+// 19.  assertBusy(() -> assertFalse(shouldBlock.get()));
+call assertBusy
+define arrow function 
+call assertFalse
+shouldBlock call get
+move next 
+
+
+// 20.
+// name 可以有各种形态，需要设计语法支持
+// e.g. org, elasticsearch, QueryBuilders, scriptQuery, SCRIPT_NAME
+// 针对已有的，可以去知识库查找： 实现一个算法
+// 主要是针对新定义的
+org
+elasticsearch
+QueryBuilders
+scriptQuery
+SCRIPT_NAME
+search_timeout
+MILLISECONDS

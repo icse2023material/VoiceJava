@@ -1,0 +1,24 @@
+define public class for test 
+define public static function main 
+type void 
+type string list name args 
+define int list variable ns 
+int sequence 1 4 9 16 25 
+define for 
+define int variable i 
+int 0 
+i less than ns call length 
+i plus plus 
+println 
+ns index i 
+set i to i plus int 1
+move next 
+define enhanced for 
+define int variable n 
+move next 
+variable ns 
+println 
+variable n 
+move next 
+move next 
+move next 

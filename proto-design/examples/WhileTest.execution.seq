@@ -1,0 +1,351 @@
+1. define public class while test 
+public class WhileTest {
+	_
+}
+2. define public static function main 
+public class WhileTest {
+	public static _ main(){
+
+	}
+}
+3. type void 
+public class WhileTest {
+	public static void main(_){
+
+	}
+}
+4. type string list name args
+public class WhileTest {
+	public static void main(String[] args, _){
+
+	}
+}
+5. move next 
+public class WhileTest {
+	public static void main(String[] args){
+    _
+	}
+}
+6. define int variable sum
+public class WhileTest {
+	public static void main(String[] args){
+	  int sum = _;
+	}
+}
+7. int 0
+public class WhileTest {
+	public static void main(String[] args){
+	  int sum = 0;
+		_
+	}
+}
+8. define int variable n 
+public class WhileTest {
+	public static void main(String[] args){
+	  int sum = 0;
+	  int n = _;
+	}
+}
+9. int 0
+public class WhileTest {
+	public static void main(String[] args){
+	  int sum = 0;
+	  int n = 0;
+		_
+	}
+}
+10. define while
+public class WhileTest {
+	public static void main(String[] args){
+	  int sum = 0;
+	  int n = 0;
+	  while(_){
+    
+	  }
+	}
+}
+11. n less equal 100 // 复杂expression呢
+public class WhileTest {
+	public static void main(String[] args){
+	  int sum = 0;
+	  int n = 0;
+	  while(n <= 100){
+			_
+	  }
+	}
+}
+12. n plus plus //
+public class WhileTest {
+	public static void main(String[] args){
+	  int sum = 0;
+	  int n = 0;
+	  while(n <= 100){
+      n++;
+			_
+	  }
+	}
+}
+13. set sum to sum plus n // ? 复杂情况
+public class whiletest {
+	public static void main(string[] args){
+	  int sum = 0;
+	  int n = 0;
+	  while(n <= 100){
+      n++;
+		  sum = sum + n;
+			_
+	  }
+	}
+}
+14. move next
+public class whiletest {
+	public static void main(string[] args){
+	  int sum = 0;
+	  int n = 0;
+	  while(n <= 100){
+      n++;
+		  sum = sum + n;
+	  }
+		_
+	}
+}
+15. println
+public class whiletest {
+	public static void main(string[] args){
+	  int sum = 0;
+	  int n = 0;
+	  while(n <= 100){
+      n++;
+		  sum = sum + n;
+	  }
+	  Sytem.out.println(_);
+	}
+}
+16. sum | variable sum // 是否加个variable
+public class whiletest {
+	public static void main(string[] args){
+	  int sum = 0;
+	  int n = 0;
+	  while(n <= 100){
+      n++;
+		  sum = sum + n;
+	  }
+	  Sytem.out.println(sum);
+		_
+	}
+}
+17. set sum to int 0 | set sum to 0
+public class whiletest {
+	public static void main(string[] args){
+	  int sum = 0;
+	  int n = 0;
+	  while(n <= 100){
+      n++;
+		  sum = sum + n;
+	  }
+	  sytem.out.println(sum);
+	  sum = 0;
+		_
+	}
+}
+18. set n to int 1
+public class whiletest {
+	public static void main(string[] args){
+	  int sum = 0;
+	  int n = 0;
+	  while(n <= 100){
+      n++;
+		  sum = sum + n;
+	  }
+	  sytem.out.println(sum);
+	  sum = 0;
+	  n = 1;
+		_
+	}
+}
+19. define do while
+public class whiletest {
+	public static void main(string[] args){
+	  int sum = 0;
+	  int n = 0;
+	  while(n <= 100){
+      n++;
+		  sum = sum + n;
+	  }
+	  sytem.out.println(sum);
+	  sum = 0;
+	  n = 1;
+		do {
+		  _
+	  } while()
+	}
+}
+20. set sum to sum plus n 
+public class whiletest {
+	public static void main(string[] args){
+	  int sum = 0;
+	  int n = 0;
+	  while(n <= 100){
+      n++;
+		  sum = sum + n;
+	  }
+	  sytem.out.println(sum);
+	  sum = 0;
+	  n = 1;
+		do {
+			sum = sum + n;
+		  _
+	  } while()
+	}
+}
+21. n plus plus 
+public class whiletest {
+	public static void main(string[] args){
+	  int sum = 0;
+	  int n = 0;
+	  while(n <= 100){
+      n++;
+		  sum = sum + n;
+	  }
+	  sytem.out.println(sum);
+	  sum = 0;
+	  n = 1;
+		do {
+			sum = sum + n;
+	    n++;
+		  _
+	  } while()
+	}
+}
+22. move next 
+public class whiletest {
+	public static void main(string[] args){
+	  int sum = 0;
+	  int n = 0;
+	  while(n <= 100){
+      n++;
+		  sum = sum + n;
+	  }
+	  sytem.out.println(sum);
+	  sum = 0;
+	  n = 1;
+		do {
+			sum = sum + n;
+	    n++;
+	  } while(_)
+	}
+}
+23. n less equal [int] 100
+public class whiletest {
+	public static void main(string[] args){
+	  int sum = 0;
+	  int n = 0;
+	  while(n <= 100){
+      n++;
+		  sum = sum + n;
+	  }
+	  sytem.out.println(sum);
+	  sum = 0;
+	  n = 1;
+		do {
+			sum = sum + n;
+	    n++;
+	  } while(n <= 100)
+		_
+	}
+}
+24. println
+public class whiletest {
+	public static void main(string[] args){
+	  int sum = 0;
+	  int n = 0;
+	  while(n <= 100){
+      n++;
+		  sum = sum + n;
+	  }
+	  sytem.out.println(sum);
+	  sum = 0;
+	  n = 1;
+		do {
+			sum = sum + n;
+	    n++;
+	  } while(n <= 100)
+		System.out.println(_);
+	}
+}
+25. sum
+public class whiletest {
+	public static void main(string[] args){
+	  int sum = 0;
+	  int n = 0;
+	  while(n <= 100){
+      n++;
+		  sum = sum + n;
+	  }
+	  sytem.out.println(sum);
+	  sum = 0;
+	  n = 1;
+		do {
+			sum = sum + n;
+	    n++;
+	  } while(n <= 100)
+		System.out.println(sum);
+		_
+	}
+}
+26. move next
+public class whiletest {
+	public static void main(string[] args){
+	  int sum = 0;
+	  int n = 0;
+	  while(n <= 100){
+      n++;
+		  sum = sum + n;
+	  }
+	  sytem.out.println(sum);
+	  sum = 0;
+	  n = 1;
+		do {
+			sum = sum + n;
+	    n++;
+	  } while(n <= 100)
+		System.out.println(sum);
+	}
+	_
+}
+27. move next 
+public class whiletest {
+	public static void main(string[] args){
+	  int sum = 0;
+	  int n = 0;
+	  while(n <= 100){
+      n++;
+		  sum = sum + n;
+	  }
+	  sytem.out.println(sum);
+	  sum = 0;
+	  n = 1;
+		do {
+			sum = sum + n;
+	    n++;
+	  } while(n <= 100)
+		System.out.println(sum);
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

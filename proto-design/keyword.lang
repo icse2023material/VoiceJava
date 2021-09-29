@@ -1,0 +1,2 @@
+ClassModifier ::= Annotation | public | protected | private | abstract | static | final | strictfp
+MethodModifier ::= Annotation | public | protected | private | abstract | static | final | synchronized | native | strictfp

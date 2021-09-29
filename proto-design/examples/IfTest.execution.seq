@@ -1,0 +1,227 @@
+1. define public class if test
+  => public class IfTest {
+		   _
+	   }
+2. define public static function main 
+  => public class IfTest {
+		   public static _ main(){
+
+		   }
+	   }
+3. type void
+  => public class IfTest {
+		   public static void main(_){
+			
+		   }
+	   }
+4. type string list name args
+  => public class IfTest {
+       public static void main(String[] args){
+			   _
+		   }
+	   }
+5. define int variable n // n的识别有难度
+  => public class IfTest {
+		   public static void main(String[] args){
+			   int n = _;
+		   }
+	   }
+6. int 90
+  => public class IfTest {
+		   public static void main(String[] args){
+			   int n = 90;
+			   _
+		   }
+	   }
+7. define if 
+  => public class IfTest {
+		   public static void main(String[] args){
+			   int n = 90;
+			   if(_){
+
+			   } else if (){
+
+			   }
+		   }
+	   }
+8. n greater than 90 // 在当前语境下,一定是expression
+  => public class IfTest {
+		   public static void main(String[] args){
+			   int n = 90;
+			   if(n > 90){
+					 _
+			   } else if (){
+
+			   }
+		   }
+	   }
+9. println
+  => public class IfTest {
+		   public static void main(String[] args){
+			   int n = 90;
+			   if(n > 90){
+					 System.out.println(_);
+			   } else if (){
+
+			   }
+		   }
+	   }
+10. string excellent
+  => public class IfTest {
+		   public static void main(String[] args){
+			   int n = 90;
+			   if(n > 90){
+					 System.out.println("excellent");
+					 _
+			   } else if (){
+
+			   }
+		   }
+	   }
+11. move next;
+  => public class IfTest {
+		   public static void main(String[] args){
+			   int n = 90;
+			   if(n > 90){
+					 System.out.println("excellent");
+			   } else if (_){
+
+			   }
+		   }
+	   }
+12. n greater equal 60
+  => public class IfTest {
+		   public static void main(String[] args){
+			   int n = 90;
+			   if(n > 90){
+					 System.out.println("excellent");
+			   } else if (n >= 60){
+           _
+			   }
+		   }
+	   }
+13. println
+  => public class IfTest {
+		   public static void main(String[] args){
+			   int n = 90;
+			   if(n > 90){
+					 System.out.println("excellent");
+			   } else if (n >= 60){
+           System.out.println(_);
+			   }
+		   }
+	   }
+14. string good
+  => public class IfTest {
+		   public static void main(String[] args){
+			   int n = 90;
+			   if(n > 90){
+					 System.out.println("excellent");
+			   } else if (n >= 60){
+           System.out.println("good");
+					 _
+			   }
+		   }
+	   }
+15. move next 
+  => public class IfTest {
+		   public static void main(String[] args){
+			   int n = 90;
+			   if(n > 90){
+					 System.out.println("excellent");
+			   } else if (n >= 60){
+           System.out.println("good");
+			   } else if (_ ){
+
+				 }
+		   }
+	   }
+16. move next 
+  => public class IfTest {
+		   public static void main(String[] args){
+			   int n = 90;
+			   if(n > 90){
+					 System.out.println("excellent");
+			   } else if (n >= 60){
+           System.out.println("good");
+			   } else {
+					 _
+				 }
+		   }
+	   }
+17. println
+  => public class IfTest {
+		   public static void main(String[] args){
+			   int n = 90;
+			   if(n > 90){
+					 System.out.println("excellent");
+			   } else if (n >= 60){
+           System.out.println("good");
+			   } else {
+					 System.out.println(_);
+				 }
+		   }
+	   }
+18. string fail
+  => public class IfTest {
+		   public static void main(String[] args){
+			   int n = 90;
+			   if(n > 90){
+					 System.out.println("excellent");
+			   } else if (n >= 60){
+           System.out.println("good");
+			   } else {
+					 System.out.println("fail");
+					 _
+				 }
+		   }
+	   }
+
+19. move next 
+  => public class IfTest {
+		   public static void main(String[] args){
+			   int n = 90;
+			   if(n > 90){
+					 System.out.println("excellent");
+			   } else if (n >= 60){
+           System.out.println("good");
+			   } else {
+					 System.out.println("fail");
+				 }
+				 _
+		   }
+	   }
+20. move next 
+  => public class IfTest {
+		   public static void main(String[] args){
+			   int n = 90;
+			   if(n > 90){
+					 System.out.println("excellent");
+			   } else if (n >= 60){
+           System.out.println("good");
+			   } else {
+					 System.out.println("fail");
+				 }
+		   }
+			 _
+	   }
+
+21. move next 
+  => public class IfTest {
+		   public static void main(String[] args){
+			   int n = 90;
+			   if(n > 90){
+					 System.out.println("excellent");
+			   } else if (n >= 60){
+           System.out.println("good");
+			   } else {
+					 System.out.println("fail");
+				 }
+		   }
+	   }
+
+
+// if-else if, 没有else的情况，也会首先生成if-else if - else, 然后执行2次move next即可跳过最后一个else
+
+
+

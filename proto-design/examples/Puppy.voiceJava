@@ -1,0 +1,35 @@
+define public class puppy
+define int variable puppy age
+move next
+define constructor puppy
+type string name name
+move next
+print
+name
+move next
+define public function set age 
+type void 
+type int name age 
+move next 
+set puppy age to age 
+move next
+define public function get age 
+type int
+move next
+print 
+puppy age 
+return puppy age 
+define public static function main
+void
+type string list name args 
+move next 
+define puppy variable my puppy 
+new instance puppy 
+string tommy 
+my puppy call set age 
+int 2 
+my puppy call get age
+print 
+my puppy call puppy age 
+move next
+move next

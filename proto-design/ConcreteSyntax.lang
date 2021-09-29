@@ -1,0 +1,59 @@
+
+package name [dot name]
+
+import name [dot name|star] // if import org.star.search, it is ok; org.star, edit this star to *
+
+define [ClassModifier] class className [extends className]
+
+define at override // @Override
+
+define constructor
+define [MethodModifier] function functionName [throws Exception]
+
+type typeName [extends typeName]
+
+define Type variable variableName
+
+set variableName to variableName|constant|expression
+
+type typeName name variableName
+
+return exp
+
+functionCall ::= call variableName | variableName [call variableName]
+
+exp ::= functionCall | variableName | constant | attribute
+
+define arrow function
+
+break
+
+new insance ReferenceType
+
+
+define [enhanced] for
+define [do] while
+define if 
+
+define try catch
+
+variableName|constant @compare variableName|constant 
+@compare ::= less than 
+           | less equal
+					 | greater than
+					 |  greater equal
+					 | double equal 
+jump out 
+move next
+
+// expression 
+// +-*/=
+define expression 
+variableName | constant @op variableName | constant
+@op ::= plus | minus | times | minus | mod | equal
+variableName plus plus 
+plus plus variableName
+
+
+
+string textxxxx

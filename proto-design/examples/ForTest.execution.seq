@@ -1,0 +1,283 @@
+1. define public class for test 
+public class ForTest {
+  _
+}
+2. define public static function main 
+public class ForTest {
+  public static _ main(){
+
+	}
+}
+3. type void 
+public class ForTest {
+  public static void main(_){
+
+	}
+}
+4. type string list name args 
+public class ForTest {
+  public static void main(String[] args){
+		_
+	}
+}
+5. define int list variable ns
+public class ForTest {
+  public static void main(String[] args){
+		int[] ns = _;
+	}
+}
+6. int sequence 1 4 9 16 25 // TODO
+public class ForTest {
+  public static void main(String[] args){
+		int[] ns = {1, 4, 9, 16, 25};
+		_
+	}
+}
+7. define for 
+public class ForTest {
+  public static void main(String[] args){
+		int[] ns = {1, 4, 9, 16, 25};
+		for(_; ;){
+
+		}
+	}
+}
+8. define int variable i
+public class ForTest {
+  public static void main(String[] args){
+		int[] ns = {1, 4, 9, 16, 25};
+		for(int i = _; ;){
+
+		}
+	}
+}
+9. int 0
+public class ForTest {
+  public static void main(String[] args){
+		int[] ns = {1, 4, 9, 16, 25};
+		for(int i = 0; _;){
+
+		}
+	}
+}
+10. i less than ns call length 
+public class ForTest {
+  public static void main(String[] args){
+		int[] ns = {1, 4, 9, 16, 25};
+		for(int i = 0; i < ns.length; _){
+
+		}
+	}
+}
+11. i plus plus 
+public class ForTest {
+  public static void main(String[] args){
+		int[] ns = {1, 4, 9, 16, 25};
+		for(int i = 0; i < ns.length; i++){
+			_
+		}
+	}
+}
+12. println
+public class ForTest {
+  public static void main(String[] args){
+		int[] ns = {1, 4, 9, 16, 25};
+		for(int i = 0; i < ns.length; i++){
+			System.out.println(_);
+		}
+	}
+}
+13. ns index i // TODO
+public class ForTest {
+  public static void main(String[] args){
+		int[] ns = {1, 4, 9, 16, 25};
+		for(int i = 0; i < ns.length; i++){
+			System.out.println(ns[i]);
+			_
+		}
+	}
+}
+14. set i to i plus one | set i to i plus int 1
+public class ForTest {
+  public static void main(String[] args){
+		int[] ns = {1, 4, 9, 16, 25};
+		for(int i = 0; i < ns.length; i++){
+			System.out.println(ns[i]);
+			i = i + 1;
+			_
+		}
+	}
+}
+15. move next
+public class ForTest {
+  public static void main(String[] args){
+		int[] ns = {1, 4, 9, 16, 25};
+		for(int i = 0; i < ns.length; i++){
+			System.out.println(ns[i]);
+			i = i + 1;
+		}
+		_
+	}
+}
+16. define enhanced for 
+public class ForTest {
+  public static void main(String[] args){
+		int[] ns = {1, 4, 9, 16, 25};
+		for(int i = 0; i < ns.length; i++){
+			System.out.println(ns[i]);
+			i = i + 1;
+		}
+		for(_;){
+
+		}
+	}
+}
+17. define int variable n 
+public class ForTest {
+  public static void main(String[] args){
+		int[] ns = {1, 4, 9, 16, 25};
+		for(int i = 0; i < ns.length; i++){
+			System.out.println(ns[i]);
+			i = i + 1;
+		}
+		for(int n = _;){
+
+		}
+	}
+}
+或者根据上下文优化为:
+public class ForTest {
+  public static void main(String[] args){
+		int[] ns = {1, 4, 9, 16, 25};
+		for(int i = 0; i < ns.length; i++){
+			System.out.println(ns[i]);
+			i = i + 1;
+		}
+		for(int n: _){
+
+		}
+	}
+}
+18. move next
+public class ForTest {
+  public static void main(String[] args){
+		int[] ns = {1, 4, 9, 16, 25};
+		for(int i = 0; i < ns.length; i++){
+			System.out.println(ns[i]);
+			i = i + 1;
+		}
+		for(int n: _){
+
+		}
+	}
+}
+19. variable ns 
+public class ForTest {
+  public static void main(String[] args){
+		int[] ns = {1, 4, 9, 16, 25};
+		for(int i = 0; i < ns.length; i++){
+			System.out.println(ns[i]);
+			i = i + 1;
+		}
+		for(int n: ns){
+			_
+		}
+	}
+}
+20. println
+public class ForTest {
+  public static void main(String[] args){
+		int[] ns = {1, 4, 9, 16, 25};
+		for(int i = 0; i < ns.length; i++){
+			System.out.println(ns[i]);
+			i = i + 1;
+		}
+		for(int n: ns){
+			System.out.println(_);
+		}
+	}
+}
+21. variable n 
+public class ForTest {
+  public static void main(String[] args){
+		int[] ns = {1, 4, 9, 16, 25};
+		for(int i = 0; i < ns.length; i++){
+			System.out.println(ns[i]);
+			i = i + 1;
+		}
+		for(int n: ns){
+			System.out.println(n);
+			_
+		}
+	}
+}
+22. move next 
+public class ForTest {
+  public static void main(String[] args){
+		int[] ns = {1, 4, 9, 16, 25};
+		for(int i = 0; i < ns.length; i++){
+			System.out.println(ns[i]);
+			i = i + 1;
+		}
+		for(int n: ns){
+			System.out.println(n);
+		}
+		_
+	}
+}
+23. move next 
+public class ForTest {
+  public static void main(String[] args){
+		int[] ns = {1, 4, 9, 16, 25};
+		for(int i = 0; i < ns.length; i++){
+			System.out.println(ns[i]);
+			i = i + 1;
+		}
+		for(int n: ns){
+			System.out.println(n);
+		}
+	}
+	_
+}
+
+24. move next 
+public class ForTest {
+  public static void main(String[] args){
+		int[] ns = {1, 4, 9, 16, 25};
+		for(int i = 0; i < ns.length; i++){
+			System.out.println(ns[i]);
+			i = i + 1;
+		}
+		for(int n: ns){
+			System.out.println(n);
+		}
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
