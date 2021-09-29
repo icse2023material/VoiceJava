@@ -1,0 +1,29 @@
+define interface person 
+define function run 
+type void
+move next
+define function get name
+type string 
+move next
+move next 
+define public class interface test implements person 
+define private string variable name
+move next 
+define constructor
+type string name name 
+move next 
+set this call name to variable name
+move next 
+define at override
+define public function run 
+type void 
+move next 
+println
+expression this call name plus string run 
+move next 
+define at override
+define public function get name 
+type string 
+move next 
+return this call name 
+move next

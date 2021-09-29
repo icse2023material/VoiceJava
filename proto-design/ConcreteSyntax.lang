@@ -3,18 +3,20 @@ package name [dot name]
 
 import name [dot name|star] // if import org.star.search, it is ok; org.star, edit this star to *
 
-define [ClassModifier] class className [extends className]
+define [ClassModifier] class className [extends className] [implements name]
 
-define at override // @Override
+define at override // @Override or 
+define override
 
 define constructor
 define [MethodModifier] function functionName [throws Exception]
-
+define interface name
+define [MethodModifier] Type variable variableName
+define [MethodModifier] variable variableName
 type typeName [extends typeName]
 
-define Type variable variableName
 
-set variableName to variableName|constant|expression
+set variableName|functionalCall to variableName|constant|expression
 
 type typeName name variableName
 

@@ -1,0 +1,333 @@
+1. define interface person
+interface Person {
+	_
+}
+2. define function run
+interface Person {
+	_ run();
+}
+3. type void
+interface Person {
+	void run(_);
+}
+4. move next // 因为是interface,没有body部分
+interface Person {
+	void run();
+	_
+}
+5. define function get name 
+interface Person {
+	void run();
+	_ getName();
+}
+6. type string
+interface Person {
+	void run();
+	String getName(_);
+}
+7. move next 
+interface Person {
+	void run();
+	String getName();
+	_
+}
+8. move next 
+interface Person {
+	void run();
+	String getName();
+}
+_
+9. define public class interface test implements person 
+interface Person {
+	void run();
+	String getName();
+}
+public class InterfaceTest implements Person {
+	_
+}
+10. define private string variable name 
+// or define private variable name 
+//    type string 
+interface Person {
+	void run();
+	String getName();
+}
+public class InterfaceTest implements Person {
+	private string name = _;
+}
+11. move next 
+interface Person {
+	void run();
+	String getName();
+}
+public class InterfaceTest implements Person {
+	private string name;
+	_
+}
+12. define constructor
+interface Person {
+	void run();
+	String getName();
+}
+public class InterfaceTest implements Person {
+	private string name;
+	public InterfaceTest(_){
+
+	}
+}
+13. type string name name 
+interface Person {
+	void run();
+	String getName();
+}
+public class InterfaceTest implements Person {
+	private string name;
+	public InterfaceTest(String name, _){
+
+	}
+}
+14. move next 
+interface Person {
+	void run();
+	String getName();
+}
+public class InterfaceTest implements Person {
+	private string name;
+	public InterfaceTest(String name){
+		_
+	}
+}
+15. set this call name  to variable name
+interface Person {
+	void run();
+	String getName();
+}
+public class InterfaceTest implements Person {
+	private string name;
+	public InterfaceTest(String name){
+		this.name = name
+		_
+	}
+}
+16. move next 
+interface Person {
+	void run();
+	String getName();
+}
+public class InterfaceTest implements Person {
+	private string name;
+	public InterfaceTest(String name){
+		this.name = name
+	}
+	_
+}
+17. define at override
+interface Person {
+	void run();
+	String getName();
+}
+public class InterfaceTest implements Person {
+	private string name;
+	public InterfaceTest(String name){
+		this.name = name
+	}
+	@Override 
+	_
+}
+18. define public function run 
+interface Person {
+	void run();
+	String getName();
+}
+public class InterfaceTest implements Person {
+	private string name;
+	public InterfaceTest(String name){
+		this.name = name
+	}
+	@Override 
+	public _ run(){
+
+	}
+}
+19. type void  // 根据override可以推导出此run为interface中的run，可以跳过一些步骤
+interface Person {
+	void run();
+	String getName();
+}
+public class InterfaceTest implements Person {
+	private string name;
+	public InterfaceTest(String name){
+		this.name = name
+	}
+	@Override 
+	public void run(_){
+		
+	}
+}
+20. move next 
+interface Person {
+	void run();
+	String getName();
+}
+public class InterfaceTest implements Person {
+	private string name;
+	public InterfaceTest(String name){
+		this.name = name
+	}
+	@Override 
+	public void run(){
+		_	
+	}
+}
+21. println
+interface Person {
+	void run();
+	String getName();
+}
+public class InterfaceTest implements Person {
+	private string name;
+	public InterfaceTest(String name){
+		this.name = name
+	}
+	@Override 
+	public void run(){
+		System.out.println(_);
+	}
+}
+22. expression this call name plus string run // expression
+// todo: "run" 还要变成" run" 
+public class InterfaceTest implements Person {
+	private string name;
+	public InterfaceTest(String name){
+		this.name = name
+	}
+	@Override 
+	public void run(){
+		System.out.println(this.name + "run");
+		_
+	}
+}
+23. move next
+public class InterfaceTest implements Person {
+	private string name;
+	public InterfaceTest(String name){
+		this.name = name
+	}
+	@Override 
+	public void run(){
+		System.out.println(this.name + "run");
+	}
+
+	_
+}
+
+24. define at override
+public class InterfaceTest implements Person {
+	private string name;
+	public InterfaceTest(String name){
+		this.name = name
+	}
+	@Override 
+	public void run(){
+		System.out.println(this.name + "run");
+	}
+
+	@Override
+	_
+}
+25. define public function get name 
+public class InterfaceTest implements Person {
+	private string name;
+	public InterfaceTest(String name){
+		this.name = name
+	}
+	@Override 
+	public void run(){
+		System.out.println(this.name + "run");
+	}
+
+	@Override
+	public _ getName(){
+
+	}
+}
+26. type string 
+public class InterfaceTest implements Person {
+	private string name;
+	public InterfaceTest(String name){
+		this.name = name
+	}
+	@Override 
+	public void run(){
+		System.out.println(this.name + "run");
+	}
+
+	@Override
+	public String getName(_){
+		
+	}
+}
+27. move next 
+public class InterfaceTest implements Person {
+	private string name;
+	public InterfaceTest(String name){
+		this.name = name
+	}
+	@Override 
+	public void run(){
+		System.out.println(this.name + "run");
+	}
+
+	@Override
+	public String getName(){
+		_	
+	}
+}
+28. return this call name 
+public class InterfaceTest implements Person {
+	private string name;
+	public InterfaceTest(String name){
+		this.name = name
+	}
+	@Override 
+	public void run(){
+		System.out.println(this.name + "run");
+	}
+
+	@Override
+	public String getName(){
+		return this.name;
+	}
+	_
+}
+29. move next 
+public class InterfaceTest implements Person {
+	private string name;
+	public InterfaceTest(String name){
+		this.name = name
+	}
+	@Override 
+	public void run(){
+		System.out.println(this.name + "run");
+	}
+
+	@Override
+	public String getName(){
+		return this.name;
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
