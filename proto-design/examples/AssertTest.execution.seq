@@ -1,0 +1,229 @@
+1. define public class assert test 
+public class AssertTest {
+	_
+}
+2. define public function test 
+public class AssertTest {
+	public _ test(){
+
+	}
+}
+3. type void
+public class AssertTest {
+	public void test(_){
+
+	}
+}
+4. move next 
+public class AssertTest {
+	public void test(){
+    _
+	}
+}
+5. define double variable x
+public class AssertTest {
+	public void test(){
+    double x = _
+	}
+}
+6. math call abs
+public class AssertTest {
+	public void test(){
+    double x = Math.abs(_);
+	}
+}
+7. int -123.45 // TODO
+public class AssertTest {
+	public void test(){
+    double x = Math.abs(-123.45);
+		_
+	}
+}
+
+8. define assert 
+public class AssertTest {
+	public void test(){
+    double x = Math.abs(-123.45);
+		assert _
+	}
+}
+
+9. expression variable x greater equal int 0 // TODO
+public class AssertTest {
+	public void test(){
+    double x = Math.abs(-123.45);
+		assert x >= 0;
+		_
+	}
+}
+10. println | system dot out dot println
+public class AssertTest {
+	public void test(){
+    double x = Math.abs(-123.45);
+		assert x >= 0;
+		System.out.println(_);
+	}
+}
+11. variable x
+public class AssertTest {
+	public void test(){
+    double x = Math.abs(-123.45);
+		assert x >= 0;
+		System.out.println(x);
+		_
+	}
+}
+12. move next 
+public class AssertTest {
+	public void test(){
+    double x = Math.abs(-123.45);
+		assert x >= 0;
+		System.out.println(x);
+	}
+
+	_
+}
+
+13. define function sort 
+public class AssertTest {
+	public void test(){
+    double x = Math.abs(-123.45);
+		assert x >= 0;
+		System.out.println(x);
+	}
+
+	_ sort(){
+
+	}
+}
+
+14. type void
+public class AssertTest {
+	public void test(){
+    double x = Math.abs(-123.45);
+		assert x >= 0;
+		System.out.println(x);
+	}
+
+	void sort(_){
+
+	}
+}
+
+15. type int list name arr
+public class AssertTest {
+	public void test(){
+    double x = Math.abs(-123.45);
+		assert x >= 0;
+		System.out.println(x);
+	}
+
+	void sort(int[] arr){
+		_
+	}
+}
+
+16. define if 
+public class AssertTest {
+	public void test(){
+    double x = Math.abs(-123.45);
+		assert x >= 0;
+		System.out.println(x);
+	}
+
+	void sort(int[] arr){
+		if(_){
+
+		}
+	}
+}
+
+17. expresion variable arr double equal null
+public class AssertTest {
+	public void test(){
+    double x = Math.abs(-123.45);
+		assert x >= 0;
+		System.out.println(x);
+	}
+
+	void sort(int[] arr){
+		if(arr == null){
+      _
+		}
+	}
+}
+
+18. throw new illegal argument exception 
+public class AssertTest {
+	public void test(){
+    double x = Math.abs(-123.45);
+		assert x >= 0;
+		System.out.println(x);
+	}
+
+	void sort(int[] arr){
+		if(arr == null){
+      throw new IllegalArgumentException(_);
+		}
+	}
+}
+
+19. string array cannot be null
+public class AssertTest {
+	public void test(){
+    double x = Math.abs(-123.45);
+		assert x >= 0;
+		System.out.println(x);
+	}
+
+	void sort(int[] arr){
+		if(arr == null){
+      throw new IllegalArgumentException("array cannot be null");
+			_
+		}
+	}
+}
+
+20. move next
+public class AssertTest {
+	public void test(){
+    double x = Math.abs(-123.45);
+		assert x >= 0;
+		System.out.println(x);
+	}
+
+	void sort(int[] arr){
+		if(arr == null){
+      throw new IllegalArgumentException("array cannot be null");
+		}
+		_
+	}
+}
+
+21 move next
+public class AssertTest {
+	public void test(){
+    double x = Math.abs(-123.45);
+		assert x >= 0;
+		System.out.println(x);
+	}
+
+	void sort(int[] arr){
+		if(arr == null){
+      throw new IllegalArgumentException("array cannot be null");
+		}
+	}
+	_
+}
+
+
+
+
+
+
+
+
+
+
+
+

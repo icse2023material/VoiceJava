@@ -41,6 +41,8 @@ define switch
 
 
 define try catch
+throw new exceptionName
+
 
 variableName|constant @compare variableName|constant 
 @compare ::= less than 

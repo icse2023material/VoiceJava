@@ -1,0 +1,27 @@
+import java dot io dot unsupported encoding exception 
+import java dot uitl dot arrays
+define public class exception test 
+define public static function main 
+type void 
+type string list name args 
+define byte list variable bs 
+jump out
+define static function to gbk
+type byte list 
+type string name s 
+define try catch 
+return s call get bytes 
+string gbk 
+type unsupported encoding exception name e 
+println
+variable e 
+return s call get bytes
+move next
+move next
+goto line 244
+call to gbk 
+string 中文
+println
+arrays call to string
+variable bs
+move next

@@ -1,0 +1,21 @@
+define public class assert test 
+define public function test 
+type void 
+move next 
+define double variable x 
+math call abs 
+int -123.45
+define assert 
+expression variable x greater equal than int 0
+system dot out println
+variable x 
+move next 
+define function sort 
+type void 
+type int list name arr 
+define if 
+expression variable arr double equal null 
+throw new illegal argument exception 
+string array cannot be null 
+move next 
+move next 

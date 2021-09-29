@@ -1,0 +1,407 @@
+1. import java dot io dot unsupported encoding exception
+import java.io.UnsupportedEncodingException;
+_
+
+2. import java dot util dot arrays 
+import java.io.UnsupportedEncodingException;
+import java.util.Arrays;
+_
+
+3. define public class exception test 
+import java.io.UnsupportedEncodingException;
+import java.util.Arrays;
+public class ExceptionTest {
+	_
+}
+
+4. define public static function main 
+import java.io.UnsupportedEncodingException;
+import java.util.Arrays;
+public class ExceptionTest {
+	public static _ main(){
+
+	}
+}
+
+5. type void 
+import java.io.UnsupportedEncodingException;
+import java.util.Arrays;
+public class ExceptionTest {
+	public static void main(_){
+
+	}
+}
+6. type string list name args
+import java.io.UnsupportedEncodingException;
+import java.util.Arrays;
+public class ExceptionTest {
+	public static void main(String[] args){
+    _
+	}
+}
+
+7. define byte list variable bs
+import java.io.UnsupportedEncodingException;
+import java.util.Arrays;
+public class ExceptionTest {
+	public static void main(String[] args){
+    byte[] bs = _;
+	}
+}
+
+8. jump out 
+
+import java.io.UnsupportedEncodingException;
+import java.util.Arrays;
+public class ExceptionTest {
+	public static void main(String[] args){
+    byte[] bs = _;
+	}
+
+	_
+}
+
+9. define static function to gbk 
+import java.io.UnsupportedEncodingException;
+import java.util.Arrays;
+public class ExceptionTest {
+	public static void main(String[] args){
+    byte[] bs = _;
+	}
+
+	static _ toGBK(){
+
+	}
+}
+
+10. type byte list 
+import java.io.UnsupportedEncodingException;
+import java.util.Arrays;
+public class ExceptionTest {
+	public static void main(String[] args){
+    byte[] bs = _;
+	}
+
+	static byte[] toGBK(_){
+
+	}
+}
+
+11. type string name s 
+import java.io.UnsupportedEncodingException;
+import java.util.Arrays;
+public class ExceptionTest {
+	public static void main(String[] args){
+    byte[] bs = _;
+	}
+
+	static byte[] toGBK(String s){
+		_
+	}
+}
+
+12. define try catch 
+import java.io.UnsupportedEncodingException;
+import java.util.Arrays;
+public class ExceptionTest {
+	public static void main(String[] args){
+    byte[] bs = _;
+	}
+
+	static byte[] toGBK(String s){
+		try {
+			_	
+		} catch () {
+		}
+	}
+}
+
+13. return s call get bytes
+import java.io.UnsupportedEncodingException;
+import java.util.Arrays;
+public class ExceptionTest {
+	public static void main(String[] args){
+    byte[] bs = _;
+	}
+
+	static byte[] toGBK(String s){
+		try {
+			return s.getBytes(_);
+		} catch () {
+		}
+	}
+}
+
+14. string gbk
+import java.io.UnsupportedEncodingException;
+import java.util.Arrays;
+public class ExceptionTest {
+	public static void main(String[] args){
+    byte[] bs = _;
+	}
+
+	static byte[] toGBK(String s){
+		try {
+			return s.getBytes("GBK");
+		} catch (_) {
+		}
+	}
+}
+15. type unsupported encoding exception name e 
+import java.io.UnsupportedEncodingException;
+import java.util.Arrays;
+public class ExceptionTest {
+	public static void main(String[] args){
+    byte[] bs = _;
+	}
+
+	static byte[] toGBK(String s){
+		try {
+			return s.getBytes("GBK");
+		} catch (UnsupportedEncodingException e) {
+			_
+		}
+	}
+}
+
+16. println
+import java.io.UnsupportedEncodingException;
+import java.util.Arrays;
+public class ExceptionTest {
+	public static void main(String[] args){
+    byte[] bs = _;
+	}
+
+	static byte[] toGBK(String s){
+		try {
+			return s.getBytes("GBK");
+		} catch (UnsupportedEncodingException e) {
+			System.out.println(_);
+		}
+	}
+}
+
+17. variable e
+import java.io.UnsupportedEncodingException;
+import java.util.Arrays;
+public class ExceptionTest {
+	public static void main(String[] args){
+    byte[] bs = _;
+	}
+
+	static byte[] toGBK(String s){
+		try {
+			return s.getBytes("GBK");
+		} catch (UnsupportedEncodingException e) {
+			System.out.println(e);
+			_
+		}
+	}
+}
+18. return s call get bytes
+import java.io.UnsupportedEncodingException;
+import java.util.Arrays;
+public class ExceptionTest {
+	public static void main(String[] args){
+    byte[] bs = _;
+	}
+
+	static byte[] toGBK(String s){
+		try {
+			return s.getBytes("GBK");
+		} catch (UnsupportedEncodingException e) {
+			System.out.println(e);
+			return s.getBytes(_);
+		}
+	}
+}
+
+19. move next 
+import java.io.unsupportedencodingexception;
+import java.util.arrays;
+public class exceptiontest {
+	public static void main(string[] args){
+    byte[] bs = _;
+	}
+
+	static byte[] togbk(string s){
+		try {
+			return s.getbytes("gbk");
+		} catch (unsupportedencodingexception e) {
+			system.out.println(e);
+			return s.getbytes();
+		} catch (_){
+
+		}
+	}
+}
+
+20. move next 
+import java.io.unsupportedencodingexception;
+import java.util.arrays;
+public class exceptiontest {
+	public static void main(string[] args){
+    byte[] bs = _;
+	}
+
+	static byte[] togbk(string s){
+		try {
+			return s.getbytes("gbk");
+		} catch (unsupportedencodingexception e) {
+			system.out.println(e);
+			return s.getbytes();
+		} 	
+	}
+}
+
+21. go to line 244 // 分析出244不完整...,或则之前缓存?
+import java.io.UnsupportedEncodingException;
+import java.util.Arrays;
+public class ExceptionTest {
+	public static void main(String[] args){
+    byte[] bs = _;
+	}
+
+	static byte[] toGBK(String s){
+		try {
+			return s.getBytes("GBK");
+		} catch (UnsupportedEncodingException e) {
+			System.out.println(e);
+			return s.getBytes();
+		}
+	}
+}
+
+22. call to gbk 
+import java.io.UnsupportedEncodingException;
+import java.util.Arrays;
+public class ExceptionTest {
+	public static void main(String[] args){
+    byte[] bs = toGBK(_);
+	}
+
+	static byte[] toGBK(String s){
+		try {
+			return s.getBytes("GBK");
+		} catch (UnsupportedEncodingException e) {
+			System.out.println(e);
+			return s.getBytes();
+		}
+	}
+}
+
+23. string 中文
+import java.io.UnsupportedEncodingException;
+import java.util.Arrays;
+public class ExceptionTest {
+	public static void main(String[] args){
+    byte[] bs = toGBK("中文");
+		_
+	}
+
+	static byte[] toGBK(String s){
+		try {
+			return s.getBytes("GBK");
+		} catch (UnsupportedEncodingException e) {
+			System.out.println(e);
+			return s.getBytes();
+		}
+	}
+}
+
+24. println
+import java.io.UnsupportedEncodingException;
+import java.util.Arrays;
+public class ExceptionTest {
+	public static void main(String[] args){
+    byte[] bs = toGBK("中文");
+		System.out.println(_);
+	}
+
+	static byte[] toGBK(String s){
+		try {
+			return s.getBytes("GBK");
+		} catch (UnsupportedEncodingException e) {
+			System.out.println(e);
+			return s.getBytes();
+		}
+	}
+}
+
+25. arrays call to string 
+import java.io.UnsupportedEncodingException;
+import java.util.Arrays;
+public class ExceptionTest {
+	public static void main(String[] args){
+    byte[] bs = toGBK("中文");
+		System.out.println(Arrays.toString(_));
+	}
+
+	static byte[] toGBK(String s){
+		try {
+			return s.getBytes("GBK");
+		} catch (UnsupportedEncodingException e) {
+			System.out.println(e);
+			return s.getBytes();
+		}
+	}
+}
+
+26. variable bs 
+import java.io.UnsupportedEncodingException;
+import java.util.Arrays;
+public class ExceptionTest {
+	public static void main(String[] args){
+    byte[] bs = toGBK("中文");
+		System.out.println(Arrays.toString(bs));
+		_
+	}
+
+	static byte[] toGBK(String s){
+		try {
+			return s.getBytes("GBK");
+		} catch (UnsupportedEncodingException e) {
+			System.out.println(e);
+			return s.getBytes();
+		}
+	}
+}
+
+27 move next
+import java.io.UnsupportedEncodingException;
+import java.util.Arrays;
+public class ExceptionTest {
+	public static void main(String[] args){
+    byte[] bs = toGBK("中文");
+		System.out.println(Arrays.toString(bs));
+	}
+  _
+	static byte[] toGBK(String s){
+		try {
+			return s.getBytes("GBK");
+		} catch (UnsupportedEncodingException e) {
+			System.out.println(e);
+			return s.getBytes();
+		}
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
