@@ -27,6 +27,7 @@ exp ::= functionCall | variableName | constant | attribute
 define arrow function
 
 break
+continue
 
 new insance ReferenceType
 
@@ -34,6 +35,8 @@ new insance ReferenceType
 define [enhanced] for
 define [do] while
 define if 
+define switch
+
 
 define try catch
 

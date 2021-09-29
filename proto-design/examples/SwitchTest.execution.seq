@@ -1,0 +1,265 @@
+1. define public class switch test
+public class SwitchTest {
+	-
+}
+2. define public static function main 
+public class SwitchTest {
+	public static _ main() {
+		
+	}
+}
+3. type void 
+public class SwitchTest {
+	public static void main(_) {
+		
+	}
+}
+4. type string list name args
+public class SwitchTest {
+	public static void main(String[] args) {
+		-
+	}
+}
+5. define int variable option 
+public class SwitchTest {
+	public static void main(String[] args) {
+		int option = _;
+	}
+}
+6. int 2
+public class SwitchTest {
+	public static void main(String[] args) {
+		int option = 2;
+		_
+	}
+}
+7. define switch
+public class SwitchTest {
+	public static void main(String[] args) {
+		int option = 2;
+		switch (_) {
+			case :
+				
+				break;
+		}
+	}
+}
+8. variable option
+public class SwitchTest {
+	public static void main(String[] args) {
+		int option = 2;
+		switch (option) {
+			case _:
+				
+				break;
+		}
+	}
+}
+
+9. int 1
+public class SwitchTest {
+	public static void main(String[] args) {
+		int option = 2;
+		switch (option) {
+			case 1:
+				_
+				break;
+		}
+	}
+}
+10. println
+public class SwitchTest {
+	public static void main(String[] args) {
+		int option = 2;
+		switch (option) {
+			case 1:
+				System.out.println(_);
+				break;
+		}
+	}
+}
+11. string selected 1 // TODO
+public class SwitchTest {
+	public static void main(String[] args) {
+		int option = 2;
+		switch (option) {
+			case 1:
+				System.out.println("Selected 1");
+				_
+				break;
+		}
+	}
+}
+12. move next
+public class SwitchTest {
+	public static void main(String[] args) {
+		int option = 2;
+		switch (option) {
+			case 1:
+				System.out.println("Selected 1");
+				break;_ // highlight break.
+		}
+	}
+}
+13. move next
+public class SwitchTest {
+	public static void main(String[] args) {
+		int option = 2;
+		switch (option) {
+			case 1:
+				System.out.println("Selected 1");
+				break;
+			case _:
+				break;
+		}
+	}
+}
+14. int 2
+public class SwitchTest {
+	public static void main(String[] args) {
+		int option = 2;
+		switch (option) {
+			case 1:
+				System.out.println("Selected 1");
+				break;
+			case 2:
+			  _
+				break;
+		}
+	}
+}
+15. move next
+public class SwitchTest {
+	public static void main(String[] args) {
+		int option = 2;
+		switch (option) {
+			case 1:
+				System.out.println("Selected 1");
+				break;
+			case 2:
+				break; // highlight break
+		}
+	}
+}
+16. delete
+public class SwitchTest {
+	public static void main(String[] args) {
+		int option = 2;
+		switch (option) {
+			case 1:
+				System.out.println("Selected 1");
+				break;
+			case 2:
+			case _:
+				break;
+		}
+	}
+}
+17. move next
+public class SwitchTest {
+	public static void main(String[] args) {
+		int option = 2;
+		switch (option) {
+			case 1:
+				System.out.println("Selected 1");
+				break;
+			case 2:
+			default:
+			  _
+				break;
+		}
+	}
+}
+18. println
+public class SwitchTest {
+	public static void main(String[] args) {
+		int option = 2;
+		switch (option) {
+			case 1:
+				System.out.println("Selected 1");
+				break;
+			case 2:
+			default:
+			  System.out.println(_);
+				break;
+		}
+	}
+}
+19. string not selected
+public class SwitchTest {
+	public static void main(String[] args) {
+		int option = 2;
+		switch (option) {
+			case 1:
+				System.out.println("Selected 1");
+				break;
+			case 2:
+			default:
+			  System.out.println("Not selected");
+				_
+				break;
+		}
+	}
+}
+20 move next 
+public class SwitchTest {
+	public static void main(String[] args) {
+		int option = 2;
+		switch (option) {
+			case 1:
+				System.out.println("Selected 1");
+				break;
+			case 2:
+			default:
+			  System.out.println("Not selected");
+				break; // highlight break
+		}
+	}
+}
+21. move next
+public class SwitchTest {
+	public static void main(String[] args) {
+		int option = 2;
+		switch (option) {
+			case 1:
+				System.out.println("Selected 1");
+				break;
+			case 2:
+			default:
+			  System.out.println("Not selected");
+				break; 
+		}
+		_
+	}
+}
+22. move next
+public class SwitchTest {
+	public static void main(String[] args) {
+		int option = 2;
+		switch (option) {
+			case 1:
+				System.out.println("Selected 1");
+				break;
+			case 2:
+			default:
+			  System.out.println("Not selected");
+				break; 
+		}
+	}
+	_
+}
+23. move next 
+public class SwitchTest {
+	public static void main(String[] args) {
+		int option = 2;
+		switch (option) {
+			case 1:
+				System.out.println("Selected 1");
+				break;
+			case 2:
+			default:
+			  System.out.println("Not selected");
+				break; 
+		}
+	}
+}

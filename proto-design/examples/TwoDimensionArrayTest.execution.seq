@@ -1,0 +1,83 @@
+1. define public class two dimension array test 
+public class TwoDimensionArrarTest {
+  -
+}
+2. define public static function main 
+public class TwoDimensionArrarTest {
+  public static _ main(){
+
+	}
+}
+3. type void 
+public class TwoDimensionArrarTest {
+  public static void main(_){
+
+	}
+}
+4. type string list name args
+public class TwoDimensionArrarTest {
+  public static void main(String[] args){
+    _
+	}
+}
+5. define int list list variable ns
+public class TwoDimensionArrarTest {
+  public static void main(String[] args){
+    int[][] ns = _;
+	}
+}
+6. int sequence 1 2 3 4 // 需要根据类型和输入来推断初始化的方式
+public class TwoDimensionArrarTest {
+  public static void main(String[] args){
+    int[][] ns = {{1, 2, 3, 4}, _};
+	}
+}
+7. int sequence 5 6 7 8
+public class TwoDimensionArrarTest {
+  public static void main(String[] args){
+    int[][] ns = {{1, 2, 3, 4}, {5, 6, 7, 8}, _};
+	}
+}
+8. int sequence 9 10 11 12
+public class TwoDimensionArrarTest {
+  public static void main(String[] args){
+    int[][] ns = {{1, 2, 3, 4}, {5, 6, 7, 8}, {9, 10, 11, 12}, _};
+	}
+}
+9. move next 
+public class TwoDimensionArrarTest {
+  public static void main(String[] args){
+    int[][] ns = {{1, 2, 3, 4}, {5, 6, 7, 8}, {9, 10, 11, 12}};
+		_
+	}
+}
+10. println 
+public class TwoDimensionArrarTest {
+  public static void main(String[] args){
+    int[][] ns = {{1, 2, 3, 4}, {5, 6, 7, 8}, {9, 10, 11, 12}};
+		System.out.println(_);
+	}
+}
+11. ns call length
+public class TwoDimensionArrarTest {
+  public static void main(String[] args){
+    int[][] ns = {{1, 2, 3, 4}, {5, 6, 7, 8}, {9, 10, 11, 12}};
+		System.out.println(ns.length);
+		_
+	}
+}
+12. move next 
+public class TwoDimensionArrarTest {
+  public static void main(String[] args){
+    int[][] ns = {{1, 2, 3, 4}, {5, 6, 7, 8}, {9, 10, 11, 12}};
+		System.out.println(ns.length);
+	}
+	_
+}
+13 move next 
+public class TwoDimensionArrarTest {
+  public static void main(String[] args){
+    int[][] ns = {{1, 2, 3, 4}, {5, 6, 7, 8}, {9, 10, 11, 12}};
+		System.out.println(ns.length);
+	}
+}
