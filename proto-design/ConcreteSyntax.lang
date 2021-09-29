@@ -5,15 +5,18 @@ import [Modifier] name [dot name|star] // if import org.star.search, it is ok; o
 
 define [ClassModifier] class className [extends className] [implements name]
 
-define at override // @Override or 
-define override
+define at override // @Override
+define at name // TODO
 
 define constructor
 define [MethodModifier] function functionName [throws Exception]
 define interface name
 define [MethodModifier] Type variable variableName
+Type ::= name | name list | name with name
+
 define [MethodModifier] variable variableName
 type typeName [extends typeName]
+
 
 
 set variableName|functionalCall to variableName|constant|expression

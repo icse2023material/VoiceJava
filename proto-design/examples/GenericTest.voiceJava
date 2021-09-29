@@ -1,0 +1,22 @@
+import java dot util dot array list 
+import java dot util dot list 
+define public class generic test 
+define public function test 
+type void 
+move next 
+define list with string variable list 
+new instance array list 
+type string 
+move next 
+list call add 
+string hello 
+list call add 
+string world 
+define string variable first 
+list call get 
+int 0 
+define string variable second 
+list call get 
+int 1
+move next
+move next

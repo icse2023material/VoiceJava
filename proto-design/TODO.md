@@ -7,3 +7,5 @@
    import java dot lang dot star
    4.1 star 与 \*
    4.2 dot 与 .
+5. annotation 语法规则: https://www.liaoxuefeng.com/wiki/1252599548343744/1265102413966176
+6. 复杂泛型: 后续再看

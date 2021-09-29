@@ -1,0 +1,223 @@
+1. import java dot util dot array list 
+import java.util.ArrayList;
+_
+
+2. import java dot util dot list 
+import java.util.ArrayList;
+import java.util.List;
+_
+
+3. define public class generic test 
+import java.util.arraylist;
+import java.util.list;
+public class generictest {
+	_
+}
+
+4. define public function test 
+import java.util.arraylist;
+import java.util.list;
+public class generictest {
+	public _ test(){
+
+	}	
+}
+
+5. type void 
+import java.util.arraylist;
+import java.util.list;
+public class generictest {
+	public void test(_){
+
+	}	
+}
+
+6. move next 
+import java.util.arraylist;
+import java.util.list;
+public class generictest {
+	public void test(){
+		_
+	}	
+}
+
+7. define list with string variable list 
+import java.util.arraylist;
+import java.util.list;
+public class generictest {
+	public void test(){
+	  List<String> list = _;
+	}	
+}
+8. new instance array list 
+import java.util.arraylist;
+import java.util.list;
+public class generictest {
+	public void test(){
+	  List<String> list = new ArrayList<_>();
+	}	
+}
+9. type string 
+import java.util.arraylist;
+import java.util.list;
+public class generictest {
+	public void test(){
+	  List<String> list = new ArrayList<String>(_);
+	}	
+}
+10. move next 
+import java.util.arraylist;
+import java.util.list;
+public class generictest {
+	public void test(){
+	  List<String> list = new ArrayList<String>();
+		_
+	}	
+}
+11. list call add 
+import java.util.arraylist;
+import java.util.list;
+public class generictest {
+	public void test(){
+	  List<String> list = new ArrayList<String>();
+	  list.add(_);
+	}	
+}
+12. string hello
+import java.util.arraylist;
+import java.util.list;
+public class generictest {
+	public void test(){
+	  List<String> list = new ArrayList<String>();
+	  list.add("hello");
+	}	
+}
+13. list call add
+import java.util.arraylist;
+import java.util.list;
+public class generictest {
+	public void test(){
+	  List<String> list = new ArrayList<String>();
+	  list.add("hello");
+	  list.add(_);
+	}	
+}
+14. string world
+import java.util.arraylist;
+import java.util.list;
+public class generictest {
+	public void test(){
+	  List<String> list = new ArrayList<String>();
+	  list.add("hello");
+	  list.add("world");
+		_
+	}	
+}
+15. define string variable first 
+import java.util.arraylist;
+import java.util.list;
+public class generictest {
+	public void test(){
+	  List<String> list = new ArrayList<String>();
+	  list.add("hello");
+	  list.add("world");
+	  String first = _;
+	}	
+}
+16. list call get 
+import java.util.arraylist;
+import java.util.list;
+public class generictest {
+	public void test(){
+	  List<String> list = new ArrayList<String>();
+	  list.add("hello");
+	  list.add("world");
+	  String first = list.get(_);
+	}	
+}
+17. int 0
+import java.util.arraylist;
+import java.util.list;
+public class generictest {
+	public void test(){
+	  List<String> list = new ArrayList<String>();
+	  list.add("hello");
+	  list.add("world");
+	  String first = list.get(0);
+		_
+	}	
+}
+18. define string variable second 
+import java.util.arraylist;
+import java.util.list;
+public class generictest {
+	public void test(){
+	  List<String> list = new ArrayList<String>();
+	  list.add("hello");
+	  list.add("world");
+	  String first = list.get(0);
+	  String second = _;
+	}	
+}
+19. list call get 
+import java.util.arraylist;
+import java.util.list;
+public class generictest {
+	public void test(){
+	  List<String> list = new ArrayList<String>();
+	  list.add("hello");
+	  list.add("world");
+	  String first = list.get(0);
+	  String second = list.get(_);
+	}	
+}
+20. int 1
+import java.util.arraylist;
+import java.util.list;
+public class generictest {
+	public void test(){
+	  List<String> list = new ArrayList<String>();
+	  list.add("hello");
+	  list.add("world");
+	  String first = list.get(0);
+	  String second = list.get(1);
+		_
+	}	
+}
+
+21 move next
+import java.util.arraylist;
+import java.util.list;
+public class generictest {
+	public void test(){
+	  List<String> list = new ArrayList<String>();
+	  list.add("hello");
+	  list.add("world");
+	  String first = list.get(0);
+	  String second = list.get(1);
+	}	
+	_
+}
+
+22 move next 
+import java.util.arraylist;
+import java.util.list;
+public class generictest {
+	public void test(){
+	  List<String> list = new ArrayList<String>();
+	  list.add("hello");
+	  list.add("world");
+	  String first = list.get(0);
+	  String second = list.get(1);
+	}	
+}
+
+
+
+
+
+
+
+
+
+
