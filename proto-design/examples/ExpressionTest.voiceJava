@@ -35,7 +35,7 @@ math call pi
 jump before math call ceil 
 subexpression
 type int 
-jump end of line 311
+jump to line 311 end
 times 6
 move next 
 println 

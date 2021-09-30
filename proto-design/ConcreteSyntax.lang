@@ -1,67 +1,70 @@
-
-define package name [dot name]
-import [Modifier] name [dot name|star] 
-define interface name
-define [ClassModifier] class name [extends name] [implements name]
+define package Name [dot Name]
+import [Modifier] Name [dot Name|star] 
+define interface Name
+define [ClassModifier] class Name [extends Name] [implements Name]
 define constructor
-define [MethodModifier] function functionName [throws Exception]
-define [FieldModifier] Type variable name
-Type ::= name list | name [dot name] [with name+]
-
-define at override // @Override
-define at name // TODO
-
-
-define [MethodModifier] variable variableName
-type typeName [extends typeName]
-
-
-
-set variableName|functionalCall to variableName|constant|expression
-
-type typeName name variableName
-
-return exp
-
-functionCall ::= call variableName | variableName [call variableName]
-
-exp ::= functionCall | variableName | constant | attribute
-
+define [MethodModifier] function Name [throws Exception]
 define arrow function
+define [FieldModifier] Type variable Name
+Type ::= Name list | Name [dot Name] [with Name+]
 
-break
-continue
-
-new insance ReferenceType
-
+define [MethodModifier] variable Name
+type Name [extends Name]
+type Name variable Name
 
 define [enhanced] for
 define [do] while
 define if 
 define switch
 
-
 define try catch
-throw new exceptionName
 
+define at override // @Override
+define at name // TODO
 
-variableName|constant @compare variableName|constant 
+let Name [dot Name] equal Expression
+return Expression
+Expression = [expression] Exp
+Exp ::= functionCall | Name | [variable] Name | Constant  
+			| Exp @op Exp
+      | Exp @compare Exp
+			| Name plus plus 
+			| plus plus Name
+      | Name minus minus
+      | minus minus Name
+functionCall ::= call Name | Name [call Name]+
+
+@op ::= plus | minus | times | divide | mod
+
 @compare ::= less than 
            | less equal
 					 | greater than
-					 |  greater equal
+					 | greater equal
 					 | double equal 
-jump out 
-move next
+					 | and 
+					 | doube and
 
-// expression 
-// +-*/=
-define expression 
-variableName | constant @op variableName | constant
-@op ::= plus | minus | times | minus | mod | equal
-variableName plus plus 
-plus plus variableName
+Constant ::= TypeName value
+TypeName ::= int | byte | short | long | char | float | double | boolean | String
+	
+subexpression // ()
 
+break
+continue
+new insance ReferenceType
+throw new name // exception name
 
+// navigation				 
+Navigation ::= move next | jump out
+             | jump before name 
+						 | jump after name
+             | jump to line number [start | end]
+						 | jump to line end
+             | up [number lines] 
+             | down [number lines] 
+						 | left 
+						 | right 
 
-string textxxxx
+Selection ::= select name | select line | select body | select function [Name]
+Editing ::= replace name to name 
+          | delete
