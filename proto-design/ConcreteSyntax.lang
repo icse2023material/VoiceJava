@@ -1,18 +1,16 @@
 
 define package name [dot name]
-
-import [Modifier] name [dot name|star] // if import org.star.search, it is ok; org.star, edit this star to *
-
-define [ClassModifier] class className [extends className] [implements name]
+import [Modifier] name [dot name|star] 
+define interface name
+define [ClassModifier] class name [extends name] [implements name]
+define constructor
+define [MethodModifier] function functionName [throws Exception]
+define [FieldModifier] Type variable name
+Type ::= name list | name [dot name] [with name+]
 
 define at override // @Override
 define at name // TODO
 
-define constructor
-define [MethodModifier] function functionName [throws Exception]
-define interface name
-define [MethodModifier] Type variable variableName
-Type ::= name | name list | name with name
 
 define [MethodModifier] variable variableName
 type typeName [extends typeName]

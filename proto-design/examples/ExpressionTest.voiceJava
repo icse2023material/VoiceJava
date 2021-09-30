@@ -1,0 +1,44 @@
+define public class expression test 
+define public function test 
+type void 
+move next 
+define int variable b 
+expression 3 plus 4
+move next
+define int variable b
+expression 3 times subexpression
+expression 4 plus 2 
+move next 
+define int variable c 
+subexpression 4 plus 2 
+move next 
+times 
+three 
+move next 
+define int variable d
+subexpression
+3 times subexpression
+4 plus 2 
+move next 
+move next 
+plus 5
+move next 
+define int variable e 
+subexpression 3 plus 4
+move next 
+times 5
+times math call add exact 
+expression a plus b
+move next 
+math call ceil 
+math call pi 
+jump before math call ceil 
+subexpression
+type int 
+jump end of line 311
+times 6
+move next 
+println 
+variable e 
+move next 
+move next 

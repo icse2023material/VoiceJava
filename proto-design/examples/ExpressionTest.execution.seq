@@ -1,0 +1,392 @@
+1. define public class expression test 
+public class ExpressionTest {
+	_
+}
+2. define public function test 
+public class ExpressionTest {
+	public _ test(){
+
+	}
+}
+3. type void
+public class ExpressionTest {
+	public void test(_){
+
+	}
+}
+4. move next 
+public class ExpressionTest {
+	public void test(){
+		_
+	}
+}
+5. define int variable a  // 不一定能够听懂a
+public class ExpressionTest {
+	public void test(){
+		int a = _;
+	}
+}
+6. expression 3 plus 4
+public class ExpressionTest {
+	public void test(){
+		int a = 3 + 4 _;
+	}
+}
+7. move next 
+public class ExpressionTest {
+	public void test(){
+		int a = 3 + 4;
+		_
+	}
+}
+8. define int variable b
+public class ExpressionTest {
+	public void test(){
+		int a = 3 + 4;
+		int b = _;
+	}
+}
+9. expression 3 times subexpression
+public class ExpressionTest {
+	public void test(){
+		int a = 3 + 4;
+		int b = 3 * (_);
+	}
+}
+10. expression 4 plus 2
+public class ExpressionTest {
+	public void test(){
+		int a = 3 + 4;
+		int b = 3 * (4+2_);
+	}
+}
+11. move next
+public class ExpressionTest {
+	public void test(){
+		int a = 3 + 4;
+		int b = 3 * (4+2);
+		_
+	}
+}
+12. define int variable c
+public class ExpressionTest {
+	public void test(){
+		int a = 3 + 4;
+		int b = 3 * (4+2);
+		int c = _;
+	}
+}
+13. subexpression 4 plus 2
+public class ExpressionTest {
+	public void test(){
+		int a = 3 + 4;
+		int b = 3 * (4+2);
+		int c = (4 + 2 _);
+	}
+}
+14. move next 
+public class ExpressionTest {
+	public void test(){
+		int a = 3 + 4;
+		int b = 3 * (4+2);
+		int c = (4 + 2)_;
+	}
+}
+15. times
+public class ExpressionTest {
+	public void test(){
+		int a = 3 + 4;
+		int b = 3 * (4+2);
+		int c = (4 + 2)* _;
+	}
+}
+16. three | 3
+public class ExpressionTest {
+	public void test(){
+		int a = 3 + 4;
+		int b = 3 * (4+2);
+		int c = (4 + 2)* 3 _;
+	}
+}
+17. move next 
+public class ExpressionTest {
+	public void test(){
+		int a = 3 + 4;
+		int b = 3 * (4+2);
+		int c = (4 + 2)* 3;
+		_
+	}
+}
+18. define int variable d
+public class ExpressionTest {
+	public void test(){
+		int a = 3 + 4;
+		int b = 3 * (4+2);
+		int c = (4 + 2)* 3;
+		int d = _;
+	}
+}
+19. subexpression
+public class ExpressionTest {
+	public void test(){
+		int a = 3 + 4;
+		int b = 3 * (4+2);
+		int c = (4 + 2)* 3;
+		int d = (_);
+	}
+}
+20. 3 times subexpression 
+public class ExpressionTest {
+	public void test(){
+		int a = 3 + 4;
+		int b = 3 * (4+2);
+		int c = (4 + 2)* 3;
+		int d = (3 * (_));
+	}
+}
+21. 4 plus 2
+public class ExpressionTest {
+	public void test(){
+		int a = 3 + 4;
+		int b = 3 * (4+2);
+		int c = (4 + 2)* 3;
+		int d = (3 * (4+2_));
+	}
+}
+22. move next 
+public class ExpressionTest {
+	public void test(){
+		int a = 3 + 4;
+		int b = 3 * (4+2);
+		int c = (4 + 2)* 3;
+		int d = (3 * (4+2)_);
+	}
+}
+23. move next 
+public class ExpressionTest {
+	public void test(){
+		int a = 3 + 4;
+		int b = 3 * (4+2);
+		int c = (4 + 2)* 3;
+		int d = (3 * (4+2))_;
+	}
+}
+24. plus 5
+public class ExpressionTest {
+	public void test(){
+		int a = 3 + 4;
+		int b = 3 * (4+2);
+		int c = (4 + 2)* 3;
+		int d = (3 * (4+2)) + 5 _;
+	}
+}
+25. move next 
+public class ExpressionTest {
+	public void test(){
+		int a = 3 + 4;
+		int b = 3 * (4+2);
+		int c = (4 + 2)* 3;
+		int d = (3 * (4+2)) + 5;
+		_
+	}
+}
+26. define int variable e
+public class ExpressionTest {
+	public void test(){
+		int a = 3 + 4;
+		int b = 3 * (4+2);
+		int c = (4 + 2)* 3;
+		int d = (3 * (4+2)) + 5;
+		int e = _;
+	}
+}
+27. subexpression 3 plus 4
+public class ExpressionTest {
+	public void test(){
+		int a = 3 + 4;
+		int b = 3 * (4+2);
+		int c = (4 + 2)* 3;
+		int d = (3 * (4+2)) + 5;
+		int e = (3 + 4_);
+	}
+}
+28. move next 
+public class ExpressionTest {
+	public void test(){
+		int a = 3 + 4;
+		int b = 3 * (4+2);
+		int c = (4 + 2)* 3;
+		int d = (3 * (4+2)) + 5;
+		int e = (3 + 4)_;
+	}
+}
+29. times 5 
+public class ExpressionTest {
+	public void test(){
+		int a = 3 + 4;
+		int b = 3 * (4+2);
+		int c = (4 + 2)* 3;
+		int d = (3 * (4+2)) + 5;
+		int e = (3 + 4)*5 _;
+	}
+}
+30. times math call add exact
+public class ExpressionTest {
+	public void test(){
+		int a = 3 + 4;
+		int b = 3 * (4+2);
+		int c = (4 + 2)* 3;
+		int d = (3 * (4+2)) + 5;
+		int e = (3 + 4)*5 * Math.addExact(_);
+	}
+}
+31. expression a plus b
+public class ExpressionTest {
+	public void test(){
+		int a = 3 + 4;
+		int b = 3 * (4+2);
+		int c = (4 + 2)* 3;
+		int d = (3 * (4+2)) + 5;
+		int e = (3 + 4)*5 * Math.addExact(a+b_);
+	}
+}
+32. move next 
+public class ExpressionTest {
+	public void test(){
+		int a = 3 + 4;
+		int b = 3 * (4+2);
+		int c = (4 + 2)* 3;
+		int d = (3 * (4+2)) + 5;
+		int e = (3 + 4)*5 * Math.addExact(a+b, _);
+	}
+}
+
+33. math call ceil
+public class ExpressionTest {
+	public void test(){
+		int a = 3 + 4;
+		int b = 3 * (4+2);
+		int c = (4 + 2)* 3;
+		int d = (3 * (4+2)) + 5;
+		int e = (3 + 4)*5 * Math.addExact(a+b, Math.ceil(_));
+	}
+}
+34. math call pi
+public class ExpressionTest {
+	public void test(){
+		int a = 3 + 4;
+		int b = 3 * (4+2);
+		int c = (4 + 2)* 3;
+		int d = (3 * (4+2)) + 5;
+		int e = (3 + 4)*5 * Math.addExact(a+b, Math.ceil(Math.PI))_;
+	}
+}
+35. jump before math call ceil
+public class ExpressionTest {
+	public void test(){
+		int a = 3 + 4;
+		int b = 3 * (4+2);
+		int c = (4 + 2)* 3;
+		int d = (3 * (4+2)) + 5;
+		int e = (3 + 4)*5 * Math.addExact(a+b, _Math.ceil(Math.PI));
+	}
+}
+36 subexpression
+public class ExpressionTest {
+	public void test(){
+		int a = 3 + 4;
+		int b = 3 * (4+2);
+		int c = (4 + 2)* 3;
+		int d = (3 * (4+2)) + 5;
+		int e = (3 + 4)*5 * Math.addExact(a+b, (_)Math.ceil(Math.PI));
+	}
+}
+37 type int 
+public class ExpressionTest {
+	public void test(){
+		int a = 3 + 4;
+		int b = 3 * (4+2);
+		int c = (4 + 2)* 3;
+		int d = (3 * (4+2)) + 5;
+		int e = (3 + 4)*5 * Math.addExact(a+b, (int)Math.ceil(Math.PI));
+		_
+	}
+}
+
+38. jump to end of line 311 // TODO
+public class ExpressionTest {
+	public void test(){
+		int a = 3 + 4;
+		int b = 3 * (4+2);
+		int c = (4 + 2)* 3;
+		int d = (3 * (4+2)) + 5;
+		int e = (3 + 4)*5 * Math.addExact(a+b, (int)Math.ceil(Math.PI))_;
+	}
+}
+39. times 6
+public class ExpressionTest {
+	public void test(){
+		int a = 3 + 4;
+		int b = 3 * (4+2);
+		int c = (4 + 2)* 3;
+		int d = (3 * (4+2)) + 5;
+		int e = (3 + 4)*5 * Math.addExact(a+b, (int)Math.ceil(Math.PI))*6_;
+	}
+}
+40. move next 
+public class ExpressionTest {
+	public void test(){
+		int a = 3 + 4;
+		int b = 3 * (4+2);
+		int c = (4 + 2)* 3;
+		int d = (3 * (4+2)) + 5;
+		int e = (3 + 4)*5 * Math.addExact(a+b, (int)Math.ceil(Math.PI))*6;
+		_
+	}
+}
+41. System dot out dot println 
+public class ExpressionTest {
+	public void test(){
+		int a = 3 + 4;
+		int b = 3 * (4+2);
+		int c = (4 + 2)* 3;
+		int d = (3 * (4+2)) + 5;
+		int e = (3 + 4)*5 * Math.addExact(a+b, (int)Math.ceil(Math.PI))*6;
+		System.out.println(_);
+	}
+}
+42. variable e 
+public class ExpressionTest {
+	public void test(){
+		int a = 3 + 4;
+		int b = 3 * (4+2);
+		int c = (4 + 2)* 3;
+		int d = (3 * (4+2)) + 5;
+		int e = (3 + 4)*5 * Math.addExact(a+b, (int)Math.ceil(Math.PI))*6;
+		System.out.println(e);
+		_
+	}
+}
+43. move next 
+public class ExpressionTest {
+	public void test(){
+		int a = 3 + 4;
+		int b = 3 * (4+2);
+		int c = (4 + 2)* 3;
+		int d = (3 * (4+2)) + 5;
+		int e = (3 + 4)*5 * Math.addExact(a+b, (int)Math.ceil(Math.PI))*6;
+		System.out.println(e);
+	}
+	_
+}
+44. move next 
+public class ExpressionTest {
+	public void test(){
+		int a = 3 + 4;
+		int b = 3 * (4+2);
+		int c = (4 + 2)* 3;
+		int d = (3 * (4+2)) + 5;
+		int e = (3 + 4)*5 * Math.addExact(a+b, (int)Math.ceil(Math.PI))*6;
+		System.out.println(e);
+	}
+}

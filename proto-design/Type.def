@@ -1,0 +1,32 @@
+Type ::= PrimitiveType 
+       | ReferenceType
+PrimitiveType ::= NumericType | boolean
+NumericType ::= IntegralType | FloatingPointType
+IntegralType ::= byte | short | int | long | char
+FloatingPointType ::= float | double
+
+ReferenceType ::= ClassOrInterfaceType 
+               | TypeVariable 
+							 | ArrayType
+
+ClassOrInterfaceType ::= ClassType 
+                       | InterfaceType
+
+ClassType::= TypeDeclSpecifier TypeArgumentsopt
+// A type declaration specifier may be either a type name (§6.5.5), or a class or interface type followed by "." and an identifier. In the latter case, the specifier has the form T.id, where id must be the simple name of an accessible (§6.6) member type (§8.5, §9.5) of T0
+
+InterfaceType::= TypeDeclSpecifier TypeArgumentsopt
+
+TypeDeclSpecifier:
+    TypeName  
+    ClassOrInterfaceType . Identifier
+
+TypeName:
+    Identifier
+    TypeName . Identifier
+
+TypeVariable:
+    Identifier
+
+ArrayType:
+    Type [ ]
