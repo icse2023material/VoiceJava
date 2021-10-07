@@ -6,6 +6,11 @@ define constructor
 define [MethodModifier] function Name [throws Exception]
 define arrow function
 define [FieldModifier] Type variable Name
+
+Modifier ::= static
+ClassModifier  ::= Annotation | public | protected | private | abstract | static | final | strictfp
+MethodModifier ::= Annotation | public | protected | private | abstract | static | final | synchronized | native | strictfp
+FieldModifier  ::= Annotation | public | protected |private  | static | final | transient | volatile
 Type ::= Name list | Name [dot Name] [with Name+]
 
 define [MethodModifier] variable Name
@@ -32,6 +37,7 @@ Exp ::= functionCall | Name | [variable] Name | Constant
 			| plus plus Name
       | Name minus minus
       | minus minus Name
+
 functionCall ::= call Name | Name [call Name]+
 
 @op ::= plus | minus | times | divide | mod
