@@ -1,36 +1,36 @@
-define package Name [dot Name]
-import [Modifier] Name [dot Name|star] 
-define interface Name
-define [ClassModifier] class Name [extends Name] [implements Name]
-define constructor
-define [MethodModifier] function Name [throws Exception]
-define arrow function
-define [FieldModifier] Type variable Name
+define package Name [dot Name] // keyword: define package dot  defund pakge
+import [Modifier] Name [dot Name|star] // keyword: import dot star
+define interface Name // keyword: define interface
+define [ClassModifier] class Name [extends Name] [implements Name] // keyword: define class extends implements
+define constructor // keyword: define constructor
+define [MethodModifier] function Name [throws Exception] // keyword: defined function throws
+define arrow function // keyword: define arrow function
+define [FieldModifier] Type variable Name // keyword: defined variable
 
-Modifier ::= static
-ClassModifier  ::= Annotation | public | protected | private | abstract | static | final | strictfp
-MethodModifier ::= Annotation | public | protected | private | abstract | static | final | synchronized | native | strictfp
-FieldModifier  ::= Annotation | public | protected |private  | static | final | transient | volatile
-Type ::= Name list | Name [dot Name] [with Name+]
+Modifier ::= static // keyword: static
+ClassModifier  ::= Annotation | public | protected | private | abstract | static | final | strictfp // keyword: all
+MethodModifier ::= Annotation | public | protected | private | abstract | static | final | synchronized | native | strictfp // keyword: all
+FieldModifier  ::= Annotation | public | protected |private  | static | final | transient | volatile // keyword: all
+Type ::= Name list | Name [dot Name] [with Name+] //keyword: list dot with
 
-define [MethodModifier] variable Name
-type Name [extends Name]
-type Name variable Name
+define [MethodModifier] variable Name // keyword: defined variable
+type Name [extends Name] // keyword: type extends
+type Name variable Name // keyword: type variable
 
-define [enhanced] for
-define [do] while
-define if 
-define switch
+define [enhanced] for // keyword: define enchanced for
+define [do] while // keyword: define do while
+define if  // keyword: define if
+define switch // keyword: define switch
 
-define try catch
+define try catch // keyword: define try catch
 
-define at override // @Override
-define at name // TODO
+define at override // @Override  // keyword: define at override
+define at name // TODO // keyword: at
 
-let Name [dot Name] equal Expression
-return Expression
-Expression = [expression] Exp
-Exp ::= functionCall | Name | [variable] Name | Constant  
+let Name [dot Name] equal Expression // keyword: let dot equal
+return Expression // keyword: return
+Expression = [expression] Exp 
+Exp ::= functionCall | Name | [variable] Name | Constant   // keyword: variable plus minus
 			| Exp @op Exp
       | Exp @compare Exp
 			| Name plus plus 
@@ -38,11 +38,11 @@ Exp ::= functionCall | Name | [variable] Name | Constant
       | Name minus minus
       | minus minus Name
 
-functionCall ::= call Name | Name [call Name]+
+functionCall ::= call Name | Name [call Name]+ // keyword: call
 
-@op ::= plus | minus | times | divide | mod
+@op ::= plus | minus | times | divide | mod // keyword: all
 
-@compare ::= less than 
+@compare ::= less than  // keyword: all
            | less equal
 					 | greater than
 					 | greater equal
@@ -51,17 +51,17 @@ functionCall ::= call Name | Name [call Name]+
 					 | doube and
 
 Constant ::= TypeName value
-TypeName ::= int | byte | short | long | char | float | double | boolean | String
+TypeName ::= int | byte | short | long | char | float | double | boolean | String // keyword: all
 	
-subexpression // ()
+subexpression // () // keyword: subexpression
 
-break
-continue
-new insance ReferenceType
-throw new name // exception name
+break // keyword
+continue // keyword
+new insance ReferenceType // keyword: new insance
+throw new name // exception name // keyword: throw new 
 
 // navigation				 
-Navigation ::= move next | jump out
+Navigation ::= move next | jump out // keyword: all
              | jump before name 
 						 | jump after name
              | jump to line number [start | end]
@@ -71,6 +71,6 @@ Navigation ::= move next | jump out
 						 | left 
 						 | right 
 
-Selection ::= select name | select line | select body | select function [Name]
-Editing ::= replace name to name 
+Selection ::= select name | select line | select body | select function [Name] // keyword: select function
+Editing ::= replace name to name  // keyword: replace to delete
           | delete

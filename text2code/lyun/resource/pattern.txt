@@ -1,0 +1,71 @@
+define package _ [dot _]* // define package Name [dot Name]*
+// Keyword define, keyword package, RegAnyExp, RegStarExp (Keyword dot) RegAnyExp
+import static? _ [dot [_|star]]* // import [Modifier] Name [dot Name|star]
+// Keyword import, RegQuestionExp static, RegAnyExp, RegStarExp (Keyword dot) (RegOrExp RegAnyExp (Keyword star))
+define interface _ // define interface Name
+// Keyword define, Keyword interface, RegAnyExp
+define (Annotation | public | protected | private | abstract | static | final | strictfp ) class _ [extends _]? [implements _]? // define [ClassModifier] class Name [extends Name] [implements Name] // keyword: define class extends implements
+// Keyword define, Keyword xxx, Keyword class, RegAnyExp, RegQuestionExp (Keyword extends) RegAnyExp, RegQuestionExp (Keyword implements) RegAnyExp
+define constructor 
+// Keyword define, Keyword constructor
+define (Annotation | public | protected | private | abstract | static | final | synchronized | native | strictfp) function _ [throws Exception]? // define [MethodModifier] function Name [throws Exception]
+// Keyword define, Keyword xxx, Keyword function, RegAnyExp, RegQuestionExp (Keyword throws) (keyword exception)
+define arrow function // keyword: define arrow function
+// Keyword define, Keyword arrow, Keyword function
+define (Annotation | public | protected |private  | static | final | transient | volatile) (_ list | _ [dot _]? [with _+]?) variable _ // define [FieldModifier] Type variable Name 
+// define (Annotation | public | protected | private | abstract | static | final | synchronized | native | strictfp) variable _ // define [MethodModifier] variable Name
+type _ [extends _]? // type Name [extends Name]
+type _ variable _ // type Name variable Name 
+define [enchanced]? for // define [enhanced] for 
+define [do]? while // define [do] while 
+define if
+define switch
+define try catch
+define at override // @Override
+subexpression // ()
+break
+continue
+new instance _
+throw new _ // exception name
+move next 
+jump out
+jump before _ // jump before name
+jump after _  // jump after name
+jump to line [_]? [start | end]?
+up [_ lines]?
+down [_ lines]?
+left
+right
+select line 
+select body 
+select _ // select name 
+select function [_]? / select function [name]?
+replace _ to _ // replace name to name
+delete
+let _ [dot _]? equal call _ // let x.a = a();
+let _ [dot _]? equal _ [call _]+ // let x.a = a.b().c()
+let _ [dot _]? equal _ [dot _]* // let x.a = b.c.d
+let _ [dot _]? equal [variable]? _ // let x.a = variable y
+let _ [dot _]? equal (int | byte | short | long | char | float | double | boolean | String) _  // let x.a = int 2
+let _ [dot _]? equal [expression]?  // let x.a = 
+return call _ // return a();
+return _ [call _]+ // return a.b();
+return _ [dot _]* // return b.c;
+return [variable]? _ // return variable y
+return (int | byte | short | long | char | float | double | boolean | String) _  // return int 2
+return [expression]? // return _
+[sub]?expression call _ // a()
+[sub]?expression _ [call _]+ // a.b()
+[sub]?expression _ [dot _]? // a.b
+[sub]?expression [variable]? _ // x
+[sub]?expression (int | byte | short | long | char | float | double | boolean | String) _ // int 2 
+[sub]?expression _ plus plus 
+[sub]?expression _ minus minus
+[sub]?expression plus plus _
+[sub]?expression minus minus _
+[sub]?expression subexpression (op | compare) subexpression
+[sub]?expression _ (op | compare) subexpression // expression 3 times subexpression
+[sub]?expression _ (op | compare) _ // expression 3 plus 4
+op ::= plus | minus | times | divide | mod
+compare ::= less than | less equal | greater than | greater equal | double equal | and | doube and
+typeName ::= int | byte | short | long | char | float | double | boolean | string
