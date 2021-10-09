@@ -160,7 +160,6 @@ public class Regex {
 					String key = entry.getKey();
 					Set<State> nexts = entry.getValue();
 					for (State next : nexts) {
-						System.out.printf("%2d->%2d  %s\n", curState.getId(), next.getId(), key);
 						String line = Integer.toString(curState.getId()) + " -> " + Integer.toString(next.getId()) + "[label=\""
 								+ (key == "Epsilon" ? "ε" : key) + "\"]";
 						filewriter.write(line);
