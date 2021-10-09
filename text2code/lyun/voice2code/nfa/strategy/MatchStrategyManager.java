@@ -10,16 +10,9 @@ public class MatchStrategyManager {
 
 	static {
 		matchStrategyMap = new HashMap<>();
-		matchStrategyMap.put("\\d", new DigitalMatchStrategy(false));
-		matchStrategyMap.put("\\D", new DigitalMatchStrategy(true));
-		matchStrategyMap.put("\\w", new WMatchStrategy(false));
-		matchStrategyMap.put("\\W", new WMatchStrategy(true));
-		matchStrategyMap.put("\\s", new SpaceMatchStrategy(false));
-		matchStrategyMap.put("\\S", new SpaceMatchStrategy(true));
-		matchStrategyMap.put(".", new DotMatchStrategy());
 		matchStrategyMap.put(Constant.EPSILON, new EpsilonMatchStrategy());
-		matchStrategyMap.put(Constant.CHAR, new CharMatchStrategy());
-		matchStrategyMap.put(Constant.CHARSET, new CharSetMatchStrategy());
+		matchStrategyMap.put("keyword", new KeywordMatchStrategy());
+		matchStrategyMap.put("any", new AnyMatchStrategy());
 	}
 
 	public static MatchStrategy getStrategy(String key) {

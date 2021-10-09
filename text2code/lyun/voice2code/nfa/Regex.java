@@ -4,6 +4,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
 
+import lyun.voice2code.nfa.strategy.KeyWordSet;
 import lyun.voice2code.nfa.strategy.MatchStrategy;
 import lyun.voice2code.nfa.strategy.MatchStrategyManager;
 import lyun.voice2code.pattern.Pattern;
@@ -11,10 +12,16 @@ import lyun.voice2code.pattern.Unit;
 
 public class Regex {
 	private NFAGraph nfaGraph;
+	private Pattern pattern;
 
 	public Regex(Pattern pattern) {
 		Unit[] units = pattern.getUnits();
+		this.pattern = pattern;
 		this.nfaGraph = unitsToNFAGraph(units);
+	}
+
+	public Pattern getPattern() {
+		return this.pattern;
 	}
 
 	public NFAGraph unitsToNFAGraph(Unit[] units) {
@@ -57,11 +64,21 @@ public class Regex {
 			case "normal":
 				Unit first = unit.getFirst();
 				if (first != null) {
-					addUnitToNFAGraph(first, nfaGraph);
+					newNFAGraph = addUnitToNFAGraph(first, nfaGraph);
+					if (nfaGraph == null) {
+						nfaGraph = newNFAGraph;
+					} else {
+						nfaGraph.addSeriesGraph(newNFAGraph);
+					}
 				}
 				Unit second = unit.getSecond();
 				if (second != null) {
-					addUnitToNFAGraph(second, nfaGraph);
+					newNFAGraph = addUnitToNFAGraph(second, nfaGraph);
+					if (nfaGraph == null) {
+						nfaGraph = newNFAGraph;
+					} else {
+						nfaGraph.addSeriesGraph(newNFAGraph);
+					}
 				}
 				break;
 			case "question":
@@ -100,6 +117,7 @@ public class Regex {
 				}
 				break;
 			case "or":
+				first = unit.getFirst();
 				NFAGraph leftNFAGraph = addUnitToNFAGraph(unit.getFirst(), null);
 				NFAGraph rightNFAGraph = addUnitToNFAGraph(unit.getSecond(), null);
 				leftNFAGraph.addParallelGraph(rightNFAGraph);
@@ -177,18 +195,19 @@ public class Regex {
 		}
 	}
 
-	public boolean isMatch(String text, int mode) {
+	public boolean isMatch(String text) {
 		State start = nfaGraph.start;
-		return isMatch(text, 0, start);
+		String[] tokenList = text.split(" ");
+		// for (String token : tokenList) {
+		// System.out.println(token);
+		// }
+		return isMatch(tokenList, 0, start);
 	}
 
-	/**
-	 * 匹配过程就是根据输入遍历图的过程, 这里DFA和NFA用了同样的代码, 但实际上因为DFA的特性是不会产生回溯的, 所以DFA可以换成非递归的形式
-	 */
-	private boolean isMatch(String text, int pos, State curState) {
-		if (pos == text.length()) {
+	private boolean isMatch(String[] tokenList, int pos, State curState) {
+		if (pos == tokenList.length) {
 			for (State nextState : curState.next.getOrDefault(Constant.EPSILON, Collections.emptySet())) {
-				if (isMatch(text, pos, nextState)) {
+				if (isMatch(tokenList, pos, nextState)) {
 					return true;
 				}
 			}
@@ -200,22 +219,30 @@ public class Regex {
 
 		for (Map.Entry<String, Set<State>> entry : curState.next.entrySet()) {
 			String edge = entry.getKey();
+			System.out.println("edge: " + edge);
 			// 这个if和else的先后顺序决定了是贪婪匹配还是非贪婪匹配
 			if (Constant.EPSILON.equals(edge)) {
-				// 如果是DFA模式,不会有EPSILON边,所以不会进这
 				for (State nextState : entry.getValue()) {
-					if (isMatch(text, pos, nextState)) {
+					if (isMatch(tokenList, pos, nextState)) {
 						return true;
 					}
 				}
 			} else {
-				MatchStrategy matchStrategy = MatchStrategyManager.getStrategy(edge);
-				if (!matchStrategy.isMatch(text.charAt(pos), edge)) {
+				MatchStrategy matchStrategy = null;
+				if (KeyWordSet.isKeyword(edge)) {
+					System.out.println("keyword match");
+					matchStrategy = MatchStrategyManager.getStrategy("keyword");
+				} else {
+					matchStrategy = MatchStrategyManager.getStrategy(edge);
+				}
+				if (!matchStrategy.isMatch(tokenList[pos], edge)) {
 					continue;
 				}
+				System.out.println("entry: " + entry.getValue());
 				// 遍历匹配策略
 				for (State nextState : entry.getValue()) {
-					if (isMatch(text, pos + 1, nextState)) {
+					System.out.println("nextState: " + nextState.getId());
+					if (isMatch(tokenList, pos + 1, nextState)) {
 						return true;
 					}
 				}
@@ -224,66 +251,4 @@ public class Regex {
 		return false;
 	}
 
-	public List<String> match(String text) {
-		return match(text, 0);
-	}
-
-	public List<String> match(String text, int mod) {
-		int s = 0;
-		int e = -1;
-		List<String> res = new LinkedList<>();
-		while (s != text.length()) {
-			// e = getMatchEnd(text, s, dfaGraph.start);
-			e = getMatchEnd(text, s, nfaGraph.start);
-			if (e != -1) {
-				res.add(text.substring(s, e));
-				s = e;
-			} else {
-				s++;
-			}
-		}
-		return res;
-	}
-
-	// 获取正则表达式在字符串中能匹配到的结尾的位置
-	private int getMatchEnd(String text, int pos, State curState) {
-		int end = -1;
-		if (curState.isEndState()) {
-			return pos;
-		}
-
-		if (pos == text.length()) {
-			for (State nextState : curState.next.getOrDefault(Constant.EPSILON, Collections.emptySet())) {
-				end = getMatchEnd(text, pos, nextState);
-				if (end != -1) {
-					return end;
-				}
-			}
-		}
-
-		for (Map.Entry<String, Set<State>> entry : curState.next.entrySet()) {
-			String edge = entry.getKey();
-			if (Constant.EPSILON.equals(edge)) {
-				for (State nextState : entry.getValue()) {
-					end = getMatchEnd(text, pos, nextState);
-					if (end != -1) {
-						return end;
-					}
-				}
-			} else {
-				MatchStrategy matchStrategy = MatchStrategyManager.getStrategy(edge);
-				if (!matchStrategy.isMatch(text.charAt(pos), edge)) {
-					continue;
-				}
-				// 遍历匹配策略
-				for (State nextState : entry.getValue()) {
-					end = getMatchEnd(text, pos + 1, nextState);
-					if (end != -1) {
-						return end;
-					}
-				}
-			}
-		}
-		return -1;
-	}
 }

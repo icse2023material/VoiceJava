@@ -17,7 +17,7 @@ define [MethodModifier] variable Name // keyword: defined variable
 type Name [extends Name] // keyword: type extends
 type Name variable Name // keyword: type variable
 
-define [enhanced] for // keyword: define enchanced for
+define [enhanced] for // keyword: define enchanced for ? define foreach ?
 define [do] while // keyword: define do while
 define if  // keyword: define if
 define switch // keyword: define switch
@@ -57,7 +57,7 @@ subexpression // () // keyword: subexpression
 
 break // keyword
 continue // keyword
-new insance ReferenceType // keyword: new insance
+new instance ReferenceType // keyword: new instance
 throw new name // exception name // keyword: throw new 
 
 // navigation				 

@@ -6,4 +6,8 @@ public class MatchStrategy {
 	public boolean isMatch(char c, String edge) {
 		return false;
 	}
+
+	public boolean isMatch(String str, String edge) {
+		return false;
+	}
 }

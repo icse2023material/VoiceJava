@@ -18,4 +18,13 @@ public class RegexSet {
 	private RegexSet(ArrayList<Regex> regexList) {
 		this.regexList = regexList;
 	}
+
+	public Regex matchPattern(String text) {
+		for (Regex regex : regexList) {
+			if (regex.isMatch(text)) {
+				return regex;
+			}
+		}
+		return null;
+	}
 }
