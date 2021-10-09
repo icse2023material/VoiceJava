@@ -290,11 +290,4 @@ public class PatternSet {
 		return str;
 	}
 
-	public ArrayList<Pattern> match(String patStr) {
-		ArrayList<Pattern> result = new ArrayList<Pattern>();
-
-		String[] patStrList = patStr.split(" ");
-
-		return result;
-	}
 }
