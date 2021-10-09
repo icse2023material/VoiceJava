@@ -1,7 +1,7 @@
-package lyun.voice2code;
+package lyun.voice2code.pattern;
 
 public class Unit {
-	private String type; // any, star, plus, or, asterisk, keyword, question, normal, list
+	private String type; // any, plus, or, asterisk, keyword, question, normal, list
 	private String keyword; // type = keyword
 	private Unit first;
 	private Unit second;
@@ -39,6 +39,26 @@ public class Unit {
 		this.list = list;
 		this.first = null;
 		this.second = null;
+	}
+
+	public String getType() {
+		return this.type;
+	}
+
+	public String getKeyword() {
+		return this.keyword;
+	}
+
+	public Unit getFirst() {
+		return this.first;
+	}
+
+	public Unit getSecond() {
+		return this.second;
+	}
+
+	public Unit[] getList() {
+		return this.list;
 	}
 
 	@Override

@@ -1,4 +1,4 @@
-package lyun.voice2code;
+package lyun.voice2code.pattern;
 
 public class Pattern {
 	private String str;
@@ -12,6 +12,14 @@ public class Pattern {
 	public Pattern(String str, Unit[] units) {
 		this.str = str;
 		this.units = units;
+	}
+
+	public String getPattern() {
+		return this.str;
+	}
+
+	public Unit[] getUnits() {
+		return this.units;
 	}
 
 	@Override

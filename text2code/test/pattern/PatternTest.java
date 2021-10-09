@@ -1,6 +1,6 @@
-package test;
+package test.pattern;
 
-import lyun.voice2code.*;
+import lyun.voice2code.pattern.*;
 
 public class PatternTest {
 	public static void main(String[] args) {

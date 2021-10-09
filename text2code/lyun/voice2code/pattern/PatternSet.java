@@ -1,4 +1,4 @@
-package lyun.voice2code;
+package lyun.voice2code.pattern;
 
 import java.util.ArrayList;
 
@@ -276,6 +276,10 @@ public class PatternSet {
 		return patSet.size();
 	}
 
+	public ArrayList<Pattern> getPatternSet() {
+		return this.patSet;
+	}
+
 	@Override
 	public String toString() {
 		String str = "";
@@ -284,5 +288,13 @@ public class PatternSet {
 		}
 
 		return str;
+	}
+
+	public ArrayList<Pattern> match(String patStr) {
+		ArrayList<Pattern> result = new ArrayList<Pattern>();
+
+		String[] patStrList = patStr.split(" ");
+
+		return result;
 	}
 }

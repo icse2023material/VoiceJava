@@ -1,1 +1,1 @@
-javac -d target test/PatternSetTest.java 
+javac -d target test/pattern/PatternSetTest.java 
