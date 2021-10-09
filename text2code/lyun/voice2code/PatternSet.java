@@ -272,6 +272,10 @@ public class PatternSet {
 		patSet.add(pat);
 	}
 
+	public int size() {
+		return patSet.size();
+	}
+
 	@Override
 	public String toString() {
 		String str = "";
