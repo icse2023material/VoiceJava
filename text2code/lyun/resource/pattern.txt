@@ -1,19 +1,11 @@
-define package _ [dot _]* // define package Name [dot Name]*
-// Keyword define, keyword package, RegAnyExp, RegStarExp (Keyword dot) RegAnyExp
+define package [_]+ [dot [_]+]* // define package Name [dot Name]* // Name can be a sequence
 import static? _ [dot [_|star]]* // import [Modifier] Name [dot Name|star]
-// Keyword import, RegQuestionExp static, RegAnyExp, RegStarExp (Keyword dot) (RegOrExp RegAnyExp (Keyword star))
 define interface _ // define interface Name
-// Keyword define, Keyword interface, RegAnyExp
 define (Annotation | public | protected | private | abstract | static | final | strictfp ) class _ [extends _]? [implements _]? // define [ClassModifier] class Name [extends Name] [implements Name] // keyword: define class extends implements
-// Keyword define, Keyword xxx, Keyword class, RegAnyExp, RegQuestionExp (Keyword extends) RegAnyExp, RegQuestionExp (Keyword implements) RegAnyExp
 define constructor 
-// Keyword define, Keyword constructor
 define (Annotation | public | protected | private | abstract | static | final | synchronized | native | strictfp) function _ [throws Exception]? // define [MethodModifier] function Name [throws Exception]
-// Keyword define, Keyword xxx, Keyword function, RegAnyExp, RegQuestionExp (Keyword throws) (keyword exception)
 define arrow function // keyword: define arrow function
-// Keyword define, Keyword arrow, Keyword function
 define (Annotation | public | protected |private  | static | final | transient | volatile) (_ list | _ [dot _]? [with _+]?) variable _ // define [FieldModifier] Type variable Name 
-// define (Annotation | public | protected | private | abstract | static | final | synchronized | native | strictfp) variable _ // define [MethodModifier] variable Name
 type _ [extends _]? // type Name [extends Name]
 type _ variable _ // type Name variable Name 
 define [enchanced]? for // define [enhanced] for 

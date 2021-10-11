@@ -7,8 +7,13 @@ public class PatternSet {
 
 	public PatternSet() {
 		patSet = new ArrayList<Pattern>();
-		Pattern packagePat = new Pattern("define package _ [dot _]*", new Unit[] { new Unit("define"), new Unit("package"),
-				new Unit(), new Unit("asterisk", new Unit("dot"), new Unit()) });
+		// Pattern packagePat = new Pattern("define package _ [dot _]*", new Unit[] {
+		// new Unit("define"), new Unit("package"),
+		// new Unit(), new Unit("asterisk", new Unit("dot"), new Unit()) });
+		Pattern packagePat = new Pattern("define package [_]+ [dot [_]+]*",
+				new Unit[] { new Unit("define"), new Unit("package"), new Unit("plus", new Unit()),
+						new Unit("asterisk", new Unit("dot"), new Unit("plus", new Unit())) });
+
 		patSet.add(packagePat);
 		Pattern importPat = new Pattern("import static? _ [dot [_|star]]*",
 				new Unit[] { new Unit("import"), new Unit("question", new Unit("static")), new Unit(),
