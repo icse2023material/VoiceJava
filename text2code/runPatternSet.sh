@@ -1,1 +1,1 @@
-javac -d target test/pattern/PatternSetTest.java 
+javac -d dist test/pattern/PatternSetTest.java 

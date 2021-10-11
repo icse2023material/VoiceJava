@@ -1,1 +1,1 @@
-javac -d target test/nfa/RegexSetTest.java
+javac -d dist test/nfa/RegexSetTest.java
