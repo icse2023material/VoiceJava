@@ -1,25 +1,44 @@
 package cn.edu.lyun.kexin.text2ast;
 
-import cn.edu.lyun.kexin.text2pattern.pattern.PatternSet;
 import cn.edu.lyun.kexin.text2pattern.pattern.Pattern;
-import java.util.ArrayList;
+import cn.edu.lyun.kexin.text2pattern.pattern.Unit;
+
+import java.util.*;
+
 import com.github.javaparser.ast.*;
 import com.github.javaparser.ast.expr.Name;
 
 public class PackageAST implements AST {
 
-	/*
-	 * text sample: 1. define package hello 2. define package hello dot world 3.
-	 * define package hello dot star 4. define package hello world
-	 */
-	public Node generate(String text) {
-		// PatternSet patSet = new PatternSet();
-		// ArrayList<Pattern> patList = patSet.getPatternSet();
-		// Pattern packagePattern = patList.get(0);
+	public Node generate(Pattern pattern) {
+		Unit[] units = pattern.getUnits();
+		List<Unit> unitList = new ArrayList<Unit>(Arrays.asList(units));
+		unitList.remove(0); // remove "define"
+		unitList.remove(0); // remove "package"
+		// TODO: temporary ignore annotations i.e. public/private etc.
+		Collections.reverse(unitList); // reverse name list
+		Name name = generate(unitList);
+		return new PackageDeclaration(name);
+	}
 
-		Name qualifier = new Name("world");
-		Name name = new Name(qualifier, "hello");
-		PackageDeclaration packageDeclaration = new PackageDeclaration(name);
-		return packageDeclaration;
+	// TODO: packge hello.dot.world case
+	private Name generate(List<Unit> units) {
+		units = removeDot(units);
+		Unit first = units.get(0);
+		String keyword = first.getKeyword();
+		keyword = keyword.equals("star") ? "*" : keyword;
+		if (units.size() == 1) {
+			return new Name(keyword);
+		} else {
+			units.remove(0);
+			return new Name(generate(units), keyword);
+		}
+	}
+
+	private List<Unit> removeDot(List<Unit> units) {
+		if (units.get(0).getKeyword() == "dot") {
+			units.remove(0);
+		}
+		return units;
 	}
 }

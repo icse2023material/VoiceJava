@@ -226,7 +226,7 @@ public class Regex {
 
 		for (Map.Entry<String, Set<State>> entry : curState.next.entrySet()) {
 			String edge = entry.getKey();
-			System.out.println("edge: " + edge);
+			// System.out.println("edge: " + edge);
 			// 这个if和else的先后顺序决定了是贪婪匹配还是非贪婪匹配
 			if (Constant.EPSILON.equals(edge)) {
 				for (State nextState : entry.getValue()) {
