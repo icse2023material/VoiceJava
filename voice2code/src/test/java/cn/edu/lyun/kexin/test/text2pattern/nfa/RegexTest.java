@@ -35,7 +35,13 @@ public class RegexTest {
 
 		Pattern interfacePat = new Pattern("define [public|private] interface _",
 				new Unit[] { new Unit("define"), classModifier, new Unit("interface"), new Unit() });
-		Regex regex = new Regex(interfacePat);
+		Pattern classPat = new Pattern(
+				"define [Annotation|public|protected|private|abstract|static|final|strictfp]* class _ [extends _]? [implements _]?",
+				new Unit[] { new Unit("define"), new Unit("asterisk", classModifier), new Unit("class"), new Unit(),
+						new Unit("question", new Unit("extends"), new Unit()),
+						new Unit("question", new Unit("implements"), new Unit()) });
+
+		Regex regex = new Regex(classPat);
 		regex.writeDotFile();
 		Runtime rt = Runtime.getRuntime();
 		try {
@@ -47,7 +53,7 @@ public class RegexTest {
 		// Pattern result = regex.isMatch("define package hello dot world");
 		// Pattern result = regex.isMatch("define public int variable count");
 		// String text = "import cn dot edu dot lyun dot kexin dot star";
-		String text = "define public interface hello";
+		String text = "define public class hello extends world implements greeting";
 		Pair<Boolean, Pattern> result = regex.isMatch(text);
 		if (result.getFirst()) {
 			System.out.println("Matched:");

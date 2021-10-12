@@ -86,6 +86,11 @@ public class Regex {
 				// create a new NFAGraph for subregex
 				// first() normally shall not be null
 				newNFAGraph = addUnitToNFAGraph(unit.getFirst(), null);
+				second = unit.getSecond();
+				if (second != null) {
+					NFAGraph nfaSecondGraph = addUnitToNFAGraph(second, null);
+					newNFAGraph.addSeriesGraph(nfaSecondGraph);
+				}
 				// then add quesiton
 				newNFAGraph.addEpsilonToEnd();
 				if (nfaGraph == null) {
@@ -96,6 +101,11 @@ public class Regex {
 				break;
 			case "plus":
 				newNFAGraph = addUnitToNFAGraph(unit.getFirst(), null);
+				second = unit.getSecond();
+				if (second != null) {
+					NFAGraph nfaSecondGraph = addUnitToNFAGraph(second, null);
+					newNFAGraph.addSeriesGraph(nfaSecondGraph);
+				}
 				newNFAGraph.repeatPlus();
 				if (nfaGraph == null) {
 					nfaGraph = newNFAGraph;
