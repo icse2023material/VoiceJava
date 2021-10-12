@@ -41,7 +41,19 @@ public class RegexTest {
 						new Unit("question", new Unit("extends"), new Unit()),
 						new Unit("question", new Unit("implements"), new Unit()) });
 
-		Regex regex = new Regex(classPat);
+		Unit methodModifier = new Unit("or", new Unit("annotation"),
+				new Unit("or", new Unit("public"),
+						new Unit("or", new Unit("protected"),
+								new Unit("or", new Unit("private"),
+										new Unit("or", new Unit("abstract"),
+												new Unit("or", new Unit("static"), new Unit("or", new Unit("final"), new Unit("or",
+														new Unit("synchronized"), new Unit("or", new Unit("native"), new Unit("strictfp"))))))))));
+		Pattern methodPat = new Pattern(
+				"define [Annotation|public|protected|private|abstract|static|final|synchronized|native|strictfp]* function _ [throws Exception]?",
+				new Unit[] { new Unit("define"), new Unit("asterisk", methodModifier), new Unit("function"), new Unit(),
+						new Unit("question", new Unit("throws"), new Unit("exception")) });
+
+		Regex regex = new Regex(methodPat);
 		regex.writeDotFile();
 		Runtime rt = Runtime.getRuntime();
 		try {
@@ -53,7 +65,7 @@ public class RegexTest {
 		// Pattern result = regex.isMatch("define package hello dot world");
 		// Pattern result = regex.isMatch("define public int variable count");
 		// String text = "import cn dot edu dot lyun dot kexin dot star";
-		String text = "define public class hello extends world implements greeting";
+		String text = "define public function greeting throws exception";
 		Pair<Boolean, Pattern> result = regex.isMatch(text);
 		if (result.getFirst()) {
 			System.out.println("Matched:");

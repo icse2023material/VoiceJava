@@ -16,7 +16,40 @@ public class ModifierAST {
 					break;
 				case "private":
 					modifier.setKeyword(Modifier.Keyword.PRIVATE);
-					// TODO: more case
+					break;
+				case "abstract":
+					modifier.setKeyword(Modifier.Keyword.ABSTRACT);
+					break;
+				case "default":
+					modifier.setKeyword(Modifier.Keyword.DEFAULT);
+					break;
+				case "final":
+					modifier.setKeyword(Modifier.Keyword.FINAL);
+					break;
+				case "native":
+					modifier.setKeyword(Modifier.Keyword.NATIVE);
+					break;
+				case "protected":
+					modifier.setKeyword(Modifier.Keyword.PROTECTED);
+					break;
+				case "static":
+					modifier.setKeyword(Modifier.Keyword.STATIC);
+					break;
+				case "strictfp":
+					modifier.setKeyword(Modifier.Keyword.STRICTFP);
+					break;
+				case "synchronized":
+					modifier.setKeyword(Modifier.Keyword.SYNCHRONIZED);
+					break;
+				case "transient":
+					modifier.setKeyword(Modifier.Keyword.TRANSIENT);
+					break;
+				case "transitive":
+					modifier.setKeyword(Modifier.Keyword.TRANSITIVE);
+					break;
+				case "volatile":
+					modifier.setKeyword(Modifier.Keyword.VOLATILE);
+					break;
 			}
 			nodeList.add(modifier);
 		}
