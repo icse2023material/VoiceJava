@@ -1,4 +1,4 @@
-package cn.edu.lyun.kexin.test.pattern;
+package cn.edu.lyun.kexin.test.text2pattern.pattern;
 
 import cn.edu.lyun.kexin.text2pattern.pattern.*;
 

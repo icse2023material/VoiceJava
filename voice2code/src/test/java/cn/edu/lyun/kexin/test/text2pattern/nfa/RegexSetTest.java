@@ -1,5 +1,5 @@
 
-package cn.edu.lyun.kexin.test.nfa;
+package cn.edu.lyun.kexin.test.text2pattern.nfa;
 
 import cn.edu.lyun.kexin.text2pattern.pattern.*;
 import cn.edu.lyun.kexin.text2pattern.nfa.*;

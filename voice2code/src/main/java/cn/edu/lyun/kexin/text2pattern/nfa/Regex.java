@@ -198,9 +198,6 @@ public class Regex {
 	public boolean isMatch(String text) {
 		State start = nfaGraph.start;
 		String[] tokenList = text.split(" ");
-		// for (String token : tokenList) {
-		// System.out.println(token);
-		// }
 		return isMatch(tokenList, 0, start);
 	}
 
