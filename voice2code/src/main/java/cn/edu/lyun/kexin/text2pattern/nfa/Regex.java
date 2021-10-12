@@ -9,6 +9,7 @@ import cn.edu.lyun.kexin.text2pattern.nfa.strategy.MatchStrategy;
 import cn.edu.lyun.kexin.text2pattern.nfa.strategy.MatchStrategyManager;
 import cn.edu.lyun.kexin.text2pattern.pattern.Pattern;
 import cn.edu.lyun.kexin.text2pattern.pattern.Unit;
+import cn.edu.lyun.util.Pair;
 
 public class Regex {
 	private NFAGraph nfaGraph;
@@ -195,23 +196,32 @@ public class Regex {
 		}
 	}
 
-	public boolean isMatch(String text) {
+	public Pair<Boolean, Pattern> isMatch(String text) {
 		State start = nfaGraph.start;
 		String[] tokenList = text.split(" ");
-		return isMatch(tokenList, 0, start);
+		Pair<Boolean, List<Unit>> isMatchResult = isMatch(tokenList, 0, start, new ArrayList<Unit>());
+		if (isMatchResult.getFirst()) {
+			List<Unit> unitInstanceList = isMatchResult.getSecond();
+			Unit[] unitList = new Unit[unitInstanceList.size()];
+			unitInstanceList.toArray(unitList);
+			return new Pair<Boolean, Pattern>(true, new Pattern(this.pattern.toString(), unitList));
+		} else {
+			return new Pair<Boolean, Pattern>(false, new Pattern(this.pattern.toString(), new Unit[] {}));
+		}
 	}
 
-	private boolean isMatch(String[] tokenList, int pos, State curState) {
+	private Pair<Boolean, List<Unit>> isMatch(String[] tokenList, int pos, State curState, List<Unit> unitInstanceList) {
 		if (pos == tokenList.length) {
 			for (State nextState : curState.next.getOrDefault(Constant.EPSILON, Collections.<State>emptySet())) {
-				if (isMatch(tokenList, pos, nextState)) {
-					return true;
+				Pair<Boolean, List<Unit>> isMatchResult = isMatch(tokenList, pos, nextState, unitInstanceList);
+				if (isMatchResult.getFirst()) {
+					return isMatchResult;
 				}
 			}
 			if (curState.isEndState()) {
-				return true;
+				return new Pair<Boolean, List<Unit>>(true, unitInstanceList);
 			}
-			return false;
+			return new Pair<Boolean, List<Unit>>(false, new ArrayList<Unit>());
 		}
 
 		for (Map.Entry<String, Set<State>> entry : curState.next.entrySet()) {
@@ -220,14 +230,14 @@ public class Regex {
 			// 这个if和else的先后顺序决定了是贪婪匹配还是非贪婪匹配
 			if (Constant.EPSILON.equals(edge)) {
 				for (State nextState : entry.getValue()) {
-					if (isMatch(tokenList, pos, nextState)) {
-						return true;
+					Pair<Boolean, List<Unit>> isMatchResult = isMatch(tokenList, pos, nextState, unitInstanceList);
+					if (isMatchResult.getFirst()) {
+						return isMatchResult;
 					}
 				}
 			} else {
 				MatchStrategy matchStrategy = null;
 				if (KeyWordSet.isKeyword(edge)) {
-					System.out.println("keyword match");
 					matchStrategy = MatchStrategyManager.getStrategy("keyword");
 				} else {
 					matchStrategy = MatchStrategyManager.getStrategy(edge);
@@ -235,17 +245,28 @@ public class Regex {
 				if (!matchStrategy.isMatch(tokenList[pos], edge)) {
 					continue;
 				}
-				System.out.println("entry: " + entry.getValue());
+
+				Unit unitInstance;
+				if (KeyWordSet.isKeyword(edge)) {
+					unitInstance = new Unit(edge);
+				} else {
+					unitInstance = new Unit();
+					unitInstance.setAnyValue(tokenList[pos]);
+				}
+				// 缓存结果，势必耗费大量资源
+				List<Unit> clonedUnitInstanceList = new ArrayList<Unit>(unitInstanceList);
+				clonedUnitInstanceList.add(unitInstance);
+
 				// 遍历匹配策略
 				for (State nextState : entry.getValue()) {
-					System.out.println("nextState: " + nextState.getId());
-					if (isMatch(tokenList, pos + 1, nextState)) {
-						return true;
+					Pair<Boolean, List<Unit>> isMatchResult = isMatch(tokenList, pos + 1, nextState, clonedUnitInstanceList);
+					if (isMatchResult.getFirst()) {
+						return isMatchResult;
 					}
 				}
 			}
 		}
-		return false;
+		return new Pair<Boolean, List<Unit>>(false, new ArrayList<Unit>());
 	}
 
 }

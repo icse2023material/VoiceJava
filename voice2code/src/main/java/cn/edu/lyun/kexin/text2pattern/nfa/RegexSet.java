@@ -3,6 +3,7 @@ package cn.edu.lyun.kexin.text2pattern.nfa;
 import java.util.*;
 import cn.edu.lyun.kexin.text2pattern.pattern.PatternSet;
 import cn.edu.lyun.kexin.text2pattern.pattern.Pattern;
+import cn.edu.lyun.util.Pair;
 
 public class RegexSet {
 	private ArrayList<Regex> regexList;
@@ -19,10 +20,11 @@ public class RegexSet {
 		this.regexList = regexList;
 	}
 
-	public Regex matchPattern(String text) {
+	public Pattern matchPattern(String text) {
 		for (Regex regex : regexList) {
-			if (regex.isMatch(text)) {
-				return regex;
+			Pair<Boolean, Pattern> result = regex.isMatch(text);
+			if (result.getFirst()) {
+				return result.getSecond();
 			}
 		}
 		return null;

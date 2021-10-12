@@ -7,8 +7,8 @@ import cn.edu.lyun.kexin.text2pattern.nfa.*;
 public class RegexSetTest {
 	public static void main(String[] args) {
 		String text = "define package hello world";
-		Regex reg = RegexSet.compile(new PatternSet()).matchPattern(text);
-		System.out.println(reg.getPattern().getPattern());
+		Pattern patternResult = RegexSet.compile(new PatternSet()).matchPattern(text);
+		System.out.println(patternResult.getPattern());
 	}
 
 }

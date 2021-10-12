@@ -18,6 +18,14 @@ public class Unit {
 		this.type = "any";
 	}
 
+	public void setAnyValue(String value) {
+		if (this.type == "any") {
+			this.keyword = value;
+		} else {
+			System.out.println("cannot set value except any type");
+		}
+	}
+
 	// Initialize with one parameter
 	public Unit(String type, Unit first) {
 		this.type = type;
@@ -105,6 +113,47 @@ public class Unit {
 				break;
 			case "any":
 				str = str != "" ? str + " _" : str + "_";
+				break;
+			case "or":
+				String subStr = "[" + first.toVoiceJavaPattern() + " | " + second.toVoiceJavaPattern() + "]";
+				str = str != "" ? str + " " + subStr : subStr;
+				break;
+			case "plus":
+			case "asterisk":
+			case "question":
+			case "normal":
+				subStr = "[" + (first != null ? first.toVoiceJavaPattern() : "")
+						+ (second != null ? " " + second.toVoiceJavaPattern() : "") + "]";
+				if (type == "star") {
+					subStr += "*";
+				} else if (type == "plus") {
+					subStr += "+";
+				} else if (type == "asterisk") {
+					subStr += "*";
+				} else if (type == "question") {
+					subStr += "?";
+				}
+				str = str != "" ? str + " " + subStr : subStr;
+				break;
+			case "list":
+				subStr = "";
+				for (Unit unit : list) {
+					subStr = subStr != "" ? subStr + " " + unit.toVoiceJavaPattern() : unit.toVoiceJavaPattern();
+				}
+				str = str != "" ? str + " " + subStr : subStr;
+				break;
+		}
+		return str;
+	}
+
+	public String showInstance() {
+		String str = "";
+		switch (type) {
+			case "keyword":
+				str = str != "" ? str + " " + keyword : str + keyword;
+				break;
+			case "any":
+				str = str != "" ? str + " " + keyword : str + keyword;
 				break;
 			case "or":
 				String subStr = "[" + first.toVoiceJavaPattern() + " | " + second.toVoiceJavaPattern() + "]";

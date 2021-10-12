@@ -34,4 +34,13 @@ public class Pattern {
 		}
 		return str;
 	}
+
+	public String showInstance() {
+		String str = "";
+		for (Unit unit : units) {
+			str += str != "" ? " " + unit.showInstance() : unit.showInstance();
+		}
+		return str;
+
+	}
 }
