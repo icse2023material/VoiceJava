@@ -20,14 +20,15 @@ public class PatternSet {
 						new Unit("asterisk", new Unit("dot"), new Unit("or", new Unit(), new Unit("star"))) });
 		patSet.add(importPat);
 
-		Pattern interfacePat = new Pattern("define interface _",
-				new Unit[] { new Unit("define"), new Unit("interface"), new Unit() });
-		patSet.add(interfacePat);
 		Unit classModifier = new Unit("or", new Unit("annotation"),
 				new Unit("or", new Unit("public"),
 						new Unit("or", new Unit("protected"),
 								new Unit("or", new Unit("private"), new Unit("or", new Unit("abstract"),
 										new Unit("or", new Unit("static"), new Unit("or", new Unit("final"), new Unit("strictfp"))))))));
+
+		Pattern interfacePat = new Pattern("define [public|private] interface _",
+				new Unit[] { new Unit("define"), classModifier, new Unit("interface"), new Unit() });
+		patSet.add(interfacePat);
 		Pattern classPat = new Pattern(
 				"define [Annotation|public|protected|private|abstract|static|final|strictfp]* class _ [extends _]? [implements _]?",
 				new Unit[] { new Unit("define"), new Unit("asterisk", classModifier), new Unit("class"), new Unit(),
