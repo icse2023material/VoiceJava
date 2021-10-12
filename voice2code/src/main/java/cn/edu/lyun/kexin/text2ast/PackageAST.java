@@ -17,28 +17,7 @@ public class PackageAST implements AST {
 		unitList.remove(0); // remove "package"
 		// TODO: temporary ignore annotations i.e. public/private etc.
 		Collections.reverse(unitList); // reverse name list
-		Name name = generate(unitList);
+		Name name = (new NameAST()).generate(unitList);
 		return new PackageDeclaration(name);
-	}
-
-	// TODO: packge hello.dot.world case
-	private Name generate(List<Unit> units) {
-		units = removeDot(units);
-		Unit first = units.get(0);
-		String keyword = first.getKeyword();
-		keyword = keyword.equals("star") ? "*" : keyword;
-		if (units.size() == 1) {
-			return new Name(keyword);
-		} else {
-			units.remove(0);
-			return new Name(generate(units), keyword);
-		}
-	}
-
-	private List<Unit> removeDot(List<Unit> units) {
-		if (units.get(0).getKeyword() == "dot") {
-			units.remove(0);
-		}
-		return units;
 	}
 }

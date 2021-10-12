@@ -4,7 +4,6 @@ import cn.edu.lyun.kexin.text2ast.PackageAST;
 import cn.edu.lyun.kexin.text2pattern.nfa.RegexSet;
 import cn.edu.lyun.kexin.text2pattern.pattern.Pattern;
 import cn.edu.lyun.kexin.text2pattern.pattern.PatternSet;
-import cn.edu.lyun.kexin.text2pattern.pattern.Unit;
 
 import com.github.javaparser.ast.*;
 
