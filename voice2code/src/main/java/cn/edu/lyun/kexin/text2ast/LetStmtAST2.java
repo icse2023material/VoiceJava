@@ -10,8 +10,6 @@ import cn.edu.lyun.util.*;
 import com.github.javaparser.ast.expr.AssignExpr;
 import com.github.javaparser.ast.expr.Expression;
 import com.github.javaparser.ast.expr.MethodCallExpr;
-import com.github.javaparser.ast.expr.NameExpr;
-import com.github.javaparser.ast.expr.SimpleName;
 
 // let _ [dot _]? equal _ [call _]+
 public class LetStmtAST2 implements AST {
@@ -27,25 +25,9 @@ public class LetStmtAST2 implements AST {
 		assignExpr.setTarget(fieldAccess);
 
 		List<Unit> second = pair.getSecond();
-		MethodCallExpr methodCallExpr = generateMethoCallExpr(second);
+		MethodCallExpr methodCallExpr = MethodCallExprAST.generateMethoCallExpr(second);
 		assignExpr.setValue(methodCallExpr);
 		return assignExpr;
-	}
-
-	public MethodCallExpr generateMethoCallExpr(List<Unit> units) {
-		units = new ListHelper().removeCall(units);
-		Unit name = units.remove(0);
-		MethodCallExpr methodCallExpr = null;
-		Expression nameExpr = new NameExpr(new SimpleName(name.getKeyword()));
-		for (Unit unit : units) {
-			if (methodCallExpr != null) {
-				methodCallExpr = new MethodCallExpr(methodCallExpr, new SimpleName(unit.getKeyword()));
-			} else {
-				methodCallExpr = new MethodCallExpr(nameExpr, new SimpleName(unit.getKeyword()));
-			}
-		}
-
-		return methodCallExpr;
 	}
 
 }

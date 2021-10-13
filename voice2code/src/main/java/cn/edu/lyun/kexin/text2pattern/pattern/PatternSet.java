@@ -166,7 +166,7 @@ public class PatternSet {
 		patSet.add(let6Pat);
 		Pattern return1Pat = new Pattern("return call _", new Unit[] { new Unit("return"), new Unit("call"), new Unit() });
 		patSet.add(return1Pat);
-		Pattern return2Pat = new Pattern("return _ [call _]+ ",
+		Pattern return2Pat = new Pattern("return _ [call _]+",
 				new Unit[] { new Unit("return"), new Unit(), new Unit("plus", new Unit("call"), new Unit()) });
 		patSet.add(return2Pat);
 		Pattern return3Pat = new Pattern("return _ [dot _]*",
