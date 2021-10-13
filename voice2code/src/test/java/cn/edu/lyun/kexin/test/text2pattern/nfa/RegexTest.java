@@ -73,6 +73,9 @@ public class RegexTest {
 			System.out.println(result.getSecond().getPattern());
 			System.out.println(result.getSecond().toVoiceJavaPattern());
 			System.out.println(result.getSecond().showInstance());
+			for (Unit unit : result.getSecond().getUnits()) {
+				System.out.print(unit);
+			}
 		} else {
 			System.out.println("Match fail!");
 			System.out.println(text);
