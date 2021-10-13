@@ -19,13 +19,6 @@ public class RegexTest {
 				new Unit("or", new Unit("public"),
 						new Unit("or", new Unit("protected"), new Unit("or", new Unit("private"), new Unit("or", new Unit("static"),
 								new Unit("or", new Unit("final"), new Unit("or", new Unit("transient"), new Unit("volatile"))))))));
-		Pattern fieldPat = new Pattern(
-				"define [Annotation|public|protected|private|static|final|transient|volatile]* (_ list | _ [dot _]? [with _+]?) variable _ ",
-				new Unit[] { new Unit("define"), new Unit("asterisk", fieldModifier),
-						new Unit("or", new Unit("normal", new Unit(), new Unit("list")),
-								new Unit(new Unit[] { new Unit(), new Unit("question", new Unit("dot"), new Unit()),
-										new Unit("question", new Unit("with"), new Unit("plus", new Unit())) })),
-						new Unit("variable"), new Unit() });
 
 		Unit classModifier = new Unit("or", new Unit("annotation"),
 				new Unit("or", new Unit("public"),
@@ -53,7 +46,15 @@ public class RegexTest {
 				new Unit[] { new Unit("define"), new Unit("asterisk", methodModifier), new Unit("function"), new Unit(),
 						new Unit("question", new Unit("throws"), new Unit("exception")) });
 
-		Regex regex = new Regex(methodPat);
+		Pattern fieldPat = new Pattern(
+				"define [Annotation|public|protected|private|static|final|transient|volatile]* (_ list | _ [dot _]? [with _+]?) variable _ ",
+				new Unit[] { new Unit("define"), new Unit("asterisk", fieldModifier),
+						new Unit("or", new Unit("normal", new Unit(), new Unit("list")),
+								new Unit(new Unit[] { new Unit(), new Unit("question", new Unit("dot"), new Unit()),
+										new Unit("question", new Unit("with"), new Unit("plus", new Unit())) })),
+						new Unit("variable"), new Unit() });
+
+		Regex regex = new Regex(fieldPat);
 		regex.writeDotFile();
 		Runtime rt = Runtime.getRuntime();
 		try {
@@ -65,7 +66,7 @@ public class RegexTest {
 		// Pattern result = regex.isMatch("define package hello dot world");
 		// Pattern result = regex.isMatch("define public int variable count");
 		// String text = "import cn dot edu dot lyun dot kexin dot star";
-		String text = "define public function greeting throws exception";
+		String text = "define public int variable count";
 		Pair<Boolean, Pattern> result = regex.isMatch(text);
 		if (result.getFirst()) {
 			System.out.println("Matched:");

@@ -1,12 +1,11 @@
 package cn.edu.lyun.kexin.test.text2ast;
 
-import cn.edu.lyun.kexin.text2ast.ImportAST;
-import cn.edu.lyun.kexin.text2ast.InterfaceAST;
 import cn.edu.lyun.kexin.text2pattern.nfa.RegexSet;
 import cn.edu.lyun.kexin.text2pattern.pattern.Pattern;
 import cn.edu.lyun.kexin.text2pattern.pattern.PatternSet;
 import cn.edu.lyun.kexin.text2pattern.pattern.Unit;
 import cn.edu.lyun.util.Pair;
+import cn.edu.lyun.kexin.text2ast.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;

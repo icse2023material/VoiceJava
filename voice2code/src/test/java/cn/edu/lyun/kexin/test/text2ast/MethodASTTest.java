@@ -1,13 +1,12 @@
 package cn.edu.lyun.kexin.test.text2ast;
 
-import cn.edu.lyun.kexin.text2ast.ImportAST;
-import cn.edu.lyun.kexin.text2ast.Method;
+import cn.edu.lyun.kexin.text2ast.MethodAST;
 import cn.edu.lyun.kexin.text2pattern.nfa.RegexSet;
 import cn.edu.lyun.kexin.text2pattern.pattern.Pattern;
 import cn.edu.lyun.kexin.text2pattern.pattern.PatternSet;
 import com.github.javaparser.ast.*;
 
-public class MethodTest {
+public class MethodASTTest {
 
 	public static void main(String[] args) {
 		String[] textList = { "define public function hello", "define private function infer",
@@ -18,7 +17,7 @@ public class MethodTest {
 			// System.out.println(pattern.toVoiceJavaPattern());
 			System.out.println(pattern.showInstance());
 
-			Method method = new Method();
+			MethodAST method = new MethodAST();
 			Node node = method.generate(pattern);
 			System.out.println(node);
 		}
