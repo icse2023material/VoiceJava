@@ -9,55 +9,14 @@ import cn.edu.lyun.kexin.text2pattern.nfa.*;
 public class RegexTest {
 
 	public static void main(String[] args) {
-		Pattern packagePat = new Pattern("define package _ [dot _]*", new Unit[] { new Unit("define"), new Unit("package"),
-				new Unit(), new Unit("asterisk", new Unit("dot"), new Unit()) });
-		Pattern importPat = new Pattern("import static? _ [dot [_|star]]*",
-				new Unit[] { new Unit("import"), new Unit("question", new Unit("static")), new Unit(),
-						new Unit("asterisk", new Unit("dot"), new Unit("or", new Unit(), new Unit("star"))) });
 
-		Unit fieldModifier = new Unit("or", new Unit("annotation"),
-				new Unit("or", new Unit("public"),
-						new Unit("or", new Unit("protected"), new Unit("or", new Unit("private"), new Unit("or", new Unit("static"),
-								new Unit("or", new Unit("final"), new Unit("or", new Unit("transient"), new Unit("volatile"))))))));
+		Pattern let1Pat = new Pattern("let _ [dot _]? equal call _ ", new Unit[] { new Unit("let"), new Unit(),
+				new Unit("question", new Unit("dot"), new Unit()), new Unit("equal"), new Unit("call"), new Unit() });
+		Pattern let2Pat = new Pattern("let _ [dot _]? equal _ [call _]+",
+				new Unit[] { new Unit("let"), new Unit(), new Unit("question", new Unit("dot"), new Unit()), new Unit("equal"),
+						new Unit(), new Unit("plus", new Unit("call"), new Unit()) });
 
-		Unit classModifier = new Unit("or", new Unit("annotation"),
-				new Unit("or", new Unit("public"),
-						new Unit("or", new Unit("protected"),
-								new Unit("or", new Unit("private"), new Unit("or", new Unit("abstract"),
-										new Unit("or", new Unit("static"), new Unit("or", new Unit("final"), new Unit("strictfp"))))))));
-
-		Pattern interfacePat = new Pattern("define [public|private] interface _",
-				new Unit[] { new Unit("define"), classModifier, new Unit("interface"), new Unit() });
-		Pattern classPat = new Pattern(
-				"define [Annotation|public|protected|private|abstract|static|final|strictfp]* class _ [extends _]? [implements _]?",
-				new Unit[] { new Unit("define"), new Unit("asterisk", classModifier), new Unit("class"), new Unit(),
-						new Unit("question", new Unit("extends"), new Unit()),
-						new Unit("question", new Unit("implements"), new Unit()) });
-
-		Unit methodModifier = new Unit("or", new Unit("annotation"),
-				new Unit("or", new Unit("public"),
-						new Unit("or", new Unit("protected"),
-								new Unit("or", new Unit("private"),
-										new Unit("or", new Unit("abstract"),
-												new Unit("or", new Unit("static"), new Unit("or", new Unit("final"), new Unit("or",
-														new Unit("synchronized"), new Unit("or", new Unit("native"), new Unit("strictfp"))))))))));
-		Pattern methodPat = new Pattern(
-				"define [Annotation|public|protected|private|abstract|static|final|synchronized|native|strictfp]* function _ [throws Exception]?",
-				new Unit[] { new Unit("define"), new Unit("asterisk", methodModifier), new Unit("function"), new Unit(),
-						new Unit("question", new Unit("throws"), new Unit("exception")) });
-
-		Pattern fieldPat = new Pattern(
-				"define [Annotation|public|protected|private|static|final|transient|volatile]* (_ list | _ [dot _]? [with _+]?) variable _ ",
-				new Unit[] { new Unit("define"), new Unit("asterisk", fieldModifier),
-						new Unit("or", new Unit("normal", new Unit(), new Unit("list")),
-								new Unit(new Unit[] { new Unit(), new Unit("question", new Unit("dot"), new Unit()),
-										new Unit("question", new Unit("with"), new Unit("plus", new Unit())) })),
-						new Unit("variable"), new Unit() });
-
-		Pattern forPat = new Pattern("define [enhanced] for",
-				new Unit[] { new Unit("define"), new Unit("question", new Unit("enhanced")), new Unit("for") });
-
-		Regex regex = new Regex(forPat);
+		Regex regex = new Regex(let2Pat);
 		regex.writeDotFile();
 		Runtime rt = Runtime.getRuntime();
 		try {
@@ -69,7 +28,7 @@ public class RegexTest {
 		// Pattern result = regex.isMatch("define package hello dot world");
 		// Pattern result = regex.isMatch("define public int variable count");
 		// String text = "import cn dot edu dot lyun dot kexin dot star";
-		String text = "define enhanced for";
+		String text = "let world equal hello call world";
 		Pair<Boolean, Pattern> result = regex.isMatch(text);
 		if (result.getFirst()) {
 			System.out.println("Matched:");

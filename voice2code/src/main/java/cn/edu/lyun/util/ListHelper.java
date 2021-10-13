@@ -1,6 +1,8 @@
 package cn.edu.lyun.util;
 
 import java.util.*;
+import java.util.function.Predicate;
+
 import cn.edu.lyun.kexin.text2pattern.pattern.Unit;
 
 public class ListHelper {
@@ -85,6 +87,26 @@ public class ListHelper {
 		}
 
 		return new Pair<List<Unit>, List<Unit>>(left, units);
+	}
+
+	public List<Unit> removeDot(List<Unit> units) {
+		units.removeIf(new Predicate<Unit>() {
+			@Override
+			public boolean test(Unit unit) {
+				return unit.getKeyword().equals("dot");
+			}
+		});
+		return units;
+	}
+
+	public List<Unit> removeCall(List<Unit> units) {
+		units.removeIf(new Predicate<Unit>() {
+			@Override
+			public boolean test(Unit unit) {
+				return unit.getKeyword().equals("call");
+			}
+		});
+		return units;
 	}
 
 }
