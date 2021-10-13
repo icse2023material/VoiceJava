@@ -54,7 +54,10 @@ public class RegexTest {
 										new Unit("question", new Unit("with"), new Unit("plus", new Unit())) })),
 						new Unit("variable"), new Unit() });
 
-		Regex regex = new Regex(fieldPat);
+		Pattern forPat = new Pattern("define [enhanced] for",
+				new Unit[] { new Unit("define"), new Unit("question", new Unit("enhanced")), new Unit("for") });
+
+		Regex regex = new Regex(forPat);
 		regex.writeDotFile();
 		Runtime rt = Runtime.getRuntime();
 		try {
@@ -66,7 +69,7 @@ public class RegexTest {
 		// Pattern result = regex.isMatch("define package hello dot world");
 		// Pattern result = regex.isMatch("define public int variable count");
 		// String text = "import cn dot edu dot lyun dot kexin dot star";
-		String text = "define public int variable count";
+		String text = "define enhanced for";
 		Pair<Boolean, Pattern> result = regex.isMatch(text);
 		if (result.getFirst()) {
 			System.out.println("Matched:");

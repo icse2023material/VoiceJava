@@ -15,7 +15,7 @@ Type ::= Name list | Name [dot Name] [with Name+] //keyword: list dot with
 
 define [MethodModifier] variable Name // keyword: defined variable
 type Name [extends Name] // keyword: type extends
-type Name variable Name // keyword: type variable
+type Type variable Name // keyword: type variable  等价于 FieldPattern 即 defined Type variable Name
 
 define [enhanced] for // keyword: define enhanced for ? define foreach ?
 define [do] while // keyword: define do while
