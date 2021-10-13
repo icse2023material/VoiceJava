@@ -10,7 +10,7 @@ import cn.edu.lyun.kexin.text2pattern.pattern.Unit;
 import cn.edu.lyun.util.ListHelper;
 import cn.edu.lyun.util.Pair;
 
-public class InterfaceAST {
+public class InterfaceAST implements AST {
 	public Node generate(Pattern pattern) {
 		Unit[] units = pattern.getUnits();
 		List<Unit> unitList = new ArrayList<Unit>(Arrays.asList(units));

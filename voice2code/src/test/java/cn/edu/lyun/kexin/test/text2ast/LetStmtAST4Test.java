@@ -7,11 +7,9 @@ import cn.edu.lyun.kexin.text2pattern.pattern.PatternSet;
 import com.github.javaparser.ast.*;
 
 public class LetStmtAST4Test {
-
 	public static void main(String[] args) {
 		// let _ [dot _]? equal [variable]? _
 		String[] textList = { "let world equal hello", "let hello dot world equal variable hello" };
-
 		for (String text : textList) {
 			Pattern pattern = RegexSet.compile(new PatternSet()).matchPattern(text);
 			System.out.println(pattern.showInstance());

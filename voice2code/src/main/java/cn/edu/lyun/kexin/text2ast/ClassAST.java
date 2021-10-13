@@ -11,7 +11,7 @@ import cn.edu.lyun.kexin.text2pattern.pattern.Unit;
 import cn.edu.lyun.util.Pair;
 import cn.edu.lyun.util.ListHelper;
 
-public class ClassAST {
+public class ClassAST implements AST {
 	public Node generate(Pattern pattern) {
 		Unit[] units = pattern.getUnits();
 		List<Unit> unitList = new ArrayList<Unit>(Arrays.asList(units));

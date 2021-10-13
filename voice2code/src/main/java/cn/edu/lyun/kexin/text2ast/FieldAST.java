@@ -4,14 +4,11 @@ import cn.edu.lyun.kexin.text2pattern.pattern.Pattern;
 import cn.edu.lyun.kexin.text2pattern.pattern.Unit;
 import cn.edu.lyun.util.Pair;
 import cn.edu.lyun.util.ListHelper;
-
 import java.util.*;
-
 import com.github.javaparser.ast.*;
 import com.github.javaparser.ast.body.FieldDeclaration;
 import com.github.javaparser.ast.body.VariableDeclarator;
 import com.github.javaparser.ast.expr.SimpleName;
-import com.github.javaparser.ast.type.PrimitiveType;
 import com.github.javaparser.ast.type.Type;
 
 public class FieldAST implements AST {

@@ -2,7 +2,6 @@ package cn.edu.lyun.kexin.text2ast;
 
 import com.github.javaparser.ast.*;
 import com.github.javaparser.ast.expr.BinaryExpr;
-
 import java.util.*;
 import cn.edu.lyun.kexin.text2pattern.pattern.Pattern;
 import cn.edu.lyun.kexin.text2pattern.pattern.Unit;

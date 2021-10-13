@@ -1,11 +1,9 @@
 package cn.edu.lyun.kexin.text2ast;
 
 import com.github.javaparser.ast.*;
-import com.github.javaparser.ast.expr.Expression;
 import com.github.javaparser.ast.expr.NameExpr;
 import com.github.javaparser.ast.expr.SimpleName;
 import com.github.javaparser.ast.expr.UnaryExpr;
-
 import java.util.*;
 import cn.edu.lyun.kexin.text2pattern.pattern.Pattern;
 import cn.edu.lyun.kexin.text2pattern.pattern.Unit;

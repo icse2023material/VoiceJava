@@ -6,7 +6,7 @@ import java.util.*;
 import cn.edu.lyun.kexin.text2pattern.pattern.Pattern;
 import cn.edu.lyun.kexin.text2pattern.pattern.Unit;
 
-public class ImportAST {
+public class ImportAST implements AST {
 	public Node generate(Pattern pattern) {
 		Unit[] units = pattern.getUnits();
 		List<Unit> unitList = new ArrayList<Unit>(Arrays.asList(units));
