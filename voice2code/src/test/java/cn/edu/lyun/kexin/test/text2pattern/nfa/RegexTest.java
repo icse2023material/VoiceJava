@@ -9,14 +9,19 @@ import cn.edu.lyun.kexin.text2pattern.nfa.*;
 public class RegexTest {
 
 	public static void main(String[] args) {
+		Unit opUnit = new Unit("or", new Unit("plus"), new Unit("or", new Unit("minus"),
+				new Unit("or", new Unit("times"), new Unit("or", new Unit("divide"), new Unit("mod")))));
+		Unit compareUnit = new Unit("or", new Unit("normal", new Unit("less"), new Unit("than")),
+				new Unit("or", new Unit("normal", new Unit("less"), new Unit("equal")),
+						new Unit("or", new Unit("normal", new Unit("greater"), new Unit("than")),
+								new Unit("or", new Unit("normal", new Unit("greater"), new Unit("equal")),
+										new Unit("or", new Unit("normal", new Unit("double"), new Unit("equal")),
+												new Unit("or", new Unit("and"), new Unit("normal", new Unit("double"), new Unit("and"))))))));
 
-		Pattern let1Pat = new Pattern("let _ [dot _]? equal call _ ", new Unit[] { new Unit("let"), new Unit(),
-				new Unit("question", new Unit("dot"), new Unit()), new Unit("equal"), new Unit("call"), new Unit() });
-		Pattern let2Pat = new Pattern("let _ [dot _]? equal _ [call _]+",
-				new Unit[] { new Unit("let"), new Unit(), new Unit("question", new Unit("dot"), new Unit()), new Unit("equal"),
-						new Unit(), new Unit("plus", new Unit("call"), new Unit()) });
-
-		Regex regex = new Regex(let2Pat);
+		Pattern expr10Pat = new Pattern("[expression]? subexpression (op | compare) subexpression",
+				new Unit[] { new Unit("question", new Unit("expression")), new Unit("subexpression"),
+						new Unit("or", opUnit, compareUnit), new Unit("subexpression") });
+		Regex regex = new Regex(expr10Pat);
 		regex.writeDotFile();
 		Runtime rt = Runtime.getRuntime();
 		try {
@@ -25,10 +30,7 @@ public class RegexTest {
 			e.printStackTrace();
 		}
 
-		// Pattern result = regex.isMatch("define package hello dot world");
-		// Pattern result = regex.isMatch("define public int variable count");
-		// String text = "import cn dot edu dot lyun dot kexin dot star";
-		String text = "let world equal hello call world";
+		String text = "expression subexpression plus subexpression";
 		Pair<Boolean, Pattern> result = regex.isMatch(text);
 		if (result.getFirst()) {
 			System.out.println("Matched:");

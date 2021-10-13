@@ -187,14 +187,14 @@ public class PatternSet {
 		Pattern expr2Pat = new Pattern("[expression]? _ [call _]+", new Unit[] {
 				new Unit("question", new Unit("expression")), new Unit(), new Unit("plus", new Unit("call"), new Unit()) });
 		patSet.add(expr2Pat);
-		Pattern expr3Pat = new Pattern("[expression]? _ [dot _]?", new Unit[] {
-				new Unit("question", new Unit("expression")), new Unit(), new Unit("question", new Unit("dot"), new Unit()) });
+		Pattern expr3Pat = new Pattern("[expression]? _ [dot _]*", new Unit[] {
+				new Unit("question", new Unit("expression")), new Unit(), new Unit("asterisk", new Unit("dot"), new Unit()) });
 		patSet.add(expr3Pat);
 		Pattern expr4Pat = new Pattern("[expression]? [variable]? _ ", new Unit[] {
 				new Unit("question", new Unit("expression")), new Unit("question", new Unit("variable")), new Unit() });
 		patSet.add(expr4Pat);
 		Pattern expr5Pat = new Pattern(
-				"[expression? (int | byte | short | long | char | float | double | boolean | String) _ ",
+				"[expression]? (int | byte | short | long | char | float | double | boolean | String) _ ",
 				new Unit[] { new Unit("question", new Unit("expression")), typeUnit, new Unit() });
 		patSet.add(expr5Pat);
 		Pattern expr6Pat = new Pattern("[expression]? _ plus plus",
