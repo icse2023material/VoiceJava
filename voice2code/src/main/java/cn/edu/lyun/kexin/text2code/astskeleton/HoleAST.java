@@ -31,7 +31,7 @@ public class HoleAST {
 			for (int index = 0; index < childList.size(); index++) {
 				List<Integer> clonedPath = new ArrayList<Integer>(path);
 				clonedPath.add(index);
-				Pair<Pair<HoleNode, HoleNode>, List<Integer>> result = getCurrentHoleRecursive(parent, childList.get(index),
+				Pair<Pair<HoleNode, HoleNode>, List<Integer>> result = getCurrentHoleRecursive(node, childList.get(index),
 						clonedPath);
 				if (result != null) {
 					return result;
@@ -43,6 +43,19 @@ public class HoleAST {
 
 	public HoleNode getRoot() {
 		return this.root;
+	}
+
+	public HoleNode getParentOfNode(List<Integer> path) {
+		HoleNode parent = this.root;
+		if (path.size() < 2) {
+			return this.root;
+		}
+
+		for (int i = 0; i < path.size() - 2; i++) {
+			parent = parent.getIthChild(path.get(i));
+		}
+
+		return parent;
 	}
 
 }

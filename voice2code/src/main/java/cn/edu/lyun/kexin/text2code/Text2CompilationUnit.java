@@ -46,20 +46,29 @@ public class Text2CompilationUnit {
 		System.out.println("[log] matched pattern name: " + pattern.getName());
 
 		Pair<Pair<HoleNode, HoleNode>, List<Integer>> holePosition = this.holeAST.getCurrentHole();
-		Pair<Node, Integer> parentNodeAndIndex = this.getParentNodeOfHole(holePosition.getSecond());
+		List<Integer> path = holePosition.getSecond();
+		Pair<Node, Integer> parentNodeAndIndex = this.getParentNodeOfHole(path);
 		int holeIndex = parentNodeAndIndex.getSecond();
 		Pair<HoleNode, HoleNode> parentAndCurrentHole = holePosition.getFirst();
 		HoleNode parentHole = parentAndCurrentHole.getFirst();
 		HoleNode currentHole = parentAndCurrentHole.getSecond();
 
 		switch (pattern.getName()) {
+			case "moveNext":
+				// delete current hole, move to next one
+				parentHole.deleteHole(holeIndex);
+				// TODO: small step move. Not syntax-directed.
+				HoleNode parentOfParentHole = this.holeAST.getParentOfNode(path);
+				HoleNode holeNode = new HoleNode(HoleType.Undefined, true);
+				parentOfParentHole.addChild(holeNode);
+				break;
 			case "package":
 				CompilationUnit parentNode = (CompilationUnit) parentNodeAndIndex.getFirst();
 				parentNode.setPackageDeclaration((PackageDeclaration) node);
 				// update current hole
 				currentHole.setIsHole(false);
 				currentHole.setHoleType(HoleType.PackageDeclaration);
-				HoleNode holeNode = new HoleNode(HoleType.Undefined, true);
+				holeNode = new HoleNode(HoleType.Undefined, true);
 				holeNode.setHoleTypeOptions(new HoleType[] { HoleType.ImportDeclaration, HoleType.TypeDeclaration });
 				parentHole.addChild(holeNode);
 				break;
@@ -89,8 +98,10 @@ public class Text2CompilationUnit {
 				}
 				break;
 			case "interface":
+				parentNode = (CompilationUnit) parentNodeAndIndex.getFirst();
 				break;
 			case "class":
+				parentNode = (CompilationUnit) parentNodeAndIndex.getFirst();
 				break;
 			case "constructor":
 				break;

@@ -60,4 +60,9 @@ public class HoleNode {
 	public int getChildListSize() {
 		return this.childList.size();
 	}
+
+	public void deleteHole(int index) {
+		this.childList.remove(index);
+	}
+
 }
