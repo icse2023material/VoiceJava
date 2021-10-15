@@ -4,13 +4,6 @@ import cn.edu.lyun.kexin.text2ast.*;
 import cn.edu.lyun.kexin.text2pattern.nfa.RegexSet;
 import cn.edu.lyun.kexin.text2pattern.pattern.Pattern;
 import cn.edu.lyun.kexin.text2pattern.pattern.PatternSet;
-import cn.edu.lyun.kexin.text2pattern.pattern.Unit;
-import cn.edu.lyun.util.Pair;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 import com.github.javaparser.ast.*;
 
 public class ClassASTTest {

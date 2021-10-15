@@ -5,9 +5,6 @@ import com.github.javaparser.ast.body.MethodDeclaration;
 import com.github.javaparser.ast.expr.SimpleName;
 import com.github.javaparser.ast.type.Type;
 import com.github.javaparser.ast.type.VoidType;
-import com.github.javaparser.ast.visitor.GenericVisitor;
-import com.github.javaparser.ast.visitor.VoidVisitor;
-import com.github.javaparser.resolution.types.ResolvedType;
 
 import java.util.*;
 

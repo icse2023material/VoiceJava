@@ -1,0 +1,10 @@
+"package","import", "interface", "class", "constructor, "method", "arrowFunction", 
+"field", "typeExtends", "typeDefine", "for", "while", "if", "switch", "tryCatch",
+"override", "subexpression", "break", "continue", "newInstance", "throw", "moveNext",
+"jumpOut", "jumpBefore", "jumpAfter", "jumpToLine", "up", "down", "left", "right", 
+"selectLine", "selectBody", "selectName", "selectFunction", "replace", "delete", 
+"let1", "let2", "let3", "let4", "let5", "let6", 
+"return1", "return2", "return3", "return4", "return5", "return6",
+ "expr1", "expr2", "expr3", "expr4", "expr5", "expr6", "expr7", "expr8", "expr9", "expr10", "expr11", "expr12", 
+"subexpr1", "subexpr2", "subexpr3", "subexpr4", "subexpr5", "subexpr6", 
+"subexpr7", "subexpr8", "subexpr9", "subexpr10", "subexpr11", "subexpr12" 

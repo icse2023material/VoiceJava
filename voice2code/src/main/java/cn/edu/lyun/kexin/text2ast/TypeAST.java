@@ -7,10 +7,7 @@ import com.github.javaparser.ast.type.Type;
 import cn.edu.lyun.kexin.text2pattern.pattern.Unit;
 import cn.edu.lyun.util.ListHelper;
 import cn.edu.lyun.util.Pair;
-
 import java.util.*;
-
-import javax.swing.text.html.HTMLDocument.HTMLReader.ParagraphAction;
 
 public class TypeAST {
 

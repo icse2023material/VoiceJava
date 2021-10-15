@@ -18,7 +18,7 @@ public class RegexTest {
 										new Unit("or", new Unit("normal", new Unit("double"), new Unit("equal")),
 												new Unit("or", new Unit("and"), new Unit("normal", new Unit("double"), new Unit("and"))))))));
 
-		Pattern expr10Pat = new Pattern("[expression]? subexpression (op | compare) subexpression",
+		Pattern expr10Pat = new Pattern("expr10", "[expression]? subexpression (op | compare) subexpression",
 				new Unit[] { new Unit("question", new Unit("expression")), new Unit("subexpression"),
 						new Unit("or", opUnit, compareUnit), new Unit("subexpression") });
 		Regex regex = new Regex(expr10Pat);

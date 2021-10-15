@@ -3,7 +3,6 @@ package cn.edu.lyun.kexin.text2ast;
 import com.github.javaparser.ast.expr.Expression;
 import java.util.*;
 import cn.edu.lyun.kexin.text2pattern.pattern.Unit;
-import com.github.javaparser.ast.expr.AssignExpr;
 import com.github.javaparser.ast.expr.BooleanLiteralExpr;
 import com.github.javaparser.ast.expr.CharLiteralExpr;
 import com.github.javaparser.ast.expr.DoubleLiteralExpr;

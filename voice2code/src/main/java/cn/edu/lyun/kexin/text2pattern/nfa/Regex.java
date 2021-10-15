@@ -214,9 +214,10 @@ public class Regex {
 			List<Unit> unitInstanceList = isMatchResult.getSecond();
 			Unit[] unitList = new Unit[unitInstanceList.size()];
 			unitInstanceList.toArray(unitList);
-			return new Pair<Boolean, Pattern>(true, new Pattern(this.pattern.toString(), unitList));
+			return new Pair<Boolean, Pattern>(true, new Pattern(this.pattern.getName(), this.pattern.toString(), unitList));
 		} else {
-			return new Pair<Boolean, Pattern>(false, new Pattern(this.pattern.toString(), new Unit[] {}));
+			return new Pair<Boolean, Pattern>(false,
+					new Pattern(this.pattern.getName(), this.pattern.toString(), new Unit[] {}));
 		}
 	}
 
