@@ -12,7 +12,9 @@ public class TypeNameMap {
 		map.put(HoleType.ImportDeclaration, "getImports"); // get all imports
 		map.put(HoleType.TypeDeclaration, "getTypes");
 		map.put(HoleType.FieldDeclaration, "getFields");
+		map.put(HoleType.MethodDeclaration, "getMethods");
 		map.put(HoleType.VariableDeclarator, "getVariables");
+		map.put(HoleType.TypeExtends, "getType");
 		return map;
 	}
 }

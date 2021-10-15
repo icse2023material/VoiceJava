@@ -16,8 +16,10 @@ import com.github.javaparser.ast.PackageDeclaration;
 import com.github.javaparser.ast.body.BodyDeclaration;
 import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
 import com.github.javaparser.ast.body.FieldDeclaration;
+import com.github.javaparser.ast.body.MethodDeclaration;
 import com.github.javaparser.ast.body.TypeDeclaration;
 import com.github.javaparser.ast.type.ClassOrInterfaceType;
+import com.github.javaparser.ast.type.Type;
 import com.github.javaparser.ast.body.VariableDeclarator;
 import com.github.javaparser.ast.expr.Expression;
 import com.github.javaparser.printer.lexicalpreservation.LexicalPreservingPrinter;
@@ -138,11 +140,18 @@ public class Text2CompilationUnit {
 			case "constructor":
 				break;
 			case "method":
+				ClassOrInterfaceDeclaration pNode = (ClassOrInterfaceDeclaration) parentNodeAndIndex.getFirst();
+				pNode.addMember((BodyDeclaration<?>) node);
+				currentHole.setIsHole(false);
+				currentHole.setHoleType(HoleType.MethodDeclaration);
+				holeNode = new HoleNode(HoleType.Undefined, true);
+				holeNode.setHoleTypeOptions(new HoleType[] { HoleType.TypeExtends });
+				currentHole.addChild(holeNode);
 				break;
 			case "arrowFunction":
 				break;
 			case "field":
-				ClassOrInterfaceDeclaration pNode = (ClassOrInterfaceDeclaration) parentNodeAndIndex.getFirst();
+				pNode = (ClassOrInterfaceDeclaration) parentNodeAndIndex.getFirst();
 				pNode.addMember((BodyDeclaration<?>) node);
 				currentHole.setIsHole(false);
 				currentHole.setHoleType(HoleType.FieldDeclaration);
@@ -151,6 +160,13 @@ public class Text2CompilationUnit {
 				currentHole.addChild(holeNode);
 				break;
 			case "typeExtends":
+				MethodDeclaration mNode = (MethodDeclaration) parentNodeAndIndex.getFirst();
+				mNode.setType((Type) node);
+				currentHole.setIsHole(false);
+				currentHole.setHoleType(HoleType.TypeExtends);
+				holeNode = new HoleNode(HoleType.Undefined, true);
+				holeNode.setHoleTypeOptions(new HoleType[] {});
+				parentHole.addChild(holeNode);
 				break;
 			case "typeDefine":
 				break;
@@ -270,8 +286,10 @@ public class Text2CompilationUnit {
 		int index;
 		Node parent = this.compilationUnit;
 		HoleNode parentHole = this.holeAST.getRoot();
+		HoleNode parentOfParentHole = parentHole;
 		for (index = 0; index < path.size() - 1; index++) {
 			HoleNode temp = parentHole.getIthChild(path.get(index));
+			parentOfParentHole = parentHole;
 			parentHole = temp;
 
 			HoleType holeType = parentHole.getHoleType();
@@ -284,15 +302,16 @@ public class Text2CompilationUnit {
 			Class parentClass = parent.getClass();
 			Method method;
 			try {
+				int indexWithSameType = this.computeASTIndex(parentOfParentHole, parentHole, path.get(index));
 				method = parentClass.getMethod(name);
 				// Optional<NodeList> optional = (Optional<NodeList>) method.invoke(parent);
 				try {
 					NodeList nodeList = (NodeList) method.invoke(parent);
-					parent = nodeList.get(path.get(index));
+					parent = nodeList.get(indexWithSameType);
 
 				} catch (Exception e) {
 					List<?> nodeList = (List<?>) method.invoke(parent);
-					parent = (Node) nodeList.get(path.get(index));
+					parent = (Node) nodeList.get(indexWithSameType);
 				}
 				// if (optional.isEmpty()) {
 				// System.out.println("something is wrong");
@@ -324,5 +343,17 @@ public class Text2CompilationUnit {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	private int computeASTIndex(HoleNode parentOfParent, HoleNode parent, int currentIndex) {
+		List<HoleNode> childList = parentOfParent.getChildList();
+		int count = 0;
+		for (int i = 0; i <= currentIndex; i++) {
+			if (childList.get(i).getHoleType().equals(parent.getHoleType())) {
+				count++;
+			}
+		}
+
+		return --count;
 	}
 }
