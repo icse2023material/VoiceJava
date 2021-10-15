@@ -76,27 +76,27 @@ public class ASTManager {
 			case "expr1":
 				return new ExprAST().generate(pattern);
 			case "expr2":
-				return new ExprAST().generate(pattern);
+				return new ExprAST2().generate(pattern);
 			case "expr3":
-				return new ExprAST().generate(pattern);
+				return new ExprAST3().generate(pattern);
 			case "expr4":
-				return new ExprAST().generate(pattern);
+				return new ExprAST4().generate(pattern);
 			case "expr5":
-				return new ExprAST().generate(pattern);
+				return new ExprAST5().generate(pattern);
 			case "expr6":
-				return new ExprAST().generate(pattern);
+				return new ExprAST6().generate(pattern);
 			case "expr7":
-				return new ExprAST().generate(pattern);
+				return new ExprAST7().generate(pattern);
 			case "expr8":
-				return new ExprAST().generate(pattern);
+				return new ExprAST8().generate(pattern);
 			case "expr9":
-				return new ExprAST().generate(pattern);
+				return new ExprAST9().generate(pattern);
 			case "expr10":
-				return new ExprAST().generate(pattern);
+				return new ExprAST10().generate(pattern);
 			case "expr11":
-				return new ExprAST().generate(pattern);
+				return new ExprAST11().generate(pattern);
 			case "expr12":
-				return new ExprAST().generate(pattern);
+				return new ExprAST12().generate(pattern);
 			case "subexpr1":
 				return null;
 			case "subexpr2":

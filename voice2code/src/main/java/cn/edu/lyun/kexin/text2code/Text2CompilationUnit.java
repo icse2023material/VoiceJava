@@ -2,6 +2,7 @@ package cn.edu.lyun.kexin.text2code;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.*;
@@ -12,6 +13,13 @@ import com.github.javaparser.ast.ImportDeclaration;
 import com.github.javaparser.ast.Node;
 import com.github.javaparser.ast.NodeList;
 import com.github.javaparser.ast.PackageDeclaration;
+import com.github.javaparser.ast.body.BodyDeclaration;
+import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
+import com.github.javaparser.ast.body.FieldDeclaration;
+import com.github.javaparser.ast.body.TypeDeclaration;
+import com.github.javaparser.ast.type.ClassOrInterfaceType;
+import com.github.javaparser.ast.body.VariableDeclarator;
+import com.github.javaparser.ast.expr.Expression;
 import com.github.javaparser.printer.lexicalpreservation.LexicalPreservingPrinter;
 import cn.edu.lyun.kexin.text2ast.ASTManager;
 import cn.edu.lyun.kexin.text2code.astskeleton.HoleAST;
@@ -102,6 +110,30 @@ public class Text2CompilationUnit {
 				break;
 			case "class":
 				parentNode = (CompilationUnit) parentNodeAndIndex.getFirst();
+				if (parentHole.getHoleType().equals(HoleType.Wrapper)) {
+					parentNode.addType((ClassOrInterfaceDeclaration) node);
+
+					currentHole.setIsHole(false);
+					holeNode = new HoleNode(HoleType.Undefined, true);
+					holeNode.setHoleTypeOptions(new HoleType[] { HoleType.BodyDeclaration });
+					parentHole.addChild(holeNode);
+				} else {
+					NodeList<TypeDeclaration<?>> nodeList = new NodeList<TypeDeclaration<?>>();
+					nodeList.add((ClassOrInterfaceDeclaration) node);
+					parentNode.setTypes(nodeList);
+
+					currentHole.setIsHole(false);
+					currentHole.setHoleType(HoleType.Wrapper);
+
+					holeNode = new HoleNode(HoleType.TypeDeclaration, false);
+					holeNode.setHoleTypeOptions(new HoleType[] { HoleType.TypeDeclaration });
+					currentHole.addChild(holeNode);
+
+					// class's body as a hole.
+					HoleNode childHoleNode = new HoleNode(HoleType.Undefined, true);
+					childHoleNode.setHoleTypeOptions(new HoleType[] { HoleType.BodyDeclaration });
+					holeNode.addChild(childHoleNode);
+				}
 				break;
 			case "constructor":
 				break;
@@ -110,6 +142,13 @@ public class Text2CompilationUnit {
 			case "arrowFunction":
 				break;
 			case "field":
+				ClassOrInterfaceDeclaration pNode = (ClassOrInterfaceDeclaration) parentNodeAndIndex.getFirst();
+				pNode.addMember((BodyDeclaration<?>) node);
+				currentHole.setIsHole(false);
+				currentHole.setHoleType(HoleType.FieldDeclaration);
+				holeNode = new HoleNode(HoleType.Undefined, true);
+				holeNode.setHoleTypeOptions(new HoleType[] { HoleType.Expression });
+				currentHole.addChild(holeNode);
 				break;
 			case "typeExtends":
 				break;
@@ -170,6 +209,17 @@ public class Text2CompilationUnit {
 			case "expr4":
 				break;
 			case "expr5":
+				NodeList<VariableDeclarator> variableDeclarators = ((FieldDeclaration) parentNodeAndIndex.getFirst())
+						.getVariables();
+				VariableDeclarator vNode = variableDeclarators.get(0);
+				vNode.setInitializer((Expression) node);
+
+				currentHole.setIsHole(false);
+				currentHole.setHoleType(HoleType.VariableDeclarator);
+				holeNode = new HoleNode(HoleType.Undefined, true);
+				holeNode.setHoleTypeOptions(new HoleType[] { HoleType.BodyDeclaration });
+				parentOfParentHole = this.holeAST.getParentOfNode(path);
+				parentOfParentHole.addChild(holeNode);
 				break;
 			case "expr6":
 				break;
@@ -222,12 +272,10 @@ public class Text2CompilationUnit {
 		HoleNode parentHole = this.holeAST.getRoot();
 		for (index = 0; index < path.size() - 1; index++) {
 			HoleNode temp = parentHole.getIthChild(path.get(index));
-			if (!temp.getHoleType().equals(HoleType.Wrapper)) {
-				parentHole = temp;
-			}
+			parentHole = temp;
 
 			HoleType holeType = parentHole.getHoleType();
-			if (holeType.equals(HoleType.CompilationUnit)) {
+			if (holeType.equals(HoleType.Wrapper)) {
 				continue;
 			}
 
@@ -237,12 +285,20 @@ public class Text2CompilationUnit {
 			Method method;
 			try {
 				method = parentClass.getMethod(name);
-				Optional<Node> optional = (Optional<Node>) method.invoke(parent);
-				if (optional.isEmpty()) {
-					System.out.println("something is wrong");
-				} else {
-					parent = optional.get();
+				// Optional<NodeList> optional = (Optional<NodeList>) method.invoke(parent);
+				try {
+					NodeList nodeList = (NodeList) method.invoke(parent);
+					parent = nodeList.get(path.get(index));
+
+				} catch (Exception e) {
+					List<?> nodeList = (List<?>) method.invoke(parent);
+					parent = (Node) nodeList.get(path.get(index));
 				}
+				// if (optional.isEmpty()) {
+				// System.out.println("something is wrong");
+				// } else {
+				// parent = optional.get().get(index);
+				// }
 			} catch (NoSuchMethodException e) {
 				e.printStackTrace();
 			} catch (SecurityException e) {

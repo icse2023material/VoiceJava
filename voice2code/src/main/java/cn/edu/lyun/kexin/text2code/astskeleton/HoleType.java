@@ -1,5 +1,6 @@
 package cn.edu.lyun.kexin.text2code.astskeleton;
 
 public enum HoleType {
-	Undefined, Wrapper, CompilationUnit, PackageDeclaration, ImportDeclaration, TypeDeclaration
+	Undefined, Wrapper, CompilationUnit, PackageDeclaration, ImportDeclaration, TypeDeclaration, FieldDeclaration,
+	VariableDeclarator, BodyDeclaration, Expression
 }
