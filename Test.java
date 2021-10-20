@@ -9,9 +9,13 @@ public class Hello {
 
     public int sayHello(int[] intArray, String name) {
         int sum = 0;
-        for (int i = 0; i <= 10; i++) {
-            sum = sum + i;
-            return sum;
+        while (i < 10) {
+            sum = fibonacci();
+            hello.sum = hello.fibonacci();
+            sum = hello.sum;
+            sum = x;
+            sum = 200;
+            sum = 2;
         }
     }
 }

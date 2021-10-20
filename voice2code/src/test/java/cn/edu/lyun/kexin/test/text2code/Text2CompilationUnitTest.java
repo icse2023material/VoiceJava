@@ -17,8 +17,9 @@ public class Text2CompilationUnitTest {
 				"import java dot lang dot reflect dot star", "move next", "define public class Hello",
 				"define private int variable greeting", "int 2", "define public function sayHello", "type int",
 				"type int list variable intArray", "type String variable name", "move next", "define int variable sum", "int 0",
-				"define for", "define int variable i", "int 0", "expression i less equal 10", "i plus plus",
-				"let sum equal expression", "expression sum plus i", };
+				"define while", "i less than 10", "let sum equal call fibonacci",
+				"let hello dot sum equal hello call fibonacci", "let sum equal hello dot sum", "let sum equal variable x",
+				"let sum equal int 200", "let sum equal expression", "int 2" };
 
 		String[] lines = example2;
 
@@ -26,7 +27,7 @@ public class Text2CompilationUnitTest {
 			text2CompilationUnit.generate(line);
 		}
 
-		text2CompilationUnit.generate("return sum");
+		text2CompilationUnit.generate();
 		text2CompilationUnit.getHoleAST().writeDotFile();
 		Runtime rt = Runtime.getRuntime();
 		try {

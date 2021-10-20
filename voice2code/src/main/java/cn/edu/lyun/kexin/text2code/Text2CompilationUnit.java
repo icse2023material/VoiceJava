@@ -9,6 +9,7 @@ import java.rmi.server.ExportException;
 import java.util.*;
 
 import cn.edu.lyun.util.Pair;
+import cn.edu.lyun.util.StringHelper;
 import javassist.bytecode.analysis.ControlFlow.Block;
 
 import com.github.javaparser.ast.CompilationUnit;
@@ -32,6 +33,7 @@ import com.github.javaparser.ast.stmt.BlockStmt;
 import com.github.javaparser.ast.stmt.ExpressionStmt;
 import com.github.javaparser.ast.stmt.ForStmt;
 import com.github.javaparser.ast.stmt.Statement;
+import com.github.javaparser.ast.stmt.WhileStmt;
 import com.github.javaparser.printer.lexicalpreservation.LexicalPreservingPrinter;
 import cn.edu.lyun.kexin.text2ast.ASTManager;
 import cn.edu.lyun.kexin.text2ast.FieldAST;
@@ -317,10 +319,17 @@ public class Text2CompilationUnit {
 					HoleNode holeNodeChild = new HoleNode(HoleType.Expression, true);
 					holeNodeChild.setHoleTypeOptions(new HoleType[] { HoleType.Expression });
 					currentHole.addChild(holeNodeChild);
-
 				}
 				break;
 			case "while":
+				BlockStmt blockStmt = (BlockStmt) parentNodeAndIndex.getFirst();
+				NodeList<Statement> statements = blockStmt.getStatements();
+				statements.add((Statement) node);
+				currentHole.setIsHole(false);
+				currentHole.setHoleType(HoleType.Statement);
+				HoleNode holeNodeChild = new HoleNode(HoleType.Expression, true);
+				holeNodeChild.setHoleTypeOptions(new HoleType[] { HoleType.Expression });
+				currentHole.addChild(holeNodeChild);
 				break;
 			case "if":
 				break;
@@ -341,14 +350,114 @@ public class Text2CompilationUnit {
 			case "throw":
 				break;
 			case "let1":
+				if (parentNodeClassStr.equals("WhileStmt")) {
+					WhileStmt whileStmt = (WhileStmt) parentNodeAndIndex.getFirst();
+					Statement body = whileStmt.getBody();
+					String bodyClassStr = body.getClass().toString();
+					bodyClassStr = bodyClassStr.substring(bodyClassStr.lastIndexOf(".") + 1);
+					if (bodyClassStr.equals("ReturnStmt")) {
+						blockStmt = new BlockStmt();
+						statements = new NodeList<Statement>();
+						ExpressionStmt expressionStmt = new ExpressionStmt((Expression) node);
+						statements.add(expressionStmt);
+						blockStmt.setStatements(statements);
+						whileStmt.setBody(blockStmt);
+
+						currentHole.setHoleType(HoleType.Body);
+						currentHole.setIsHole(false);
+
+						HoleNode anotherCurrentHole = new HoleNode();
+						anotherCurrentHole.setHoleType(HoleType.Wrapper);
+						anotherCurrentHole.setIsHole(false);
+						currentHole.addChild(anotherCurrentHole);
+
+						HoleNode childNode = new HoleNode(HoleType.Statement, false);
+						anotherCurrentHole.addChild(childNode);
+
+						HoleNode newHole = new HoleNode(HoleType.Statement, true);
+						anotherCurrentHole.addChild(newHole);
+					} else {
+					}
+				}
 				break;
 			case "let2":
+				if (parentNodeClassStr.equals("WhileStmt")) {
+					WhileStmt whileStmt = (WhileStmt) parentNodeAndIndex.getFirst();
+					Statement body = whileStmt.getBody();
+					String bodyClassStr = body.getClass().toString();
+					bodyClassStr = bodyClassStr.substring(bodyClassStr.lastIndexOf(".") + 1);
+					if (bodyClassStr.equals("ReturnStmt")) {
+						blockStmt = new BlockStmt();
+						statements = new NodeList<Statement>();
+						ExpressionStmt expressionStmt = new ExpressionStmt((Expression) node);
+						statements.add(expressionStmt);
+						blockStmt.setStatements(statements);
+						whileStmt.setBody(blockStmt);
+
+						currentHole.setHoleType(HoleType.Body);
+						currentHole.setIsHole(false);
+
+						HoleNode anotherCurrentHole = new HoleNode();
+						anotherCurrentHole.setHoleType(HoleType.Wrapper);
+						anotherCurrentHole.setIsHole(false);
+						currentHole.addChild(anotherCurrentHole);
+
+						HoleNode childNode = new HoleNode(HoleType.Statement, false);
+						anotherCurrentHole.addChild(childNode);
+
+						HoleNode newHole = new HoleNode(HoleType.Statement, true);
+						anotherCurrentHole.addChild(newHole);
+					}
+				} else if (parentNodeClassStr.equals("BlockStmt")) {
+					blockStmt = (BlockStmt) parentNodeAndIndex.getFirst();
+					statements = blockStmt.getStatements();
+					ExpressionStmt expressionStmt = new ExpressionStmt((Expression) node);
+
+					statements.add(expressionStmt);
+
+					currentHole.setIsHole(false);
+					holeNode = new HoleNode(HoleType.Statement, true);
+					parentHole.addChild(holeNode);
+				}
 				break;
 			case "let3":
+				if (parentNodeClassStr.equals("BlockStmt")) {
+					blockStmt = (BlockStmt) parentNodeAndIndex.getFirst();
+					statements = blockStmt.getStatements();
+					ExpressionStmt expressionStmt = new ExpressionStmt((Expression) node);
+
+					statements.add(expressionStmt);
+
+					currentHole.setIsHole(false);
+					holeNode = new HoleNode(HoleType.Statement, true);
+					parentHole.addChild(holeNode);
+				}
 				break;
 			case "let4":
+				if (parentNodeClassStr.equals("BlockStmt")) {
+					blockStmt = (BlockStmt) parentNodeAndIndex.getFirst();
+					statements = blockStmt.getStatements();
+					ExpressionStmt expressionStmt = new ExpressionStmt((Expression) node);
+
+					statements.add(expressionStmt);
+
+					currentHole.setIsHole(false);
+					holeNode = new HoleNode(HoleType.Statement, true);
+					parentHole.addChild(holeNode);
+				}
 				break;
 			case "let5":
+				if (parentNodeClassStr.equals("BlockStmt")) {
+					blockStmt = (BlockStmt) parentNodeAndIndex.getFirst();
+					statements = blockStmt.getStatements();
+					ExpressionStmt expressionStmt = new ExpressionStmt((Expression) node);
+
+					statements.add(expressionStmt);
+
+					currentHole.setIsHole(false);
+					holeNode = new HoleNode(HoleType.Statement, true);
+					parentHole.addChild(holeNode);
+				}
 				break;
 			case "let6":
 				if (parentNodeClassStr.equals("ForStmt")) {
@@ -360,8 +469,8 @@ public class Text2CompilationUnit {
 					String bodyClassStr = body.getClass().toString();
 					bodyClassStr = bodyClassStr.substring(bodyClassStr.lastIndexOf(".") + 1);
 					if (bodyClassStr.equals("ReturnStmt")) {
-						BlockStmt blockStmt = new BlockStmt();
-						NodeList<Statement> statements = new NodeList<Statement>();
+						blockStmt = new BlockStmt();
+						statements = new NodeList<Statement>();
 						ExpressionStmt expressionStmt = new ExpressionStmt((Expression) node);
 						statements.add(expressionStmt);
 						blockStmt.setStatements(statements);
@@ -390,6 +499,14 @@ public class Text2CompilationUnit {
 					} else {
 						System.out.println("Should not go to this branch");
 					}
+				} else if (parentNodeClassStr.equals("BlockStmt")) {
+					blockStmt = (BlockStmt) parentNodeAndIndex.getFirst();
+					statements = blockStmt.getStatements();
+					ExpressionStmt expressionStmt = new ExpressionStmt((Expression) node);
+					statements.add(expressionStmt);
+					currentHole.setIsHole(false);
+					holeNode = new HoleNode(HoleType.Expression, true);
+					currentHole.addChild(holeNode);
 				}
 				break;
 			case "return1":
@@ -398,8 +515,8 @@ public class Text2CompilationUnit {
 				break;
 			case "return3":
 				if (parentNodeClassStr.equals("BlockStmt")) {
-					BlockStmt blockStmt = (BlockStmt) parentNodeAndIndex.getFirst();
-					NodeList<Statement> statements = blockStmt.getStatements();
+					blockStmt = (BlockStmt) parentNodeAndIndex.getFirst();
+					statements = blockStmt.getStatements();
 					statements.add((Statement) node);
 					currentHole.setIsHole(false);
 					currentHole.setHoleType(HoleType.Statement);
@@ -435,16 +552,26 @@ public class Text2CompilationUnit {
 					parentOfParentHole.addChild(holeNode);
 				} else if (parentNodeClassStr.equals("ExpressionStmt")) {
 					ExpressionStmt expressionStmt = (ExpressionStmt) parentNodeAndIndex.getFirst();
-					VariableDeclarationExpr variableDeclarationExpr = (VariableDeclarationExpr) expressionStmt.getExpression();
-					NodeList<VariableDeclarator> variableDeclarators = variableDeclarationExpr.getVariables();
-					variableDeclarators.get(0).setInitializer((Expression) node);
+					String expressionClassStr = StringHelper.getClassName(expressionStmt.getExpression().getClass().toString());
+					if (expressionClassStr.equals("VariableDeclarationExpr")) {
+						VariableDeclarationExpr variableDeclarationExpr = (VariableDeclarationExpr) expressionStmt.getExpression();
+						NodeList<VariableDeclarator> variableDeclarators = variableDeclarationExpr.getVariables();
+						variableDeclarators.get(0).setInitializer((Expression) node);
 
-					currentHole.setIsHole(false);
-					currentHole.setHoleType(HoleType.Expression);
+						currentHole.setIsHole(false);
+						currentHole.setHoleType(HoleType.Expression);
 
-					holeNode = new HoleNode(HoleType.Undefined, true);
-					holeNode.setHoleTypeOptions(new HoleType[] { HoleType.Statement });
-					parentOfParentHole.addChild(holeNode);
+						holeNode = new HoleNode(HoleType.Undefined, true);
+						holeNode.setHoleTypeOptions(new HoleType[] { HoleType.Statement });
+						parentOfParentHole.addChild(holeNode);
+
+					} else if (expressionClassStr.equals("AssignExpr")) {
+						AssignExpr assignExpr = (AssignExpr) expressionStmt.getExpression();
+						assignExpr.setValue((Expression) node);
+						currentHole.setIsHole(false);
+						holeNode = new HoleNode(HoleType.Undefined, true);
+						parentOfParentHole.addChild(holeNode);
+					}
 				} else if (parentNodeClassStr.equals("VariableDeclarationExpr")) {
 					VariableDeclarationExpr variableDeclarationExpr = (VariableDeclarationExpr) parentNodeAndIndex.getFirst();
 					NodeList<VariableDeclarator> variableDeclarators = variableDeclarationExpr.getVariables();
@@ -512,7 +639,13 @@ public class Text2CompilationUnit {
 					holeNode.setIsHole(true);
 					holeNode.setHoleType(HoleType.Undefined);
 					parentOfParentHole.addChild(holeNode);
+				} else if (parentNodeClassStr.equals("WhileStmt")) {
+					WhileStmt whileStmt = (WhileStmt) parentNodeAndIndex.getFirst();
+					whileStmt.setCondition((Expression) node);
+					currentHole.setIsHole(false);
 
+					holeNode = new HoleNode(HoleType.Body, true);
+					parentHole.addChild(holeNode);
 				}
 				break;
 			case "subexpr1":
