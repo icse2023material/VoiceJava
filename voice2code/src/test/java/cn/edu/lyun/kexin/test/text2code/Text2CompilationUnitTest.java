@@ -14,6 +14,6 @@ public class Text2CompilationUnitTest {
 		for (String line : lines) {
 			text2CompilationUnit.generate(line);
 		}
-		System.out.println("xxxx");
+		System.out.println("done");
 	}
 }

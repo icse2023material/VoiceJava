@@ -68,8 +68,12 @@ public class PatternSet {
 		Pattern typePat = new Pattern("typeExtends", "type _ [extends _]?",
 				new Unit[] { new Unit("type"), new Unit(), new Unit("question", new Unit("extends"), new Unit()) });
 		patSet.add(typePat);
-		Pattern typePat2 = new Pattern("typeDefine", "type _ variable _",
-				new Unit[] { new Unit("type"), new Unit(), new Unit("variable"), new Unit() });
+		Pattern typePat2 = new Pattern("typeVariable", "type (_ list | _ [dot _]? [with _+]?) variable _",
+				new Unit[] { new Unit("type"),
+						new Unit("or", new Unit("normal", new Unit(), new Unit("list")),
+								new Unit(new Unit[] { new Unit(), new Unit("question", new Unit("dot"), new Unit()),
+										new Unit("question", new Unit("with"), new Unit("plus", new Unit())) })),
+						new Unit("variable"), new Unit() });
 		patSet.add(typePat2);
 		Pattern forPat = new Pattern("for", "define [enhanced] for",
 				new Unit[] { new Unit("define"), new Unit("question", new Unit("enhanced")), new Unit("for") });

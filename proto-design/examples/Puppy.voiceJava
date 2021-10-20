@@ -9,7 +9,7 @@ name
 move next
 define public function set age 
 type void 
-type int name age 
+type int variable age 
 move next 
 set puppy age to age 
 move next
@@ -20,8 +20,8 @@ print
 puppy age 
 return puppy age 
 define public static function main
-void
-type string list name args 
+type void
+type string list variable args 
 move next 
 define puppy variable my puppy 
 new instance puppy 

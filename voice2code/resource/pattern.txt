@@ -7,7 +7,7 @@ define (Annotation | public | protected | private | abstract | static | final | 
 define arrow function // keyword: define arrow function
 define (Annotation | public | protected |private  | static | final | transient | volatile) (_ list | _ [dot _]? [with _+]?) variable _ // define [FieldModifier] Type variable Name 
 type _ [extends _]? // type Name [extends Name]
-type _ variable _ // type Name variable Name 
+type (_ list | _ [dot _]? [with _+]?) variable _ // type Name variable Name 
 define [enchanced]? for // define [enhanced] for 
 define [do]? while // define [do] while 
 define if

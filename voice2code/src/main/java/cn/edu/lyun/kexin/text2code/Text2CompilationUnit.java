@@ -168,7 +168,8 @@ public class Text2CompilationUnit {
 				holeNode.setHoleTypeOptions(new HoleType[] {});
 				parentHole.addChild(holeNode);
 				break;
-			case "typeDefine":
+			case "typeVariable":
+
 				break;
 			case "for":
 				break;
