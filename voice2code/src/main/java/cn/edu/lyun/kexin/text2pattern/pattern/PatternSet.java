@@ -53,6 +53,24 @@ public class PatternSet {
 		Pattern arrowFunctionPat = new Pattern("arrowFunction", "define arrow function",
 				new Unit[] { new Unit("define"), new Unit("arrow"), new Unit("function") });
 		patSet.add(arrowFunctionPat);
+		// shoule be put before fieldPat
+		Pattern forPat = new Pattern("for", "define [enhanced] for",
+				new Unit[] { new Unit("define"), new Unit("question", new Unit("enhanced")), new Unit("for") });
+		patSet.add(forPat);
+		Pattern whilePat = new Pattern("while", "define [do]? while",
+				new Unit[] { new Unit("define"), new Unit("question", new Unit("do")), new Unit("while") });
+		patSet.add(whilePat);
+		Pattern ifPat = new Pattern("if", "define if", new Unit[] { new Unit("define"), new Unit("if") });
+		patSet.add(ifPat);
+		Pattern switchPat = new Pattern("switch", "define switch", new Unit[] { new Unit("define"), new Unit("switch") });
+		patSet.add(switchPat);
+		Pattern tryCatchPat = new Pattern("tryCatch", "define try catch",
+				new Unit[] { new Unit("define"), new Unit("try"), new Unit("catch") });
+		patSet.add(tryCatchPat);
+		Pattern atOverridePat = new Pattern("override", "define at override",
+				new Unit[] { new Unit("define"), new Unit("at"), new Unit("override") });
+		patSet.add(atOverridePat);
+
 		Unit fieldModifier = new Unit("or", new Unit("annotation"),
 				new Unit("or", new Unit("public"),
 						new Unit("or", new Unit("protected"), new Unit("or", new Unit("private"), new Unit("or", new Unit("static"),
@@ -75,22 +93,6 @@ public class PatternSet {
 										new Unit("question", new Unit("with"), new Unit("plus", new Unit())) })),
 						new Unit("variable"), new Unit() });
 		patSet.add(typePat2);
-		Pattern forPat = new Pattern("for", "define [enhanced] for",
-				new Unit[] { new Unit("define"), new Unit("question", new Unit("enhanced")), new Unit("for") });
-		patSet.add(forPat);
-		Pattern whilePat = new Pattern("while", "define [do]? while",
-				new Unit[] { new Unit("define"), new Unit("question", new Unit("do")), new Unit("while") });
-		patSet.add(whilePat);
-		Pattern ifPat = new Pattern("if", "define if", new Unit[] { new Unit("define"), new Unit("if") });
-		patSet.add(ifPat);
-		Pattern switchPat = new Pattern("switch", "define switch", new Unit[] { new Unit("define"), new Unit("switch") });
-		patSet.add(switchPat);
-		Pattern tryCatchPat = new Pattern("tryCatch", "define try catch",
-				new Unit[] { new Unit("define"), new Unit("try"), new Unit("catch") });
-		patSet.add(tryCatchPat);
-		Pattern atOverridePat = new Pattern("override", "define at override",
-				new Unit[] { new Unit("define"), new Unit("at"), new Unit("override") });
-		patSet.add(atOverridePat);
 		Pattern subExpressionPat = new Pattern("subexpression", "subexpression", new Unit[] { new Unit("subexpression") });
 		patSet.add(subExpressionPat);
 		Pattern breakPat = new Pattern("break", "break", new Unit[] { new Unit("break") });
@@ -150,6 +152,11 @@ public class PatternSet {
 				new Unit[] { new Unit("let"), new Unit(), new Unit("question", new Unit("dot"), new Unit()), new Unit("equal"),
 						new Unit(), new Unit("plus", new Unit("call"), new Unit()) });
 		patSet.add(let2Pat);
+		// let6 must be put before let3
+		Pattern let6Pat = new Pattern("let6", "let _ [dot _]? equal [expression]? ",
+				new Unit[] { new Unit("let"), new Unit(), new Unit("question", new Unit("dot"), new Unit()), new Unit("equal"),
+						new Unit("question", new Unit("expression")) });
+		patSet.add(let6Pat);
 		Pattern let3Pat = new Pattern("let3", "let _ [dot _]? equal _ [dot _]* ",
 				new Unit[] { new Unit("let"), new Unit(), new Unit("question", new Unit("dot"), new Unit()), new Unit("equal"),
 						new Unit(), new Unit("asterisk", new Unit("dot"), new Unit()) });
@@ -168,10 +175,6 @@ public class PatternSet {
 				new Unit[] { new Unit("let"), new Unit(), new Unit("question", new Unit("dot"), new Unit()), new Unit("equal"),
 						typeUnit, new Unit() });
 		patSet.add(let5Pat);
-		Pattern let6Pat = new Pattern("let6", "let _ [dot _]? equal [expression]? ",
-				new Unit[] { new Unit("let"), new Unit(), new Unit("question", new Unit("dot"), new Unit()), new Unit("equal"),
-						new Unit("question", new Unit("expression")) });
-		patSet.add(let6Pat);
 		Pattern return1Pat = new Pattern("return1", "return call _",
 				new Unit[] { new Unit("return"), new Unit("call"), new Unit() });
 		patSet.add(return1Pat);

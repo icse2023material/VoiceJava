@@ -17,6 +17,7 @@ public class TypeNameMap {
 		map.put(HoleType.TypeExtends, "getType");
 		map.put(HoleType.Body, "getBody");
 		map.put(HoleType.Statement, "getStatements");
+		map.put(HoleType.ForInitialization, "getInitialization");
 		return map;
 	}
 }

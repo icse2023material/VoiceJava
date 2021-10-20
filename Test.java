@@ -8,7 +8,10 @@ public class Hello {
     private int greeting = 2;
 
     public int sayHello(int[] intArray, String name) {
-        int initialize;
-        String first;
+        int sum = 0;
+        for (int i = 0; i <= 10; i++) {
+            sum = sum + i;
+            return sum;
+        }
     }
 }
