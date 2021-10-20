@@ -7,6 +7,6 @@ public class Hello {
 
     private int greting = 2;
 
-    public int sayHello() {
+    public int sayHello(int[] intArray, String name) {
     }
 }

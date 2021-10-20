@@ -26,7 +26,7 @@ public class ASTManager {
 			case "typeExtends":
 				return new TypeExtendAST().generate(pattern);
 			case "typeVariable":
-				return null;
+				return new TypeVariableAST().generate(pattern);
 			case "for":
 				return new ForAST().generate(pattern);
 			case "while":

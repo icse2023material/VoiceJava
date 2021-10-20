@@ -17,6 +17,7 @@ import com.github.javaparser.ast.body.BodyDeclaration;
 import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
 import com.github.javaparser.ast.body.FieldDeclaration;
 import com.github.javaparser.ast.body.MethodDeclaration;
+import com.github.javaparser.ast.body.Parameter;
 import com.github.javaparser.ast.body.TypeDeclaration;
 import com.github.javaparser.ast.type.ClassOrInterfaceType;
 import com.github.javaparser.ast.type.Type;
@@ -102,6 +103,7 @@ public class Text2CompilationUnit {
 					parentNode.addImport((ImportDeclaration) node);
 
 					currentHole.setIsHole(false);
+					currentHole.setHoleType(HoleType.ImportDeclaration);
 					holeNode = new HoleNode(HoleType.Undefined, true);
 					holeNode.setHoleTypeOptions(new HoleType[] { HoleType.ImportDeclaration });
 					parentHole.addChild(holeNode);
@@ -164,12 +166,39 @@ public class Text2CompilationUnit {
 				mNode.setType((Type) node);
 				currentHole.setIsHole(false);
 				currentHole.setHoleType(HoleType.TypeExtends);
-				holeNode = new HoleNode(HoleType.Undefined, true);
+				holeNode = new HoleNode(HoleType.TypeVariale, true);
 				holeNode.setHoleTypeOptions(new HoleType[] {});
 				parentHole.addChild(holeNode);
 				break;
 			case "typeVariable":
+				mNode = (MethodDeclaration) parentNodeAndIndex.getFirst();
+				if (parentHole.getHoleType().equals(HoleType.Wrapper)) {
+					NodeList<Parameter> nodeList = mNode.getParameters();
+					nodeList.add((Parameter) node);
+					mNode.setParameters(nodeList);
 
+					currentHole.setIsHole(false);
+
+					holeNode = new HoleNode(HoleType.Undefined, true);
+					holeNode.setHoleTypeOptions(new HoleType[] { HoleType.TypeVariale, HoleType.BodyDeclaration });
+					parentHole.addChild(holeNode);
+				} else {
+					NodeList<Parameter> nodeList = new NodeList<Parameter>();
+					nodeList.add((Parameter) node);
+					mNode.setParameters(nodeList);
+
+					currentHole.setIsHole(false);
+					currentHole.setHoleType(HoleType.Wrapper);
+
+					holeNode = new HoleNode(HoleType.TypeVariale, false);
+					holeNode.setHoleTypeOptions(new HoleType[] { HoleType.TypeVariale, HoleType.BodyDeclaration });
+					currentHole.addChild(holeNode);
+
+					holeNode = new HoleNode(HoleType.TypeVariale, true);
+					holeNode.setHoleTypeOptions(new HoleType[] { HoleType.TypeVariale, HoleType.BodyDeclaration });
+					currentHole.addChild(holeNode);
+
+				}
 				break;
 			case "for":
 				break;

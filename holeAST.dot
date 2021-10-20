@@ -1,0 +1,16 @@
+digraph {
+CompilationUnit_1843397873 -> PackageDeclaration_1171611746
+CompilationUnit_1843397873 -> Wrapper_1076250141
+CompilationUnit_1843397873 -> Wrapper_421293587
+Wrapper_1076250141 -> ImportDeclaration_1949709901
+Wrapper_1076250141 -> ImportDeclaration_445554393
+Wrapper_421293587 -> TypeDeclaration_1760175419
+TypeDeclaration_1760175419 -> FieldDeclaration_318550723
+TypeDeclaration_1760175419 -> MethodDeclaration_1472031375
+FieldDeclaration_318550723 -> VariableDeclarator_967532279
+MethodDeclaration_1472031375 -> TypeExtends_5338884
+MethodDeclaration_1472031375 -> Wrapper_2009900903
+MethodDeclaration_1472031375 -> Undefined_1259950595 [color = red] 
+Wrapper_2009900903 -> TypeVariale_682025329
+Wrapper_2009900903 -> TypeVariale_591678006
+}

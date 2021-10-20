@@ -1,6 +1,8 @@
 package cn.edu.lyun.kexin.text2code.astskeleton;
 
 import java.util.*;
+import java.io.FileWriter;
+import java.io.IOException;
 
 import cn.edu.lyun.util.Pair;
 
@@ -56,6 +58,40 @@ public class HoleAST {
 		}
 
 		return parent;
+	}
+
+	public void writeDotFile() {
+		FileWriter filewriter;
+		try {
+			filewriter = new FileWriter("holeAST.dot");
+			filewriter.write("digraph {");
+			filewriter.write("\n");
+			Queue<HoleNode> queue = new ArrayDeque<>();
+			queue.add(this.root);
+			String colorRed = " [color = red] ";
+			while (!queue.isEmpty()) {
+				HoleNode holeNode = queue.poll();
+				String nodeStr = holeNode.getHoleType() + "_" + String.valueOf(holeNode.hashCode());
+				if (holeNode.getIsHole()) {
+					nodeStr += colorRed;
+				}
+
+				for (HoleNode holeNodeChild : holeNode.getChildList()) {
+					queue.add(holeNodeChild);
+					String nodeChildStr = holeNodeChild.getHoleType() + "_" + String.valueOf(holeNodeChild.hashCode());
+					if (holeNodeChild.getIsHole()) {
+						nodeChildStr += colorRed;
+					}
+					String line = nodeStr + " -> " + nodeChildStr;
+					filewriter.write(line);
+					filewriter.write("\n");
+				}
+			}
+			filewriter.write("}");
+			filewriter.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 }
