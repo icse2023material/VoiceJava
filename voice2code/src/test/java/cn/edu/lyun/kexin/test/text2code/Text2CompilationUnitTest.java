@@ -20,14 +20,21 @@ public class Text2CompilationUnitTest {
 				"define while", "i less than 10", "let sum equal call fibonacci",
 				"let hello dot sum equal hello call fibonacci", "let sum equal hello dot sum", "let sum equal variable x",
 				"let sum equal int 200", "let sum equal expression", "int 2" };
+		String[] ifExample = { "define package lyun", "import java dot uitl dot star",
+				"import java dot lang dot reflect dot star", "move next", "define public class Hello",
+				"define private int variable greeting", "int 2", "define public function sayHello", "type int",
+				"type int list variable intArray", "type String variable name", "move next", "define int variable sum", "int 0",
+				"define if", "i less than 10", "sum plus plus", "sum plus plus", "move next", "i double equal 10",
+				"sum plus plus", "sum plus plus", "move next", "i greater than 10", "sum plus plus", "move next", "move next",
+				"move next", "move next", "move next", "move next", "move next", "return sum" };
 
-		String[] lines = example2;
+		String[] lines = ifExample;
 
 		for (String line : lines) {
 			text2CompilationUnit.generate(line);
 		}
 
-		text2CompilationUnit.generate();
+		// text2CompilationUnit.generate("return sum");
 		text2CompilationUnit.getHoleAST().writeDotFile();
 		Runtime rt = Runtime.getRuntime();
 		try {

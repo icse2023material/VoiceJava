@@ -32,6 +32,7 @@ import com.github.javaparser.ast.expr.VariableDeclarationExpr;
 import com.github.javaparser.ast.stmt.BlockStmt;
 import com.github.javaparser.ast.stmt.ExpressionStmt;
 import com.github.javaparser.ast.stmt.ForStmt;
+import com.github.javaparser.ast.stmt.IfStmt;
 import com.github.javaparser.ast.stmt.Statement;
 import com.github.javaparser.ast.stmt.WhileStmt;
 import com.github.javaparser.printer.lexicalpreservation.LexicalPreservingPrinter;
@@ -332,6 +333,14 @@ public class Text2CompilationUnit {
 				currentHole.addChild(holeNodeChild);
 				break;
 			case "if":
+				blockStmt = (BlockStmt) parentNodeAndIndex.getFirst();
+				statements = blockStmt.getStatements();
+				statements.add((Statement) node);
+				currentHole.setIsHole(false);
+				currentHole.setHoleType(HoleType.Statement);
+				holeNodeChild = new HoleNode(HoleType.Expression, true);
+				holeNodeChild.setHoleTypeOptions(new HoleType[] { HoleType.Expression });
+				currentHole.addChild(holeNodeChild);
 				break;
 			case "switch":
 				break;
@@ -595,11 +604,47 @@ public class Text2CompilationUnit {
 
 					currentHole.setIsHole(false);
 					currentHole.setHoleType(HoleType.Expression);
+					holeNode = new HoleNode(HoleType.Undefined, true);
+					parentHole.addChild(holeNode);
+				} else if (parentNodeClassStr.equals("IfStmt")) {
+					// i++ in if(){ i++;}
+					IfStmt ifStmt = (IfStmt) parentNodeAndIndex.getFirst();
+					Statement thenStmt = ifStmt.getThenStmt();
+					String thenStmtStr = StringHelper.getClassName(thenStmt.getClass().toString());
+					if (thenStmtStr.equals("ReturnStmt")) {
+						blockStmt = new BlockStmt();
+						statements = new NodeList<Statement>();
+						ExpressionStmt expressionStmt = new ExpressionStmt((Expression) node);
+						statements.add(expressionStmt);
+						blockStmt.setStatements(statements);
+						ifStmt.setThenStmt(blockStmt);
 
-					holeNode = new HoleNode();
-					holeNode.setIsHole(true);
-					holeNode.setHoleType(HoleType.Undefined);
+						// [then, else, else], use a wrapper
+						currentHole.setIsHole(false);
+						currentHole.setHoleType(HoleType.Wrapper);
 
+						holeNode = new HoleNode(HoleType.ThenStatement, false);
+						currentHole.addChild(holeNode);
+						holeNodeChild = new HoleNode(HoleType.Expression, false);
+						holeNode.addChild(holeNodeChild);
+						HoleNode holeNodeChildChild = new HoleNode(HoleType.Undefined, true);
+						holeNode.addChild(holeNodeChildChild);
+					} else if (thenStmtStr.equals("BlockStmt")) {
+						blockStmt = (BlockStmt) parentNodeAndIndex.getFirst();
+						statements = blockStmt.getStatements();
+						ExpressionStmt expressionStmt = new ExpressionStmt((Expression) node);
+						statements.add(expressionStmt);
+						currentHole.setIsHole(false);
+						holeNode = new HoleNode(HoleType.Statement, true);
+						parentHole.addChild(holeNode);
+					}
+				} else if (parentNodeClassStr.equals("BlockStmt")) {
+					blockStmt = (BlockStmt) parentNodeAndIndex.getFirst();
+					statements = blockStmt.getStatements();
+					ExpressionStmt expressionStmt = new ExpressionStmt((Expression) node);
+					statements.add(expressionStmt);
+					currentHole.setIsHole(false);
+					holeNode = new HoleNode(HoleType.Statement, true);
 					parentHole.addChild(holeNode);
 				}
 				break;
@@ -646,6 +691,35 @@ public class Text2CompilationUnit {
 
 					holeNode = new HoleNode(HoleType.Body, true);
 					parentHole.addChild(holeNode);
+				} else if (parentNodeClassStr.equals("IfStmt")) {
+					IfStmt ifStmt = (IfStmt) parentNodeAndIndex.getFirst();
+
+					if (parentHoleType.equals(HoleType.Wrapper) && (parentOfParentHoleType.equals(HoleType.Statement)
+							|| parentOfParentHoleType.equals(HoleType.ThenStatement)
+							|| parentOfParentHoleType.equals(HoleType.ElseStatement))) {
+						// else branch
+						IfStmt elseBranch = new IfStmt();
+						elseBranch.setCondition((Expression) node);
+						ifStmt.setElseStmt(elseBranch);
+						currentHole.setIsHole(false);
+						currentHole.setHoleType(HoleType.ElseStatement);
+
+						holeNodeChild = new HoleNode(HoleType.Expression, false);
+						currentHole.addChild(holeNodeChild);
+
+						HoleNode holeNodeChild2 = new HoleNode(HoleType.Undefined, true);
+						currentHole.addChild(holeNodeChild2);
+					} else if (parentHoleType.equals(HoleType.Statement)) {
+						// if condition
+						ifStmt.setCondition((Expression) node);
+
+						currentHole.setIsHole(false);
+						currentHole.setHoleType(HoleType.Expression);
+						holeNode = new HoleNode(HoleType.Undefined, true);
+						parentHole.addChild(holeNode);
+
+					}
+
 				}
 				break;
 			case "subexpr1":

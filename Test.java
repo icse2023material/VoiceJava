@@ -9,13 +9,15 @@ public class Hello {
 
     public int sayHello(int[] intArray, String name) {
         int sum = 0;
-        while (i < 10) {
-            sum = fibonacci();
-            hello.sum = hello.fibonacci();
-            sum = hello.sum;
-            sum = x;
-            sum = 200;
-            sum = 2;
+        if (i < 10) {
+            sum++;
+            sum++;
+        } else if (i == 10) {
+            sum++;
+            sum++;
+        } else if (i > 10) {
+            sum++;
         }
+        return sum;
     }
 }

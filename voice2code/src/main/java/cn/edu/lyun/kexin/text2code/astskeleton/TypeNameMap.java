@@ -18,6 +18,8 @@ public class TypeNameMap {
 		map.put(HoleType.Body, "getBody");
 		map.put(HoleType.Statement, "getStatements");
 		map.put(HoleType.ForInitialization, "getInitialization");
+		map.put(HoleType.ThenStatement, "getThenStmt");
+		map.put(HoleType.ElseStatement, "getElseStmt");
 		return map;
 	}
 }
