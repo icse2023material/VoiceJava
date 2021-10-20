@@ -5,8 +5,10 @@ import java.lang.reflect.*;
 
 public class Hello {
 
-    private int greting = 2;
+    private int greeting = 2;
 
     public int sayHello(int[] intArray, String name) {
+        int initialize;
+        String first;
     }
 }

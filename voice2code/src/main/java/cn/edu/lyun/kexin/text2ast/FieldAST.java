@@ -9,6 +9,8 @@ import com.github.javaparser.ast.*;
 import com.github.javaparser.ast.body.FieldDeclaration;
 import com.github.javaparser.ast.body.VariableDeclarator;
 import com.github.javaparser.ast.expr.SimpleName;
+import com.github.javaparser.ast.expr.VariableDeclarationExpr;
+import com.github.javaparser.ast.stmt.ExpressionStmt;
 import com.github.javaparser.ast.type.Type;
 
 public class FieldAST implements AST {
@@ -45,5 +47,21 @@ public class FieldAST implements AST {
 		fieldDeclaration.setVariables(nodeList);
 
 		return fieldDeclaration;
+	}
+
+	public Node generateVariableDeclarationExpr(Pattern pattern) {
+		Unit[] units = pattern.getUnits();
+		List<Unit> unitList = new ArrayList<Unit>(Arrays.asList(units));
+		unitList.remove(0); // remove "define"
+
+		Pair<List<Unit>, List<Unit>> pair = new ListHelper().splitList(unitList, "variable");
+		List<Unit> typeList = pair.getFirst();
+		List<Unit> variableNameList = pair.getSecond();
+
+		Type type = new TypeAST().generateType(typeList);
+		VariableDeclarationExpr variableDeclarationExpr = new VariableDeclarationExpr(type,
+				variableNameList.get(0).getKeyword());
+
+		return new ExpressionStmt(variableDeclarationExpr);
 	}
 }
