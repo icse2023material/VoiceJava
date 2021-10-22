@@ -23,6 +23,7 @@ public class TypeNameMap {
 		map.put(HoleType.ThenStatement, "getThenStmt");
 		map.put(HoleType.ElseStatement, "getElseStmt");
 		map.put(HoleType.SwitchEntries, "getEntries");
+		map.put(HoleType.Expression, "getExpression");
 		return map;
 	}
 }

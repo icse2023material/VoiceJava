@@ -8,14 +8,11 @@ public class Hello {
     private int greeting = 2;
 
     public int sayHello(int[] intArray, String name) {
-        int sum = 0;
-        switch(userType) {
-            case 1:
-                15 * 15;
-                15 * sum;
-            case 2:
-                15 * 15;
-        }
-        return sum;
+        sum = sum();
+        sum = sum.sum();
+        sum = score.sum;
+        sum = sumResult;
+        sum = 100;
+        sum.count = sum;
     }
 }

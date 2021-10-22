@@ -11,6 +11,7 @@ public class HoleNode {
 
 	public HoleNode() {
 		this.isHole = true;
+		this.holeType = HoleType.Undefined;
 		this.childList = new ArrayList<HoleNode>();
 	}
 

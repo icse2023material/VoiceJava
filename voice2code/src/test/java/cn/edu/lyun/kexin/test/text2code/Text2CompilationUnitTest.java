@@ -37,7 +37,14 @@ public class Text2CompilationUnitTest {
 				"move next", "int 2", "expression 15 times 15", "move next", "move next", "move next", "move next",
 				"return sum" };
 
-		String[] lines = switchExample;
+		String[] letExpr = { "define package lyun", "import java dot uitl dot star",
+				"import java dot lang dot reflect dot star", "move next", "define public class Hello",
+				"define private int variable greeting", "int 2", "define public function sayHello", "type int",
+				"type int list variable intArray", "type String variable name", "move next", "let sum equal call sum",
+				"let sum equal sum call sum", "let sum equal score dot sum", "let sum equal variable sumResult",
+				"let sum equal int 100", "let sum dot count equal", "variable sum" };
+
+		String[] lines = letExpr;
 		for (String line : lines) {
 			text2CompilationUnit.generate(line);
 		}
