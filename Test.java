@@ -9,14 +9,5 @@ public class Hello {
 
     public int sayHello(int[] intArray, String name) {
         int sum = 0;
-        if (i < 10) {
-            sum++;
-            sum++;
-        } else if (i > 10) {
-            sum++;
-        } else if (i == 10) {
-            sum++;
-        }
-        return sum;
     }
 }

@@ -423,14 +423,32 @@ public class Text2CompilationUnit {
 			}
 			break;
 		case "switch":
-			BlockStmt blockStmt = (BlockStmt) parentAndIndex.getFirst();
-			NodeList<Statement> statements = blockStmt.getStatements();
-			statements.add((Statement) node);
-			currentHole.setIsHole(false);
-			currentHole.setHoleType(HoleType.Statement);
-			HoleNode holeNodeChild = new HoleNode(HoleType.Expression, true);
-			holeNodeChild.setHoleTypeOptions(new HoleType[] { HoleType.Expression });
-			currentHole.addChild(holeNodeChild);
+			if (parentHoleType.equals(HoleType.Statements)) {
+				NodeList<Statement> statements = (NodeList<Statement>) parent.get().get();
+				if (holeIndex < statements.size()) {
+					// insert at holeIndex
+					statements.add(holeIndex, (Statement) node);
+				} else {
+					// append
+					statements.add((Statement) node);
+					currentHole.setIsHole(false);
+					currentHole.setHoleType(HoleType.Wrapper);
+					currentHole.setHoleTypeOptions(new HoleType[] { HoleType.SwitchStmt });
+					HoleNode holeNodeChild = new HoleNode(HoleType.Expression, true);
+					holeNodeChild.setHoleTypeOptions(new HoleType[] { HoleType.Expression });
+					currentHole.addChild(holeNodeChild);
+				}
+			} else {
+				BlockStmt blockStmt = (BlockStmt) parentAndIndex.getFirst();
+				NodeList<Statement> statements = blockStmt.getStatements();
+				statements.add((Statement) node);
+				currentHole.setIsHole(false);
+				currentHole.setHoleType(HoleType.Wrapper);
+				currentHole.setHoleTypeOptions(new HoleType[] { HoleType.SwitchStmt });
+				HoleNode holeNodeChild = new HoleNode(HoleType.Expression, true);
+				holeNodeChild.setHoleTypeOptions(new HoleType[] { HoleType.Expression });
+				currentHole.addChild(holeNodeChild);
+			}
 			break;
 		case "tryCatch":
 			break;
@@ -452,8 +470,8 @@ public class Text2CompilationUnit {
 				Statement body = whileStmt.getBody();
 				String bodyClassStr = StringHelper.getClassName(body.getClass().toString());
 				if (bodyClassStr.equals("ReturnStmt")) {
-					blockStmt = new BlockStmt();
-					statements = new NodeList<Statement>();
+					BlockStmt blockStmt = new BlockStmt();
+					NodeList<Statement> statements = new NodeList<Statement>();
 					ExpressionStmt expressionStmt = new ExpressionStmt((Expression) node);
 					statements.add(expressionStmt);
 					blockStmt.setStatements(statements);
@@ -484,8 +502,8 @@ public class Text2CompilationUnit {
 				String bodyClassStr = body.getClass().toString();
 				bodyClassStr = bodyClassStr.substring(bodyClassStr.lastIndexOf(".") + 1);
 				if (bodyClassStr.equals("ReturnStmt")) {
-					blockStmt = new BlockStmt();
-					statements = new NodeList<Statement>();
+					BlockStmt blockStmt = new BlockStmt();
+					NodeList<Statement> statements = new NodeList<Statement>();
 					ExpressionStmt expressionStmt = new ExpressionStmt((Expression) node);
 					statements.add(expressionStmt);
 					blockStmt.setStatements(statements);
@@ -506,8 +524,8 @@ public class Text2CompilationUnit {
 					anotherCurrentHole.addChild(newHole);
 				}
 			} else if (parentNodeClassStr != null && parentNodeClassStr.equals("BlockStmt")) {
-				blockStmt = (BlockStmt) parent.getLeft();
-				statements = blockStmt.getStatements();
+				BlockStmt blockStmt = (BlockStmt) parent.getLeft();
+				NodeList<Statement> statements = blockStmt.getStatements();
 				ExpressionStmt expressionStmt = new ExpressionStmt((Expression) node);
 				statements.add(expressionStmt);
 
@@ -515,7 +533,7 @@ public class Text2CompilationUnit {
 				holeNode = new HoleNode(HoleType.Statement, true);
 				parentHole.addChild(holeNode);
 			} else if (parentHoleType.equals(HoleType.Statements)) {
-				statements = (NodeList<Statement>) parent.get().get();
+				NodeList<Statement> statements = (NodeList<Statement>) parent.get().get();
 				if (holeIndex < statements.size()) {
 					// TODO
 				} else {
@@ -530,8 +548,8 @@ public class Text2CompilationUnit {
 			break;
 		case "let3":
 			if (parentNodeClassStr != null && parentNodeClassStr.equals("BlockStmt")) {
-				blockStmt = (BlockStmt) parentAndIndex.getFirst();
-				statements = blockStmt.getStatements();
+				BlockStmt blockStmt = (BlockStmt) parentAndIndex.getFirst();
+				NodeList<Statement> statements = blockStmt.getStatements();
 				ExpressionStmt expressionStmt = new ExpressionStmt((Expression) node);
 
 				statements.add(expressionStmt);
@@ -540,7 +558,7 @@ public class Text2CompilationUnit {
 				holeNode = new HoleNode(HoleType.Statement, true);
 				parentHole.addChild(holeNode);
 			} else if (parentHoleType.equals(HoleType.Statements)) {
-				statements = (NodeList<Statement>) parent.get().get();
+				NodeList<Statement> statements = (NodeList<Statement>) parent.get().get();
 				if (holeIndex < statements.size()) {
 					// TODO
 				} else {
@@ -555,8 +573,8 @@ public class Text2CompilationUnit {
 			break;
 		case "let4":
 			if (parentNodeClassStr != null && parentNodeClassStr.equals("BlockStmt")) {
-				blockStmt = (BlockStmt) parentAndIndex.getFirst();
-				statements = blockStmt.getStatements();
+				BlockStmt blockStmt = (BlockStmt) parentAndIndex.getFirst();
+				NodeList<Statement> statements = blockStmt.getStatements();
 				ExpressionStmt expressionStmt = new ExpressionStmt((Expression) node);
 
 				statements.add(expressionStmt);
@@ -565,7 +583,7 @@ public class Text2CompilationUnit {
 				holeNode = new HoleNode(HoleType.Statement, true);
 				parentHole.addChild(holeNode);
 			} else if (parentHoleType.equals(HoleType.Statements)) {
-				statements = (NodeList<Statement>) parent.get().get();
+				NodeList<Statement> statements = (NodeList<Statement>) parent.get().get();
 				if (holeIndex < statements.size()) {
 					// TODO
 				} else {
@@ -580,8 +598,8 @@ public class Text2CompilationUnit {
 			break;
 		case "let5":
 			if (parentNodeClassStr != null && parentNodeClassStr.equals("BlockStmt")) {
-				blockStmt = (BlockStmt) parentAndIndex.getFirst();
-				statements = blockStmt.getStatements();
+				BlockStmt blockStmt = (BlockStmt) parentAndIndex.getFirst();
+				NodeList<Statement> statements = blockStmt.getStatements();
 				ExpressionStmt expressionStmt = new ExpressionStmt((Expression) node);
 
 				statements.add(expressionStmt);
@@ -590,7 +608,7 @@ public class Text2CompilationUnit {
 				holeNode = new HoleNode(HoleType.Statement, true);
 				parentHole.addChild(holeNode);
 			} else if (parentHoleType.equals(HoleType.Statements)) {
-				statements = (NodeList<Statement>) parent.get().get();
+				NodeList<Statement> statements = (NodeList<Statement>) parent.get().get();
 				if (holeIndex < statements.size()) {
 					// TODO
 				} else {
@@ -613,8 +631,8 @@ public class Text2CompilationUnit {
 				String bodyClassStr = body.getClass().toString();
 				bodyClassStr = StringHelper.getClassName(bodyClassStr);
 				if (bodyClassStr.equals("ReturnStmt")) {
-					blockStmt = new BlockStmt();
-					statements = new NodeList<Statement>();
+					BlockStmt blockStmt = new BlockStmt();
+					NodeList<Statement> statements = new NodeList<Statement>();
 					ExpressionStmt expressionStmt = new ExpressionStmt((Expression) node);
 					statements.add(expressionStmt);
 					blockStmt.setStatements(statements);
@@ -645,8 +663,8 @@ public class Text2CompilationUnit {
 					System.out.println("Should not go to this branch");
 				}
 			} else if (parentNodeClassStr != null && parentNodeClassStr.equals("BlockStmt")) {
-				blockStmt = (BlockStmt) parent.getLeft();
-				statements = blockStmt.getStatements();
+				BlockStmt blockStmt = (BlockStmt) parent.getLeft();
+				NodeList<Statement> statements = blockStmt.getStatements();
 				ExpressionStmt expressionStmt = new ExpressionStmt((Expression) node);
 				statements.add(expressionStmt);
 				currentHole.setIsHole(false);
@@ -654,7 +672,7 @@ public class Text2CompilationUnit {
 				holeNode = new HoleNode(HoleType.Expression, true);
 				currentHole.addChild(holeNode);
 			} else if (parentHoleType.equals(HoleType.Statements)) {
-				statements = (NodeList<Statement>) parent.get().get();
+				NodeList<Statement> statements = (NodeList<Statement>) parent.get().get();
 				ExpressionStmt expressionStmt = new ExpressionStmt((Expression) node);
 				statements.add(expressionStmt);
 				currentHole.setIsHole(false);
@@ -670,7 +688,7 @@ public class Text2CompilationUnit {
 			break;
 		case "return3":
 			if (parentHoleType.equals(HoleType.Statements)) {
-				statements = (NodeList<Statement>) parent.get().get();
+				NodeList<Statement> statements = (NodeList<Statement>) parent.get().get();
 				if (holeIndex < statements.size()) {
 					// TODO
 				} else {
@@ -681,8 +699,8 @@ public class Text2CompilationUnit {
 					parentHole.addChild(childHoleNode);
 				}
 			} else if (parentNodeClassStr != null && parentNodeClassStr.equals("BlockStmt")) {
-				blockStmt = (BlockStmt) parentAndIndex.getFirst();
-				statements = blockStmt.getStatements();
+				BlockStmt blockStmt = (BlockStmt) parentAndIndex.getFirst();
+				NodeList<Statement> statements = blockStmt.getStatements();
 				statements.add((Statement) node);
 				currentHole.setIsHole(false);
 				currentHole.setHoleType(HoleType.Statement);
@@ -711,7 +729,7 @@ public class Text2CompilationUnit {
 				holeNode = new HoleNode(HoleType.Wrapper, false);
 				parentHole.addChild(holeNode);
 
-				holeNodeChild = new HoleNode(HoleType.Undefined, true);
+				HoleNode holeNodeChild = new HoleNode(HoleType.Undefined, true);
 				holeNode.addChild(holeNodeChild);
 			}
 			break;
@@ -777,7 +795,7 @@ public class Text2CompilationUnit {
 					holeNode = new HoleNode(HoleType.Expression, false);
 					wrapperNode.addChild(holeNode);
 
-					holeNodeChild = new HoleNode(HoleType.Undefined, true);
+					HoleNode holeNodeChild = new HoleNode(HoleType.Undefined, true);
 					wrapperNode.addChild(holeNodeChild);
 				} else {
 
@@ -803,8 +821,8 @@ public class Text2CompilationUnit {
 				Statement thenStmt = ifStmt.getThenStmt();
 				String thenStmtStr = StringHelper.getClassName(thenStmt.getClass().toString());
 				if (thenStmtStr.equals("ReturnStmt")) {
-					blockStmt = new BlockStmt();
-					statements = new NodeList<Statement>();
+					BlockStmt blockStmt = new BlockStmt();
+					NodeList<Statement> statements = new NodeList<Statement>();
 					ExpressionStmt expressionStmt = new ExpressionStmt((Expression) node);
 					statements.add(expressionStmt);
 					blockStmt.setStatements(statements);
@@ -813,13 +831,13 @@ public class Text2CompilationUnit {
 					// [condition,then, else, else]
 					currentHole.setIsHole(false);
 					currentHole.setHoleType(HoleType.ThenStatement);
-					holeNodeChild = new HoleNode(HoleType.Expression, false);
+					HoleNode holeNodeChild = new HoleNode(HoleType.Expression, false);
 					currentHole.addChild(holeNodeChild);
 					HoleNode holeNodeChildChild = new HoleNode(HoleType.Undefined, true);
 					currentHole.addChild(holeNodeChildChild);
 				} else if (thenStmtStr.equals("BlockStmt")) {
-					blockStmt = (BlockStmt) parentAndIndex.getFirst();
-					statements = blockStmt.getStatements();
+					BlockStmt blockStmt = (BlockStmt) parentAndIndex.getFirst();
+					NodeList<Statement> statements = blockStmt.getStatements();
 					ExpressionStmt expressionStmt = new ExpressionStmt((Expression) node);
 					statements.add(expressionStmt);
 					currentHole.setIsHole(false);
@@ -827,8 +845,8 @@ public class Text2CompilationUnit {
 					parentHole.addChild(holeNode);
 				}
 			} else if (parentNodeClassStr.equals("BlockStmt")) {
-				blockStmt = (BlockStmt) parent.getLeft();
-				statements = blockStmt.getStatements();
+				BlockStmt blockStmt = (BlockStmt) parent.getLeft();
+				NodeList<Statement> statements = blockStmt.getStatements();
 				if (holeIndex < statements.size()) {
 					// TODO
 				} else {
@@ -915,7 +933,7 @@ public class Text2CompilationUnit {
 					currentHole.setIsHole(false);
 					currentHole.setHoleType(HoleType.ElseStatement);
 
-					holeNodeChild = new HoleNode(HoleType.Expression, false);
+					HoleNode holeNodeChild = new HoleNode(HoleType.Expression, false);
 					currentHole.addChild(holeNodeChild);
 
 					HoleNode holeNodeChild2 = new HoleNode(HoleType.Undefined, true);
@@ -923,7 +941,7 @@ public class Text2CompilationUnit {
 				}
 			} else if (parentNodeClassStr.equals("SwitchEntry")) {
 				SwitchEntry switchEntry = (SwitchEntry) parentAndIndex.getFirst();
-				statements = switchEntry.getStatements();
+				NodeList<Statement> statements = switchEntry.getStatements();
 				ExpressionStmt expressionStmt = new ExpressionStmt((Expression) node);
 				statements.add((Statement) expressionStmt);
 				currentHole.setHoleType(HoleType.Expression);
