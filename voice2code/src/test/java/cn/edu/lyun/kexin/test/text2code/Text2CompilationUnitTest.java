@@ -36,7 +36,6 @@ public class Text2CompilationUnitTest {
 				"define switch", "variable userType", "int 1", "expression 15 times 15", "expression 15 times sum", "move next",
 				"move next", "int 2", "expression 15 times 15", "move next", "move next", "move next", "move next",
 				"return sum" };
-
 		String[] letExpr = { "define package lyun", "import java dot uitl dot star",
 				"import java dot lang dot reflect dot star", "move next", "define public class Hello",
 				"define private int variable greeting", "int 2", "define public function sayHello", "type int",
@@ -44,12 +43,19 @@ public class Text2CompilationUnitTest {
 				"let sum equal sum call sum", "let sum equal score dot sum", "let sum equal variable sumResult",
 				"let sum equal int 100", "let sum dot count equal", "variable sum" };
 
-		String[] lines = letExpr;
+		String[] returnExpr = { "define package lyun", "import java dot uitl dot star",
+				"import java dot lang dot reflect dot star", "move next", "define public class Hello",
+				"define private int variable greeting", "int 2", "define public function sayHello", "type int",
+				"type int list variable intArray", "type String variable name", "move next", "define int variable b",
+				"move next", };
+
+		String[] lines = returnExpr;
 		for (String line : lines) {
 			text2CompilationUnit.generate(line);
 		}
 
-		// text2CompilationUnit.generate();
+		text2CompilationUnit.generate("return");
+		text2CompilationUnit.generate("variable sum");
 		text2CompilationUnit.getHoleAST().writeDotFile();
 		Runtime rt = Runtime.getRuntime();
 		try {

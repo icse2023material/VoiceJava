@@ -54,6 +54,11 @@ public class HoleNode {
 		return this.isHole;
 	}
 
+	public void set(HoleType holeType, boolean isHole) {
+		this.holeType = holeType;
+		this.isHole = isHole;
+	}
+
 	public List<HoleNode> getChildList() {
 		return this.childList;
 	}
