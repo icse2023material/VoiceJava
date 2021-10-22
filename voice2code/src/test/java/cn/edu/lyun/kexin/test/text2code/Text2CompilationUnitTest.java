@@ -29,25 +29,20 @@ public class Text2CompilationUnitTest {
 				"define if", "i less than 10", "sum plus plus", "sum plus plus", "move next", "i greater than 10",
 				"sum plus plus", "move next", "i double equal 10", "sum plus plus", "move next", "move next", "move next",
 				"move next", "return sum" };
-		String[] example = { "define package lyun", "import java dot uitl dot star",
-				"import java dot lang dot reflect dot star", "move next", "define public class Hello",
-				"define private int variable greeting", "int 2", "define public function sayHello", "type int",
-				"type int list variable intArray", "type String variable name", "move next", "define int variable sum", "int 0",
-				"define switch", "variable userType", "int 1", "expression 15 times 15", "expression 15 times sum",
-				"move next" };
-
 		String[] switchExample = { "define package lyun", "import java dot uitl dot star",
 				"import java dot lang dot reflect dot star", "move next", "define public class Hello",
 				"define private int variable greeting", "int 2", "define public function sayHello", "type int",
-				"type int list variable intArray", "type String variable name", "move next", "define int variable sum",
-				"int 0", };
+				"type int list variable intArray", "type String variable name", "move next", "define int variable sum", "int 0",
+				"define switch", "variable userType", "int 1", "expression 15 times 15", "expression 15 times sum", "move next",
+				"move next", "int 2", "expression 15 times 15", "move next", "move next", "move next", "move next",
+				"return sum" };
 
 		String[] lines = switchExample;
 		for (String line : lines) {
 			text2CompilationUnit.generate(line);
 		}
 
-		text2CompilationUnit.generate("define switch");
+		// text2CompilationUnit.generate();
 		text2CompilationUnit.getHoleAST().writeDotFile();
 		Runtime rt = Runtime.getRuntime();
 		try {

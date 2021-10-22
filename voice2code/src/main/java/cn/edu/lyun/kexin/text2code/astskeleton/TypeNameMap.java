@@ -22,7 +22,7 @@ public class TypeNameMap {
 		map.put(HoleType.ForInitialization, "getInitialization");
 		map.put(HoleType.ThenStatement, "getThenStmt");
 		map.put(HoleType.ElseStatement, "getElseStmt");
-		map.put(HoleType.Entries, "getEntries");
+		map.put(HoleType.SwitchEntries, "getEntries");
 		return map;
 	}
 }

@@ -5,5 +5,5 @@ public enum HoleType {
 	TypeDeclaration, ClassDeclaration, FieldDeclarations, BodyDeclarations, FieldDeclaration, MethodDeclaration,
 	VariableDeclarator, BodyDeclaration, Expression, TypeExtends, TypeVariables, TypeVariable, Body, Statements,
 	Statement, ForStmt, WhileStmt, ForInitialization, BlockStmt, IfStmt, IfCondition, ThenStatement, ElseStatement,
-	SwitchStmt, Entries
+	SwitchStmt, SwitchEntry, SwitchEntries
 }

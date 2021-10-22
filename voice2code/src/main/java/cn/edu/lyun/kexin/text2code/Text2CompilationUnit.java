@@ -722,19 +722,38 @@ public class Text2CompilationUnit {
 			break;
 		case "expr4":
 			if (parentNodeClassStr.equals("SwitchStmt")) {
-				SwitchStmt switchStmt = (SwitchStmt) parentAndIndex.getFirst();
+				SwitchStmt switchStmt = (SwitchStmt) parent.getLeft();
 				switchStmt.setSelector((Expression) node);
 				currentHole.setIsHole(false);
 
-				holeNode = new HoleNode(HoleType.Wrapper, false);
+				holeNode = new HoleNode(HoleType.Undefined, true);
 				parentHole.addChild(holeNode);
-
-				HoleNode holeNodeChild = new HoleNode(HoleType.Undefined, true);
-				holeNode.addChild(holeNodeChild);
 			}
 			break;
 		case "expr5":
-			if (parentNodeClassStr.equals("FieldDeclaration")) {
+			if (parentHoleType.equals(HoleType.SwitchEntries)) {
+				NodeList<SwitchEntry> switchEntries = (NodeList<SwitchEntry>) parent.get().get();
+				if (holeIndex < switchEntries.size()) {
+					// TODO
+				} else {
+					SwitchEntry switchEntry = new SwitchEntry();
+					NodeList<Expression> labels = new NodeList<Expression>();
+					labels.add((Expression) node);
+					switchEntry.setLabels(labels);
+					switchEntries.add(switchEntry);
+
+					currentHole.setIsHole(false);
+					currentHole.setHoleType(HoleType.Wrapper);
+					currentHole.setHoleTypeOptions(new HoleType[] { HoleType.SwitchEntry });
+
+					holeNode = new HoleNode(HoleType.Expression, false);
+					currentHole.addChild(holeNode);
+
+					HoleNode holeNodeChild = new HoleNode(HoleType.Undefined, true);
+					currentHole.addChild(holeNodeChild);
+
+				}
+			} else if (parentNodeClassStr != null && parentNodeClassStr.equals("FieldDeclaration")) {
 				NodeList<VariableDeclarator> variableDeclarators = ((FieldDeclaration) parent.getLeft()).getVariables();
 				VariableDeclarator vNode = variableDeclarators.get(0);
 				vNode.setInitializer((Expression) node);
@@ -767,7 +786,7 @@ public class Text2CompilationUnit {
 					holeNode = new HoleNode(HoleType.Undefined, true);
 					parentOfParentHole.addChild(holeNode);
 				}
-			} else if (parentNodeClassStr.equals("VariableDeclarationExpr")) {
+			} else if (parentNodeClassStr != null && parentNodeClassStr.equals("VariableDeclarationExpr")) {
 				VariableDeclarationExpr variableDeclarationExpr = (VariableDeclarationExpr) parent.getLeft();
 				NodeList<VariableDeclarator> variableDeclarators = variableDeclarationExpr.getVariables();
 				variableDeclarators.get(0).setInitializer((Expression) node);
@@ -777,8 +796,8 @@ public class Text2CompilationUnit {
 				holeNode = new HoleNode(HoleType.Undefined, true);
 				holeNode.setHoleTypeOptions(new HoleType[] { HoleType.Expression });
 				parentOfParentHole.addChild(holeNode);
-			} else if (parentNodeClassStr.equals("SwitchStmt")) {
-				SwitchStmt switchStmt = (SwitchStmt) parentAndIndex.getFirst();
+			} else if (parentNodeClassStr != null && parentNodeClassStr.equals("SwitchStmt")) {
+				SwitchStmt switchStmt = (SwitchStmt) parent.getLeft();
 				NodeList<SwitchEntry> switchEntries = switchStmt.getEntries();
 				if (switchEntries.size() == 0) {
 					SwitchEntry switchEntry = new SwitchEntry();
@@ -786,10 +805,12 @@ public class Text2CompilationUnit {
 					labels.add((Expression) node);
 					switchEntry.setLabels(labels);
 					switchEntries.add(switchEntry);
+
 					currentHole.setIsHole(false);
-					currentHole.setHoleType(HoleType.Entries);
+					currentHole.setHoleType(HoleType.SwitchEntries);
 
 					HoleNode wrapperNode = new HoleNode(HoleType.Wrapper, false);
+					wrapperNode.setHoleTypeOptions(new HoleType[] { HoleType.SwitchEntry });
 					currentHole.addChild(wrapperNode);
 
 					holeNode = new HoleNode(HoleType.Expression, false);
@@ -870,7 +891,19 @@ public class Text2CompilationUnit {
 		case "expr11":
 			break;
 		case "expr12":
-			if (parentNodeClassStr.equals("ForStmt")) {
+			if (parentHoleType.equals(HoleType.Statements)) {
+				NodeList<Statement> statements = (NodeList<Statement>) parent.get().get();
+				if (holeIndex < statements.size()) {
+					// TODO
+				} else {
+					ExpressionStmt expressionStmt = new ExpressionStmt((Expression) node);
+					statements.add(expressionStmt);
+					currentHole.setIsHole(false);
+					currentHole.setHoleType(HoleType.Expression);
+					holeNode = new HoleNode(HoleType.Statement, true);
+					parentHole.addChild(holeNode);
+				}
+			} else if (parentNodeClassStr != null && parentNodeClassStr.equals("ForStmt")) {
 				// i < 10 in for(; i < 10 ;){}
 				ForStmt forStmt = (ForStmt) parent.getLeft();
 				forStmt.setCompare((Expression) node);
@@ -883,7 +916,7 @@ public class Text2CompilationUnit {
 				holeNode.setHoleType(HoleType.Undefined);
 
 				parentHole.addChild(holeNode);
-			} else if (parentNodeClassStr.equals("ExpressionStmt")) {
+			} else if (parentNodeClassStr != null && parentNodeClassStr.equals("ExpressionStmt")) {
 				// body part, expression
 				ExpressionStmt expressionStmt = (ExpressionStmt) parent.getLeft();
 				String expressionClassStr = expressionStmt.getExpression().getClass().toString();
@@ -902,7 +935,7 @@ public class Text2CompilationUnit {
 					// TODO
 				}
 
-			} else if (parentNodeClassStr.equals("WhileStmt")) {
+			} else if (parentNodeClassStr != null && parentNodeClassStr.equals("WhileStmt")) {
 				// i < 10 in while(i < 10){}
 				WhileStmt whileStmt = (WhileStmt) parent.getLeft();
 				whileStmt.setCondition((Expression) node);
@@ -911,7 +944,7 @@ public class Text2CompilationUnit {
 				holeNode = new HoleNode(HoleType.Body, true);
 				parentHole.addChild(holeNode);
 
-			} else if (parentNodeClassStr.equals("IfStmt")) {
+			} else if (parentNodeClassStr != null && parentNodeClassStr.equals("IfStmt")) {
 				IfStmt ifStmt = (IfStmt) parent.getLeft();
 				if (parentHoleType.equals(HoleType.Wrapper) && parentHole.getChildList().size() == 1) {
 					// parentHole.getChildList().size() == 1 means one child hole, it shall be
@@ -939,15 +972,24 @@ public class Text2CompilationUnit {
 					HoleNode holeNodeChild2 = new HoleNode(HoleType.Undefined, true);
 					currentHole.addChild(holeNodeChild2);
 				}
-			} else if (parentNodeClassStr.equals("SwitchEntry")) {
-				SwitchEntry switchEntry = (SwitchEntry) parentAndIndex.getFirst();
+			} else if (parentNodeClassStr != null && parentNodeClassStr.equals("SwitchEntry")) {
+				SwitchEntry switchEntry = (SwitchEntry) parent.getLeft();
 				NodeList<Statement> statements = switchEntry.getStatements();
-				ExpressionStmt expressionStmt = new ExpressionStmt((Expression) node);
-				statements.add((Statement) expressionStmt);
-				currentHole.setHoleType(HoleType.Expression);
-				currentHole.setIsHole(false);
-				holeNode = new HoleNode(HoleType.Undefined, true);
-				parentHole.addChild(holeNode);
+				if (holeIndex < statements.size()) {
+					// TODO
+				} else {
+					ExpressionStmt expressionStmt = new ExpressionStmt((Expression) node);
+					statements.add((Statement) expressionStmt);
+					currentHole.setHoleType(HoleType.Statements);
+					currentHole.setIsHole(false);
+
+					holeNode = new HoleNode(HoleType.Expression, false);
+					currentHole.addChild(holeNode);
+
+					HoleNode holeNode2 = new HoleNode(HoleType.Undefined, true);
+					currentHole.addChild(holeNode2);
+
+				}
 			}
 			break;
 		case "subexpr1":

@@ -9,5 +9,13 @@ public class Hello {
 
     public int sayHello(int[] intArray, String name) {
         int sum = 0;
+        switch(userType) {
+            case 1:
+                15 * 15;
+                15 * sum;
+            case 2:
+                15 * 15;
+        }
+        return sum;
     }
 }
