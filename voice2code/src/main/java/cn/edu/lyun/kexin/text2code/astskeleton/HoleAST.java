@@ -71,14 +71,21 @@ public class HoleAST {
 			String colorRed = " [color = red] ";
 			while (!queue.isEmpty()) {
 				HoleNode holeNode = queue.poll();
-				String nodeStr = holeNode.getHoleType() + "_" + String.valueOf(holeNode.hashCode());
+				String nodeStr = holeNode.getHoleType().equals(HoleType.Wrapper)
+						? holeNode.getHoleType() + "_" + holeNode.getHoleTypeOfOptionsIfOnlyOne() + "_"
+								+ String.valueOf(holeNode.hashCode())
+						: holeNode.getHoleType() + "_" + String.valueOf(holeNode.hashCode());
 				if (holeNode.getIsHole()) {
 					nodeStr += colorRed;
 				}
 
 				for (HoleNode holeNodeChild : holeNode.getChildList()) {
 					queue.add(holeNodeChild);
-					String nodeChildStr = holeNodeChild.getHoleType() + "_" + String.valueOf(holeNodeChild.hashCode());
+					HoleType childHoleType = holeNodeChild.getHoleType();
+					String nodeChildStr = childHoleType.equals(HoleType.Wrapper)
+							? childHoleType + "_" + holeNodeChild.getHoleTypeOfOptionsIfOnlyOne() + "_"
+									+ String.valueOf(holeNodeChild.hashCode())
+							: childHoleType + "_" + String.valueOf(holeNodeChild.hashCode());
 					if (holeNodeChild.getIsHole()) {
 						nodeChildStr += colorRed;
 					}

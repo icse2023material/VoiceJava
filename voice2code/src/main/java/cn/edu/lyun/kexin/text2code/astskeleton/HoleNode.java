@@ -29,6 +29,14 @@ public class HoleNode {
 		return this.holeTypeOptions;
 	}
 
+	public HoleType getHoleTypeOfOptionsIfOnlyOne() {
+		if (this.holeTypeOptions != null && this.holeTypeOptions.length == 1) {
+			return this.holeTypeOptions[0];
+		} else {
+			return null;
+		}
+	}
+
 	public void setHoleType(HoleType holeType) {
 		this.holeType = holeType;
 	}

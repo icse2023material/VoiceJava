@@ -4,5 +4,6 @@ public enum HoleType {
 	Undefined, Wrapper, CompilationUnit, PackageDeclaration, ImportDeclarations, ImportDeclaration, TypeDeclarations,
 	TypeDeclaration, ClassDeclaration, FieldDeclarations, BodyDeclarations, FieldDeclaration, MethodDeclaration,
 	VariableDeclarator, BodyDeclaration, Expression, TypeExtends, TypeVariables, TypeVariable, Body, Statements,
-	Statement, For, ForInitialization, ThenStatement, ElseStatement, Entries
+	Statement, ForStmt, WhileStmt, ForInitialization, BlockStmt, IfStmt, IfCondition, ThenStatement, ElseStatement,
+	Entries
 }
