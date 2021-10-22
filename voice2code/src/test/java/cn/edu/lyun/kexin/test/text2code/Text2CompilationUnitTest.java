@@ -7,7 +7,7 @@ import cn.edu.lyun.kexin.text2code.Text2CompilationUnit;
 public class Text2CompilationUnitTest {
 	public static void main(String[] args) throws IOException {
 		Text2CompilationUnit text2CompilationUnit = new Text2CompilationUnit();
-		String[] example1 = { "define package lyun", "import java dot uitl dot star",
+		String[] forExample = { "define package lyun", "import java dot uitl dot star",
 				"import java dot lang dot reflect dot star", "move next", "define public class Hello",
 				"define private int variable greeting", "int 2", "define public function sayHello", "type int",
 				"type int list variable intArray", "type String variable name", "move next", "define int variable sum", "int 0",
@@ -28,13 +28,29 @@ public class Text2CompilationUnitTest {
 				"sum plus plus", "sum plus plus", "move next", "i greater than 10", "sum plus plus", "move next", "move next",
 				"move next", "move next", "move next", "move next", "move next", "return sum" };
 
-		String[] lines = ifExample;
+		String[] switchExample = { "define package lyun", "import java dot uitl dot star",
+				"import java dot lang dot reflect dot star", "move next", "define public class Hello",
+				"define private int variable greeting", "int 2", "define public function sayHello", "type int",
+				"type int list variable intArray", "type String variable name", "move next", "define int variable sum", "int 0",
+				"define switch", "variable userType", "int 1", "expression 15 times 15", "expression 15 times sum",
+				"move next" };
+
+		String[] example1 = { "define package lyun", "import java dot util dot star",
+				"import java dot lang dot reflect dot star", "move next", "define public class Hello",
+				"define public int variable count", "int 0", "define private int variable sum", "int 2",
+				"define public String variable name", "move next", "define public function sayHello", "type int",
+				"type int list variable intArray", "type String variable name", "move next", "define int variable sum", "int 0",
+				"define int variable b", "move next", "define for", "define int variable i", "int 0",
+				"expression i less equal 10", "i plus plus", "let sum equal expression", "expression sum plus i",
+				"let count equal expression" };
+		String[] lines = example1;
 
 		for (String line : lines) {
 			text2CompilationUnit.generate(line);
 		}
-
-		// text2CompilationUnit.generate("return sum");
+		// , ,
+		// ,
+		text2CompilationUnit.generate("expression count plus i");
 		text2CompilationUnit.getHoleAST().writeDotFile();
 		Runtime rt = Runtime.getRuntime();
 		try {

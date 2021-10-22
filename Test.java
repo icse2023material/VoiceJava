@@ -1,23 +1,22 @@
 package lyun;
 
-import java.uitl.*;
+import java.util.*;
 import java.lang.reflect.*;
 
 public class Hello {
 
-    private int greeting = 2;
+    public int count = 0;
+
+    private int sum = 2;
+
+    public String name;
 
     public int sayHello(int[] intArray, String name) {
         int sum = 0;
-        if (i < 10) {
-            sum++;
-            sum++;
-        } else if (i == 10) {
-            sum++;
-            sum++;
-        } else if (i > 10) {
-            sum++;
+        int b;
+        for (int i = 0; i <= 10; i++) {
+            sum = sum + i;
+            count = count + i;
         }
-        return sum;
     }
 }
