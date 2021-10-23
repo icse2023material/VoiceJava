@@ -60,6 +60,46 @@ public class HoleAST {
 		return parent;
 	}
 
+	public HoleNode getParentOfParentOfParentNode(List<Integer> path) {
+		HoleNode parent = this.root;
+		if (path.size() < 3) {
+			return this.root;
+		}
+
+		for (int i = 0; i < path.size() - 3; i++) {
+			parent = parent.getIthChild(path.get(i));
+		}
+
+		return parent;
+	}
+
+	private HoleNode getParentNodeOfIndex(List<Integer> path, int backStep) {
+		HoleNode parent = this.root;
+		if (path.size() < 3) {
+			return this.root;
+		}
+
+		for (int i = 0; i < path.size() - backStep; i++) {
+			parent = parent.getIthChild(path.get(i));
+		}
+
+		return parent;
+	}
+
+	public HoleNode checkExpr10NodeAndGoToCorrectParent(HoleNode holeNode, List<Integer> path) {
+
+		HoleType holeType = holeNode.getHoleTypeOfOptionsIfOnlyOne();
+		if (holeType != null && holeType.equals(HoleType.Expr10) && holeNode.getChildListSize() == 2) {
+			HoleNode pHoleNode = getParentNodeOfIndex(path, 4);
+			if (pHoleNode.getHoleType().equals(HoleType.Statements)) {
+				return pHoleNode;
+			} else {
+				return getParentNodeOfIndex(path, 5);
+			}
+		}
+		return holeNode;
+	}
+
 	public void writeDotFile() {
 		FileWriter filewriter;
 		try {

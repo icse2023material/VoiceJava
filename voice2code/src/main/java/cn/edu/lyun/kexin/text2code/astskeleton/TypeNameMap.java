@@ -24,6 +24,8 @@ public class TypeNameMap {
 		map.put(HoleType.ElseStatement, "getElseStmt");
 		map.put(HoleType.SwitchEntries, "getEntries");
 		map.put(HoleType.Expression, "getExpression");
+		map.put(HoleType.LeftSubExpr, "getLeft");
+		map.put(HoleType.RightSubExpr, "getRight");
 		return map;
 	}
 }

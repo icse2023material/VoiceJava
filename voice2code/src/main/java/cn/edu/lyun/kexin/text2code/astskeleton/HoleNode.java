@@ -38,6 +38,10 @@ public class HoleNode {
 		}
 	}
 
+	public void setHoleTypeOptionsOfOnlyOne(HoleType holeType) {
+		this.holeTypeOptions = new HoleType[] { holeType };
+	}
+
 	public void setHoleType(HoleType holeType) {
 		this.holeType = holeType;
 	}

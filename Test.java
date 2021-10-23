@@ -8,7 +8,8 @@ public class Hello {
     private int greeting = 2;
 
     public int sayHello(int[] intArray, String name) {
-        int b;
-        return sum;
+        notify();
+        3 + 5;
+        5 + sum * sum();
     }
 }

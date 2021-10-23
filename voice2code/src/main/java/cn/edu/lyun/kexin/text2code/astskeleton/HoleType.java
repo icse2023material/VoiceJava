@@ -5,5 +5,6 @@ public enum HoleType {
 	TypeDeclaration, ClassDeclaration, FieldDeclarations, BodyDeclarations, FieldDeclaration, MethodDeclaration,
 	VariableDeclarator, BodyDeclaration, Expression, TypeExtends, TypeVariables, TypeVariable, Body, Statements,
 	Statement, ForStmt, WhileStmt, ForInitialization, BlockStmt, IfStmt, IfCondition, ThenStatement, ElseStatement,
-	SwitchStmt, SwitchEntry, SwitchEntries, Let6Expr, Return1, Return2, Return3, Return4, Return5, Return6,
+	SwitchStmt, SwitchEntry, SwitchEntries, Let6Expr, Return1, Return2, Return3, Return4, Return5, Return6, Expr1, Expr2,
+	Expr3, Expr4, Expr5, Expr6, Expr7, Expr8, Expr9, Expr10, Expr11, Expr12, SubExpr, LeftSubExpr, RightSubExpr
 }

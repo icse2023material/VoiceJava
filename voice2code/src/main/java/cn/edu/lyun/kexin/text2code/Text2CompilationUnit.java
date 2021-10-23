@@ -22,6 +22,7 @@ import com.github.javaparser.ast.body.Parameter;
 import com.github.javaparser.ast.type.Type;
 import com.github.javaparser.ast.body.VariableDeclarator;
 import com.github.javaparser.ast.expr.AssignExpr;
+import com.github.javaparser.ast.expr.BinaryExpr;
 import com.github.javaparser.ast.expr.Expression;
 import com.github.javaparser.ast.expr.VariableDeclarationExpr;
 import com.github.javaparser.ast.stmt.BlockStmt;
@@ -78,9 +79,9 @@ public class Text2CompilationUnit {
 		HoleNode parentHole = parentAndCurrentHole.getFirst();
 		HoleNode currentHole = parentAndCurrentHole.getSecond();
 		HoleType parentHoleType = parentHole.getHoleType();
-		HoleType parentOfParentHoleType = this.holeAST.getParentOfNode(path).getHoleType();
 		Either<Node, Either<List<?>, NodeList<?>>> parent = parentAndIndex.getFirst();
 		HoleNode parentOfParentHole = this.holeAST.getParentOfNode(path);
+		HoleNode parentOfParentOfParentHole = this.holeAST.getParentOfParentOfParentNode(path);
 
 		// the following code can be optimized.
 		String parentNodeClassStr = null;
@@ -1135,13 +1136,48 @@ public class Text2CompilationUnit {
 			}
 			break;
 		case "expr1":
+			HoleType holeTypeExpr = HoleType.Expr1;
+			if (parentHoleType.equals(HoleType.Statements)) {
+				this.generateExpInStatements(parent, holeIndex, node, currentHole, parentHole, holeTypeExpr);
+			} else if (parentNodeClassStr != null && parentNodeClassStr.equals("MethodDeclaration")) {
+				this.generateExpInMethodBody(parent, currentHole, node, holeTypeExpr);
+			} else if (parentNodeClassStr != null && parentNodeClassStr.equals("BinaryExpr")) {
+				this.generateBinarExprInExpr(parent, holeIndex, node, currentHole, parentHole, parentOfParentHole,
+						parentOfParentOfParentHole, holeTypeExpr);
+			}
 			break;
 		case "expr2":
+			holeTypeExpr = HoleType.Expr2;
+			if (parentHoleType.equals(HoleType.Statements)) {
+				this.generateExpInStatements(parent, holeIndex, node, currentHole, parentHole, holeTypeExpr);
+			} else if (parentNodeClassStr != null && parentNodeClassStr.equals("MethodDeclaration")) {
+				this.generateExpInMethodBody(parent, currentHole, node, holeTypeExpr);
+			} else if (parentNodeClassStr != null && parentNodeClassStr.equals("BinaryExpr")) {
+				this.generateBinarExprInExpr(parent, holeIndex, node, currentHole, parentHole, parentOfParentHole,
+						parentOfParentOfParentHole, holeTypeExpr);
+			}
 			break;
 		case "expr3":
+			holeTypeExpr = HoleType.Expr3;
+			if (parentHoleType.equals(HoleType.Statements)) {
+				this.generateExpInStatements(parent, holeIndex, node, currentHole, parentHole, holeTypeExpr);
+			} else if (parentNodeClassStr != null && parentNodeClassStr.equals("MethodDeclaration")) {
+				this.generateExpInMethodBody(parent, currentHole, node, holeTypeExpr);
+			} else if (parentNodeClassStr != null && parentNodeClassStr.equals("BinaryExpr")) {
+				this.generateBinarExprInExpr(parent, holeIndex, node, currentHole, parentHole, parentOfParentHole,
+						parentOfParentOfParentHole, holeTypeExpr);
+			}
 			break;
 		case "expr4":
-			if (parentNodeClassStr != null && parentNodeClassStr.equals("SwitchStmt")) {
+			holeTypeExpr = HoleType.Expr4;
+			if (parentHoleType.equals(HoleType.Statements)) {
+				this.generateExpInStatements(parent, holeIndex, node, currentHole, parentHole, holeTypeExpr);
+			} else if (parentNodeClassStr != null && parentNodeClassStr.equals("MethodDeclaration")) {
+				this.generateExpInMethodBody(parent, currentHole, node, holeTypeExpr);
+			} else if (parentNodeClassStr != null && parentNodeClassStr.equals("BinaryExpr")) {
+				this.generateBinarExprInExpr(parent, holeIndex, node, currentHole, parentHole, parentOfParentHole,
+						parentOfParentOfParentHole, holeTypeExpr);
+			} else if (parentNodeClassStr != null && parentNodeClassStr.equals("SwitchStmt")) {
 				SwitchStmt switchStmt = (SwitchStmt) parent.getLeft();
 				switchStmt.setSelector((Expression) node);
 				currentHole.setIsHole(false);
@@ -1164,7 +1200,15 @@ public class Text2CompilationUnit {
 			}
 			break;
 		case "expr5":
-			if (parentHoleType.equals(HoleType.SwitchEntries)) {
+			holeTypeExpr = HoleType.Expr5;
+			if (parentHoleType.equals(HoleType.Statements)) {
+				this.generateExpInStatements(parent, holeIndex, node, currentHole, parentHole, holeTypeExpr);
+			} else if (parentNodeClassStr != null && parentNodeClassStr.equals("MethodDeclaration")) {
+				this.generateExpInMethodBody(parent, currentHole, node, holeTypeExpr);
+			} else if (parentNodeClassStr != null && parentNodeClassStr.equals("BinaryExpr")) {
+				this.generateBinarExprInExpr(parent, holeIndex, node, currentHole, parentHole, parentOfParentHole,
+						parentOfParentOfParentHole, holeTypeExpr);
+			} else if (parentHoleType.equals(HoleType.SwitchEntries)) {
 				NodeList<SwitchEntry> switchEntries = (NodeList<SwitchEntry>) parent.get().get();
 				if (holeIndex < switchEntries.size()) {
 					// TODO
@@ -1258,7 +1302,15 @@ public class Text2CompilationUnit {
 
 			break;
 		case "expr6":
-			if (parentNodeClassStr.equals("ForStmt")) {
+			holeTypeExpr = HoleType.Expr6;
+			if (parentHoleType.equals(HoleType.Statements)) {
+				this.generateExpInStatements(parent, holeIndex, node, currentHole, parentHole, holeTypeExpr);
+			} else if (parentNodeClassStr != null && parentNodeClassStr.equals("MethodDeclaration")) {
+				this.generateExpInMethodBody(parent, currentHole, node, holeTypeExpr);
+			} else if (parentNodeClassStr != null && parentNodeClassStr.equals("BinaryExpr")) {
+				this.generateBinarExprInExpr(parent, holeIndex, node, currentHole, parentHole, parentOfParentHole,
+						parentOfParentOfParentHole, holeTypeExpr);
+			} else if (parentNodeClassStr.equals("ForStmt")) {
 				// i++ in for(; ;i++){}
 				ForStmt forStmt = (ForStmt) parent.getLeft();
 				NodeList<Expression> expressions = new NodeList<Expression>();
@@ -1314,28 +1366,168 @@ public class Text2CompilationUnit {
 			}
 			break;
 		case "expr7":
+			holeTypeExpr = HoleType.Expr7;
+			if (parentHoleType.equals(HoleType.Statements)) {
+				this.generateExpInStatements(parent, holeIndex, node, currentHole, parentHole, holeTypeExpr);
+			} else if (parentNodeClassStr != null && parentNodeClassStr.equals("MethodDeclaration")) {
+				this.generateExpInMethodBody(parent, currentHole, node, holeTypeExpr);
+			} else if (parentNodeClassStr != null && parentNodeClassStr.equals("BinaryExpr")) {
+				this.generateBinarExprInExpr(parent, holeIndex, node, currentHole, parentHole, parentOfParentHole,
+						parentOfParentOfParentHole, holeTypeExpr);
+			}
 			break;
 		case "expr8":
+			holeTypeExpr = HoleType.Expr8;
+			if (parentHoleType.equals(HoleType.Statements)) {
+				this.generateExpInStatements(parent, holeIndex, node, currentHole, parentHole, holeTypeExpr);
+			} else if (parentNodeClassStr != null && parentNodeClassStr.equals("MethodDeclaration")) {
+				this.generateExpInMethodBody(parent, currentHole, node, holeTypeExpr);
+			} else if (parentNodeClassStr != null && parentNodeClassStr.equals("BinaryExpr")) {
+				this.generateBinarExprInExpr(parent, holeIndex, node, currentHole, parentHole, parentOfParentHole,
+						parentOfParentOfParentHole, holeTypeExpr);
+			}
 			break;
 		case "expr9":
+			holeTypeExpr = HoleType.Expr9;
+			if (parentHoleType.equals(HoleType.Statements)) {
+				this.generateExpInStatements(parent, holeIndex, node, currentHole, parentHole, holeTypeExpr);
+			} else if (parentNodeClassStr != null && parentNodeClassStr.equals("MethodDeclaration")) {
+				this.generateExpInMethodBody(parent, currentHole, node, holeTypeExpr);
+			} else if (parentNodeClassStr != null && parentNodeClassStr.equals("BinaryExpr")) {
+				this.generateBinarExprInExpr(parent, holeIndex, node, currentHole, parentHole, parentOfParentHole,
+						parentOfParentOfParentHole, holeTypeExpr);
+			}
 			break;
 		case "expr10":
-			break;
-		case "expr11":
-			break;
-		case "expr12":
+			holeTypeExpr = HoleType.Expr10;
 			if (parentHoleType.equals(HoleType.Statements)) {
 				NodeList<Statement> statements = (NodeList<Statement>) parent.get().get();
 				if (holeIndex < statements.size()) {
 					// TODO
 				} else {
-					ExpressionStmt expressionStmt = new ExpressionStmt((Expression) node);
-					statements.add(expressionStmt);
-					currentHole.setIsHole(false);
-					currentHole.setHoleType(HoleType.Expression);
-					holeNode = new HoleNode(HoleType.Statement, true);
-					parentHole.addChild(holeNode);
+					statements.add(new ExpressionStmt((Expression) node));
+
+					currentHole.set(HoleType.Wrapper, false);
+					currentHole.setHoleTypeOptionsOfOnlyOne(HoleType.Expr10);
+					HoleNode holdeNodeChild0 = new HoleNode(HoleType.Expression, false);
+					currentHole.addChild(holdeNodeChild0);
+
+					HoleNode holeNodeChild = new HoleNode();
+					holeNodeChild.setHoleTypeOptionsOfOnlyOne(HoleType.Expression);
+					holdeNodeChild0.addChild(holeNodeChild);
 				}
+			} else if (parentNodeClassStr != null && parentNodeClassStr.equals("MethodDeclaration")) {
+				this.generateExpInMethodBody(parent, currentHole, node, HoleType.Expr10);
+			} else if (parentNodeClassStr != null && parentNodeClassStr.equals("BinaryExpr")) {
+				BinaryExpr binaryExpr = (BinaryExpr) parent.getLeft();
+				if ((parentHole.getHoleTypeOfOptionsIfOnlyOne() != null
+						&& parentHole.getHoleTypeOfOptionsIfOnlyOne().equals(HoleType.Expr11))
+						|| parentOfParentHole.getHoleTypeOfOptionsIfOnlyOne().equals(HoleType.Expr11)) {
+					binaryExpr.setRight((Expression) node);
+
+					currentHole.set(HoleType.RightSubExpr, false);
+
+					holeNode = new HoleNode(HoleType.Wrapper, false);
+					holeNode.setHoleTypeOptionsOfOnlyOne(holeTypeExpr);
+					currentHole.addChild(holeNode);
+
+					HoleNode holeNodeChild = new HoleNode();
+					holeNode.addChild(holeNodeChild);
+				} else if ((parentHole.getHoleTypeOfOptionsIfOnlyOne() != null
+						&& parentHole.getHoleTypeOfOptionsIfOnlyOne().equals(HoleType.Expr10))
+						|| parentOfParentHole.getHoleTypeOfOptionsIfOnlyOne().equals(HoleType.Expr10)) {
+					if (holeIndex == 0) {
+						// left
+						binaryExpr.setLeft((Expression) node);
+						currentHole.set(HoleType.LeftSubExpr, false);
+						HoleNode anotherCurrentHole = new HoleNode(HoleType.Wrapper, false);
+						anotherCurrentHole.setHoleTypeOptionsOfOnlyOne(holeTypeExpr);
+						currentHole.addChild(anotherCurrentHole);
+						holeNode = new HoleNode();
+						anotherCurrentHole.addChild(holeNode);
+					} else {
+						// right
+						binaryExpr.setRight((Expression) node);
+						currentHole.set(HoleType.RightSubExpr, false);
+						HoleNode anotherCurrentHole = new HoleNode(HoleType.Wrapper, false);
+						anotherCurrentHole.setHoleTypeOptionsOfOnlyOne(holeTypeExpr);
+						currentHole.addChild(anotherCurrentHole);
+						holeNode = new HoleNode();
+						anotherCurrentHole.addChild(holeNode);
+					}
+				}
+			}
+			break;
+		case "expr11":
+			holeTypeExpr = HoleType.Expr11;
+			if (parentHoleType.equals(HoleType.Statements)) {
+				NodeList<Statement> statements = (NodeList<Statement>) parent.get().get();
+				if (holeIndex < statements.size()) {
+					// TODO
+				} else {
+					statements.add(new ExpressionStmt((Expression) node));
+
+					currentHole.set(HoleType.Wrapper, false);
+					currentHole.setHoleTypeOptionsOfOnlyOne(holeTypeExpr);
+					HoleNode holdeNodeChild0 = new HoleNode(HoleType.Expression, false);
+					currentHole.addChild(holdeNodeChild0);
+
+					HoleNode holeNodeChild = new HoleNode();
+					holeNodeChild.setHoleTypeOptionsOfOnlyOne(HoleType.Expression);
+					holdeNodeChild0.addChild(holeNodeChild);
+				}
+			} else if (parentNodeClassStr != null && parentNodeClassStr.equals("MethodDeclaration")) {
+				this.generateExpInMethodBody(parent, currentHole, node, holeTypeExpr);
+			} else if (parentNodeClassStr != null && parentNodeClassStr.equals("BinaryExpr")) {
+				BinaryExpr binaryExpr = (BinaryExpr) parent.getLeft();
+				if (parentHole.getHoleType().equals(HoleType.LeftSubExpr)) {
+					binaryExpr.setLeft((Expression) node);
+					currentHole.set(holeTypeExpr, false);
+					holeNode = new HoleNode();
+					parentOfParentOfParentHole.addChild(holeNode);
+				} else if (parentHole.getHoleType().equals(HoleType.RightSubExpr)) {
+					binaryExpr.setRight((Expression) node);
+					currentHole.set(HoleType.Expression, false);
+					holeNode = new HoleNode();
+					parentOfParentOfParentHole.addChild(holeNode);
+				} else if ((parentHole.getHoleTypeOfOptionsIfOnlyOne() != null
+						&& parentHole.getHoleTypeOfOptionsIfOnlyOne().equals(HoleType.Expr11))
+						|| parentOfParentHole.getHoleTypeOfOptionsIfOnlyOne().equals(HoleType.Expr11)) {
+					binaryExpr.setRight((Expression) node);
+					currentHole.set(HoleType.Wrapper, false);
+					currentHole.setHoleTypeOptionsOfOnlyOne(holeTypeExpr);
+
+					HoleNode holeNodeChild = new HoleNode();
+					currentHole.addChild(holeNodeChild);
+				} else if ((parentHole.getHoleTypeOfOptionsIfOnlyOne() != null
+						&& parentHole.getHoleTypeOfOptionsIfOnlyOne().equals(HoleType.Expr10))
+						|| parentOfParentHole.getHoleTypeOfOptionsIfOnlyOne().equals(HoleType.Expr10)) {
+					if (holeIndex == 0) {
+						// left
+						binaryExpr.setLeft((Expression) node);
+						currentHole.set(HoleType.LeftSubExpr, false);
+						HoleNode anotherCurrentHole = new HoleNode(HoleType.Wrapper, false);
+						anotherCurrentHole.setHoleTypeOptionsOfOnlyOne(holeTypeExpr);
+						currentHole.addChild(anotherCurrentHole);
+						holeNode = new HoleNode();
+						anotherCurrentHole.addChild(holeNode);
+					} else {
+						// right
+						binaryExpr.setRight((Expression) node);
+						currentHole.set(HoleType.RightSubExpr, false);
+						HoleNode anotherCurrentHole = new HoleNode(HoleType.Wrapper, false);
+						anotherCurrentHole.setHoleTypeOptionsOfOnlyOne(holeTypeExpr);
+						currentHole.addChild(anotherCurrentHole);
+						holeNode = new HoleNode();
+						anotherCurrentHole.addChild(holeNode);
+					}
+				}
+			}
+			break;
+		case "expr12":
+			holeTypeExpr = HoleType.Expr12;
+			if (parentHoleType.equals(HoleType.Statements)) {
+				this.generateExpInStatements(parent, holeIndex, node, currentHole, parentHole, holeTypeExpr);
 			} else if (parentNodeClassStr != null && parentNodeClassStr.equals("ForStmt")) {
 				// i < 10 in for(; i < 10 ;){}
 				ForStmt forStmt = (ForStmt) parent.getLeft();
@@ -1423,6 +1615,11 @@ public class Text2CompilationUnit {
 					currentHole.addChild(holeNode2);
 
 				}
+			} else if (parentNodeClassStr != null && parentNodeClassStr.equals("MethodDeclaration")) {
+				this.generateExpInMethodBody(parent, currentHole, node, holeTypeExpr);
+			} else if (parentNodeClassStr != null && parentNodeClassStr.equals("BinaryExpr")) {
+				this.generateBinarExprInExpr(parent, holeIndex, node, currentHole, parentHole, parentOfParentHole,
+						parentOfParentOfParentHole, holeTypeExpr);
 			}
 			break;
 		case "subexpr1":
@@ -1693,5 +1890,106 @@ public class Text2CompilationUnit {
 			return HoleType.ImportDeclaration;
 		}
 		return null;
+	}
+
+	private void generateExpInMethodBody(Either<Node, Either<List<?>, NodeList<?>>> parent, HoleNode currentHole,
+			Node node, HoleType exprHoleType) {
+		MethodDeclaration mNode = (MethodDeclaration) parent.getLeft();
+		Optional<BlockStmt> optionalBody = mNode.getBody();
+		currentHole.setIsHole(false);
+		currentHole.setHoleType(HoleType.Body);
+
+		HoleNode anotherCurrentHole = new HoleNode();
+		currentHole.addChild(anotherCurrentHole);
+
+		BlockStmt blockStmt = optionalBody.get();
+		NodeList<Statement> statements = blockStmt.getStatements();
+		if (statements.size() == 0) {
+			ExpressionStmt expressionStmt = new ExpressionStmt((Expression) node);
+			statements.add(expressionStmt);
+
+			anotherCurrentHole.setIsHole(false);
+			anotherCurrentHole.setHoleType(HoleType.Statements);
+
+			HoleNode holeNode = new HoleNode(HoleType.Wrapper, false);
+			holeNode.setHoleTypeOptions(new HoleType[] { exprHoleType });
+			anotherCurrentHole.addChild(holeNode);
+
+			HoleNode holdeNodeChild0 = new HoleNode(HoleType.Expression, false);
+			holeNode.addChild(holdeNodeChild0);
+
+			HoleNode holeNodeChild = new HoleNode();
+			holeNodeChild.setHoleTypeOptions(new HoleType[] { HoleType.Expression });
+			anotherCurrentHole.addChild(holeNodeChild);
+		} else {
+			// TODO
+		}
+	}
+
+	private void generateExpInStatements(Either<Node, Either<List<?>, NodeList<?>>> parent, int holeIndex, Node node,
+			HoleNode currentHole, HoleNode parentHole, HoleType exprHoleType) {
+		NodeList<Statement> statements = (NodeList<Statement>) parent.get().get();
+		if (holeIndex < statements.size()) {
+			// TODO
+		} else {
+			statements.add(new ExpressionStmt((Expression) node));
+
+			currentHole.set(HoleType.Wrapper, false);
+			currentHole.setHoleTypeOptionsOfOnlyOne(exprHoleType);
+			HoleNode holdeNodeChild0 = new HoleNode(HoleType.Expression, false);
+			currentHole.addChild(holdeNodeChild0);
+
+			HoleNode holeNodeChild = new HoleNode();
+			parentHole.addChild(holeNodeChild);
+		}
+	}
+
+	private void generateBinarExprInExpr(Either<Node, Either<List<?>, NodeList<?>>> parent, int holeIndex, Node node,
+			HoleNode currentHole, HoleNode parentHole, HoleNode parentOfParentHole, HoleNode parentOfParentOfParentHole,
+			HoleType exprHoleType) {
+		BinaryExpr binaryExpr = (BinaryExpr) parent.getLeft();
+		if (parentHole.getHoleType().equals(HoleType.LeftSubExpr)) {
+			binaryExpr.setLeft((Expression) node);
+			currentHole.set(exprHoleType, false);
+			HoleNode holeNode = new HoleNode();
+			parentOfParentOfParentHole.addChild(holeNode);
+		} else if (parentHole.getHoleType().equals(HoleType.RightSubExpr)) {
+			binaryExpr.setRight((Expression) node);
+			currentHole.set(HoleType.Expression, false);
+			HoleNode holeNode = new HoleNode();
+			parentOfParentOfParentHole.addChild(holeNode);
+		} else if ((parentHole.getHoleTypeOfOptionsIfOnlyOne() != null
+				&& parentHole.getHoleTypeOfOptionsIfOnlyOne().equals(HoleType.Expr11))
+				|| (parentOfParentHole.getHoleTypeOfOptionsIfOnlyOne() != null
+						&& parentOfParentHole.getHoleTypeOfOptionsIfOnlyOne().equals(HoleType.Expr11))) {
+			binaryExpr.setRight((Expression) node);
+			currentHole.set(exprHoleType, false);
+			HoleNode holeNode = new HoleNode();
+			parentOfParentOfParentHole.addChild(holeNode);
+		} else if ((parentHole.getHoleTypeOfOptionsIfOnlyOne() != null
+				&& parentHole.getHoleTypeOfOptionsIfOnlyOne().equals(HoleType.Expr10))
+				|| (parentOfParentHole.getHoleTypeOfOptionsIfOnlyOne() != null
+						&& parentOfParentHole.getHoleTypeOfOptionsIfOnlyOne().equals(HoleType.Expr10))) {
+			if (holeIndex == 0) {
+				// left
+				binaryExpr.setLeft((Expression) node);
+
+				currentHole.set(HoleType.LeftSubExpr, false);
+				HoleNode anotherCurrentHole = new HoleNode(exprHoleType, false);
+				currentHole.addChild(anotherCurrentHole);
+				HoleNode holeNode = new HoleNode();
+				parentHole.addChild(holeNode);
+			} else {
+				// right
+				binaryExpr.setRight((Expression) node);
+
+				currentHole.set(HoleType.RightSubExpr, false);
+				HoleNode anotherCurrentHole = new HoleNode(exprHoleType, false);
+				currentHole.addChild(anotherCurrentHole);
+
+				HoleNode holeNode = new HoleNode();
+				parentOfParentOfParentHole.addChild(holeNode);
+			}
+		}
 	}
 }
