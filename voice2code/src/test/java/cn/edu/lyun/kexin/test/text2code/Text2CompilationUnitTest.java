@@ -48,10 +48,17 @@ public class Text2CompilationUnitTest {
 				"define private int variable greeting", "int 2", "define public function sayHello", "type int",
 				"type int list variable intArray", "type String variable name", "move next", "call notify",
 				"subexpression plus subexpression", "int 3", "int 5", };
-		// "define int variable b","move next","fundebug call send", "fundebug dot
-		// silent", "variable fundebug", "int 100", "count plus plus",
-		// "count minus minus", "plus plus count", "minus minus count", "3 times 5",
-		String[] lines = returnExpr;
+
+		String[] forExample1 = { "define package lyun", "import java dot util dot star",
+				"import java dot lang dot reflect dot star", "move next", "define public class Hello",
+				"define public int variable count", "int 0", "define private int variable sum", "int 2",
+				"define public String variable name", "move next", "define public function sayHello", "type int",
+				"type int list variable intArray", "type String variable name", "move next", "define int variable sum", "int 0",
+				"define int variable b", "move next", "define for", "define int variable i", "int 0",
+				"expression i less equal 10", "i plus plus", };
+		// "let sum equal expression", "expression sum plus i",
+		// "let count equal expression", "expression count plus i"
+		String[] lines = forExample1;
 		for (String line : lines) {
 			text2CompilationUnit.generate(line);
 		}
@@ -70,12 +77,8 @@ public class Text2CompilationUnitTest {
 		// "expr11", "[expression]? _ (op | compare) subexpression",
 		// "expr12", "[expression]? _ (op | compare) _"
 		// , "5 times subexpression",
-		text2CompilationUnit.generate("5 plus subexpression");
-		text2CompilationUnit.generate("subexpression times subexpression");
-		text2CompilationUnit.generate("variable sum");
-		text2CompilationUnit.generate("call sum");
+		text2CompilationUnit.generate("5 plus 3");
 
-		// text2CompilationUnit.generate("6 times subexpression");
 		text2CompilationUnit.getHoleAST().writeDotFile();
 		Runtime rt = Runtime.getRuntime();
 		try {
