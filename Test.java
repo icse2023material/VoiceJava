@@ -15,7 +15,7 @@ public class Hello {
         int sum = 0;
         int b;
         for (int i = 0; i <= 10; i++) {
-            sum = s;
+            for (; false; ) return;
         }
     }
 }

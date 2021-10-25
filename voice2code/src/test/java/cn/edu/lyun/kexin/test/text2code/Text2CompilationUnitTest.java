@@ -54,13 +54,15 @@ public class Text2CompilationUnitTest {
 				"define public String variable name", "move next", "define public function sayHello", "type int",
 				"type int list variable intArray", "type String variable name", "move next", "define int variable sum", "int 0",
 				"define int variable b", "move next", "define for", "define int variable i", "int 0",
-				"expression i less equal 10", "i plus plus" };
+				"expression i less equal 10", "i plus plus", };
+
 		String[] lines = forExample1;
 		for (String line : lines) {
 			text2CompilationUnit.generate(line);
 		}
 
-		text2CompilationUnit.generate("let sum equal");
+		text2CompilationUnit.generate("define for");
+
 		text2CompilationUnit.getHoleAST().writeDotFile();
 		Runtime rt = Runtime.getRuntime();
 		try {
