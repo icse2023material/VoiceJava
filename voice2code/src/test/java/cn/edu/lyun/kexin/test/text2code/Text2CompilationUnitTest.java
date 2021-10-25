@@ -47,31 +47,20 @@ public class Text2CompilationUnitTest {
 				"define private int variable greeting", "int 2", "define public function sayHello", "type int",
 				"type int list variable intArray", "type String variable name", "move next", "call notify",
 				"subexpression plus subexpression", "int 3", "int 5", };
-		String[] switchExample1 = { "define package lyun", "import java dot uitl dot star",
-				"import java dot lang dot reflect dot star", "move next", "define public class Hello",
-				"define private int variable greeting", "int 2", "define public function sayHello", "type int",
-				"type int list variable intArray", "type String variable name", "move next", "define int variable sum", "int 0",
-				"define switch", "variable userType", "int 1" };
 
-		String[] lines = switchExample1;
+		String[] forExample1 = { "define package lyun", "import java dot util dot star",
+				"import java dot lang dot reflect dot star", "move next", "define public class Hello",
+				"define public int variable count", "int 0", "define private int variable sum", "int 2",
+				"define public String variable name", "move next", "define public function sayHello", "type int",
+				"type int list variable intArray", "type String variable name", "move next", "define int variable sum", "int 0",
+				"define int variable b", "move next", "define for", "define int variable i", "int 0",
+				"expression i less equal 10", "i plus plus" };
+		String[] lines = forExample1;
 		for (String line : lines) {
 			text2CompilationUnit.generate(line);
 		}
 
-		// "expr1", "[expression]? call _" "call notify"
-		// "expr2", "[expression]? _ [call _]+"
-		// "expr3", "[expression]? _ [dot _]*"
-		// "expr4", "[expression]? [variable]? _ "
-		// "[expression]? (int | byte | short | long | char | float | double | boolean |
-		// "expr6", "[expression]? _ plus plus",
-		// "expr7", "[expression]? _ minus minus",
-		// "expr8", "[expression]? plus plus _
-		// "expr9", "[expression]? minus minus _"
-		// "expr10", "[expression]? subexpression (op | compare) subexpression",
-		// "expr11", "[expression]? _ (op | compare) subexpression",
-		// "expr12", "[expression]? _ (op | compare) _"
-		text2CompilationUnit.generate("5 plus subexpression");
-		text2CompilationUnit.generate("int 5");
+		text2CompilationUnit.generate("let sum equal");
 		text2CompilationUnit.getHoleAST().writeDotFile();
 		Runtime rt = Runtime.getRuntime();
 		try {
