@@ -9,8 +9,8 @@ public class Hello {
 
     public int sayHello(int[] intArray, String name) {
         int sum = 0;
-        while (i < 10) {
-            5 + notify();
+        if (i < 10) {
+            5 + 3;
         }
     }
 }

@@ -49,14 +49,12 @@ public class Text2CompilationUnitTest {
 				"type int list variable intArray", "type String variable name", "move next", "call notify",
 				"subexpression plus subexpression", "int 3", "int 5", };
 
-		String[] whileExample1 = { "define package lyun", "import java dot uitl dot star",
+		String[] ifExample1 = { "define package lyun", "import java dot uitl dot star",
 				"import java dot lang dot reflect dot star", "move next", "define public class Hello",
 				"define private int variable greeting", "int 2", "define public function sayHello", "type int",
 				"type int list variable intArray", "type String variable name", "move next", "define int variable sum", "int 0",
-				"define while", "i less than 10" };
-		// "let sum equal expression", "expression sum plus i",
-		// "let count equal expression", "expression count plus i"
-		String[] lines = whileExample1;
+				"define if", "i less than 10", };
+		String[] lines = ifExample1;
 		for (String line : lines) {
 			text2CompilationUnit.generate(line);
 		}
@@ -66,7 +64,6 @@ public class Text2CompilationUnitTest {
 		// "expr3", "[expression]? _ [dot _]*"
 		// "expr4", "[expression]? [variable]? _ "
 		// "[expression]? (int | byte | short | long | char | float | double | boolean |
-		// String) _ ",
 		// "expr6", "[expression]? _ plus plus",
 		// "expr7", "[expression]? _ minus minus",
 		// "expr8", "[expression]? plus plus _
@@ -74,10 +71,9 @@ public class Text2CompilationUnitTest {
 		// "expr10", "[expression]? subexpression (op | compare) subexpression",
 		// "expr11", "[expression]? _ (op | compare) subexpression",
 		// "expr12", "[expression]? _ (op | compare) _"
-		// , "5 times subexpression",
-		// text2CompilationUnit.generate("5 plus subexpression");
-		// text2CompilationUnit.generate("call notify");
-		// text2CompilationUnit.generate("call notify");
+		text2CompilationUnit.generate("5 plus 3");
+		text2CompilationUnit.generate("move next");
+		text2CompilationUnit.generate("move next");
 
 		text2CompilationUnit.getHoleAST().writeDotFile();
 		Runtime rt = Runtime.getRuntime();
