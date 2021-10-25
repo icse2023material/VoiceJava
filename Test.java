@@ -9,8 +9,9 @@ public class Hello {
 
     public int sayHello(int[] intArray, String name) {
         int sum = 0;
-        if (i < 10) {
-            5 + 3;
+        switch(userType) {
+            case 1:
+                5 + 5;
         }
     }
 }
