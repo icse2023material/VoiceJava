@@ -181,6 +181,9 @@ public class PatternSet {
 		Pattern return2Pat = new Pattern("return2", "return _ [call _]+",
 				new Unit[] { new Unit("return"), new Unit(), new Unit("plus", new Unit("call"), new Unit()) });
 		patSet.add(return2Pat);
+		Pattern return6Pat = new Pattern("return6", "return [expression]? ",
+				new Unit[] { new Unit("return"), new Unit("question", new Unit("expression")) });
+		patSet.add(return6Pat);
 		Pattern return3Pat = new Pattern("return3", "return _ [dot _]*",
 				new Unit[] { new Unit("return"), new Unit(), new Unit("asterisk", new Unit("dot"), new Unit()) });
 		patSet.add(return3Pat);
@@ -191,9 +194,6 @@ public class PatternSet {
 				"return (int | byte | short | long | char | float | double | boolean | String) _ ",
 				new Unit[] { new Unit("return"), typeUnit, new Unit() });
 		patSet.add(return5Pat);
-		Pattern return6Pat = new Pattern("return6", "return [expression]? ",
-				new Unit[] { new Unit("return"), new Unit("question", new Unit("expression")) });
-		patSet.add(return6Pat);
 		Pattern expr1Pat = new Pattern("expr1", "[expression]? call _",
 				new Unit[] { new Unit("question", new Unit("expression")), new Unit("call"), new Unit() });
 		patSet.add(expr1Pat);

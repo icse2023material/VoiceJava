@@ -1,21 +1,15 @@
 package lyun;
 
-import java.util.*;
+import java.uitl.*;
 import java.lang.reflect.*;
 
 public class Hello {
 
-    public int count = 0;
-
-    private int sum = 2;
-
-    public String name;
+    private int greeting = 2;
 
     public int sayHello(int[] intArray, String name) {
         int sum = 0;
-        int b;
-        for (int i = 0; i <= 10; i++) {
-            for (; false; ) return;
-        }
+        if (i < 10)
+            return 5 + 100;
     }
 }

@@ -48,20 +48,19 @@ public class Text2CompilationUnitTest {
 				"type int list variable intArray", "type String variable name", "move next", "call notify",
 				"subexpression plus subexpression", "int 3", "int 5", };
 
-		String[] forExample1 = { "define package lyun", "import java dot util dot star",
+		String[] ifExample1 = { "define package lyun", "import java dot uitl dot star",
 				"import java dot lang dot reflect dot star", "move next", "define public class Hello",
-				"define public int variable count", "int 0", "define private int variable sum", "int 2",
-				"define public String variable name", "move next", "define public function sayHello", "type int",
+				"define private int variable greeting", "int 2", "define public function sayHello", "type int",
 				"type int list variable intArray", "type String variable name", "move next", "define int variable sum", "int 0",
-				"define int variable b", "move next", "define for", "define int variable i", "int 0",
-				"expression i less equal 10", "i plus plus", };
-
-		String[] lines = forExample1;
+				"define if", "i less than 10", };
+		String[] lines = ifExample1;
 		for (String line : lines) {
 			text2CompilationUnit.generate(line);
 		}
 
-		text2CompilationUnit.generate("define for");
+		text2CompilationUnit.generate("return expression");
+		text2CompilationUnit.generate("5 plus subexpression");
+		text2CompilationUnit.generate("int 100");
 
 		text2CompilationUnit.getHoleAST().writeDotFile();
 		Runtime rt = Runtime.getRuntime();
