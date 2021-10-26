@@ -58,9 +58,10 @@ public class Text2CompilationUnitTest {
 			text2CompilationUnit.generate(line);
 		}
 
-		text2CompilationUnit.generate("return expression");
-		text2CompilationUnit.generate("5 plus subexpression");
-		text2CompilationUnit.generate("int 100");
+		text2CompilationUnit.generate("let fundebug equal expression");
+		text2CompilationUnit.generate("subexpression plus subexpression");
+		text2CompilationUnit.generate("int 2");
+		text2CompilationUnit.generate("int 5");
 
 		text2CompilationUnit.getHoleAST().writeDotFile();
 		Runtime rt = Runtime.getRuntime();

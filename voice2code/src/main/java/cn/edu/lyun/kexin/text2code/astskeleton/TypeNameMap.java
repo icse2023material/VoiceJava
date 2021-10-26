@@ -26,6 +26,7 @@ public class TypeNameMap {
 		map.put(HoleType.Expression, "getExpression");
 		map.put(HoleType.LeftSubExpr, "getLeft");
 		map.put(HoleType.RightSubExpr, "getRight");
+		map.put(HoleType.AssignExprValue, "getValue");
 		return map;
 	}
 }

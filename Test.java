@@ -9,7 +9,8 @@ public class Hello {
 
     public int sayHello(int[] intArray, String name) {
         int sum = 0;
-        if (i < 10)
-            return 5 + 100;
+        if (i < 10) {
+            fundebug = 2 + 5;
+        }
     }
 }
