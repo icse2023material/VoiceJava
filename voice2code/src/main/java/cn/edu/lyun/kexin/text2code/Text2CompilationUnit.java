@@ -1546,7 +1546,6 @@ public class Text2CompilationUnit {
 				SwitchStmt switchStmt = (SwitchStmt) parent.getLeft();
 				switchStmt.setSelector((Expression) node);
 				currentHole.setIsHole(false);
-
 				holeNode = new HoleNode();
 				parentHole.addChild(holeNode);
 			} else if (parentNodeClassStr != null && parentNodeClassStr.equals("SwitchEntry")) {
