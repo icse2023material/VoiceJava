@@ -1,0 +1,23 @@
+define public class Puppy
+define int variable puppyAge
+move next
+define public function setAge
+type void
+type int variable age
+move next
+let puppyAge equal variable age
+move next
+move next
+move next
+define public function getAge
+type int
+move next
+return variable puppyAge
+move next 
+move next 
+move next 
+define public static function main
+type void
+type String list variable args
+move next
+define Puppy variable myPuppy

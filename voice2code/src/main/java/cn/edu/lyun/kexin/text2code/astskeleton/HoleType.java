@@ -7,5 +7,5 @@ public enum HoleType {
 	Statement, ForStmt, WhileStmt, ForInitialization, BlockStmt, IfStmt, IfCondition, ThenStatement, ElseStatement,
 	SwitchStmt, SwitchEntry, SwitchEntries, Let1Expr, Let2Expr, Let3Expr, Let4Expr, Let5Expr, Let6Expr, Return1, Return2,
 	Return3, Return4, Return5, Return6, Expr1, Expr2, Expr3, Expr4, Expr5, Expr6, Expr7, Expr8, Expr9, Expr10, Expr11,
-	Expr12, SubExpr, LeftSubExpr, RightSubExpr, AssignExprValue
+	Expr12, SubExpr, LeftSubExpr, RightSubExpr, AssignExprValue, VariableInitializer, Arguments,
 }

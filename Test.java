@@ -1,17 +1,16 @@
-package lyun;
+public class Puppy {
 
-import java.uitl.*;
-import java.lang.reflect.*;
+    int puppyAge;
 
-public class Hello {
+    public void setAge(int age) {
+        puppyAge = age;
+    }
 
-    private int greeting = 2;
+    public int getAge() {
+        return puppyAge;
+    }
 
-    public int sayHello(int[] intArray, String name) {
-        int sum = 0;
-        switch(userType) {
-            case 1:
-                fundebug = "empty";
-        }
+    public static void main(String[] args) {
+        Puppy myPuppy = new Puppy("tommy");
     }
 }

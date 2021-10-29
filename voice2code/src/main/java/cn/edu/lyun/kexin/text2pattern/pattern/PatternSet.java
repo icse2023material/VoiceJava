@@ -99,8 +99,8 @@ public class PatternSet {
 		patSet.add(breakPat);
 		Pattern continuePat = new Pattern("continue", "continue", new Unit[] { new Unit("continue") });
 		patSet.add(continuePat);
-		Pattern newInstancePat = new Pattern("newInstance", "new instance _",
-				new Unit[] { new Unit("new"), new Unit("instance"), new Unit() });
+		Pattern newInstancePat = new Pattern("newInstance", "new instance _ [dot _]*", new Unit[] { new Unit("new"),
+				new Unit("instance"), new Unit(), new Unit("asterisk", new Unit("dot"), new Unit()) });
 		patSet.add(newInstancePat);
 		Pattern throwPat = new Pattern("throw", "throw new _",
 				new Unit[] { new Unit("throw"), new Unit("new"), new Unit() });

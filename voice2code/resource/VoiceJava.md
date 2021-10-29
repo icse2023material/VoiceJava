@@ -61,7 +61,8 @@
 18. `break`
 19. `continue`
 20. 构建新实例：  
-     `new instance _`
+     `new instance _ [dot _]*`
+    - 示例：`new instance Puppy`， `new instance HashMap dot Entry`
 21. 抛出异常：
     `throw new _`
 22. 6 种赋值形式：

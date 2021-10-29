@@ -24,6 +24,7 @@ import com.github.javaparser.ast.body.VariableDeclarator;
 import com.github.javaparser.ast.expr.AssignExpr;
 import com.github.javaparser.ast.expr.BinaryExpr;
 import com.github.javaparser.ast.expr.Expression;
+import com.github.javaparser.ast.expr.ObjectCreationExpr;
 import com.github.javaparser.ast.expr.VariableDeclarationExpr;
 import com.github.javaparser.ast.stmt.BlockStmt;
 import com.github.javaparser.ast.stmt.ExpressionStmt;
@@ -93,9 +94,13 @@ public class Text2CompilationUnit {
 		case "moveNext":
 			// delete current hole, move to next one
 			parentHole.deleteHole(holeIndex);
-			// TODO: small step move. Not syntax-directed.
 			HoleNode holeNode = new HoleNode(HoleType.Undefined, true);
-			parentOfParentHole.addChild(holeNode);
+			if (currentHole.getHoleType().equals(HoleType.TypeVariables)) {
+				parentHole.addChild(holeNode);
+			} else {
+				// TODO: small step move. Not syntax-directed.
+				parentOfParentHole.addChild(holeNode);
+			}
 			break;
 		case "package":
 			CompilationUnit parentNode = null;
@@ -675,6 +680,26 @@ public class Text2CompilationUnit {
 		case "continue":
 			break;
 		case "newInstance":
+			if (parentNodeClassStr != null && parentNodeClassStr.equals("ExpressionStmt")) {
+				ExpressionStmt expressionStmt = (ExpressionStmt) parent.getLeft();
+				VariableDeclarationExpr expression = (VariableDeclarationExpr) expressionStmt.getExpression();
+				NodeList<VariableDeclarator> variableDeclarators = expression.getVariables();
+				variableDeclarators.get(0).setInitializer((Expression) node);
+
+				currentHole.set(HoleType.Expression, false);
+				holeNode = new HoleNode(HoleType.VariableDeclarator, false);
+				currentHole.addChild(holeNode);
+
+				HoleNode childHoleNode = new HoleNode(HoleType.Wrapper, false);
+				childHoleNode.setHoleTypeOptionsOfOnlyOne(HoleType.VariableDeclarator);
+				holeNode.addChild(childHoleNode);
+
+				HoleNode childOfChildNode = new HoleNode(HoleType.VariableInitializer, false);
+				childHoleNode.addChild(childOfChildNode);
+
+				HoleNode newHole = new HoleNode();
+				childOfChildNode.addChild(newHole);
+			}
 			break;
 		case "throw":
 			break;
@@ -1651,6 +1676,21 @@ public class Text2CompilationUnit {
 				this.generateReturn6(parent, node, currentHole, parentHole, parentOfParentHole, holeTypeExpr);
 			} else if (parentNodeClassStr != null && parentNodeClassStr.equals("AssignExpr")) {
 				this.generateExprInAssignExpr(parent, node, currentHole, parentOfParentHole, holeTypeExpr);
+			} else if (parentNodeClassStr != null && parentNodeClassStr.equals("ObjectCreationExpr")) {
+				ObjectCreationExpr objectCreationExpr = (ObjectCreationExpr) parent.getLeft();
+				NodeList<Expression> arguments = objectCreationExpr.getArguments();
+				arguments.add((Expression) node);
+
+				currentHole.set(HoleType.Arguments, false);
+				holeNode = new HoleNode(HoleType.Wrapper, false);
+				holeNode.setHoleTypeOptionsOfOnlyOne(holeTypeExpr);
+				currentHole.addChild(holeNode);
+
+				HoleNode newHole = new HoleNode();
+				currentHole.addChild(newHole);
+			} else if (parentHoleType.equals(HoleType.Arguments)) {
+				NodeList<Expression> arguments = (NodeList<Expression>) parent.get().get();
+				arguments.add((Expression) node);
 			}
 			break;
 		case "expr6":
