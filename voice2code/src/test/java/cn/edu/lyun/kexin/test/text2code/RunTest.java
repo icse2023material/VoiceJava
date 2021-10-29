@@ -15,7 +15,6 @@ public class RunTest {
 		for (String line; (line = br.readLine()) != null;) {
 			text2CompilationUnit.generate(line);
 		}
-		text2CompilationUnit.generate("System call out");
 		br.close();
 		text2CompilationUnit.getHoleAST().writeDotFile();
 		Runtime rt = Runtime.getRuntime();

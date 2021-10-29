@@ -38,3 +38,5 @@ myPuppy call getAge
 move next
 move next
 move next
+expression System dot out call println
+expression myPuppy dot puppyAge

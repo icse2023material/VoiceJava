@@ -14,5 +14,6 @@ public class Puppy {
         Puppy myPuppy = new Puppy("tommy");
         myPuppy.setAge(2);
         myPuppy.getAge();
+        System.out.println(myPuppy.puppyAge);
     }
 }
