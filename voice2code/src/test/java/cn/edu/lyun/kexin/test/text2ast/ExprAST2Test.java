@@ -9,7 +9,8 @@ import com.github.javaparser.ast.*;
 // [expression]? _ [call _]+
 public class ExprAST2Test {
 	public static void main(String[] args) {
-		String[] textList = { "expression hello call world", "hello call world call greeting" };
+		String[] textList = { "expression hello call world", "hello call world call greeting",
+				"System dot out call println" };
 		for (String text : textList) {
 			Pattern pattern = RegexSet.compile(new PatternSet()).matchPattern(text);
 			System.out.println(pattern.showInstance());

@@ -9,7 +9,7 @@ import com.github.javaparser.ast.*;
 
 public class ReturnStmtAST2Test {
 	public static void main(String[] args) {
-		String[] textList = { "return hello call world call greeting" };
+		String[] textList = { "return hello call world call greeting", "return hello dot world call greeting" };
 
 		AST ast = new ReturnStmtAST2();
 

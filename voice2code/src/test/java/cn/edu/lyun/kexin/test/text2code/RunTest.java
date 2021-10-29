@@ -10,15 +10,13 @@ public class RunTest {
 	public static void main(String[] args) throws IOException {
 		String dir = System.getProperty("user.dir");
 		Text2CompilationUnit text2CompilationUnit = new Text2CompilationUnit();
-		String filePath = "/testcases/Puppy.voiceJava";
-		filePath = dir + "/voice2code/src/test/java/cn/edu/lyun/kexin/test/text2code" + filePath;
+		String filePath = dir + "/voice2code/src/test/java/cn/edu/lyun/kexin/test/text2code/testcases/Puppy.voiceJava";
 		BufferedReader br = new BufferedReader(new FileReader(filePath));
 		for (String line; (line = br.readLine()) != null;) {
 			text2CompilationUnit.generate(line);
 		}
+		text2CompilationUnit.generate("System call out");
 		br.close();
-		text2CompilationUnit.generate("new instance Puppy");
-		text2CompilationUnit.generate("expression string tommy");
 		text2CompilationUnit.getHoleAST().writeDotFile();
 		Runtime rt = Runtime.getRuntime();
 		try {

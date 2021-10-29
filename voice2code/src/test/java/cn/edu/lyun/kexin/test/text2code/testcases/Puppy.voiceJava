@@ -21,3 +21,20 @@ type void
 type String list variable args
 move next
 define Puppy variable myPuppy
+new instance Puppy
+expression string tommy
+move next
+move next
+move next
+move next
+move next
+move next
+myPuppy call setAge
+expression int 2
+move next
+move next
+move next
+myPuppy call getAge
+move next
+move next
+move next

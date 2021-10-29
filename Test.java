@@ -12,5 +12,7 @@ public class Puppy {
 
     public static void main(String[] args) {
         Puppy myPuppy = new Puppy("tommy");
+        myPuppy.setAge(2);
+        myPuppy.getAge();
     }
 }
