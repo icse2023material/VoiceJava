@@ -1,0 +1,7 @@
+define public class ExpressionTest
+define public function test
+type void 
+move next 
+define int variable a 
+expression 3 plus 4
+define int variable b

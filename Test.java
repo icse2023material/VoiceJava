@@ -1,19 +1,7 @@
-public class Puppy {
+public class ExpressionTest {
 
-    int puppyAge;
-
-    public void setAge(int age) {
-        puppyAge = age;
-    }
-
-    public int getAge() {
-        return puppyAge;
-    }
-
-    public static void main(String[] args) {
-        Puppy myPuppy = new Puppy("tommy");
-        myPuppy.setAge(2);
-        myPuppy.getAge();
-        System.out.println(myPuppy.puppyAge);
+    public void test() {
+        int a = 3 + 4;
+        int b = 3 * 5;
     }
 }

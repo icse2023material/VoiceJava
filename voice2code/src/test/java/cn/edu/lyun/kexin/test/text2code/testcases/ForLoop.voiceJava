@@ -1,0 +1,21 @@
+define public class ForTest
+define public function main
+type void
+type String list variable args
+move next
+define int list variable ns
+move next
+define for
+define int variable i
+int 0
+expression i less than subexpression
+ns dot length
+expression i plus plus
+expression System dot out call println
+variable ns
+move next
+move next
+move next
+move next
+let i equal 
+expression i plus 1 
