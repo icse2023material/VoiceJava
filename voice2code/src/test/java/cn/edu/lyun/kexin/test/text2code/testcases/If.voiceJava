@@ -1,0 +1,29 @@
+define public class IfTest
+define public static function main
+type void
+type string list variable args
+move next
+define int variable n
+int 90
+define if
+n greater than 90
+System dot out call prtinln
+string excellent
+move next
+move next
+move next
+move next
+move next
+move next
+expression n greater equal 60
+System dot out call prtinln
+string good
+move next
+move next
+move next
+move next
+move next
+move next
+expression n less than 60
+System dot out call prtinln
+string fail

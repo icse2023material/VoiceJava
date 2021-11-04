@@ -3281,15 +3281,23 @@ public class Text2CompilationUnit {
 				// [condition,then, else, else]
 				currentHole.setIsHole(false);
 				currentHole.setHoleType(HoleType.ThenStatement);
+
+				HoleNode statementsHole = new HoleNode(HoleType.Statements, false);
+				currentHole.addChild(statementsHole);
+
+				HoleNode statementHole = new HoleNode(HoleType.Wrapper, false);
+				statementHole.setHoleTypeOptionsOfOnlyOne(HoleType.Statement);
+				statementsHole.addChild(statementHole);
+
 				HoleNode holeNodeChild = new HoleNode(HoleType.Expression, false);
-				currentHole.addChild(holeNodeChild);
+				statementHole.addChild(holeNodeChild);
 
 				HoleNode childOfHoleNodeChild = new HoleNode(HoleType.Wrapper, false);
 				childOfHoleNodeChild.setHoleTypeOptionsOfOnlyOne(holeTypeExpr);
 				holeNodeChild.addChild(childOfHoleNodeChild);
 
 				HoleNode holeNodeChildChild = new HoleNode(HoleType.Arguments, false);
-				currentHole.addChild(holeNodeChildChild);
+				childOfHoleNodeChild.addChild(holeNodeChildChild);
 
 				HoleNode newHole = new HoleNode();
 				holeNodeChildChild.addChild(newHole);

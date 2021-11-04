@@ -1,7 +1,13 @@
-public class ExpressionTest {
+public class IfTest {
 
-    public void test() {
-        int a = 3 + 4;
-        int b = 3 * 5;
+    public static void main(string[] args) {
+        int n = 90;
+        if (n > 90) {
+            System.out.prtinln("excellent");
+        } else if (n >= 60) {
+            System.out.prtinln("good");
+        } else if (n < 60) {
+            System.out.prtinln("fail");
+        }
     }
 }
