@@ -1,33 +1,10 @@
 digraph {
-CompilationUnit_877317123 -> TypeDeclarations_1357570394
-TypeDeclarations_1357570394 -> Wrapper_ClassDeclaration_1270490884
-Wrapper_ClassDeclaration_1270490884 -> BodyDeclarations_1532977612
-BodyDeclarations_1532977612 -> Wrapper_MethodDeclaration_957846640
-Wrapper_MethodDeclaration_957846640 -> TypeExtends_1055932985
-Wrapper_MethodDeclaration_957846640 -> TypeVariables_610844900
-Wrapper_MethodDeclaration_957846640 -> Body_77173924
-TypeVariables_610844900 -> TypeVariable_27796563
-Body_77173924 -> Statements_1039486933
-Statements_1039486933 -> Wrapper_Statement_1610143599
-Statements_1039486933 -> Wrapper_Statement_395068544
-Statements_1039486933 -> Wrapper_WhileStmt_1464230046
-Statements_1039486933 -> Expression_1088034372
-Statements_1039486933 -> Undefined_1501618847
-Statements_1039486933 -> Undefined_752686443
-Statements_1039486933 -> Undefined_1216070398 [color = red] 
-Wrapper_Statement_1610143599 -> Expr5_1476625795
-Wrapper_Statement_395068544 -> Expr5_105451526
-Wrapper_WhileStmt_1464230046 -> Expression_1123757033
-Wrapper_WhileStmt_1464230046 -> Body_1417768314
-Expression_1088034372 -> Wrapper_Expr2_275432948
-Body_1417768314 -> Statements_1592602335
-Wrapper_Expr2_275432948 -> Arguments_1163059848
-Statements_1592602335 -> Wrapper_Statement_443006437
-Statements_1592602335 -> Wrapper_Statement_1550093880
-Arguments_1163059848 -> Wrapper_Argument_1808324797
-Wrapper_Statement_443006437 -> Expression_962339310
-Wrapper_Statement_1550093880 -> Expression_510868405
-Wrapper_Argument_1808324797 -> Expr4_1721660173
-Expression_962339310 -> Wrapper_Expr6_1262371411
-Expression_510868405 -> Expr12_330652043
+CompilationUnit_1223399478 -> TypeDeclarations_1817281652
+TypeDeclarations_1817281652 -> Wrapper_InterfaceDeclaration_297031141
+Wrapper_InterfaceDeclaration_297031141 -> BodyDeclarations_705062537
+BodyDeclarations_705062537 -> Wrapper_MethodDeclaration_1043882455
+BodyDeclarations_705062537 -> Wrapper_MethodDeclaration_1579823168
+Wrapper_MethodDeclaration_1043882455 -> TypeExtends_1828871453
+Wrapper_MethodDeclaration_1579823168 -> TypeExtends_1948863514
+Wrapper_MethodDeclaration_1579823168 -> TypeVariables_165850513 [color = red] 
 }

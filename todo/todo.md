@@ -4,3 +4,6 @@
 4. else without condition
 5. 字符串句子: string hello world
 6. switch's default case.
+   [√] 7. interface 中的函数只需要声明，不需要定义，需要单独支持...
+7. 泛型
+8. 异常处理

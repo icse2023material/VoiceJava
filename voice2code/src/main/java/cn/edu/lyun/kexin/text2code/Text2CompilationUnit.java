@@ -148,7 +148,18 @@ public class Text2CompilationUnit {
 			}
 			break;
 		case "interface":
-			parentNode = (CompilationUnit) parentAndIndex.getFirst();
+			parentNode = (CompilationUnit) parent.getLeft();
+			parentNode.addType((ClassOrInterfaceDeclaration) node);
+			currentHole.setIsHole(false);
+			currentHole.setHoleType(HoleType.TypeDeclarations);
+
+			holeNode = new HoleNode(HoleType.Wrapper, false);
+			holeNode.setHoleTypeOptions(new HoleType[] { HoleType.InterfaceDeclaration });
+			currentHole.addChild(holeNode);
+
+			HoleNode childHoleNode0 = new HoleNode(HoleType.Undefined, true);
+			childHoleNode0.setHoleTypeOptions(new HoleType[] { HoleType.BodyDeclaration });
+			holeNode.addChild(childHoleNode0);
 			break;
 		case "class": // Note: class and interface belongs to TypeDeclaration.
 			parentNode = null;
@@ -185,7 +196,12 @@ public class Text2CompilationUnit {
 		case "method":
 			if (parentHoleType.equals(HoleType.BodyDeclarations)) {
 				NodeList<BodyDeclaration<?>> bodyDeclarations = (NodeList<BodyDeclaration<?>>) parent.get().get();
+				// Interface method, no body.
+				if (((MethodDeclaration) bodyDeclarations.get(0)).getBody().isEmpty()) {
+					((MethodDeclaration) node).removeBody();
+				}
 				bodyDeclarations.add((BodyDeclaration<?>) node);
+
 				currentHole.set(HoleType.Wrapper, false);
 				currentHole.setHoleTypeOptions(new HoleType[] { HoleType.MethodDeclaration });
 				holeNode = new HoleNode();
@@ -194,7 +210,12 @@ public class Text2CompilationUnit {
 			}
 			if (parentNodeClassStr != null && parentNodeClassStr.equals("ClassOrInterfaceDeclaration")) {
 				ClassOrInterfaceDeclaration classOrInterfaceDeclaration = (ClassOrInterfaceDeclaration) parent.getLeft();
+				// If Interface, no body
+				if (classOrInterfaceDeclaration.isInterface()) {
+					((MethodDeclaration) node).removeBody();
+				}
 				classOrInterfaceDeclaration.addMember((BodyDeclaration<?>) node);
+
 				currentHole.setIsHole(false);
 				currentHole.setHoleType(HoleType.BodyDeclarations);
 

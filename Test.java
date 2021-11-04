@@ -1,14 +1,6 @@
-public class WhileTest {
+public interface Person {
 
-    public static void main(string[] args) {
-        int sum = 0;
-        int n = 0;
-        while (n <= 100) {
-            n++;
-            sum = sum + n;
-        }
-        System.out.println(sum);
-        sum = 0;
-        n = 1;
-    }
+    void run();
+
+    String getName();
 }
