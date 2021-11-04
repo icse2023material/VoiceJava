@@ -1,0 +1,23 @@
+define public class WhileTest
+define public static function main
+type void
+type string list variable args
+move next
+define int variable sum 
+int 0
+define int variable n 
+int 0
+define while
+expression n less equal 100
+expression n plus plus
+let sum equal expression 
+expression sum plus n
+move next 
+move next 
+move next 
+move next 
+System dot out call println 
+variable sum
+move next 
+move next 
+move next 

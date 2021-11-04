@@ -2764,7 +2764,7 @@ public class Text2CompilationUnit {
 			anotherChildNode.addChild(childOfanotherChildNode);
 
 			HoleNode newHole = new HoleNode();
-			childOfanotherChildNode.addChild(newHole);
+			anotherCurrentHole.addChild(newHole);
 			return blockStmt;
 		} else if (bodyClassStr.equals("BlockStmt")) {
 
