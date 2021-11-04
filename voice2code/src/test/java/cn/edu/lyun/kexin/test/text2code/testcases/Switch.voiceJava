@@ -25,3 +25,8 @@ move next
 move next 
 move next
 break
+move next
+move next
+move next
+System dot out call println
+string bad

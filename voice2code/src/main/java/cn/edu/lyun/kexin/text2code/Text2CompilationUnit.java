@@ -95,13 +95,31 @@ public class Text2CompilationUnit {
 
 		switch (pattern.getName()) {
 		case "moveNext":
-			// delete current hole, move to next one
-			parentHole.deleteHole(holeIndex);
 			HoleNode holeNode = new HoleNode(HoleType.Undefined, true);
 			if (currentHole.getHoleType().equals(HoleType.TypeVariables)) {
+				// delete current hole, move to next one
+				parentHole.deleteHole(holeIndex);
 				parentHole.addChild(holeNode);
+			} else if (parentHoleType.equals(HoleType.SwitchEntries)) {
+				// generate SwitchEntry Sketch
+				NodeList<SwitchEntry> switchEntries = (NodeList<SwitchEntry>) parent.get().get();
+				SwitchEntry switchEntry = new SwitchEntry();
+				switchEntries.add(switchEntry);
+
+				currentHole.setIsHole(false);
+				currentHole.setHoleType(HoleType.Wrapper);
+				currentHole.setHoleTypeOptions(new HoleType[] { HoleType.SwitchEntry });
+
+				holeNode = new HoleNode(HoleType.Wrapper, false);
+				holeNode.setHoleTypeOptionsOfOnlyOne(HoleType.MoveNext);
+				currentHole.addChild(holeNode);
+
+				HoleNode holeNodeChild = new HoleNode(HoleType.Undefined, true);
+				currentHole.addChild(holeNodeChild);
+
 			} else {
 				// TODO: small step move. Not syntax-directed.
+				parentHole.deleteHole(holeIndex);
 				parentOfParentHole.addChild(holeNode);
 			}
 			break;
@@ -719,8 +737,8 @@ public class Text2CompilationUnit {
 					// TODO
 				} else {
 					statements.add((Statement) node);
-					currentHole.setIsHole(false);
-					currentHole.setHoleTypeOptionsOfOnlyOne(HoleType.Break);
+					currentHole.set(HoleType.Break, false);
+
 					holeNode = new HoleNode();
 					// not correct exactly
 					parentHole.addChild(holeNode);
