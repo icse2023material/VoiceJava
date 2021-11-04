@@ -1,9 +1,15 @@
-package org.elasticsearch.search;
-
-import static java.lang.System.*;
-public class PackageTest {
+public class SwitchTest {
 
     public static void main(string[] args) {
-        System.out.println("hello");
+        int option = 2;
+        switch(option) {
+            case 1:
+                System.out.println("Selected1");
+                break;
+            case 2:
+            case 3:
+                System.out.println("NotSelected");
+                break;
+        }
     }
 }

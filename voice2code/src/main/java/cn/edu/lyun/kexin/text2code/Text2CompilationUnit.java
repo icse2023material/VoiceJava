@@ -692,6 +692,19 @@ public class Text2CompilationUnit {
 		case "subexpression":
 			break;
 		case "break":
+			if (parentHoleType.equals(HoleType.Statements)) {
+				NodeList<Statement> statements = (NodeList<Statement>) parent.get().get();
+				if (holeIndex < statements.size()) {
+					// TODO
+				} else {
+					statements.add((Statement) node);
+					currentHole.setIsHole(false);
+					currentHole.setHoleTypeOptionsOfOnlyOne(HoleType.Break);
+					holeNode = new HoleNode();
+					// not correct exactly
+					parentHole.addChild(holeNode);
+				}
+			}
 			break;
 		case "continue":
 			break;

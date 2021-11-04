@@ -1,0 +1,27 @@
+define public class SwitchTest
+define public static function main
+type void
+type string list variable args
+move next
+define int variable option
+int 2
+define switch
+variable option
+int 1
+System dot out call println
+string Selected1
+move next
+move next 
+move next
+break
+move next
+move next
+int 2
+move next
+int 3
+System dot out call println
+string NotSelected 
+move next
+move next 
+move next
+break
