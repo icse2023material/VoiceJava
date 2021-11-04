@@ -12,10 +12,15 @@ expression i less than subexpression
 ns dot length
 expression i plus plus
 expression System dot out call println
-variable ns
+expression variable ns index i
 move next
 move next
 move next
 move next
-let i equal 
-expression i plus 1 
+define int variable nsi
+variable ns index i
+let nsi equal expression
+variable ns index i
+move next
+return expression
+expression variable ns index i

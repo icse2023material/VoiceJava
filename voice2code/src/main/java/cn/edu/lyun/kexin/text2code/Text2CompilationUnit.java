@@ -2378,6 +2378,35 @@ public class Text2CompilationUnit {
 				this.generateExpForExpressionStmt(parent, node, holeIndex, currentHole, parentOfParentHole, holeTypeExpr);
 			}
 			break;
+		case "expr13":
+			holeTypeExpr = HoleType.Expr13;
+			if (parentHoleType.equals(HoleType.Statements)) {
+				this.generateExpInStatements(parent, holeIndex, node, currentHole, parentHole, holeTypeExpr);
+			} else if (parentNodeClassStr != null && parentNodeClassStr.equals("MethodDeclaration")) {
+				this.generateExpInMethodBody(parent, currentHole, node, holeTypeExpr);
+			} else if (parentNodeClassStr != null && parentNodeClassStr.equals("BinaryExpr")) {
+				this.generateBinarExprInExpr(parent, holeIndex, node, currentHole, parentHole, parentOfParentHole,
+						parentOfParentOfParentHole, holeTypeExpr);
+			} else if (parentNodeClassStr != null && parentNodeClassStr.equals("ForStmt")) {
+				this.generateExprStmtInForStmt(parent, currentHole, node, holeTypeExpr);
+			} else if (parentNodeClassStr != null && parentNodeClassStr.equals("WhileStmt")) {
+				this.generateExprStmtInWhileStmt(parent, currentHole, node, holeTypeExpr);
+			} else if (parentNodeClassStr != null && parentNodeClassStr.equals("IfStmt")) {
+				this.generateThenStmtInIfStmt(parent, node, currentHole, holeTypeExpr);
+			} else if (parentNodeClassStr != null && parentNodeClassStr.equals("BlockStmt")) {
+				this.generateBlockStmt(parent, node, currentHole, holeIndex, parentHole, holeTypeExpr);
+			} else if (parentNodeClassStr != null && parentNodeClassStr.equals("SwitchEntry")) {
+				this.generateSwitchEntry(parent, node, holeIndex, currentHole, holeTypeExpr);
+			} else if (parentNodeClassStr != null && parentNodeClassStr.equals("ExpressionStmt")) {
+				this.generateExpForExpressionStmt(parent, node, holeIndex, currentHole, parentOfParentHole, holeTypeExpr);
+			} else if (parentNodeClassStr != null && parentNodeClassStr.equals("ReturnStmt")) {
+				this.generateReturn6(parent, node, currentHole, parentHole, parentOfParentHole, holeTypeExpr);
+			} else if (parentNodeClassStr != null && parentNodeClassStr.equals("AssignExpr")) {
+				this.generateExprInAssignExpr(parent, node, currentHole, parentOfParentHole, holeTypeExpr);
+			} else if (parentHoleType.equals(HoleType.Arguments)) {
+				this.generateExprInArguments(parent, node, currentHole, parentHole, holeTypeExpr);
+			}
+			break;
 		case "subexpr1":
 			break;
 		case "subexpr2":

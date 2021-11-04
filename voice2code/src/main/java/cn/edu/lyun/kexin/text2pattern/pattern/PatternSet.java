@@ -247,6 +247,11 @@ public class PatternSet {
 				new Unit("question", new Unit("expression")), new Unit(), new Unit("or", opUnit, compareUnit), new Unit() });
 		patSet.add(expr12Pat);
 
+		Pattern expr13Pat = new Pattern("expr13", "[expression]? variable _ index _",
+				new Unit[] { new Unit("question", new Unit("expression")), new Unit("variable"), new Unit(), new Unit("index"),
+						new Unit() });
+		patSet.add(expr13Pat);
+
 		Pattern subExpr1Pat = new Pattern("subexpr1", "subexpression call _",
 				new Unit[] { new Unit("subexpression"), new Unit("call"), new Unit() });
 		patSet.add(subExpr1Pat);
@@ -287,6 +292,11 @@ public class PatternSet {
 		Pattern subExpr12Pat = new Pattern("subexpr12", "subexpression _ (op | compare) _",
 				new Unit[] { new Unit("subexpression"), new Unit(), new Unit("or", opUnit, compareUnit), new Unit() });
 		patSet.add(subExpr12Pat);
+
+		Pattern subExpr13Pat = new Pattern("subexpr13", "[subexpression]? variable _ index _",
+				new Unit[] { new Unit("question", new Unit("subexpression")), new Unit("variable"), new Unit(),
+						new Unit("index"), new Unit() });
+		patSet.add(subExpr13Pat);
 	}
 
 	public void addToSet(Pattern pat) {

@@ -115,6 +115,8 @@
       - 示例：`expression 3 times subexpression`
     - `[sub]?expression _ (op | compare) _`
       - 示例：`expression 3 plus 4`
+    - `[sub]?expression variable _ index _`
+      - 示例: `expression variable ns index i`
     - 备注：
       - `op ::= plus | minus | times | divide | mod`
       - `compare ::= less than | less equal | greater than | greater equal | double equal | and | doube and`

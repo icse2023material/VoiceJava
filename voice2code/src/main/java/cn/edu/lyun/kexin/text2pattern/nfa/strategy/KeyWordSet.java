@@ -11,7 +11,7 @@ public class KeyWordSet {
 			"plus", "times", "divide", "mod", "less", "than", "greater", "double", "and", "int", "byte", "short", "long",
 			"char", "float", "double", "boolean", "string", "subexpression", "break", "continue", "new", "instance", "throw",
 			"new", "move", "next", "jump", "out", "before", "after", "to", "line", "start", "end", "up", "lines", "down",
-			"left", "right", "select", "line", "body", "replace", "delete", "expression" }));
+			"left", "right", "select", "line", "body", "replace", "delete", "expression", "index" }));
 
 	public static boolean isKeyword(String str) {
 		return KeyWordSet.keywordList.contains(str);
