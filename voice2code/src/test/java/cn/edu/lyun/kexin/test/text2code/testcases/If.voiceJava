@@ -27,3 +27,12 @@ move next
 expression n less than 60
 System dot out call prtinln
 string fail
+move next
+move next
+move next
+move next
+move next
+move next
+move next
+System dot out call println
+string bad

@@ -1,17 +1,15 @@
-public class SwitchTest {
+public class IfTest {
 
     public static void main(string[] args) {
-        int option = 2;
-        switch(option) {
-            case 1:
-                System.out.println("Selected1");
-                break;
-            case 2:
-            case 3:
-                System.out.println("NotSelected");
-                break;
-            default:
-                System.out.println("bad");
+        int n = 90;
+        if (n > 90) {
+            System.out.prtinln("excellent");
+        } else if (n >= 60) {
+            System.out.prtinln("good");
+        } else if (n < 60) {
+            System.out.prtinln("fail");
+        } else {
+            System.out.println("bad");
         }
     }
 }

@@ -117,6 +117,23 @@ public class Text2CompilationUnit {
 				HoleNode holeNodeChild = new HoleNode(HoleType.Undefined, true);
 				currentHole.addChild(holeNodeChild);
 
+			} else if (parentHoleType.equals(HoleType.ElseStatement)) {
+				// default else case
+				BlockStmt blockStmt = new BlockStmt();
+				IfStmt ifStmt = (IfStmt) parent.getLeft();
+				ifStmt.setElseStmt(blockStmt);
+
+				currentHole.set(HoleType.ElseStatement, false);
+
+				// HoleNode bodyHole = new HoleNode(HoleType.Body, false);
+				// currentHole.addChild(bodyHole);
+
+				HoleNode stmtsHole = new HoleNode();
+				stmtsHole.set(HoleType.Statements, false);
+				currentHole.addChild(stmtsHole);
+
+				HoleNode statementHole = new HoleNode();
+				stmtsHole.addChild(statementHole);
 			} else {
 				// TODO: small step move. Not syntax-directed.
 				parentHole.deleteHole(holeIndex);
@@ -447,12 +464,9 @@ public class Text2CompilationUnit {
 					blockStmt.setStatements(statements);
 					whileStmt.setBody(blockStmt);
 
-					currentHole.setHoleType(HoleType.Body);
-					currentHole.setIsHole(false);
-
+					currentHole.set(HoleType.Body, false);
 					HoleNode anotherCurrentHole = new HoleNode();
-					anotherCurrentHole.setHoleType(HoleType.Statements);
-					anotherCurrentHole.setIsHole(false);
+					anotherCurrentHole.set(HoleType.Statements, false);
 					currentHole.addChild(anotherCurrentHole);
 
 					HoleNode childNode = new HoleNode(HoleType.Wrapper, false);
