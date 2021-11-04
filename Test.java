@@ -1,13 +1,9 @@
-public class IfTest {
+package org.elasticsearch.search;
+
+import static java.lang.System.*;
+public class PackageTest {
 
     public static void main(string[] args) {
-        int n = 90;
-        if (n > 90) {
-            System.out.prtinln("excellent");
-        } else if (n >= 60) {
-            System.out.prtinln("good");
-        } else if (n < 60) {
-            System.out.prtinln("fail");
-        }
+        System.out.println("hello");
     }
 }

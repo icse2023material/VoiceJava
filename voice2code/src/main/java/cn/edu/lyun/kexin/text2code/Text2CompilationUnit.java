@@ -3141,7 +3141,7 @@ public class Text2CompilationUnit {
 				holeNode.addChild(holeNodeChild);
 
 				HoleNode newHole = new HoleNode();
-				holeNode.addChild(newHole);
+				holeNodeChild.addChild(newHole);
 			} else {
 				// TODO
 			}

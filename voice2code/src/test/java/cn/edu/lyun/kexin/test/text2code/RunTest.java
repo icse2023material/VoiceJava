@@ -10,14 +10,14 @@ public class RunTest {
 	public static void main(String[] args) throws IOException {
 		String dir = System.getProperty("user.dir");
 		Text2CompilationUnit text2CompilationUnit = new Text2CompilationUnit();
-		String filePath = dir + "/voice2code/src/test/java/cn/edu/lyun/kexin/test/text2code/testcases/if.voiceJava";
+		String filePath = dir + "/voice2code/src/test/java/cn/edu/lyun/kexin/test/text2code/testcases/package.voiceJava";
 		BufferedReader br = new BufferedReader(new FileReader(filePath));
 		for (String line; (line = br.readLine()) != null;) {
 			text2CompilationUnit.generate(line);
 		}
 		br.close();
-		// text2CompilationUnit.generate();
 		// text2CompilationUnit.generate("");
+		// text2CompilationUnit.generate("string hello");
 		// text2CompilationUnit.generate("int 5");
 		text2CompilationUnit.getHoleAST().writeDotFile();
 		Runtime rt = Runtime.getRuntime();
