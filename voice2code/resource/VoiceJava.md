@@ -57,7 +57,6 @@
     - 备注：还未实现。
 17. 定义子表达式，即括号。
     - 语法：`subexpression`
-    - 备注：还未实现。
 18. `break`
 19. `continue`
 20. 构建新实例：  
@@ -96,27 +95,27 @@
 
 24. 12 种表达式
 
-    - `[sub]?expression call _`
+    - `expression? call _`
       - 示例：`expression call a`
-    - `[sub]?expression _ [call _]+`
+    - `expression? _ [call _]+`
       - 示例：`expression a call b`
-    - `[sub]?expression _ [dot _]?`
+    - `expression? _ [dot _]?`
       - 示例：`expression a dot b`
-    - `[sub]?expression [variable]? _`
+    - `expression? [variable]? _`
       - 示例：`expression variable y`
-    - `[sub]?expression (int | byte | short | long | char | float | double | boolean | String) \_`
+    - `expression? (int | byte | short | long | char | float | double | boolean | String) \_`
       - 示例： `expression int 2`
-    - `[sub]?expression _ plus plus`
-    - `[sub]?expression _ minus minus`
-    - `[sub]?expression plus plus _`
-    - `[sub]?expression minus minus _`
-    - `[sub]?expression subexpression (op | compare) subexpression`
-    - `[sub]?expression _ (op | compare) subexpression`
-      - 示例：`expression 3 times subexpression`
-    - `[sub]?expression _ (op | compare) _`
+    - `expression? _ plus plus`
+    - `expression? _ minus minus`
+    - `expression? plus plus _`
+    - `expression? minus minus _`
+    - `expression? expression (op | compare) expression`
+    - `expression? _ (op | compare) expression`
+      - 示例：`expression 3 times expression`
+    - `expression? _ (op | compare) _`
       - 示例：`expression 3 plus 4`
-    - `[sub]?expression variable _ index _`
-      - 示例: `expression variable ns index i`
+    - `expression? variable _ index _`
+      - 示例: `expression variable ns index i`, 数组索引
     - 备注：
       - `op ::= plus | minus | times | divide | mod`
       - `compare ::= less than | less equal | greater than | greater equal | double equal | and | doube and`

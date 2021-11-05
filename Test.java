@@ -1,12 +1,11 @@
-public class ForTest {
+package lyun;
 
-    public void main(String[] args) {
-        int[] ns;
-        for (int i = 0; i < ns.length; i++) {
-            System.out.println(ns[i]);
-            int nsi = ns[i];
-            nsi = ns[i];
-            return ns[i];
-        }
+import java.uitl.*;
+import java.lang.reflect.*;
+
+public class Hello {
+
+    public void hello() {
+        return ("empty");
     }
 }

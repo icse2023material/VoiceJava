@@ -40,7 +40,7 @@ public class ASTManager {
 		case "override":
 			return null;
 		case "subexpression":
-			return null;
+			return new SubExpressionAST().generate(pattern);
 		case "break":
 			return new BreakAST().generate(pattern);
 		case "continue":

@@ -30,6 +30,7 @@ public class TypeNameMap {
 		map.put(HoleType.VariableInitializer, "getInitializer");
 		map.put(HoleType.Arguments, "getArguments");
 		map.put(HoleType.ForCompare, "getCompare");
+		map.put(HoleType.InnerExpr, "getInner");
 		return map;
 	}
 }

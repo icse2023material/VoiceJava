@@ -15,7 +15,9 @@ public class ExprAST10 implements AST {
 			unitList.remove(0); // remove "expression"
 		}
 
-		unitList.remove(0); // remove "subexpression"
+		if (unitList.get(0).getKeyword().equals("expression")) {
+			unitList.remove(0); // remove "expression"
+		}
 
 		String operatorStr = BinaryOperatorAST.getOperatorStr(unitList);
 		BinaryExpr binaryExpr = new BinaryExpr();

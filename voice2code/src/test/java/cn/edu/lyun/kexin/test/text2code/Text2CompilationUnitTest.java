@@ -50,16 +50,16 @@ public class Text2CompilationUnitTest {
 
 		String[] switchExample1 = { "define package lyun", "import java dot uitl dot star",
 				"import java dot lang dot reflect dot star", "move next", "define public class Hello",
-				"define private int variable greeting", "int 2", "define public function sayHello", "type int",
-				"type int list variable intArray", "type String variable name", "move next", "define int variable sum", "int 0",
-				"define switch", "variable userType", "int 1", };
+				"define public function hello", "type void", "move next", "return expression" };
 
 		String[] lines = switchExample1;
 		for (String line : lines) {
 			text2CompilationUnit.generate(line);
 		}
 
-		text2CompilationUnit.generate("let fundebug equal expression");
+		text2CompilationUnit.generate("subexpression");
+		// text2CompilationUnit.generate("expression plus expression");
+		// text2CompilationUnit.generate("subexpression");
 
 		text2CompilationUnit.getHoleAST().writeDotFile();
 		Runtime rt = Runtime.getRuntime();

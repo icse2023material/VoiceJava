@@ -235,13 +235,13 @@ public class PatternSet {
 										new Unit("or", new Unit("normal", new Unit("double"), new Unit("equal")),
 												new Unit("or", new Unit("and"), new Unit("normal", new Unit("double"), new Unit("and"))))))));
 
-		Pattern expr10Pat = new Pattern("expr10", "[expression]? subexpression (op | compare) subexpression",
-				new Unit[] { new Unit("question", new Unit("expression")), new Unit("subexpression"),
-						new Unit("or", opUnit, compareUnit), new Unit("subexpression") });
+		Pattern expr10Pat = new Pattern("expr10", "[expression]? expression (op | compare) expression",
+				new Unit[] { new Unit("question", new Unit("expression")), new Unit("expression"),
+						new Unit("or", opUnit, compareUnit), new Unit("expression") });
 		patSet.add(expr10Pat);
-		Pattern expr11Pat = new Pattern("expr11", "[expression]? _ (op | compare) subexpression",
+		Pattern expr11Pat = new Pattern("expr11", "[expression]? _ (op | compare) expression",
 				new Unit[] { new Unit("question", new Unit("expression")), new Unit(), new Unit("or", opUnit, compareUnit),
-						new Unit("subexpression") });
+						new Unit("expression") });
 		patSet.add(expr11Pat);
 		Pattern expr12Pat = new Pattern("expr12", "[expression]? _ (op | compare) _", new Unit[] {
 				new Unit("question", new Unit("expression")), new Unit(), new Unit("or", opUnit, compareUnit), new Unit() });

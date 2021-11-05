@@ -146,7 +146,6 @@
 <p>定义子表达式，即括号。</p>
 <ul>
 <li>语法：<code>subexpression</code></li>
-<li>备注：还未实现。</li>
 </ul>
 </li>
 <li>
@@ -235,44 +234,49 @@
 <li>
 <p>12 种表达式</p>
 <ul>
-<li><code>[sub]?expression call _</code>
+<li><code>expression? call _</code>
 <ul>
 <li>示例：<code>expression call a</code></li>
 </ul>
 </li>
-<li><code>[sub]?expression _ [call _]+</code>
+<li><code>expression? _ [call _]+</code>
 <ul>
 <li>示例：<code>expression a call b</code></li>
 </ul>
 </li>
-<li><code>[sub]?expression _ [dot _]?</code>
+<li><code>expression? _ [dot _]?</code>
 <ul>
 <li>示例：<code>expression a dot b</code></li>
 </ul>
 </li>
-<li><code>[sub]?expression [variable]? _</code>
+<li><code>expression? [variable]? _</code>
 <ul>
 <li>示例：<code>expression variable y</code></li>
 </ul>
 </li>
-<li><code>[sub]?expression (int | byte | short | long | char | float | double | boolean | String) \_</code>
+<li><code>expression? (int | byte | short | long | char | float | double | boolean | String) \_</code>
 <ul>
 <li>示例： <code>expression int 2</code></li>
 </ul>
 </li>
-<li><code>[sub]?expression _ plus plus</code></li>
-<li><code>[sub]?expression _ minus minus</code></li>
-<li><code>[sub]?expression plus plus _</code></li>
-<li><code>[sub]?expression minus minus _</code></li>
-<li><code>[sub]?expression subexpression (op | compare) subexpression</code></li>
-<li><code>[sub]?expression _ (op | compare) subexpression</code>
+<li><code>expression? _ plus plus</code></li>
+<li><code>expression? _ minus minus</code></li>
+<li><code>expression? plus plus _</code></li>
+<li><code>expression? minus minus _</code></li>
+<li><code>expression? expression (op | compare) expression</code></li>
+<li><code>expression? _ (op | compare) expression</code>
 <ul>
-<li>示例：<code>expression 3 times subexpression</code></li>
+<li>示例：<code>expression 3 times expression</code></li>
 </ul>
 </li>
-<li><code>[sub]?expression _ (op | compare) _</code>
+<li><code>expression? _ (op | compare) _</code>
 <ul>
 <li>示例：<code>expression 3 plus 4</code></li>
+</ul>
+</li>
+<li><code>expression? variable _ index _</code>
+<ul>
+<li>示例: <code>expression variable ns index i</code>, 数组索引</li>
 </ul>
 </li>
 <li>备注：
