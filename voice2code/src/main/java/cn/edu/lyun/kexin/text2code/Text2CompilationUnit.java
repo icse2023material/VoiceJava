@@ -1667,120 +1667,8 @@ public class Text2CompilationUnit {
 			break;
 		case "expr5":
 			holeTypeExpr = HoleType.Expr5;
-			if (parentHoleType.equals(HoleType.Statements)) {
-				this.generateExpInStatements(parent, holeIndex, node, currentHole, parentHole, holeTypeExpr);
-			} else if (parentNodeClassStr != null && parentNodeClassStr.equals("MethodDeclaration")) {
-				this.generateExpInMethodBody(parent, currentHole, node, holeTypeExpr);
-			} else if (parentNodeClassStr != null && parentNodeClassStr.equals("BinaryExpr")) {
-				this.generateBinarExprInExpr(parent, holeIndex, node, currentHole, parentHole, parentOfParentHole,
-						parentOfParentOfParentHole, holeTypeExpr);
-			} else if (parentNodeClassStr != null && parentNodeClassStr.equals("ForStmt")) {
-				this.generateExprStmtInForStmt(parent, currentHole, node, holeTypeExpr);
-			} else if (parentNodeClassStr != null && parentNodeClassStr.equals("WhileStmt")) {
-				this.generateExprStmtInWhileStmt(parent, currentHole, node, holeTypeExpr);
-			} else if (parentNodeClassStr != null && parentNodeClassStr.equals("IfStmt")) {
-				this.generateThenStmtInIfStmt(parent, node, currentHole, holeTypeExpr);
-			} else if (parentNodeClassStr != null && parentNodeClassStr.equals("BlockStmt")) {
-				this.generateBlockStmt(parent, node, currentHole, holeIndex, parentHole, holeTypeExpr);
-			} else if (parentHoleType.equals(HoleType.SwitchEntries)) {
-				NodeList<SwitchEntry> switchEntries = (NodeList<SwitchEntry>) parent.get().get();
-				if (holeIndex < switchEntries.size()) {
-					// TODO
-				} else {
-					SwitchEntry switchEntry = new SwitchEntry();
-					NodeList<Expression> labels = new NodeList<Expression>();
-					labels.add((Expression) node);
-					switchEntry.setLabels(labels);
-					switchEntries.add(switchEntry);
-
-					currentHole.setIsHole(false);
-					currentHole.setHoleType(HoleType.Wrapper);
-					currentHole.setHoleTypeOptions(new HoleType[] { HoleType.SwitchEntry });
-
-					holeNode = new HoleNode(HoleType.Expression, false);
-					holeNode.setHoleTypeOptionsOfOnlyOne(HoleType.Expr5);
-					currentHole.addChild(holeNode);
-
-					HoleNode holeNodeChild = new HoleNode(HoleType.Undefined, true);
-					currentHole.addChild(holeNodeChild);
-
-				}
-			} else if (parentNodeClassStr != null && parentNodeClassStr.equals("SwitchEntry")) {
-				this.generateSwitchEntry(parent, node, holeIndex, currentHole, holeTypeExpr);
-			} else if (parentNodeClassStr != null && parentNodeClassStr.equals("FieldDeclaration")) {
-				NodeList<VariableDeclarator> variableDeclarators = ((FieldDeclaration) parent.getLeft()).getVariables();
-				VariableDeclarator vNode = variableDeclarators.get(0);
-				vNode.setInitializer((Expression) node);
-
-				currentHole.setIsHole(false);
-				currentHole.setHoleType(HoleType.VariableDeclarator);
-				holeNode = new HoleNode(HoleType.Undefined, true);
-				holeNode.setHoleTypeOptions(new HoleType[] { HoleType.BodyDeclaration });
-				parentOfParentHole.addChild(holeNode);
-			} else if (parentNodeClassStr != null && parentNodeClassStr.equals("ExpressionStmt")) {
-				this.generateExpForExpressionStmt(parent, node, holeIndex, currentHole, parentOfParentHole, holeTypeExpr);
-			} else if (parentNodeClassStr != null && parentNodeClassStr.equals("VariableDeclarationExpr")) {
-				VariableDeclarationExpr variableDeclarationExpr = (VariableDeclarationExpr) parent.getLeft();
-				NodeList<VariableDeclarator> variableDeclarators = variableDeclarationExpr.getVariables();
-				variableDeclarators.get(0).setInitializer((Expression) node);
-				currentHole.setIsHole(false);
-				currentHole.setHoleType(HoleType.Expression);
-
-				holeNode = new HoleNode(HoleType.Undefined, true);
-				holeNode.setHoleTypeOptions(new HoleType[] { HoleType.Expression });
-				parentOfParentHole.addChild(holeNode);
-			} else if (parentNodeClassStr != null && parentNodeClassStr.equals("SwitchStmt")) {
-				SwitchStmt switchStmt = (SwitchStmt) parent.getLeft();
-				NodeList<SwitchEntry> switchEntries = switchStmt.getEntries();
-				if (switchEntries.size() == 0) {
-					SwitchEntry switchEntry = new SwitchEntry();
-					NodeList<Expression> labels = new NodeList<Expression>();
-					labels.add((Expression) node);
-					switchEntry.setLabels(labels);
-					switchEntries.add(switchEntry);
-
-					currentHole.setIsHole(false);
-					currentHole.setHoleType(HoleType.SwitchEntries);
-
-					HoleNode wrapperNode = new HoleNode(HoleType.Wrapper, false);
-					wrapperNode.setHoleTypeOptions(new HoleType[] { HoleType.SwitchEntry });
-					currentHole.addChild(wrapperNode);
-
-					holeNode = new HoleNode(HoleType.Expression, false);
-					wrapperNode.addChild(holeNode);
-
-					HoleNode holeNodeChild = new HoleNode(HoleType.Undefined, true);
-					wrapperNode.addChild(holeNodeChild);
-				} else {
-
-				}
-			} else if (parentNodeClassStr != null && parentNodeClassStr.equals("ReturnStmt")) {
-				this.generateReturn6(parent, node, currentHole, parentHole, parentOfParentHole, holeTypeExpr);
-			} else if (parentNodeClassStr != null && parentNodeClassStr.equals("AssignExpr")) {
-				this.generateExprInAssignExpr(parent, node, currentHole, parentOfParentHole, holeTypeExpr);
-			} else if (parentNodeClassStr != null && parentNodeClassStr.equals("ObjectCreationExpr")) {
-				ObjectCreationExpr objectCreationExpr = (ObjectCreationExpr) parent.getLeft();
-				NodeList<Expression> arguments = objectCreationExpr.getArguments();
-				arguments.add((Expression) node);
-
-				currentHole.set(HoleType.Arguments, false);
-				holeNode = new HoleNode(HoleType.Wrapper, false);
-				holeNode.setHoleTypeOptionsOfOnlyOne(HoleType.Argument);
-				currentHole.addChild(holeNode);
-
-				HoleNode childHoleNode = new HoleNode(holeTypeExpr, false);
-				holeNode.addChild(childHoleNode);
-
-				HoleNode newHole = new HoleNode();
-				currentHole.addChild(newHole);
-			} else if (parentHoleType.equals(HoleType.Arguments)) {
-				this.generateExprInArguments(parent, node, currentHole, parentHole, holeTypeExpr);
-			} else if (parentNodeClassStr != null && parentNodeClassStr.equals("ExpressionStmt")) {
-				// body part, expression
-				this.generateExpForExpressionStmt(parent, node, holeIndex, currentHole, parentOfParentHole, holeTypeExpr);
-			} else if (parentNodeClassStr != null && parentNodeClassStr.equals("EnclosedExpr")) {
-				this.generateExprForEnclosedExpr(parent, node, currentHole, parentOfParentHole, holeTypeExpr);
-			}
+			this.generateExprForExpr5AndExpr14(parent, node, parentNodeClassStr, holeIndex, currentHole, parentHole,
+					parentOfParentHole, parentOfParentOfParentHole, parentHoleType, holeTypeExpr);
 			break;
 		case "expr6":
 			holeTypeExpr = HoleType.Expr6;
@@ -2478,30 +2366,10 @@ public class Text2CompilationUnit {
 				this.generateExprForEnclosedExpr(parent, node, currentHole, parentOfParentHole, holeTypeExpr);
 			}
 			break;
-		case "subexpr1":
-			break;
-		case "subexpr2":
-			break;
-		case "subexpr3":
-			break;
-		case "subexpr4":
-			break;
-		case "subexpr5":
-			break;
-		case "subexpr6":
-			break;
-		case "subexpr7":
-			break;
-		case "subexpr8":
-			break;
-		case "subexpr9":
-			break;
-		case "subexpr10":
-			break;
-		case "subexpr11":
-			break;
-		case "subexpr12":
-
+		case "expr14":
+			holeTypeExpr = HoleType.Expr14;
+			this.generateExprForExpr5AndExpr14(parent, node, parentNodeClassStr, holeIndex, currentHole, parentHole,
+					parentOfParentHole, parentOfParentOfParentHole, parentHoleType, holeTypeExpr);
 			break;
 		}
 
@@ -3603,5 +3471,124 @@ public class Text2CompilationUnit {
 		HoleNode exprHole = new HoleNode(holeTypeExpr, false);
 		currentHole.addChild(exprHole);
 		parentOfParentHole.addChild(new HoleNode());
+	}
+
+	private void generateExprForExpr5AndExpr14(Either<Node, Either<List<?>, NodeList<?>>> parent, Node node,
+			String parentNodeClassStr, int holeIndex, HoleNode currentHole, HoleNode parentHole, HoleNode parentOfParentHole,
+			HoleNode parentOfParentOfParentHole, HoleType parentHoleType, HoleType holeTypeExpr) {
+		if (parentHoleType.equals(HoleType.Statements)) {
+			this.generateExpInStatements(parent, holeIndex, node, currentHole, parentHole, holeTypeExpr);
+		} else if (parentNodeClassStr != null && parentNodeClassStr.equals("MethodDeclaration")) {
+			this.generateExpInMethodBody(parent, currentHole, node, holeTypeExpr);
+		} else if (parentNodeClassStr != null && parentNodeClassStr.equals("BinaryExpr")) {
+			this.generateBinarExprInExpr(parent, holeIndex, node, currentHole, parentHole, parentOfParentHole,
+					parentOfParentOfParentHole, holeTypeExpr);
+		} else if (parentNodeClassStr != null && parentNodeClassStr.equals("ForStmt")) {
+			this.generateExprStmtInForStmt(parent, currentHole, node, holeTypeExpr);
+		} else if (parentNodeClassStr != null && parentNodeClassStr.equals("WhileStmt")) {
+			this.generateExprStmtInWhileStmt(parent, currentHole, node, holeTypeExpr);
+		} else if (parentNodeClassStr != null && parentNodeClassStr.equals("IfStmt")) {
+			this.generateThenStmtInIfStmt(parent, node, currentHole, holeTypeExpr);
+		} else if (parentNodeClassStr != null && parentNodeClassStr.equals("BlockStmt")) {
+			this.generateBlockStmt(parent, node, currentHole, holeIndex, parentHole, holeTypeExpr);
+		} else if (parentHoleType.equals(HoleType.SwitchEntries)) {
+			NodeList<SwitchEntry> switchEntries = (NodeList<SwitchEntry>) parent.get().get();
+			if (holeIndex < switchEntries.size()) {
+				// TODO
+			} else {
+				SwitchEntry switchEntry = new SwitchEntry();
+				NodeList<Expression> labels = new NodeList<Expression>();
+				labels.add((Expression) node);
+				switchEntry.setLabels(labels);
+				switchEntries.add(switchEntry);
+
+				currentHole.setIsHole(false);
+				currentHole.setHoleType(HoleType.Wrapper);
+				currentHole.setHoleTypeOptions(new HoleType[] { HoleType.SwitchEntry });
+
+				HoleNode holeNode = new HoleNode(HoleType.Expression, false);
+				holeNode.setHoleTypeOptionsOfOnlyOne(HoleType.Expr5);
+				currentHole.addChild(holeNode);
+
+				HoleNode holeNodeChild = new HoleNode(HoleType.Undefined, true);
+				currentHole.addChild(holeNodeChild);
+
+			}
+		} else if (parentNodeClassStr != null && parentNodeClassStr.equals("SwitchEntry")) {
+			this.generateSwitchEntry(parent, node, holeIndex, currentHole, holeTypeExpr);
+		} else if (parentNodeClassStr != null && parentNodeClassStr.equals("FieldDeclaration")) {
+			NodeList<VariableDeclarator> variableDeclarators = ((FieldDeclaration) parent.getLeft()).getVariables();
+			VariableDeclarator vNode = variableDeclarators.get(0);
+			vNode.setInitializer((Expression) node);
+
+			currentHole.setIsHole(false);
+			currentHole.setHoleType(HoleType.VariableDeclarator);
+			HoleNode holeNode = new HoleNode(HoleType.Undefined, true);
+			holeNode.setHoleTypeOptions(new HoleType[] { HoleType.BodyDeclaration });
+			parentOfParentHole.addChild(holeNode);
+		} else if (parentNodeClassStr != null && parentNodeClassStr.equals("ExpressionStmt")) {
+			this.generateExpForExpressionStmt(parent, node, holeIndex, currentHole, parentOfParentHole, holeTypeExpr);
+		} else if (parentNodeClassStr != null && parentNodeClassStr.equals("VariableDeclarationExpr")) {
+			VariableDeclarationExpr variableDeclarationExpr = (VariableDeclarationExpr) parent.getLeft();
+			NodeList<VariableDeclarator> variableDeclarators = variableDeclarationExpr.getVariables();
+			variableDeclarators.get(0).setInitializer((Expression) node);
+			currentHole.setIsHole(false);
+			currentHole.setHoleType(HoleType.Expression);
+
+			HoleNode holeNode = new HoleNode(HoleType.Undefined, true);
+			holeNode.setHoleTypeOptions(new HoleType[] { HoleType.Expression });
+			parentOfParentHole.addChild(holeNode);
+		} else if (parentNodeClassStr != null && parentNodeClassStr.equals("SwitchStmt")) {
+			SwitchStmt switchStmt = (SwitchStmt) parent.getLeft();
+			NodeList<SwitchEntry> switchEntries = switchStmt.getEntries();
+			if (switchEntries.size() == 0) {
+				SwitchEntry switchEntry = new SwitchEntry();
+				NodeList<Expression> labels = new NodeList<Expression>();
+				labels.add((Expression) node);
+				switchEntry.setLabels(labels);
+				switchEntries.add(switchEntry);
+
+				currentHole.setIsHole(false);
+				currentHole.setHoleType(HoleType.SwitchEntries);
+
+				HoleNode wrapperNode = new HoleNode(HoleType.Wrapper, false);
+				wrapperNode.setHoleTypeOptions(new HoleType[] { HoleType.SwitchEntry });
+				currentHole.addChild(wrapperNode);
+
+				HoleNode holeNode = new HoleNode(HoleType.Expression, false);
+				wrapperNode.addChild(holeNode);
+
+				HoleNode holeNodeChild = new HoleNode(HoleType.Undefined, true);
+				wrapperNode.addChild(holeNodeChild);
+			} else {
+
+			}
+		} else if (parentNodeClassStr != null && parentNodeClassStr.equals("ReturnStmt")) {
+			this.generateReturn6(parent, node, currentHole, parentHole, parentOfParentHole, holeTypeExpr);
+		} else if (parentNodeClassStr != null && parentNodeClassStr.equals("AssignExpr")) {
+			this.generateExprInAssignExpr(parent, node, currentHole, parentOfParentHole, holeTypeExpr);
+		} else if (parentNodeClassStr != null && parentNodeClassStr.equals("ObjectCreationExpr")) {
+			ObjectCreationExpr objectCreationExpr = (ObjectCreationExpr) parent.getLeft();
+			NodeList<Expression> arguments = objectCreationExpr.getArguments();
+			arguments.add((Expression) node);
+
+			currentHole.set(HoleType.Arguments, false);
+			HoleNode holeNode = new HoleNode(HoleType.Wrapper, false);
+			holeNode.setHoleTypeOptionsOfOnlyOne(HoleType.Argument);
+			currentHole.addChild(holeNode);
+
+			HoleNode childHoleNode = new HoleNode(holeTypeExpr, false);
+			holeNode.addChild(childHoleNode);
+
+			HoleNode newHole = new HoleNode();
+			currentHole.addChild(newHole);
+		} else if (parentHoleType.equals(HoleType.Arguments)) {
+			this.generateExprInArguments(parent, node, currentHole, parentHole, holeTypeExpr);
+		} else if (parentNodeClassStr != null && parentNodeClassStr.equals("ExpressionStmt")) {
+			// body part, expression
+			this.generateExpForExpressionStmt(parent, node, holeIndex, currentHole, parentOfParentHole, holeTypeExpr);
+		} else if (parentNodeClassStr != null && parentNodeClassStr.equals("EnclosedExpr")) {
+			this.generateExprForEnclosedExpr(parent, node, currentHole, parentOfParentHole, holeTypeExpr);
+		}
 	}
 }

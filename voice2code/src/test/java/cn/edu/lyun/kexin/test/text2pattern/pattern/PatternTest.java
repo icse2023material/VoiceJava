@@ -15,6 +15,8 @@ public class PatternTest {
 		Pattern pat = new Pattern("expr13", "[expression]? variable _ index _",
 				new Unit[] { new Unit("question", new Unit("expression")), new Unit("variable"), new Unit(), new Unit("index"),
 						new Unit() });
+		pat = new Pattern("expr14", "[expression]? string [_]+",
+				new Unit[] { new Unit("question", new Unit("expression")), new Unit("string"), new Unit("plus", new Unit()) });
 		System.out.println(pat.toString());
 		System.out.println(pat.toVoiceJavaPattern());
 	}

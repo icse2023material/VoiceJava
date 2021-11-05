@@ -252,51 +252,9 @@ public class PatternSet {
 						new Unit() });
 		patSet.add(expr13Pat);
 
-		Pattern subExpr1Pat = new Pattern("subexpr1", "subexpression call _",
-				new Unit[] { new Unit("subexpression"), new Unit("call"), new Unit() });
-		patSet.add(subExpr1Pat);
-		Pattern subExpr2Pat = new Pattern("subexpr2", "subexpression _ [call _]+",
-				new Unit[] { new Unit("subexpression"), new Unit(), new Unit("plus", new Unit("call"), new Unit()) });
-		patSet.add(subExpr2Pat);
-		Pattern subExpr3Pat = new Pattern("subexpr3", "subexpression _ [dot _]?",
-				new Unit[] { new Unit("subexpression"), new Unit(), new Unit("question", new Unit("dot"), new Unit()) });
-		patSet.add(subExpr3Pat);
-		Pattern subExpr4Pat = new Pattern("subexpr4", "subexpression [variable]? _ ",
-				new Unit[] { new Unit("subexpression"), new Unit("question", new Unit("variable")), new Unit() });
-		patSet.add(subExpr4Pat);
-		Pattern subExpr5Pat = new Pattern("subexpr5",
-				"subexpression (int | byte | short | long | char | float | double | boolean | String) _ ",
-				new Unit[] { new Unit("subexpression"), typeUnit, new Unit() });
-		patSet.add(subExpr5Pat);
-		Pattern subExpr6Pat = new Pattern("subexpr6", "subexpression _ plus plus",
-				new Unit[] { new Unit("subexpression"), new Unit(), new Unit("plus"), new Unit("plus") });
-		patSet.add(subExpr6Pat);
-		Pattern subExpr7Pat = new Pattern("subexpr7", "expression _ minus minus",
-				new Unit[] { new Unit("subexpression"), new Unit(), new Unit("minus"), new Unit("minus") });
-		patSet.add(subExpr7Pat);
-
-		Pattern subExpr8Pat = new Pattern("subexpr8", "subexpression plus plus _",
-				new Unit[] { new Unit("subexpression"), new Unit("plus"), new Unit("plus"), new Unit() });
-		patSet.add(subExpr8Pat);
-		Pattern subExpr9Pat = new Pattern("subexpr9", "subexpression minus minus _",
-				new Unit[] { new Unit("subexpression"), new Unit("minus"), new Unit("minus"), new Unit() });
-		patSet.add(subExpr9Pat);
-
-		Pattern subExpr10Pat = new Pattern("subexpr10", "subexpression subexpression (op | compare) subexpression",
-				new Unit[] { new Unit("subexpression"), new Unit("subexpression"), new Unit("or", opUnit, compareUnit),
-						new Unit("subexpression") });
-		patSet.add(subExpr10Pat);
-		Pattern subExpr11Pat = new Pattern("subexpr11", "subexpression _ (op | compare) subexpression", new Unit[] {
-				new Unit("subexpression"), new Unit(), new Unit("or", opUnit, compareUnit), new Unit("subexpression") });
-		patSet.add(subExpr11Pat);
-		Pattern subExpr12Pat = new Pattern("subexpr12", "subexpression _ (op | compare) _",
-				new Unit[] { new Unit("subexpression"), new Unit(), new Unit("or", opUnit, compareUnit), new Unit() });
-		patSet.add(subExpr12Pat);
-
-		Pattern subExpr13Pat = new Pattern("subexpr13", "[subexpression]? variable _ index _",
-				new Unit[] { new Unit("question", new Unit("subexpression")), new Unit("variable"), new Unit(),
-						new Unit("index"), new Unit() });
-		patSet.add(subExpr13Pat);
+		Pattern expr14Pat = new Pattern("expr14", "[expression]? string [_]+",
+				new Unit[] { new Unit("question", new Unit("expression")), new Unit("string"), new Unit("plus", new Unit()) });
+		patSet.add(expr14Pat);
 	}
 
 	public void addToSet(Pattern pat) {

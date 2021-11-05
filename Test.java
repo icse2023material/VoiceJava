@@ -6,6 +6,6 @@ import java.lang.reflect.*;
 public class Hello {
 
     public void hello() {
-        return ("empty");
+        return "hello world !";
     }
 }

@@ -99,30 +99,8 @@ public class ASTManager {
 			return new ExprAST12().generate(pattern);
 		case "expr13":
 			return new ExprAST13().generate(pattern);
-		case "subexpr1":
-			return null;
-		case "subexpr2":
-			return null;
-		case "subexpr3":
-			return null;
-		case "subexpr4":
-			return null;
-		case "subexpr5":
-			return null;
-		case "subexpr6":
-			return null;
-		case "subexpr7":
-			return null;
-		case "subexpr8":
-			return null;
-		case "subexpr9":
-			return null;
-		case "subexpr10":
-			return null;
-		case "subexpr11":
-			return null;
-		case "subexpr12":
-			return null;
+		case "expr14":
+			return new ExprAST14().generate(pattern);
 		}
 
 		return null;

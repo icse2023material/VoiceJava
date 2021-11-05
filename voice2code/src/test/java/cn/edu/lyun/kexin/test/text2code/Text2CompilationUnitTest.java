@@ -57,7 +57,7 @@ public class Text2CompilationUnitTest {
 			text2CompilationUnit.generate(line);
 		}
 
-		text2CompilationUnit.generate("subexpression");
+		text2CompilationUnit.generate("string hello world !");
 		// text2CompilationUnit.generate("expression plus expression");
 		// text2CompilationUnit.generate("subexpression");
 
