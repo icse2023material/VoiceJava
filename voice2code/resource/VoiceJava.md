@@ -34,7 +34,7 @@
 10. 定义参数：
 
     - 语法： `type (_ list | _ [dot _]? [with _+]?) variable _`
-    - 示例：`type int count`
+    - 示例：`type int variable count`，`type NodeList with Statement variable nodelist`
 
 11. 定义`for`循环：
 
