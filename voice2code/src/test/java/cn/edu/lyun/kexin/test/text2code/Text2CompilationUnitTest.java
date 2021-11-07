@@ -1,9 +1,6 @@
 package cn.edu.lyun.kexin.test.text2code;
 
 import java.io.IOException;
-
-import org.checkerframework.checker.i18nformatter.qual.I18nFormat;
-
 import cn.edu.lyun.kexin.text2code.Text2CompilationUnit;
 
 public class Text2CompilationUnitTest {
@@ -50,18 +47,16 @@ public class Text2CompilationUnitTest {
 				"type int list variable intArray", "type String variable name", "move next", "call notify",
 				"subexpression plus subexpression", "int 3", "int 5", };
 
-		String[] switchExample1 = { "define package lyun", "import java dot uitl dot star",
+		String[] general = { "define package lyun", "import java dot uitl dot star",
 				"import java dot lang dot reflect dot star", "move next", "define public class Hello",
-				"define private int variable greeting", "int 2", "define public function sayHello", "type int",
-				"type int list variable intArray", "type String variable name", "move next", "define int variable sum", "int 0",
-				"define switch", "variable userType", "int 1", "expression 15 times 15", "expression 15 times sum", "move next",
-				"move next", "int 2", "expression 15 times 15", "move next", "move next", "move next" };
-		String[] lines = switchExample1;
+				"define private int variable greeting", "int 2", "define public function sayHello",
+				"type Nodelist with Statement" };
+		String[] lines = general;
 		for (String line : lines) {
 			text2CompilationUnit.generate(line);
 		}
 
-		// text2CompilationUnit.generate("throw new Exception");
+		text2CompilationUnit.generate("type Nodelist with Statement variable nodelist");
 		// text2CompilationUnit.generate("let sum equal call fibonacci");
 		// text2CompilationUnit.generate("let hello dot sum equal hello call
 		// fibonacci");

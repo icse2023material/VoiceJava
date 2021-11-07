@@ -9,7 +9,8 @@ import com.github.javaparser.ast.*;
 
 public class TypeVariableASTTest {
 	public static void main(String[] args) {
-		String[] textList = { "type int variable count", "type int list variable countArray" };
+		String[] textList = { "type int variable count", "type int list variable countArray",
+				"type Nodelist with Statement variable nodelist" };
 
 		AST ast = new TypeVariableAST();
 

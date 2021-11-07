@@ -83,9 +83,6 @@ public class PatternSet {
 										new Unit("question", new Unit("with"), new Unit("plus", new Unit())) })),
 						new Unit("variable"), new Unit() });
 		patSet.add(fieldPat);
-		Pattern typePat = new Pattern("typeExtends", "type _ [extends _]?",
-				new Unit[] { new Unit("type"), new Unit(), new Unit("question", new Unit("extends"), new Unit()) });
-		patSet.add(typePat);
 		Pattern typePat2 = new Pattern("typeVariable", "type (_ list | _ [dot _]? [with _+]?) variable _",
 				new Unit[] { new Unit("type"),
 						new Unit("or", new Unit("normal", new Unit(), new Unit("list")),
@@ -93,6 +90,15 @@ public class PatternSet {
 										new Unit("question", new Unit("with"), new Unit("plus", new Unit())) })),
 						new Unit("variable"), new Unit() });
 		patSet.add(typePat2);
+
+		Pattern typePat = new Pattern("typeExtends", "type (_ list | _ [dot _]? [with _+]?) [extends _]?",
+				new Unit[] { new Unit("type"),
+						new Unit("or", new Unit("normal", new Unit(), new Unit("list")),
+								new Unit(new Unit[] { new Unit(), new Unit("question", new Unit("dot"), new Unit()),
+										new Unit("question", new Unit("with"), new Unit("plus", new Unit())) })),
+						new Unit("question", new Unit("extends"), new Unit()) });
+		patSet.add(typePat);
+
 		Pattern subExpressionPat = new Pattern("subexpression", "subexpression", new Unit[] { new Unit("subexpression") });
 		patSet.add(subExpressionPat);
 		Pattern breakPat = new Pattern("break", "break", new Unit[] { new Unit("break") });

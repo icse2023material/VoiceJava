@@ -21,7 +21,13 @@ public class RegexTest {
 		Pattern expr10Pat = new Pattern("expr10", "[expression]? subexpression (op | compare) subexpression",
 				new Unit[] { new Unit("question", new Unit("expression")), new Unit("subexpression"),
 						new Unit("or", opUnit, compareUnit), new Unit("subexpression") });
-		Regex regex = new Regex(expr10Pat);
+		Pattern typePat2 = new Pattern("typeVariable", "type (_ list | _ [dot _]? [with _+]?) variable _",
+				new Unit[] { new Unit("type"),
+						new Unit("or", new Unit("normal", new Unit(), new Unit("list")),
+								new Unit(new Unit[] { new Unit(), new Unit("question", new Unit("dot"), new Unit()),
+										new Unit("question", new Unit("with"), new Unit("plus", new Unit())) })),
+						new Unit("variable"), new Unit() });
+		Regex regex = new Regex(typePat2);
 		regex.writeDotFile();
 		Runtime rt = Runtime.getRuntime();
 		try {
@@ -30,7 +36,7 @@ public class RegexTest {
 			e.printStackTrace();
 		}
 
-		String text = "expression subexpression plus subexpression";
+		String text = "type NodeList with Statement variable nodelist";
 		Pair<Boolean, Pattern> result = regex.isMatch(text);
 		if (result.getFirst()) {
 			System.out.println("Matched:");

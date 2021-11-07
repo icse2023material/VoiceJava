@@ -28,7 +28,7 @@
     - 示例：`define private int variable count`， `define int list variable list`， `define Pair with Integer String`
 9.  定义类型：
 
-    - 语法：`type _ [extends _]?`
+    - 语法：`type (_ list | _ [dot _]? [with _+]?) [extends _]?`
     - 示例: `type int`， `type void`
 
 10. 定义参数：
