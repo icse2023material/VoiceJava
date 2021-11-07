@@ -3,7 +3,7 @@
 [√] else without condition
 [√] switch's default case.
 [√] interface 中的函数只需要声明，不需要定义，需要单独支持...
-[√] 字符串句子: string hello world
+[√] 字符串句子: `string hello world`
 [ ] 异常处理
 [ ] 泛型
 [ ] move next 不够智能

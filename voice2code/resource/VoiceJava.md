@@ -81,7 +81,7 @@
 
 23. 6 种返回形式：
 
-    - `return call`
+    - `return call _`
     - `return _ [call _]+`
       - 示例：`return a call b`
     - `return _ [dot _]*`

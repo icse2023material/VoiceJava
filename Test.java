@@ -5,7 +5,18 @@ import java.lang.reflect.*;
 
 public class Hello {
 
-    public void hello() {
-        return "hello world !";
+    private int greeting = 2;
+
+    public int sayHello(int[] intArray, String name) {
+        int sum = 0;
+        switch(userType) {
+            case 1:
+                15 * 15;
+                15 * sum;
+            case 2:
+                15 * 15;
+            default:
+                throw new Exception();
+        }
     }
 }
