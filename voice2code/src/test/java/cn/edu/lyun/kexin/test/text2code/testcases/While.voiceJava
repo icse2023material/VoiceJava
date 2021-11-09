@@ -12,12 +12,6 @@ expression n less equal 100
 expression n plus plus
 let sum equal expression 
 expression sum plus n
-move next 
-move next 
-move next 
-move next 
 System dot out call println 
 variable sum
-move next 
-move next 
 move next 

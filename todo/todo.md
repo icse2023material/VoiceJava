@@ -7,4 +7,5 @@
 [√] 异常处理
 [√] 泛型
 [ ] move next 不够智能
+[ ] let1, let2 not correct, return 1, return2 也需要检查
 [ ] 对象形式的初始化：`int[] ns = { 1, 4, 9, 16, 25}`

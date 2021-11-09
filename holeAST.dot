@@ -1,43 +1,11 @@
 digraph {
-CompilationUnit_1877453512 -> TypeDeclarations_487694075
-TypeDeclarations_487694075 -> Wrapper_ClassDeclaration_1704629915
-Wrapper_ClassDeclaration_1704629915 -> BodyDeclarations_1989184704
-BodyDeclarations_1989184704 -> Wrapper_MethodDeclaration_838473569
-Wrapper_MethodDeclaration_838473569 -> TypeExtends_9797126
-Wrapper_MethodDeclaration_838473569 -> TypeVariables_2134271532
-Wrapper_MethodDeclaration_838473569 -> Body_948395645
-TypeVariables_2134271532 -> TypeVariable_1907241392
-Body_948395645 -> Statements_358420513
-Statements_358420513 -> Wrapper_SwitchStmt_1272115420
-Wrapper_SwitchStmt_1272115420 -> Expression_778337881
-Wrapper_SwitchStmt_1272115420 -> SwitchEntries_1165568071
-SwitchEntries_1165568071 -> Wrapper_SwitchEntry_203401172
-SwitchEntries_1165568071 -> Wrapper_SwitchEntry_849520318
-SwitchEntries_1165568071 -> Wrapper_SwitchEntry_713765818
-SwitchEntries_1165568071 -> Wrapper_SwitchEntry_1915898213
-Wrapper_SwitchEntry_203401172 -> Expression_2056499811
-Wrapper_SwitchEntry_203401172 -> Statements_890733699
-Wrapper_SwitchEntry_849520318 -> Expression_647218712
-Wrapper_SwitchEntry_713765818 -> Expression_1663271865
-Wrapper_SwitchEntry_713765818 -> Statements_1256384385
-Wrapper_SwitchEntry_1915898213 -> Wrapper_MoveNext_355366659
-Wrapper_SwitchEntry_1915898213 -> Statements_459330340
-Statements_890733699 -> Expression_244190700
-Statements_890733699 -> Break_1320248993
-Statements_1256384385 -> Expression_1793759719
-Statements_1256384385 -> Break_2020226167
-Statements_459330340 -> Expression_1938438604
-Expression_244190700 -> Wrapper_Expr2_315748820
-Expression_1793759719 -> Wrapper_Expr2_476709123
-Expression_1938438604 -> Wrapper_Expr2_1122108119
-Wrapper_Expr2_315748820 -> Arguments_1979325411
-Wrapper_Expr2_476709123 -> Arguments_2017574192
-Wrapper_Expr2_1122108119 -> Arguments_954697228
-Arguments_1979325411 -> Wrapper_Argument_2050529121
-Arguments_2017574192 -> Wrapper_Argument_1170735890
-Arguments_954697228 -> Wrapper_Argument_1645578641
-Arguments_954697228 -> Undefined_964301023 [color = red] 
-Wrapper_Argument_2050529121 -> Expr5_1901824111
-Wrapper_Argument_1170735890 -> Expr5_1719854757
-Wrapper_Argument_1645578641 -> Expr5_967337409
+CompilationUnit_1559122513 -> TypeDeclarations_1128096251
+TypeDeclarations_1128096251 -> Wrapper_InterfaceDeclaration_889486595
+Wrapper_InterfaceDeclaration_889486595 -> BodyDeclarations_77269878
+BodyDeclarations_77269878 -> Wrapper_MethodDeclaration_9797126
+BodyDeclarations_77269878 -> Wrapper_MethodDeclaration_2002790740
+Wrapper_MethodDeclaration_9797126 -> TypeExtends_844112759
+Wrapper_MethodDeclaration_9797126 -> TypeVariables_71802912
+Wrapper_MethodDeclaration_2002790740 -> TypeExtends_1967432164
+Wrapper_MethodDeclaration_2002790740 -> Undefined_1655242052 [color = red] 
 }
