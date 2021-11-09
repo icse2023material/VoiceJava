@@ -6,6 +6,7 @@ public class HoleNode {
 	private HoleType[] holeTypeOptions;
 	private HoleType holeType;
 	private boolean isHole;
+	private HoleNode parent;
 
 	private List<HoleNode> childList;
 
@@ -13,6 +14,7 @@ public class HoleNode {
 		this.isHole = true;
 		this.holeType = HoleType.Undefined;
 		this.childList = new ArrayList<HoleNode>();
+		this.parent = null;
 	}
 
 	public HoleNode(HoleType holeType, boolean isHole) {
@@ -68,6 +70,7 @@ public class HoleNode {
 	}
 
 	public void addChild(HoleNode holeNode) {
+		holeNode.setParent(this);
 		this.childList.add(holeNode);
 	}
 
@@ -81,6 +84,10 @@ public class HoleNode {
 
 	public void deleteHole(int index) {
 		this.childList.remove(index);
+	}
+
+	public void setParent(HoleNode parent) {
+		this.parent = parent;
 	}
 
 }

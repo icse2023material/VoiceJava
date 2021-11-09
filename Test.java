@@ -1,12 +1,19 @@
-package lyun;
+public class Puppy {
 
-import java.uitl.*;
-import java.lang.reflect.*;
+    int puppyAge;
 
-public class Hello {
+    public void setAge(int age) {
+        puppyAge = age;
+    }
 
-    private int greeting = 2;
+    public int getAge() {
+        return puppyAge;
+    }
 
-    public Nodelist<Statement> sayHello(Nodelist<Statement> nodelist) {
+    public static void main(String[] args) {
+        Puppy myPuppy = new Puppy("tommy");
+        myPuppy.setAge(2);
+        myPuppy.getAge();
+        System.out.println(myPuppy.puppyAge);
     }
 }
