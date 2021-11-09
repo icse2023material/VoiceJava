@@ -14,9 +14,26 @@ public class RunTest {
 		BufferedReader br = new BufferedReader(new FileReader(filePath));
 		for (String line; (line = br.readLine()) != null;) {
 			text2CompilationUnit.generate(line);
+
+			// text2CompilationUnit.getHoleAST().writeDotFile();
+			// Runtime rt = Runtime.getRuntime();
+			// try {
+			// rt.exec("dot -Tpng holeAST.dot -o holeAST.png");
+			// } catch (IOException e) {
+			// e.printStackTrace();
+			// }
+			text2CompilationUnit.getHoleAST().cleverMove();
+
+			text2CompilationUnit.getHoleAST().writeDotFile();
+			rt = Runtime.getRuntime();
+			// try {
+			// rt.exec("dot -Tpng holeAST.dot -o holeAST.png");
+			// } catch (IOException e) {
+			// e.printStackTrace();
+			// }
 		}
 		br.close();
-		text2CompilationUnit.generate("move next");
+		// text2CompilationUnit.generate("");
 		// // text2CompilationUnit.generate("");
 		text2CompilationUnit.getHoleAST().writeDotFile();
 		Runtime rt = Runtime.getRuntime();

@@ -1,6 +1,8 @@
 public class Puppy {
 
-    int puppyAge;
+    private int puppyAge;
+
+    private int puppyNum;
 
     public void setAge(int age) {
         puppyAge = age;

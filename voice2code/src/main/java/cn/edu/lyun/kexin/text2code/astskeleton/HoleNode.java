@@ -82,6 +82,16 @@ public class HoleNode {
 		return this.childList.size();
 	}
 
+	public int getNonUndefinedChildListSize() {
+		int count = 0;
+		for (HoleNode holeNode : childList) {
+			if (!holeNode.getHoleType().equals(HoleType.Undefined)) {
+				count++;
+			}
+		}
+		return count;
+	}
+
 	public void deleteHole(int index) {
 		this.childList.remove(index);
 	}
@@ -90,4 +100,7 @@ public class HoleNode {
 		this.parent = parent;
 	}
 
+	public HoleNode getParent() {
+		return this.parent;
+	}
 }

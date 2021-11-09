@@ -1,6 +1,7 @@
 package cn.edu.lyun.kexin.text2code.astskeleton;
 
 import java.util.*;
+
 import java.io.FileWriter;
 import java.io.IOException;
 
@@ -141,4 +142,50 @@ public class HoleAST {
 		}
 	}
 
+	public void cleverMove() {
+		Pair<Pair<HoleNode, HoleNode>, List<Integer>> pair = getCurrentHole();
+		HoleNode parentHole = pair.getFirst().getFirst();
+		List<Integer> path = pair.getSecond();
+
+		boolean deleted = false;
+		while (hashOnlyOneChild(parentHole) || isNodeChildrenFull(parentHole)) {
+			int index = path.remove(path.size() - 1);
+			if (!deleted) {
+				deleted = true;
+				parentHole.deleteHole(index);
+			}
+			parentHole = parentHole.getParent();
+		}
+		if (deleted) {
+			HoleNode newHole = new HoleNode();
+			parentHole.addChild(newHole);
+		}
+	}
+
+	public boolean hashOnlyOneChild(HoleNode holeNode) {
+		Set<HoleType> set = new HashSet<HoleType>(Arrays.asList(HoleType.ImportDeclaration, HoleType.TypeDeclaration,
+				HoleType.Expression, HoleType.TypeVariable, HoleType.Body, HoleType.Statement, HoleType.VariableInitializer,
+				HoleType.VariableDeclarator, HoleType.Expr1, HoleType.Expr2));
+		return holeNode.getNonUndefinedChildListSize() == 1 && set.contains(holeNode.getHoleType());
+	}
+
+	public boolean isNodeChildrenFull(HoleNode holeNode) {
+		Set<HoleType> set = new HashSet<HoleType>(
+				Arrays.asList(HoleType.VariableDeclarator, HoleType.Statement, HoleType.Expr1, HoleType.Expr2));
+		if (holeNode.getHoleType().equals(HoleType.Wrapper)) {
+			HoleType holeType = holeNode.getHoleTypeOfOptionsIfOnlyOne();
+			if (holeType != null) {
+				// children: [returnType, arguments. body]
+				if (holeType.equals(HoleType.MethodDeclaration)) {
+					return holeNode.getChildList().get(holeNode.getChildListSize() - 1).getHoleType().equals(HoleType.Body);
+				}
+				if (set.contains(holeType)) {
+					return holeNode.getNonUndefinedChildListSize() == 1;
+				}
+				return false;
+			}
+			return false;
+		}
+		return false;
+	}
 }
