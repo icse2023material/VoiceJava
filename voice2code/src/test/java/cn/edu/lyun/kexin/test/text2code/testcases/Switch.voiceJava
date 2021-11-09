@@ -11,22 +11,16 @@ int 1
 System dot out call println
 string Selected1
 move next
-move next 
-move next
 break
-move next
-move next
 int 2
 move next
 int 3
 System dot out call println
 string NotSelected 
 move next
-move next 
-move next
 break
-move next
-move next
 move next
 System dot out call println
 string bad
+move next
+break

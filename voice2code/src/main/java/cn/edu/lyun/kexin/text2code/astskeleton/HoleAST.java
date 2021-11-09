@@ -194,6 +194,9 @@ public class HoleAST {
 								.equals(HoleType.ElseStatement);
 					}
 				}
+				if (holeType.equals(HoleType.SwitchEntry)) {
+					return holeNode.getNonUndefinedChildListSize() == 2;
+				}
 				if (set.contains(holeType)) {
 					return holeNode.getNonUndefinedChildListSize() == 1;
 				}
@@ -201,7 +204,9 @@ public class HoleAST {
 			}
 			return false;
 		}
-		if (holeNode.getHoleType().equals(HoleType.ElseStatement)) {
+		if (holeNode.getHoleType().equals(HoleType.ElseStatement))
+
+		{
 			// default else branch
 			if (holeNode.getNonUndefinedChildListSize() == 1
 					&& holeNode.getIthChild(0).getHoleType().equals(HoleType.Statements)) {

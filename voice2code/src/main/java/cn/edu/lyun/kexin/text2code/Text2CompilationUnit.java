@@ -752,6 +752,27 @@ public class Text2CompilationUnit {
 				} else {
 					System.out.println("Should not go to this branch");
 				}
+			} else if (parentNodeClassStr != null && parentNodeClassStr.equals("MethodDeclaration")) {
+				MethodDeclaration mNode = (MethodDeclaration) parent.getLeft();
+				Optional<BlockStmt> optionalBody = mNode.getBody();
+				currentHole.setIsHole(false);
+				currentHole.setHoleType(HoleType.Body);
+				HoleNode anotherCurrentHole = new HoleNode();
+				currentHole.addChild(anotherCurrentHole);
+				BlockStmt blockStmt = optionalBody.get();
+				NodeList<Statement> statements = blockStmt.getStatements();
+				if (statements.size() == 0) {
+					statements.add((Statement) node);
+
+					anotherCurrentHole.set(HoleType.Statements, false);
+
+					HoleNode childNode = new HoleNode(HoleType.Wrapper, false);
+					childNode.setHoleTypeOptionsOfOnlyOne(HoleType.SwitchStmt);
+					anotherCurrentHole.addChild(childNode);
+
+					HoleNode newHole = new HoleNode();
+					childNode.addChild(newHole);
+				}
 			}
 			break;
 		case "tryCatch":
@@ -800,7 +821,7 @@ public class Text2CompilationUnit {
 
 					holeNode = new HoleNode();
 					// not correct exactly
-					parentHole.addChild(holeNode);
+					parentOfParentHole.addChild(holeNode);
 				}
 			}
 			break;
@@ -1725,7 +1746,7 @@ public class Text2CompilationUnit {
 			} else if (parentNodeClassStr != null && parentNodeClassStr.equals("SwitchStmt")) {
 				SwitchStmt switchStmt = (SwitchStmt) parent.getLeft();
 				switchStmt.setSelector((Expression) node);
-				currentHole.setIsHole(false);
+				currentHole.set(HoleType.Expression, false);
 				holeNode = new HoleNode();
 				parentHole.addChild(holeNode);
 			} else if (parentNodeClassStr != null && parentNodeClassStr.equals("SwitchEntry")) {
