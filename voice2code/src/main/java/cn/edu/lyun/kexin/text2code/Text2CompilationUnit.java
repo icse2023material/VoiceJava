@@ -387,7 +387,7 @@ public class Text2CompilationUnit {
 				nodeList.add((Parameter) node);
 				mNode.setParameters(nodeList);
 
-				currentHole.setIsHole(false);
+				currentHole.set(HoleType.TypeVariables, false);
 
 				holeNode = new HoleNode(HoleType.TypeVariable, false);
 				holeNode.setHoleTypeOptions(new HoleType[] { HoleType.TypeVariable });

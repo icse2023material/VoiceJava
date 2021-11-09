@@ -10,7 +10,7 @@ public class RunTest {
 	public static void main(String[] args) throws IOException {
 		String dir = System.getProperty("user.dir");
 		Text2CompilationUnit text2CompilationUnit = new Text2CompilationUnit();
-		String filePath = dir + "/voice2code/src/test/java/cn/edu/lyun/kexin/test/text2code/testcases/Interface.voiceJava";
+		String filePath = dir + "/voice2code/src/test/java/cn/edu/lyun/kexin/test/text2code/testcases/ForLoop.voiceJava";
 		BufferedReader br = new BufferedReader(new FileReader(filePath));
 		for (String line; (line = br.readLine()) != null;) {
 			text2CompilationUnit.generate(line);
@@ -33,9 +33,15 @@ public class RunTest {
 			}
 		}
 		br.close();
-		// text2CompilationUnit.generate("");
-		// // text2CompilationUnit.generate("");
-		text2CompilationUnit.getHoleAST().writeDotFile();
+		// text2CompilationUnit.generate("expression i less than expression");
+		// text2CompilationUnit.getHoleAST().writeDotFile();
+		// Runtime rt = Runtime.getRuntime();
+		// try {
+		// rt.exec("dot -Tpng holeAST.dot -o holeAST.png");
+		// } catch (IOException e) {
+		// e.printStackTrace();
+		// }
+		// text2CompilationUnit.getHoleAST().cleverMove();
 		Runtime rt = Runtime.getRuntime();
 		try {
 			rt.exec("dot -Tpng holeAST.dot -o holeAST.png");

@@ -184,6 +184,9 @@ public class HoleAST {
 						return holeNode.getChildList().get(holeNode.getChildListSize() - 1).getHoleType().equals(HoleType.Body);
 					}
 				}
+				if (holeType.equals(HoleType.ForStmt)) {
+					return holeNode.getChildList().get(holeNode.getChildListSize() - 1).getHoleType().equals(HoleType.Body);
+				}
 				if (set.contains(holeType)) {
 					return holeNode.getNonUndefinedChildListSize() == 1;
 				}

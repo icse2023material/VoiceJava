@@ -1,10 +1,37 @@
 digraph {
 CompilationUnit_487694075 -> TypeDeclarations_1704629915
-TypeDeclarations_1704629915 -> Wrapper_InterfaceDeclaration_1989184704
-Wrapper_InterfaceDeclaration_1989184704 -> BodyDeclarations_611572016
-BodyDeclarations_611572016 -> Wrapper_MethodDeclaration_838473569
-BodyDeclarations_611572016 -> Wrapper_MethodDeclaration_1021565761
-Wrapper_MethodDeclaration_838473569 -> TypeExtends_9797126
-Wrapper_MethodDeclaration_1021565761 -> TypeExtends_1677543539
-Wrapper_MethodDeclaration_1021565761 -> Undefined_1868809295 [color = red] 
+TypeDeclarations_1704629915 -> Wrapper_ClassDeclaration_1989184704
+Wrapper_ClassDeclaration_1989184704 -> BodyDeclarations_611572016
+BodyDeclarations_611572016 -> Wrapper_MethodDeclaration_9797126
+Wrapper_MethodDeclaration_9797126 -> TypeExtends_844112759
+Wrapper_MethodDeclaration_9797126 -> TypeVariables_71802912
+Wrapper_MethodDeclaration_9797126 -> Body_1028472807
+TypeVariables_71802912 -> TypeVariable_883020319
+Body_1028472807 -> Statements_1840940155
+Statements_1840940155 -> Wrapper_Statement_32496853
+Statements_1840940155 -> Wrapper_ForStmt_62803825
+Statements_1840940155 -> Wrapper_Return6_492971350
+Statements_1840940155 -> Undefined_426600523 [color = red] 
+Wrapper_ForStmt_62803825 -> ForInitialization_130564501
+Wrapper_ForStmt_62803825 -> ForCompare_1562912969
+Wrapper_ForStmt_62803825 -> Expression_1907228381
+Wrapper_ForStmt_62803825 -> Body_1232631679
+Wrapper_Return6_492971350 -> Expr13_488322592
+ForInitialization_130564501 -> Expression_1437107223
+ForCompare_1562912969 -> Wrapper_Expr11_27313641
+Body_1232631679 -> Statements_1496585534
+Wrapper_Expr11_27313641 -> Expr3_306016343
+Statements_1496585534 -> Wrapper_Statement_1002031672
+Statements_1496585534 -> Wrapper_Statement_473655651
+Statements_1496585534 -> Expression_721536649
+Statements_1496585534 -> Wrapper_Statement_1630986748
+Wrapper_Statement_1002031672 -> Expression_370055648
+Expression_721536649 -> Wrapper_Expr13_389464548
+Wrapper_Statement_1630986748 -> Expression_1086262805
+Expression_370055648 -> Wrapper_Expr2_1329504187
+Expression_1086262805 -> Wrapper_Let6Expr_746009679
+Wrapper_Expr2_1329504187 -> Arguments_911933063
+Wrapper_Let6Expr_746009679 -> Expr13_303946916
+Arguments_911933063 -> Wrapper_Argument_1128733310
+Wrapper_Argument_1128733310 -> Expr13_890525812
 }

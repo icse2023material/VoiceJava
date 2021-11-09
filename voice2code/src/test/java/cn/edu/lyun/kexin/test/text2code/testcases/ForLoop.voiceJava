@@ -8,14 +8,11 @@ move next
 define for
 define int variable i
 int 0
-expression i less than subexpression
+expression i less than expression
 ns dot length
 expression i plus plus
 expression System dot out call println
 expression variable ns index i
-move next
-move next
-move next
 move next
 define int variable nsi
 variable ns index i
