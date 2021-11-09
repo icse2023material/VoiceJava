@@ -177,7 +177,12 @@ public class HoleAST {
 			if (holeType != null) {
 				// children: [returnType, arguments. body]
 				if (holeType.equals(HoleType.MethodDeclaration)) {
-					return holeNode.getChildList().get(holeNode.getChildListSize() - 1).getHoleType().equals(HoleType.Body);
+					HoleNode parentOfParent = holeNode.getParent().getParent();
+					if (parentOfParent.getHoleTypeOfOptionsIfOnlyOne().equals(HoleType.InterfaceDeclaration)) {
+						return holeNode.getNonUndefinedChildListSize() == 2;
+					} else {
+						return holeNode.getChildList().get(holeNode.getChildListSize() - 1).getHoleType().equals(HoleType.Body);
+					}
 				}
 				if (set.contains(holeType)) {
 					return holeNode.getNonUndefinedChildListSize() == 1;
@@ -188,4 +193,5 @@ public class HoleAST {
 		}
 		return false;
 	}
+
 }
