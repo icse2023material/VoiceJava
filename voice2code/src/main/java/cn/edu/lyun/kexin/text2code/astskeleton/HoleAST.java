@@ -187,6 +187,13 @@ public class HoleAST {
 				if (holeType.equals(HoleType.ForStmt)) {
 					return holeNode.getChildList().get(holeNode.getChildListSize() - 1).getHoleType().equals(HoleType.Body);
 				}
+
+				if (holeType.equals(HoleType.IfStmt)) {
+					if (holeNode.getNonUndefinedChildListSize() == 3) {
+						return holeNode.getChildList().get(holeNode.getChildListSize() - 1).getHoleType()
+								.equals(HoleType.ElseStatement);
+					}
+				}
 				if (set.contains(holeType)) {
 					return holeNode.getNonUndefinedChildListSize() == 1;
 				}
@@ -194,6 +201,17 @@ public class HoleAST {
 			}
 			return false;
 		}
+		if (holeNode.getHoleType().equals(HoleType.ElseStatement)) {
+			// default else branch
+			if (holeNode.getNonUndefinedChildListSize() == 1
+					&& holeNode.getIthChild(0).getHoleType().equals(HoleType.Statements)) {
+				return true;
+			} else if (holeNode.getNonUndefinedChildListSize() == 3) {
+				return holeNode.getChildList().get(holeNode.getChildListSize() - 1).getHoleType()
+						.equals(HoleType.ElseStatement);
+			}
+		}
+
 		return false;
 	}
 

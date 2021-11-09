@@ -4,7 +4,7 @@ public class IfTest {
         if (n > 90) {
             System.out.prtinln("excellent");
         } else {
-            System.out.println("bad");
         }
+        n = 2;
     }
 }

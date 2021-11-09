@@ -10,5 +10,5 @@ string excellent
 move next
 move next
 move next
-System dot out call println
-string bad
+move next
+let n equal int 2
