@@ -165,7 +165,7 @@ public class HoleAST {
 	public boolean hashOnlyOneChild(HoleNode holeNode) {
 		Set<HoleType> set = new HashSet<HoleType>(Arrays.asList(HoleType.ImportDeclaration, HoleType.TypeDeclaration,
 				HoleType.Expression, HoleType.TypeVariable, HoleType.Body, HoleType.Statement, HoleType.VariableInitializer,
-				HoleType.VariableDeclarator, HoleType.Expr1, HoleType.Expr2));
+				HoleType.VariableDeclarator, HoleType.Expr1, HoleType.Expr2, HoleType.ThenStatement));
 		return holeNode.getNonUndefinedChildListSize() == 1 && set.contains(holeNode.getHoleType());
 	}
 

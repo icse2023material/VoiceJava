@@ -1,13 +1,10 @@
-public class ForTest {
+public class IfTest {
 
-    public void main(String[] args) {
-        int[] ns;
-        for (int i = 0; i < ns.length; i++) {
-            System.out.println(ns[i]);
-            int nsi;
-            ns[i];
-            nsi = ns[i];
+    public static void main(string[] args) {
+        if (n > 90) {
+            System.out.prtinln("excellent");
+        } else {
+            System.out.println("bad");
         }
-        return ns[i];
     }
 }
