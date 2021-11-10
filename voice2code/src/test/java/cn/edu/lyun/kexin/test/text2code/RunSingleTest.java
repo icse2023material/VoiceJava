@@ -18,43 +18,17 @@ public class RunSingleTest {
 			text2CompilationUnit.generate(line);
 
 			if (RunSingleTest.isDebug) {
-				text2CompilationUnit.getHoleAST().writeDotFile();
-				Runtime rt = Runtime.getRuntime();
-				try {
-					rt.exec("dot -Tpng holeAST.dot -o holeAST.png");
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
+				text2CompilationUnit.generatePNGofHoleAST();
 			}
 			text2CompilationUnit.getHoleAST().cleverMove();
 
 			if (RunSingleTest.isDebug) {
-				text2CompilationUnit.getHoleAST().writeDotFile();
-				Runtime rt = Runtime.getRuntime();
-				try {
-					rt.exec("dot -Tpng holeAST.dot -o holeAST.png");
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
+				text2CompilationUnit.generatePNGofHoleAST();
 			}
 		}
 		br.close();
-		// text2CompilationUnit.generate("expression i less than expression");
-		// text2CompilationUnit.getHoleAST().writeDotFile();
-		// Runtime rt = Runtime.getRuntime();
-		// try {
-		// rt.exec("dot -Tpng holeAST.dot -o holeAST.png");
-		// } catch (IOException e) {
-		// e.printStackTrace();
-		// }
-		// text2CompilationUnit.getHoleAST().cleverMove();
-		Runtime rt = Runtime.getRuntime();
-		try {
-			rt.exec("dot -Tpng holeAST.dot -o holeAST.png");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 
+		text2CompilationUnit.generatePNGofHoleAST();
 		System.out.println("done");
 	}
 }
