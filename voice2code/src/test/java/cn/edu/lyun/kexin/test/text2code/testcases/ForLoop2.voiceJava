@@ -1,0 +1,29 @@
+define package lyun
+import java dot util dot star
+import java dot lang dot reflect dot star
+move next
+define public class Hello
+define public int variable count
+int 0
+define private int variable sum
+int 2
+define public String variable name
+move next
+define public function sayHello
+type int
+type int list variable intArray
+type String variable name
+move next
+define int variable sum
+int 0
+define int variable b
+move next
+define for
+define int variable i
+int 0
+expression i less equal 10
+i plus plus
+let sum equal expression
+expression sum plus i
+let count equal expression
+expression count plus i

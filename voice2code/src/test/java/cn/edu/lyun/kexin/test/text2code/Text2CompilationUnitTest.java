@@ -56,8 +56,8 @@ public class Text2CompilationUnitTest {
 				"type Nodelist with Statement", "type Nodelist with Statement variable nodelist", "move next",
 				"let sum equal call fibonacci", "int 2", "move next", "let sum equal call fibonacci", "int 20", "move next" };
 
-		// isStepDebug = true;
-		String[] lines = returnExpr;
+		isStepDebug = true;
+		String[] lines = ifExample;
 		for (String line : lines) {
 			text2CompilationUnit.generate(line);
 

@@ -1,0 +1,28 @@
+define package lyun
+import java dot uitl dot star
+import java dot lang dot reflect dot star
+move next
+define public class Hello
+define private int variable greeting
+int 2
+define public function sayHello
+type int
+type int list variable intArray
+type String variable name
+move next
+define int variable sum
+int 0
+define if
+i less than 10
+sum plus plus
+sum plus plus
+move next
+i greater than 10
+sum plus plus
+move next
+i double equal 10
+sum plus plus
+move next
+move next
+move next
+return sum
