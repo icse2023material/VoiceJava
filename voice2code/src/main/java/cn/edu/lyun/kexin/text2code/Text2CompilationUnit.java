@@ -54,10 +54,12 @@ public class Text2CompilationUnit {
 
 	private CompilationUnit compilationUnit;
 	private HoleAST holeAST;
+	private boolean isDebug;
 
 	public Text2CompilationUnit() {
 		this.compilationUnit = new CompilationUnit();
 		this.holeAST = new HoleAST();
+		this.isDebug = false;
 	}
 
 	public HoleAST getHoleAST() {
@@ -75,7 +77,9 @@ public class Text2CompilationUnit {
 	public CompilationUnit generate(String text) {
 		Pattern pattern = RegexSet.compile(new PatternSet()).matchPattern(text);
 		Node node = ASTManager.generate(pattern);
-		System.out.println("[log] matched pattern name: " + pattern.getName());
+		if (this.isDebug) {
+			System.out.println("[log] matched pattern name: " + pattern.getName());
+		}
 
 		Pair<Pair<HoleNode, HoleNode>, List<Integer>> holePosition = this.holeAST.getCurrentHole();
 		List<Integer> path = holePosition.getSecond();
@@ -2220,7 +2224,9 @@ public class Text2CompilationUnit {
 			break;
 		}
 
-		System.out.println("[log] write to file");
+		if (this.isDebug) {
+			System.out.println("[log] write to file");
+		}
 		this.lexicalPreseveToJavaFile();
 		return this.compilationUnit;
 	}

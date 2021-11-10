@@ -44,6 +44,7 @@
 12. 定义`while`循环：
 
     - 语法：`define [do]? while`
+    - 备注: `do`还未实现
 
 13. 定义`if`:
     - 语法：`define if`
@@ -91,7 +92,7 @@
     - `return (int | byte | short | long | char | float | double | boolean | String) _ `
       - 示例：`return int 2`
     - `return [expression]?`
-      - 示例：`return _`，`return expression`
+      - 示例：`return`，`return expression`
 
 24. 12 种表达式
 
@@ -145,3 +146,4 @@
       - 备注：选中函数
     - `replace _ to _`
     - `delete`
+    - `undo`:撤销

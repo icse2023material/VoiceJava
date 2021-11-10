@@ -15,34 +15,33 @@ public class BinaryOperatorAST {
 			operatorStr += " " + anOtherOperatorStr;
 			units.remove(0);
 		}
-		System.out.println(operatorStr);
 		return operatorStr;
 	}
 
 	public static Operator generateOperator(String operatorStr) {
 		switch (operatorStr) {
-			case "plus":
-				return BinaryExpr.Operator.PLUS;
-			case "minus":
-				return BinaryExpr.Operator.MINUS;
-			case "times":
-				return BinaryExpr.Operator.MULTIPLY;
-			case "divide":
-				return BinaryExpr.Operator.DIVIDE;
-			case "mod":
-				return BinaryExpr.Operator.REMAINDER;
-			case "less than":
-				return BinaryExpr.Operator.LESS;
-			case "less equal":
-				return BinaryExpr.Operator.LESS_EQUALS;
-			case "greater than":
-				return BinaryExpr.Operator.GREATER;
-			case "greater equal":
-				return BinaryExpr.Operator.GREATER_EQUALS;
-			case "double equal":
-				return BinaryExpr.Operator.EQUALS;
-			case "double and":
-				return BinaryExpr.Operator.AND;
+		case "plus":
+			return BinaryExpr.Operator.PLUS;
+		case "minus":
+			return BinaryExpr.Operator.MINUS;
+		case "times":
+			return BinaryExpr.Operator.MULTIPLY;
+		case "divide":
+			return BinaryExpr.Operator.DIVIDE;
+		case "mod":
+			return BinaryExpr.Operator.REMAINDER;
+		case "less than":
+			return BinaryExpr.Operator.LESS;
+		case "less equal":
+			return BinaryExpr.Operator.LESS_EQUALS;
+		case "greater than":
+			return BinaryExpr.Operator.GREATER;
+		case "greater equal":
+			return BinaryExpr.Operator.GREATER_EQUALS;
+		case "double equal":
+			return BinaryExpr.Operator.EQUALS;
+		case "double and":
+			return BinaryExpr.Operator.AND;
 		}
 		return null;
 	}

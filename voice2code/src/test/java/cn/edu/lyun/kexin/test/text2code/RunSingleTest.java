@@ -6,7 +6,7 @@ import java.io.IOException;
 
 import cn.edu.lyun.kexin.text2code.Text2CompilationUnit;
 
-public class RunTest {
+public class RunSingleTest {
 	public static void main(String[] args) throws IOException {
 		String dir = System.getProperty("user.dir");
 		Text2CompilationUnit text2CompilationUnit = new Text2CompilationUnit();

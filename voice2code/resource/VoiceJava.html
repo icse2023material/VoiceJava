@@ -92,7 +92,7 @@
 <li>
 <p>定义类型：</p>
 <ul>
-<li>语法：<code>type _ [extends _]?</code></li>
+<li>语法：<code>type (_ list | _ [dot _]? [with _+]?) [extends _]?</code></li>
 <li>示例: <code>type int</code>， <code>type void</code></li>
 </ul>
 </li>
@@ -100,7 +100,7 @@
 <p>定义参数：</p>
 <ul>
 <li>语法： <code>type (_ list | _ [dot _]? [with _+]?) variable _</code></li>
-<li>示例：<code>type int count</code></li>
+<li>示例：<code>type int variable count</code>，<code>type NodeList with Statement variable nodelist</code></li>
 </ul>
 </li>
 <li>
@@ -114,6 +114,7 @@
 <p>定义<code>while</code>循环：</p>
 <ul>
 <li>语法：<code>define [do]? while</code></li>
+<li>备注: <code>do</code>还未实现</li>
 </ul>
 </li>
 <li>
@@ -226,7 +227,7 @@
 </li>
 <li><code>return [expression]?</code>
 <ul>
-<li>示例：<code>return _</code>，<code>return expression</code></li>
+<li>示例：<code>return</code>，<code>return expression</code></li>
 </ul>
 </li>
 </ul>
@@ -338,6 +339,7 @@
 </li>
 <li><code>replace _ to _</code></li>
 <li><code>delete</code></li>
+<li><code>undo</code>:撤销</li>
 </ul>
 </li>
 </ol>
