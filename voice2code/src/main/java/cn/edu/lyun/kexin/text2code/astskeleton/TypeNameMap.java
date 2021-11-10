@@ -26,6 +26,7 @@ public class TypeNameMap {
 		map.put(HoleType.Expression, "getExpression");
 		map.put(HoleType.LeftSubExpr, "getLeft");
 		map.put(HoleType.RightSubExpr, "getRight");
+		map.put(HoleType.AssignExprTarget, "getTarget");
 		map.put(HoleType.AssignExprValue, "getValue");
 		map.put(HoleType.VariableInitializer, "getInitializer");
 		map.put(HoleType.Arguments, "getArguments");

@@ -24,6 +24,13 @@ public class HoleNode {
 
 	}
 
+	public HoleNode(HoleType holeType, boolean isHole, HoleType realHoleType) {
+		this.holeType = holeType;
+		this.isHole = isHole;
+		this.holeTypeOptions = new HoleType[] { realHoleType };
+		this.childList = new ArrayList<HoleNode>();
+	}
+
 	public void setHoleTypeOptions(HoleType[] holeTypeOptions) {
 		this.holeTypeOptions = holeTypeOptions;
 	}
@@ -63,6 +70,12 @@ public class HoleNode {
 	public void set(HoleType holeType, boolean isHole) {
 		this.holeType = holeType;
 		this.isHole = isHole;
+	}
+
+	public void set(HoleType holeType, boolean isHole, HoleType realType) {
+		this.holeType = holeType;
+		this.isHole = isHole;
+		this.holeTypeOptions = new HoleType[] { realType };
 	}
 
 	public List<HoleNode> getChildList() {

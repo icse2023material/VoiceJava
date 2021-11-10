@@ -1,12 +1,14 @@
-public class WhileTest {
+package lyun;
 
-    public static void main(string[] args) {
-        int sum = 0;
-        int n = 0;
-        while (n <= 100) {
-            n++;
-            sum = sum + n;
-            System.out.println(sum);
-        }
+import java.uitl.*;
+import java.lang.reflect.*;
+
+public class Hello {
+
+    private int greeting = 2;
+
+    public int sayHello(int[] intArray, String name) {
+        notify(3, 5);
+        return hello.notify(2);
     }
 }

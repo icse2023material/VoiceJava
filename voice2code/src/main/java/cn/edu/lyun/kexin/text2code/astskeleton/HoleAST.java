@@ -142,6 +142,16 @@ public class HoleAST {
 		}
 	}
 
+	public void generateDotAndPNGOfHoleAST() {
+		this.writeDotFile();
+		Runtime rt = Runtime.getRuntime();
+		try {
+			rt.exec("dot -Tpng holeAST.dot -o holeAST.png");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
 	public void cleverMove() {
 		Pair<Pair<HoleNode, HoleNode>, List<Integer>> pair = getCurrentHole();
 		HoleNode parentHole = pair.getFirst().getFirst();
@@ -165,13 +175,16 @@ public class HoleAST {
 	public boolean hashOnlyOneChild(HoleNode holeNode) {
 		Set<HoleType> set = new HashSet<HoleType>(Arrays.asList(HoleType.ImportDeclaration, HoleType.TypeDeclaration,
 				HoleType.Expression, HoleType.TypeVariable, HoleType.Body, HoleType.Statement, HoleType.VariableInitializer,
-				HoleType.VariableDeclarator, HoleType.Expr1, HoleType.Expr2, HoleType.ThenStatement));
+				HoleType.VariableDeclarator, HoleType.Expr1, HoleType.Expr2, HoleType.ThenStatement, HoleType.AssignExprValue));
 		return holeNode.getNonUndefinedChildListSize() == 1 && set.contains(holeNode.getHoleType());
 	}
 
 	public boolean isNodeChildrenFull(HoleNode holeNode) {
-		Set<HoleType> set = new HashSet<HoleType>(
-				Arrays.asList(HoleType.VariableDeclarator, HoleType.Statement, HoleType.Expr1, HoleType.Expr2));
+		Set<HoleType> oneChildSet = new HashSet<HoleType>(Arrays.asList(HoleType.VariableDeclarator, HoleType.Statement,
+				HoleType.Expr1, HoleType.Expr2, HoleType.MethodCallExpr, HoleType.Return1, HoleType.Return2));
+		Set<HoleType> twoChildrenSet = new HashSet<HoleType>(
+				Arrays.asList(HoleType.Let1Expr, HoleType.Let2Expr, HoleType.SwitchEntry));
+
 		if (holeNode.getHoleType().equals(HoleType.Wrapper)) {
 			HoleType holeType = holeNode.getHoleTypeOfOptionsIfOnlyOne();
 			if (holeType != null) {
@@ -193,13 +206,12 @@ public class HoleAST {
 						return holeNode.getChildList().get(holeNode.getChildListSize() - 1).getHoleType()
 								.equals(HoleType.ElseStatement);
 					}
-				}
-				if (holeType.equals(HoleType.SwitchEntry)) {
+				} else if (oneChildSet.contains(holeType)) {
+					return holeNode.getNonUndefinedChildListSize() == 1;
+				} else if (twoChildrenSet.contains(holeType)) {
 					return holeNode.getNonUndefinedChildListSize() == 2;
 				}
-				if (set.contains(holeType)) {
-					return holeNode.getNonUndefinedChildListSize() == 1;
-				}
+
 				return false;
 			}
 			return false;
