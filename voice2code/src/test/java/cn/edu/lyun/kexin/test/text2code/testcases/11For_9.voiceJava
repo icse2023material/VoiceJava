@@ -1,0 +1,11 @@
+define public class HelloWorld
+define public function sayHello
+type void
+type Name list variable names
+move next
+define for
+move next
+move next
+move next
+System dot out call println
+string hello world

@@ -1,0 +1,11 @@
+define public class HelloWorld
+define public function sayHello
+type void
+type Name list variable names
+move next
+define for
+define int variable i 
+int 0
+expression i less than expression
+names dot length
+i plus plus

@@ -1,8 +1,8 @@
 digraph {
-CompilationUnit_1767228680 -> TypeDeclarations_1047108779
-TypeDeclarations_1047108779 -> Wrapper_ClassDeclaration_1493076079
-Wrapper_ClassDeclaration_1493076079 -> BodyDeclarations_1099465107
-BodyDeclarations_1099465107 -> Wrapper_MethodDeclaration_103969071
-Wrapper_MethodDeclaration_103969071 -> TypeExtends_1951148422
-Wrapper_MethodDeclaration_103969071 -> Undefined_1490905744 [color = red] 
+CompilationUnit_10355399 -> TypeDeclarations_1324764935
+TypeDeclarations_1324764935 -> Wrapper_ClassDeclaration_1577055739
+Wrapper_ClassDeclaration_1577055739 -> BodyDeclarations_310728054
+BodyDeclarations_310728054 -> Wrapper_MethodDeclaration_1652418011
+Wrapper_MethodDeclaration_1652418011 -> TypeExtends_512692452
+Wrapper_MethodDeclaration_1652418011 -> Undefined_1014853347 [color = red] 
 }
