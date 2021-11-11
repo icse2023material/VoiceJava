@@ -500,6 +500,22 @@ public class Text2CompilationUnit {
 					holeNodeChild.setHoleTypeOptions(new HoleType[] { HoleType.Expression });
 					currentHole.addChild(holeNodeChild);
 				}
+			} else if (parentNodeClassStr != null && parentNodeClassStr.equals("MethodDeclaration")) {
+				MethodDeclaration mNode = (MethodDeclaration) parent.getLeft();
+				Optional<BlockStmt> optionalBody = mNode.getBody();
+				currentHole.set(HoleType.Body, false);
+				HoleNode anotherCurrentHole = new HoleNode();
+				currentHole.addChild(anotherCurrentHole);
+				BlockStmt blockStmt = optionalBody.get();
+				NodeList<Statement> statements = blockStmt.getStatements();
+				if (statements.size() == 0) {
+					statements.add((Statement) node);
+					anotherCurrentHole.set(HoleType.Statements, false);
+					HoleNode childNode = new HoleNode(HoleType.Wrapper, false);
+					childNode.setHoleTypeOptionsOfOnlyOne(HoleType.WhileStmt);
+					anotherCurrentHole.addChild(childNode);
+					childNode.addChild(new HoleNode());
+				}
 			} else if (parentNodeClassStr != null && parentNodeClassStr.equals("ForStmt")) {
 				ForStmt forStmt = (ForStmt) parent.getLeft();
 				Statement body = forStmt.getBody();
@@ -3449,7 +3465,15 @@ public class Text2CompilationUnit {
 		} else if (parentNodeClassStr != null && parentNodeClassStr.equals("ForStmt")) {
 			this.generateExprStmtInForStmt(parent, currentHole, node, holeTypeExpr);
 		} else if (parentNodeClassStr != null && parentNodeClassStr.equals("WhileStmt")) {
-			this.generateExprStmtInWhileStmt(parent, currentHole, node, holeTypeExpr);
+			if (holeIndex == 0) {
+				// i < 10 in while(i < 10){}
+				WhileStmt whileStmt = (WhileStmt) parent.getLeft();
+				whileStmt.setCondition((Expression) node);
+				currentHole.set(HoleType.Expression, false);
+				parentHole.addChild(new HoleNode());
+			} else {
+				this.generateExprStmtInWhileStmt(parent, currentHole, node, holeTypeExpr);
+			}
 		} else if (parentNodeClassStr != null && parentNodeClassStr.equals("IfStmt")) {
 			this.generateThenStmtInIfStmt(parent, node, currentHole, holeTypeExpr);
 		} else if (parentNodeClassStr != null && parentNodeClassStr.equals("BlockStmt")) {

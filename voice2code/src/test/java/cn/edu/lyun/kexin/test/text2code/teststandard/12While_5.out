@@ -1,0 +1,7 @@
+public class HelloWorld {
+    public void sayHello(Name[] names) {
+        while (true) {
+            System.out.println("hello world");
+        }
+    }
+}
