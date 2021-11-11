@@ -1,0 +1,3 @@
+public class HelloWorld {
+    public Node<Integer, String> nodelist;
+}

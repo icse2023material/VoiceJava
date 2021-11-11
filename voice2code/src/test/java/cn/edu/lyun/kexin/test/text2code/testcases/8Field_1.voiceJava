@@ -1,0 +1,2 @@
+define public class HelloWorld
+define private int variable count

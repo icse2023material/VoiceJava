@@ -1,0 +1,2 @@
+define public class HelloWorld
+define public Node with Integer String variable nodelist
