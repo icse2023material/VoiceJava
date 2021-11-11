@@ -1,0 +1,10 @@
+define public class HelloWorld
+define public function sayHello
+type void
+move next
+let x equal expression
+expression 3 plus 5
+let x equal expression
+variable ns index i
+let x equal expression
+string hello world !

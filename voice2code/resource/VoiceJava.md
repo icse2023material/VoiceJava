@@ -117,6 +117,8 @@
       - 示例：`expression 3 plus 4`
     - `expression? variable _ index _`
       - 示例: `expression variable ns index i`, 数组索引
+    - `expression? string [_]+`
+      - 示例：`string hello world`，支持多个单词。
     - 备注：
       - `op ::= plus | minus | times | divide | mod`
       - `compare ::= less than | less equal | greater than | greater equal | double equal | and | doube and`
