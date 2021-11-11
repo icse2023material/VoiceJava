@@ -1,7 +1,7 @@
 public class HelloWorld {
 
     public void sayHello(Name[] names) {
-        switch(option) {
-        }
+        fib = Fib.fibonacci();
+        sum.fib = fib.fibonacci();
     }
 }

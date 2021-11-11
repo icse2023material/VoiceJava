@@ -1,7 +1,9 @@
 public class HelloWorld {
 
     public void sayHello(Name[] names) {
-        switch(option) {
-        }
+        x = a;
+        x = a.b;
+        x.y = a;
+        x.y = a.b;
     }
 }

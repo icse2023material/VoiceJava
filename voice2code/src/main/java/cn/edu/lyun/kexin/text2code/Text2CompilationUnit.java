@@ -979,8 +979,8 @@ public class Text2CompilationUnit {
 				Optional<BlockStmt> optionalBody = mNode.getBody();
 				currentHole.set(HoleType.Body, false);
 
-				HoleNode anotherCurrentHole = new HoleNode();
-				currentHole.addChild(anotherCurrentHole);
+				HoleNode stmtsNode = new HoleNode();
+				currentHole.addChild(stmtsNode);
 
 				BlockStmt blockStmt = optionalBody.get();
 				NodeList<Statement> statements = blockStmt.getStatements();
@@ -988,14 +988,9 @@ public class Text2CompilationUnit {
 					ExpressionStmt expressionStmt = new ExpressionStmt((Expression) node);
 					statements.add(expressionStmt);
 
-					anotherCurrentHole.set(HoleType.Statements, false);
-
-					holeNode = new HoleNode(HoleType.Expression, false);
-					anotherCurrentHole.addChild(holeNode);
-
-					HoleNode holeNodeChild = new HoleNode();
-					holeNodeChild.setHoleTypeOptions(new HoleType[] { HoleType.Expression });
-					anotherCurrentHole.addChild(holeNodeChild);
+					stmtsNode.set(HoleType.Statements, false);
+					stmtsNode.set(HoleType.Statements, false);
+					stmtsNode.addChild(this.constructHoleASTOfAssignStmtForLet1AndLet2(holeTypeExpr));
 				} else {
 					// TODO
 				}

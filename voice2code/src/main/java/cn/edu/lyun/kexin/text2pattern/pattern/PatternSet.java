@@ -177,7 +177,7 @@ public class PatternSet {
 								new Unit("or", new Unit("long"), new Unit("or", new Unit("char"), new Unit("or", new Unit("float"),
 										new Unit("or", new Unit("double"), new Unit("or", new Unit("boolean"), new Unit("string")))))))));
 		Pattern let5Pat = new Pattern("let5",
-				"let _ [dot _]? equal (int | byte | short | long | char | float | double | boolean | String) _ ",
+				"let _ [dot _]? equal (int | byte | short | long | char | float | double | boolean | string) _ ",
 				new Unit[] { new Unit("let"), new Unit(), new Unit("question", new Unit("dot"), new Unit()), new Unit("equal"),
 						typeUnit, new Unit() });
 		patSet.add(let5Pat);

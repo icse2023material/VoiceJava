@@ -1,0 +1,7 @@
+define public class HelloWorld
+define public function sayHello
+type void
+type Name list variable names
+move next
+let x equal long 2.12
+let x dot y equal int 2

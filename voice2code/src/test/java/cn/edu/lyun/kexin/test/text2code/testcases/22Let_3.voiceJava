@@ -1,0 +1,9 @@
+define public class HelloWorld
+define public function sayHello
+type void
+type Name list variable names
+move next
+let x equal a
+let x equal a dot b
+let x dot y equal a
+let x dot y equal a dot b

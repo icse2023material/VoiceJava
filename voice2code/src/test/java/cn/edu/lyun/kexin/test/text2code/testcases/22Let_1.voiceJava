@@ -1,0 +1,8 @@
+define public class HelloWorld
+define public function sayHello
+type void
+type Name list variable names
+move next
+let fib equal call fibonacci
+move next
+let sum dot fib equal call fibonacci

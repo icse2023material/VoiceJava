@@ -71,11 +71,11 @@
       - 示例：`let count equal call compute`
     - `let _ [dot _]? equal _ [call _]+`
       - 示例：`let x dot a equal a call b call c`
-    - `let _ [dot _]? equal _ [dot _] _`
+    - `let _ [dot _]? equal _ [dot _]*`
       - 示例：`let x equal b dot c dot d`
     - `let _ [dot _]? equal [variable]? _`
       - 示例： `let x equal variable y`
-    - `let _ [dot _]? equal (int | byte | short | long | char | float | double | boolean | String) _`
+    - `let _ [dot _]? equal (int | byte | short | long | char | float | double | boolean | string) _`
       - 示例： `let x equal int 2`
     - `let _ [dot _]? equal [expression]?`
       - 示例：`let x equal`，`let x equal expression`
@@ -89,7 +89,7 @@
       - 示例：`return a`， `return a dot b`
     - `return [variable]? _`
       - 示例：`return variable y`, `return y`
-    - `return (int | byte | short | long | char | float | double | boolean | String) _ `
+    - `return (int | byte | short | long | char | float | double | boolean | string) _ `
       - 示例：`return int 2`
     - `return [expression]?`
       - 示例：`return`，`return expression`
@@ -104,7 +104,7 @@
       - 示例：`expression a dot b`
     - `expression? [variable]? _`
       - 示例：`expression variable y`
-    - `expression? (int | byte | short | long | char | float | double | boolean | String) \_`
+    - `expression? (int | byte | short | long | char | float | double | boolean | string) \_`
       - 示例： `expression int 2`
     - `expression? _ plus plus`
     - `expression? _ minus minus`

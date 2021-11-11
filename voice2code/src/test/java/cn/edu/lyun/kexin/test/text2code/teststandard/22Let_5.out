@@ -1,7 +1,7 @@
 public class HelloWorld {
 
     public void sayHello(Name[] names) {
-        switch(option) {
-        }
+        x = 2.12;
+        x.y = 2;
     }
 }
