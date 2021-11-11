@@ -1,9 +1,4 @@
-package org.elasticsearch.search;
+package lyun;
 
-import static java.lang.System.*;
-public class PackageTest {
+import static cn.edu.lyun.*;
 
-    public static void main(string[] args) {
-        System.out.println("hello");
-    }
-}

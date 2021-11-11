@@ -1,9 +1,0 @@
-define package org dot elasticsearch dot search
-import static java dot lang dot System dot star
-define public class PackageTest
-define public static function main
-type void
-type string list variable args
-move next
-System dot out call println
-string hello
