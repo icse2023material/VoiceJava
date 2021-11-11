@@ -104,7 +104,7 @@
       - 示例：`expression a dot b`
     - `expression? [variable]? _`
       - 示例：`expression variable y`
-    - `expression? (int | byte | short | long | char | float | double | boolean | string) \_`
+    - `expression? (int | byte | short | long | char | float | double | boolean | string) _`
       - 示例： `expression int 2`
     - `expression? _ plus plus`
     - `expression? _ minus minus`
@@ -120,6 +120,7 @@
     - 备注：
       - `op ::= plus | minus | times | divide | mod`
       - `compare ::= less than | less equal | greater than | greater equal | double equal | and | doube and`
+      - 备注: `and`还不支持
 
 25. 常用指令：
     - `move next`

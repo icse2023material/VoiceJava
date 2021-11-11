@@ -1,0 +1,6 @@
+public class HelloWorld {
+
+    public void sayHello() {
+        x = 3 + 2 * sum();
+    }
+}

@@ -1,0 +1,11 @@
+define public class HelloWorld
+define public function sayHello
+type void
+type Name list variable names
+move next
+let x equal expression
+expression call sum
+move next
+let x equal expression
+expression a call sum
+move next

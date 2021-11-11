@@ -1223,13 +1223,15 @@ public class Text2CompilationUnit {
 
 					anotherCurrentHole.set(HoleType.Statements, false);
 
-					holeNode = new HoleNode(HoleType.Expression, false);
-					holeNode.setHoleTypeOptions(new HoleType[] { HoleType.Let6Expr });
-					anotherCurrentHole.addChild(holeNode);
+					HoleNode stmtHole = new HoleNode(HoleType.Wrapper, false, HoleType.Statement);
+					anotherCurrentHole.addChild(stmtHole);
 
-					HoleNode holeNodeChild = new HoleNode();
-					holeNodeChild.setHoleTypeOptions(new HoleType[] { HoleType.Expression });
-					holeNode.addChild(holeNodeChild);
+					HoleNode exprNode = new HoleNode(HoleType.Expression, false);
+					stmtHole.addChild(exprNode);
+
+					HoleNode exprWrapper = new HoleNode(HoleType.Wrapper, false, holeTypeExpr);
+					exprNode.addChild(exprWrapper);
+					exprWrapper.addChild(new HoleNode());
 				} else {
 					// TODO
 				}
@@ -1781,7 +1783,8 @@ public class Text2CompilationUnit {
 				BinaryExpr binaryExpr = (BinaryExpr) parent.getLeft();
 				if ((parentHole.getHoleTypeOfOptionsIfOnlyOne() != null
 						&& parentHole.getHoleTypeOfOptionsIfOnlyOne().equals(HoleType.Expr11))
-						|| parentOfParentHole.getHoleTypeOfOptionsIfOnlyOne().equals(HoleType.Expr11)) {
+						|| (parentOfParentHole.getHoleTypeOfOptionsIfOnlyOne() != null
+								&& parentOfParentHole.getHoleTypeOfOptionsIfOnlyOne().equals(HoleType.Expr11))) {
 					binaryExpr.setRight((Expression) node);
 
 					currentHole.set(HoleType.RightSubExpr, false);
@@ -1791,7 +1794,8 @@ public class Text2CompilationUnit {
 					holeNode.addChild(new HoleNode());
 				} else if ((parentHole.getHoleTypeOfOptionsIfOnlyOne() != null
 						&& parentHole.getHoleTypeOfOptionsIfOnlyOne().equals(HoleType.Expr10))
-						|| parentOfParentHole.getHoleTypeOfOptionsIfOnlyOne().equals(HoleType.Expr10)) {
+						|| (parentOfParentHole.getHoleTypeOfOptionsIfOnlyOne() != null
+								&& parentOfParentHole.getHoleTypeOfOptionsIfOnlyOne().equals(HoleType.Expr10))) {
 					if (holeIndex == 0) {
 						// left
 						binaryExpr.setLeft((Expression) node);
@@ -1963,16 +1967,19 @@ public class Text2CompilationUnit {
 					parentOfParentOfParentHole.addChild(holeNode);
 				} else if ((parentHole.getHoleTypeOfOptionsIfOnlyOne() != null
 						&& parentHole.getHoleTypeOfOptionsIfOnlyOne().equals(HoleType.Expr11))
-						|| parentOfParentHole.getHoleTypeOfOptionsIfOnlyOne().equals(HoleType.Expr11)) {
+						|| (parentOfParentHole.getHoleTypeOfOptionsIfOnlyOne() != null
+								&& parentOfParentHole.getHoleTypeOfOptionsIfOnlyOne().equals(HoleType.Expr11))) {
 					binaryExpr.setRight((Expression) node);
-					currentHole.set(HoleType.Wrapper, false);
-					currentHole.setHoleTypeOptionsOfOnlyOne(holeTypeExpr);
+					currentHole.set(HoleType.RightSubExpr, false);
+					HoleNode exprWrapper = new HoleNode(HoleType.Wrapper, false, holeTypeExpr);
+					currentHole.addChild(exprWrapper);
 
 					HoleNode holeNodeChild = new HoleNode();
-					currentHole.addChild(holeNodeChild);
+					exprWrapper.addChild(holeNodeChild);
 				} else if ((parentHole.getHoleTypeOfOptionsIfOnlyOne() != null
 						&& parentHole.getHoleTypeOfOptionsIfOnlyOne().equals(HoleType.Expr10))
-						|| parentOfParentHole.getHoleTypeOfOptionsIfOnlyOne().equals(HoleType.Expr10)) {
+						|| (parentOfParentHole.getHoleTypeOfOptionsIfOnlyOne() != null
+								&& parentOfParentHole.getHoleTypeOfOptionsIfOnlyOne().equals(HoleType.Expr10))) {
 					if (holeIndex == 0) {
 						// left
 						binaryExpr.setLeft((Expression) node);
@@ -3123,9 +3130,10 @@ public class Text2CompilationUnit {
 		assignExpr.setValue((Expression) node);
 
 		currentHole.set(HoleType.AssignExprValue, false);
-		HoleNode anotherHole = new HoleNode(HoleType.Wrapper, false);
-		anotherHole.setHoleTypeOptionsOfOnlyOne(holeType);
+		HoleNode anotherHole = new HoleNode(HoleType.Wrapper, false, holeType);
 		currentHole.addChild(anotherHole);
+		// HoleNode rightSubHole = new HoleNode(HoleType.RightSubExpr, false);
+		// anotherHole.addChild(rightSubHole);
 		anotherHole.addChild(new HoleNode());
 	}
 
@@ -3197,7 +3205,7 @@ public class Text2CompilationUnit {
 		} else if (parentNodeClassStr != null && parentNodeClassStr.equals("BinaryExpr")) {
 			BinaryExpr binaryExpr = (BinaryExpr) parent.getLeft();
 			if (parentHole.getHoleType().equals(HoleType.LeftSubExpr)) {
-				System.out.println("Shall not go this branch");
+				System.out.println("Shall not go to this branch");
 			} else if (parentHole.getHoleType().equals(HoleType.RightSubExpr)) {
 				binaryExpr.setRight((Expression) node);
 				currentHole.set(HoleType.Expression, false);
@@ -3212,12 +3220,11 @@ public class Text2CompilationUnit {
 					|| (parentOfParentHole.getHoleTypeOfOptionsIfOnlyOne() != null
 							&& parentOfParentHole.getHoleTypeOfOptionsIfOnlyOne().equals(HoleType.Expr11))) {
 				binaryExpr.setRight((Expression) node);
-				currentHole.set(HoleType.Expression, false);
-				HoleNode holeNode = new HoleNode(HoleType.Wrapper, false);
-				holeNode.setHoleTypeOptionsOfOnlyOne(holeTypeExpr);
-				currentHole.addChild(holeNode);
+				currentHole.set(HoleType.RightSubExpr, false);
+				HoleNode exprWrapper = new HoleNode(HoleType.Wrapper, false, holeTypeExpr);
+				currentHole.addChild(exprWrapper);
 				HoleNode anotherHoleNode = new HoleNode(HoleType.Arguments, false);
-				holeNode.addChild(anotherHoleNode);
+				exprWrapper.addChild(anotherHoleNode);
 				anotherHoleNode.addChild(new HoleNode());
 			} else if ((parentHole.getHoleTypeOfOptionsIfOnlyOne() != null
 					&& parentHole.getHoleTypeOfOptionsIfOnlyOne().equals(HoleType.Expr10))
@@ -3225,16 +3232,22 @@ public class Text2CompilationUnit {
 							&& parentOfParentHole.getHoleTypeOfOptionsIfOnlyOne().equals(HoleType.Expr10))) {
 				if (holeIndex == 0) {
 					// left
-					System.out.println("Shall not go to this branch");
+					// right
+					binaryExpr.setLeft((Expression) node);
+					currentHole.set(HoleType.LeftSubExpr, false);
+					HoleNode exprWrapper = new HoleNode(HoleType.Wrapper, false, holeTypeExpr);
+					currentHole.addChild(exprWrapper);
+					HoleNode anotherHoleNode = new HoleNode(HoleType.Arguments, false);
+					exprWrapper.addChild(anotherHoleNode);
+					anotherHoleNode.addChild(new HoleNode());
 				} else {
 					// right
 					binaryExpr.setRight((Expression) node);
-					currentHole.set(HoleType.Expression, false);
-					HoleNode holeNode = new HoleNode(HoleType.Wrapper, false);
-					holeNode.setHoleTypeOptionsOfOnlyOne(holeTypeExpr);
-					currentHole.addChild(holeNode);
+					currentHole.set(HoleType.RightSubExpr, false);
+					HoleNode exprWrapper = new HoleNode(HoleType.Wrapper, false, holeTypeExpr);
+					currentHole.addChild(exprWrapper);
 					HoleNode anotherHoleNode = new HoleNode(HoleType.Arguments, false);
-					holeNode.addChild(anotherHoleNode);
+					exprWrapper.addChild(anotherHoleNode);
 					anotherHoleNode.addChild(new HoleNode());
 				}
 			}
