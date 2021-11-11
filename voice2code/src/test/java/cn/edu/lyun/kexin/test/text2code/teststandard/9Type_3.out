@@ -1,0 +1,4 @@
+public class HelloWorld {
+    public Node.Name sayHello() {
+    }
+}

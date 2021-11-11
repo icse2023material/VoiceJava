@@ -14,3 +14,4 @@
 [] 从文件恢复状态的机制：如果只有代码以及 HoleAST 的数据，如何恢复出来
 [] `class pattern` 中，`ClassModifier`可选，且可以多个
 [] `method pattern`中,`throws Exception`还不支持
+[] `type pattern`中,`extends`未实现

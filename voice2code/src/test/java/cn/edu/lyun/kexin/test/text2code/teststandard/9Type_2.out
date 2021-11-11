@@ -1,5 +1,4 @@
 public class HelloWorld {
-
-    public int sayHello() {
+    public int[] sayHello() {
     }
 }

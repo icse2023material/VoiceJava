@@ -1,0 +1,3 @@
+define public class HelloWorld
+define public function sayHello
+type Node with String Integer

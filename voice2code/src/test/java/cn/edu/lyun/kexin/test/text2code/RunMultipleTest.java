@@ -12,6 +12,7 @@ public class RunMultipleTest {
 		String dir = System.getProperty("user.dir");
 		File directoryPath = new File(dir + "/voice2code/src/test/java/cn/edu/lyun/kexin/test/text2code/testcases");
 		File filesList[] = directoryPath.listFiles();
+		int passCount = 0, failCount = 0;
 		for (File file : filesList) {
 			if (!RunMultipleTest.getFileExtension(file).equals(".voiceJava")) {
 				continue;
@@ -21,9 +22,16 @@ public class RunMultipleTest {
 			fileName = fileName.substring(0, fileName.indexOf("."));
 			fileName += ".out";
 			Boolean isEqual = Generate.compare(fileName);
+			if (isEqual) {
+				passCount++;
+			} else {
+				failCount++;
+			}
 			System.out.println(
 					file.getName() + ": " + (isEqual ? ANSI_GREEN + "true" + ANSI_RESET : ANSI_RED + "false" + ANSI_RESET));
 		}
+
+		RunMultipleTest.output(passCount, failCount);
 	}
 
 	private static String getFileExtension(File file) {
@@ -33,6 +41,15 @@ public class RunMultipleTest {
 			return "";
 		}
 		return name.substring(lastIndexOf);
+	}
+
+	private static void output(int passCount, int failCount) {
+		System.out.println();
+		System.out.println("-------------------------------------");
+		System.out.println("Test Result:");
+		System.out.println("Total: " + (passCount + failCount));
+		System.out.println("Pass : " + ANSI_GREEN + passCount + ANSI_RESET);
+		System.out.println("Fail : " + ANSI_RED + failCount + ANSI_RED);
 	}
 
 }
