@@ -1,0 +1,12 @@
+define public class HelloWorld
+define public function sayHello
+type void
+type Name list variable names
+move next
+define if
+expression i greater than 90
+let sum equal int 100
+move next
+move next
+move next
+let i equal int 100

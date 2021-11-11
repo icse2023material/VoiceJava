@@ -1,0 +1,20 @@
+define public class HelloWorld
+define public function sayHello
+type void
+type Name list variable names
+move next
+define switch
+variable option
+int 1
+let sum equal int 0
+break
+int 2
+let sum equal int 1
+break
+int 3
+move next
+int 4
+let sum equal int 34
+break
+move next
+move next

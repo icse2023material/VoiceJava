@@ -183,7 +183,7 @@ public class HoleAST {
 		Set<HoleType> oneChildSet = new HashSet<HoleType>(Arrays.asList(HoleType.VariableDeclarator, HoleType.Statement,
 				HoleType.Expr1, HoleType.Expr2, HoleType.MethodCallExpr, HoleType.Return1, HoleType.Return2));
 		Set<HoleType> twoChildrenSet = new HashSet<HoleType>(
-				Arrays.asList(HoleType.Let1Expr, HoleType.Let2Expr, HoleType.SwitchEntry));
+				Arrays.asList(HoleType.Let1Expr, HoleType.Let2Expr, HoleType.SwitchEntry, HoleType.SwitchStmt));
 
 		if (holeNode.getHoleType().equals(HoleType.Wrapper)) {
 			HoleType holeType = holeNode.getHoleTypeOfOptionsIfOnlyOne();

@@ -1,0 +1,14 @@
+public class HelloWorld {
+
+    public void sayHello(Name[] names) {
+        switch(option) {
+            case 1:
+                sum = 0;
+                break;
+            default:
+                sum = 100;
+                break;
+        }
+        System.out.println("nice");
+    }
+}

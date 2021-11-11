@@ -1,7 +1,10 @@
 public class HelloWorld {
 
     public void sayHello(Name[] names) {
-        switch(option) {
+        if (i > 90) {
+            sum = 100;
+        } else {
         }
+        i = 100;
     }
 }

@@ -127,19 +127,26 @@ public class Text2CompilationUnit {
 					parentOfParentHole.addChild(holeNode);
 				}
 			} else if (parentHoleType.equals(HoleType.SwitchEntries)) {
-				// generate SwitchEntry Sketch
-				NodeList<SwitchEntry> switchEntries = (NodeList<SwitchEntry>) parent.get().get();
-				SwitchEntry switchEntry = new SwitchEntry();
-				switchEntries.add(switchEntry);
+				HoleNode elderBrother = parentHole.getIthChild(holeIndex - 1);
+				// Not has default case yet, then add a default case
+				if (elderBrother.getIthChild(0).getHoleType().equals(HoleType.Expression)) {
+					// generate SwitchEntry Sketch
+					NodeList<SwitchEntry> switchEntries = (NodeList<SwitchEntry>) parent.get().get();
+					SwitchEntry switchEntry = new SwitchEntry();
+					switchEntries.add(switchEntry);
 
-				currentHole.set(HoleType.Wrapper, false);
-				currentHole.setHoleTypeOptions(new HoleType[] { HoleType.SwitchEntry });
+					currentHole.set(HoleType.Wrapper, false);
+					currentHole.setHoleTypeOptions(new HoleType[] { HoleType.SwitchEntry });
 
-				holeNode = new HoleNode(HoleType.Wrapper, false);
-				holeNode.setHoleTypeOptionsOfOnlyOne(HoleType.MoveNext);
-				currentHole.addChild(holeNode);
+					holeNode = new HoleNode(HoleType.Wrapper, false);
+					holeNode.setHoleTypeOptionsOfOnlyOne(HoleType.MoveNext);
+					currentHole.addChild(holeNode);
 
-				currentHole.addChild(new HoleNode());
+					currentHole.addChild(new HoleNode());
+				} else {
+					parentHole.deleteHole(holeIndex);
+					parentOfParentHole.addChild(holeNode);
+				}
 			} else if (parentHoleType.equals(HoleType.ElseStatement) || (parentHole.getHoleTypeOfOptionsIfOnlyOne() != null
 					&& parentHole.getHoleTypeOfOptionsIfOnlyOne().equals(HoleType.IfStmt))) {
 				// default else case

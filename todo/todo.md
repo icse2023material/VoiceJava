@@ -10,6 +10,7 @@
 [√] let1, let2 not correct, return 1, return2 也需要检查
 [ ] 对象形式的初始化：`int[] ns = { 1, 4, 9, 16, 25}`
 [√] 一套测试和验证规范，并整理一个测试集
+[√] `switch` 用 `move next` 无法跳出整个`SwitchStmt`, 见 `14Switch9.vocieJava`
 [] 更多的测试来完善代码逻辑
 [] 从文件恢复状态的机制：如果只有代码以及 HoleAST 的数据，如何恢复出来
 [] `class pattern` 中，`ClassModifier`可选，且可以多个
