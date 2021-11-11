@@ -1,0 +1,6 @@
+define public class HelloWorld
+define public function sayHello
+type void
+type Name list variable names
+move next
+return variable y

@@ -2270,6 +2270,7 @@ public class Text2CompilationUnit {
 			break;
 		}
 
+		// this.holeAST.generateDotAndPNGOfHoleAST();
 		this.holeAST.cleverMove();
 
 		if (this.isDebug) {
@@ -3426,6 +3427,7 @@ public class Text2CompilationUnit {
 
 			HoleNode argsHole = new HoleNode(HoleType.Arguments, false);
 			exprHole.addChild(argsHole);
+			argsHole.addChild(new HoleNode());
 		} else if (parentNodeClassStr != null && parentNodeClassStr.equals("AssignExpr")) {
 			AssignExpr assignExpr = (AssignExpr) parent.getLeft();
 			assignExpr.setValue((Expression) node);
@@ -3437,6 +3439,7 @@ public class Text2CompilationUnit {
 
 			HoleNode argsHole = new HoleNode(HoleType.Arguments, false);
 			exprHole.addChild(argsHole);
+			argsHole.addChild(new HoleNode());
 		} else if (parentHoleType.equals(HoleType.Arguments)) {
 			this.generateExprInArguments(parent, node, currentHole, parentHole, holeTypeExpr);
 		} else if (parentNodeClassStr != null && parentNodeClassStr.equals("EnclosedExpr")) {
