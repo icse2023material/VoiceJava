@@ -20,11 +20,6 @@ public class RunSingleTest {
 			if (RunSingleTest.isDebug) {
 				text2CompilationUnit.generatePNGofHoleAST();
 			}
-			text2CompilationUnit.getHoleAST().cleverMove();
-
-			if (RunSingleTest.isDebug) {
-				text2CompilationUnit.generatePNGofHoleAST();
-			}
 		}
 		br.close();
 

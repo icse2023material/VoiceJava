@@ -64,29 +64,9 @@ public class Text2CompilationUnitTest {
 			if (isStepDebug) {
 				text2CompilationUnit.generatePNGofHoleAST();
 			}
-
-			text2CompilationUnit.getHoleAST().cleverMove();
-
-			if (isStepDebug) {
-				text2CompilationUnit.generatePNGofHoleAST();
-			}
 		}
-		// text2CompilationUnit.generate();
-		// text2CompilationUnit.getHoleAST().cleverMove();
-		// text2CompilationUnit.generate();
-		// text2CompilationUnit.generate("let hello dot sum equal hello call
-		// fibonacci");
-		// text2CompilationUnit.generate("let sum equal hello dot sum");
-		// text2CompilationUnit.generate("expression plus expression");
-		// text2CompilationUnit.generate("subexpression");
 
-		text2CompilationUnit.getHoleAST().writeDotFile();
-		Runtime rt = Runtime.getRuntime();
-		try {
-			rt.exec("dot -Tpng holeAST.dot -o holeAST.png");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		text2CompilationUnit.generatePNGofHoleAST();
 
 		System.out.println("done");
 	}

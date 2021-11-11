@@ -2224,6 +2224,8 @@ public class Text2CompilationUnit {
 			break;
 		}
 
+		this.holeAST.cleverMove();
+
 		if (this.isDebug) {
 			System.out.println("[log] write to file");
 		}

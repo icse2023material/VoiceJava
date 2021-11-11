@@ -14,15 +14,9 @@ public class Generate {
 		BufferedReader br = new BufferedReader(new FileReader(filePath));
 		for (String line; (line = br.readLine()) != null;) {
 			text2CompilationUnit.generate(line);
-			text2CompilationUnit.getHoleAST().cleverMove();
 		}
 		br.close();
-		Runtime rt = Runtime.getRuntime();
-		try {
-			rt.exec("dot -Tpng holeAST.dot -o holeAST.png");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		text2CompilationUnit.generatePNGofHoleAST();
 	}
 
 	public static boolean compare(String standardResultFileName) throws IOException {
