@@ -15,3 +15,4 @@
 [] `class pattern` 中，`ClassModifier`可选，且可以多个
 [] `method pattern`中,`throws Exception`还不支持
 [] `type pattern`中,`extends`未实现
+[] 参数定义中，如何正确识别类型，比如 `type string variable name` 会被识别为: `string name`; `type String variable name`被识别为`String name`。我们期望的为第二种
