@@ -1,6 +1,0 @@
-define public interface Person
-define function run
-type void
-move next
-define function getName
-type String
