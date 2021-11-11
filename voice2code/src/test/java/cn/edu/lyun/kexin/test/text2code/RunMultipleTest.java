@@ -13,6 +13,9 @@ public class RunMultipleTest {
 		File directoryPath = new File(dir + "/voice2code/src/test/java/cn/edu/lyun/kexin/test/text2code/testcases");
 		File filesList[] = directoryPath.listFiles();
 		for (File file : filesList) {
+			if (!RunMultipleTest.getFileExtension(file).equals(".voiceJava")) {
+				continue;
+			}
 			Generate.generate(file.getAbsolutePath());
 			String fileName = file.getName();
 			fileName = fileName.substring(0, fileName.indexOf("."));
@@ -21,6 +24,15 @@ public class RunMultipleTest {
 			System.out.println(
 					file.getName() + ": " + (isEqual ? ANSI_GREEN + "true" + ANSI_RESET : ANSI_RED + "false" + ANSI_RESET));
 		}
+	}
+
+	private static String getFileExtension(File file) {
+		String name = file.getName();
+		int lastIndexOf = name.lastIndexOf(".");
+		if (lastIndexOf == -1) {
+			return "";
+		}
+		return name.substring(lastIndexOf);
 	}
 
 }

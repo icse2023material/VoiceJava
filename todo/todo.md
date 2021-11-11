@@ -12,3 +12,5 @@
 [√] 一套测试和验证规范，并整理一个测试集
 [] 更多的测试来完善代码逻辑
 [] 从文件恢复状态的机制：如果只有代码以及 HoleAST 的数据，如何恢复出来
+[] `class pattern` 中，`ClassModifier`可选，且可以多个
+[] `method pattern`中,`throws Exception`还不支持
