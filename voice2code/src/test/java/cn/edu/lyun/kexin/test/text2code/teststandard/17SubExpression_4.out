@@ -1,0 +1,9 @@
+public class HelloWorld {
+
+    public void sayHello() {
+        x = 3 + (z);
+        x = (a.b) + (a.b);
+        x = (y);
+        x = (3 + 2);
+    }
+}

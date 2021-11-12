@@ -1,0 +1,4 @@
+public class HelloWorld {
+
+    private int great = 17 * (18 + 19);
+}

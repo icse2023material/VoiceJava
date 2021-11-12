@@ -13,7 +13,7 @@ public class RunSingleTest {
 		String dir = System.getProperty("user.dir");
 		Text2CompilationUnit text2CompilationUnit = new Text2CompilationUnit();
 		String filePath = dir
-				+ "/voice2code/src/test/java/cn/edu/lyun/kexin/test/text2code/testcases/24Expression_14.voiceJava";
+				+ "/voice2code/src/test/java/cn/edu/lyun/kexin/test/text2code/testcases/17Subexpression_6.voiceJava";
 		BufferedReader br = new BufferedReader(new FileReader(filePath));
 		for (String line; (line = br.readLine()) != null;) {
 			text2CompilationUnit.generate(line);

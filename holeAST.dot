@@ -1,23 +1,14 @@
 digraph {
-CompilationUnit_1825071442 -> TypeDeclarations_1629133067
-TypeDeclarations_1629133067 -> Wrapper_ClassDeclaration_2092870757
-Wrapper_ClassDeclaration_2092870757 -> BodyDeclarations_2145921383
-BodyDeclarations_2145921383 -> Wrapper_MethodDeclaration_1350894905
-Wrapper_MethodDeclaration_1350894905 -> TypeExtends_1709317347
-Wrapper_MethodDeclaration_1350894905 -> TypeVariables_1815501246
-Wrapper_MethodDeclaration_1350894905 -> Body_1378612814
-Body_1378612814 -> Statements_721395199
-Statements_721395199 -> Wrapper_Statement_1594857799
-Statements_721395199 -> Wrapper_Statement_27971761
-Statements_721395199 -> Wrapper_Statement_205446988
-Statements_721395199 -> Undefined_1526250321 [color = red] 
-Wrapper_Statement_1594857799 -> Expression_2040452328
-Wrapper_Statement_27971761 -> Expression_778484786
-Wrapper_Statement_205446988 -> Expression_1423491597
-Expression_2040452328 -> Wrapper_Let6Expr_1264966132
-Expression_778484786 -> Wrapper_Let6Expr_1146318308
-Expression_1423491597 -> Wrapper_Let6Expr_1607458416
-Wrapper_Let6Expr_1264966132 -> Expr12_1301653294
-Wrapper_Let6Expr_1146318308 -> Expr13_685407505
-Wrapper_Let6Expr_1607458416 -> Expr14_2008619427
+CompilationUnit_2094913297 -> TypeDeclarations_991651800
+TypeDeclarations_991651800 -> Wrapper_ClassDeclaration_816662630
+Wrapper_ClassDeclaration_816662630 -> BodyDeclarations_1866280061
+BodyDeclarations_1866280061 -> Wrapper_MethodDeclaration_2102004692
+Wrapper_MethodDeclaration_2102004692 -> TypeExtends_487560706
+Wrapper_MethodDeclaration_2102004692 -> TypeVariables_1195054013
+Wrapper_MethodDeclaration_2102004692 -> Body_1097040355
+TypeVariables_1195054013 -> TypeVariable_1826240176
+Body_1097040355 -> Statements_226759343
+Statements_226759343 -> Wrapper_SwitchStmt_314396249
+Wrapper_SwitchStmt_314396249 -> Expression_1334618484
+Wrapper_SwitchStmt_314396249 -> Undefined_1927178627 [color = red] 
 }

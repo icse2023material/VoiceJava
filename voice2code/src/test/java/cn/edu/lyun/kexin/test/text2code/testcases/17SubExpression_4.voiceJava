@@ -1,0 +1,20 @@
+define public class HelloWorld
+define public function sayHello
+type void
+move next
+let x equal expression
+expression 3 plus expression
+subexpression
+variable z
+let x equal expression
+expression plus expression
+subexpression
+expression a dot b
+subexpression
+expression a dot b
+let x equal expression
+subexpression
+variable y
+let x equal expression
+subexpression
+expression 3 plus 2
