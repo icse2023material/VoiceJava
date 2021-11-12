@@ -9,3 +9,50 @@ move next
 let x equal expression
 expression a call sum
 move next
+let x equal expression
+expression call sum
+call plus
+move next
+let x equal expression
+expression call sum
+a call plus
+move next
+let x equal expression
+expression call sum
+expression a dot b
+move next
+let x equal expression
+expression call sum
+variable y
+move next
+let x equal expression
+expression call sum
+i plus plus
+move next
+let x equal expression
+expression call sum
+i minus minus
+move next
+let x equal expression
+expression call sum
+plus plus i
+move next
+let x equal expression
+expression call sum
+minus minus i
+move next
+let x equal expression
+expression call sum
+expression plus expression
+int 12
+int 13
+move next
+let x equal expression
+expression call sum
+expression 2 plus expression
+int 3
+move next
+let x equal expression
+expression call sum
+expression 2 plus 3
+move next
