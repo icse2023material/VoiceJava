@@ -1,0 +1,27 @@
+define public class HelloWorld
+define public int variable count
+expression a dot b
+define public int variable count
+variable y
+define public int variable count
+int 2
+define public int variable count
+i plus plus
+define public int variable count
+i minus minus
+define public int variable count
+plus plus i
+define public int variable count
+minus minus i
+define public int variable count
+expression plus expression
+int 2
+int 3
+define public int variable count
+expression 2 plus expression
+int 3
+define public int variable count
+expression 2 plus 3
+define public int variable count
+subexpression
+int 2

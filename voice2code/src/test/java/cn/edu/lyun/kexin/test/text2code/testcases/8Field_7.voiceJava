@@ -1,0 +1,36 @@
+define public class HelloWorld
+define public function sayHello
+type void
+move next
+define int variable count
+call sum
+move next
+define int variable count
+a call sum
+move next
+define int variable count
+expression a dot b
+define int variable count
+variable y
+define int variable count
+int 2
+define int variable count
+i plus plus
+define int variable count
+i minus minus
+define int variable count
+plus plus i
+define int variable count
+minus minus i
+define int variable count
+expression plus expression
+int 2
+int 3
+define int variable count
+expression 2 plus expression
+int 3
+define int variable count
+expression 2 plus 3
+define int variable count
+subexpression
+int 2

@@ -1,0 +1,4 @@
+define public class HelloWorld
+define public int variable count
+a call sum
+move next

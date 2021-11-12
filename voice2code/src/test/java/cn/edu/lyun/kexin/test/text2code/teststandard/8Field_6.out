@@ -1,0 +1,24 @@
+public class HelloWorld {
+
+    public int count = a.b;
+
+    public int count = y;
+
+    public int count = 2;
+
+    public int count = i++;
+
+    public int count = i--;
+
+    public int count = ++i;
+
+    public int count = --i;
+
+    public int count = 2 + 3;
+
+    public int count = 2 + 3;
+
+    public int count = 2 + 3;
+
+    public int count = (2);
+}
