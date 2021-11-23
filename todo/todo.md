@@ -20,3 +20,5 @@
 [] `variable names index i`中,`variable`可选
 [] `null`: https://www.javadoc.io/static/com.github.javaparser/javaparser-core/3.23.1/com/github/javaparser/ast/expr/NullLiteralExpr.html
 [] `byte, float, short`没有?
+[] 如果 any 不能是 keyword,那么会出现局限性。比如`define node list with statement variable node list`，本意表述: `NodeList<Statement> nodeList`, 但是因为`list`是关键字，首先匹配失败。
+其次，`node list`还可能是`Node[]`, 这个如何区分？
