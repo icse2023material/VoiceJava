@@ -2,7 +2,7 @@
 
 1.  定义`package`：
     - 语法：`define package [_]+ [dot [_]+]*`
-    - 示例: `define package hello dot world`， `define package hello dot world dot star`
+    - 示例: `define package hello dot world`
     - 注意: 目前还不支持组合词情况，即`hello world`还不能拼接为 `helloWorld`。
 2.  导入`module`:
     - 语法：`import static? _ [dot [_|star]]*`
