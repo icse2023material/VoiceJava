@@ -1,30 +1,30 @@
-define public class Puppy
-define private int variable puppyAge
+define public class puppy
+define private int variable puppy age
 move next
-define private int variable puppyNum
+define private int variable puppy num
 move next
-define public function setAge
+define public function set age
 type void
 type int variable age
 move next
-let puppyAge equal variable age
+let puppy age equal variable age
 move next
-define public function getAge
+define public function get age
 type int
 move next
-return variable puppyAge
+return variable puppy age
 define public static function main
 type void
 type String list variable args
 move next
-define Puppy variable myPuppy
-new instance Puppy
+define Puppy variable my puppy
+new instance puppy
 expression string tommy
 move next
-myPuppy call setAge
+my puppy call set age
 expression int 2
 move next
-myPuppy call getAge
+my puppy call get age
 move next
-expression System dot out call println
-expression myPuppy dot puppyAge
+expression System dot Out call println
+expression my puppy dot puppy age

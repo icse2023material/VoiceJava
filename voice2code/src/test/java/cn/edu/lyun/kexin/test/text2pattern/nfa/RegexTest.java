@@ -12,17 +12,10 @@ public class RegexTest {
 	public static void main(String[] args) {
 		Unit Name = new Unit("plus", new Unit());
 
-		Unit[] letUnits = new Unit[] { new Unit("let"), Name, new Unit("question", new Unit("dot"), Name),
-				new Unit("equal") };
-		Unit typeUnit = new Unit("or", new Unit("int"),
-				new Unit("or", new Unit("byte"),
-						new Unit("or", new Unit("short"),
-								new Unit("or", new Unit("long"), new Unit("or", new Unit("char"), new Unit("or", new Unit("float"),
-										new Unit("or", new Unit("double"), new Unit("or", new Unit("boolean"), new Unit("string")))))))));
-		Pattern expr13Pat = new Pattern("expr13", "[expression]? variable [_]+ index [_]+", new Unit[] {
-				new Unit("question", new Unit("expression")), new Unit("variable"), Name, new Unit("index"), Name });
-
-		Regex regex = new Regex(expr13Pat);
+		Pattern importPat = new Pattern("import", "import static? [_]+ [dot [[_]+|star]]*",
+				new Unit[] { new Unit("import"), new Unit("question", new Unit("static")), Name,
+						new Unit("asterisk", new Unit("dot"), new Unit("or", Name, new Unit("star"))) });
+		Regex regex = new Regex(importPat);
 		regex.writeDotFile();
 		Runtime rt = Runtime.getRuntime();
 		try {
@@ -31,7 +24,7 @@ public class RegexTest {
 			e.printStackTrace();
 		}
 
-		String text = "expression variable hello world index nice good";
+		String text = "import java dot uitl dot star";
 		Pair<Boolean, Pattern> result = regex.isMatch(text);
 		if (result.getFirst()) {
 			System.out.println("Matched:");

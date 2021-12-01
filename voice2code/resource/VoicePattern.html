@@ -55,14 +55,14 @@
 <li>
 <p>定义<code>interface</code>：</p>
 <ul>
-<li>语法：<code>define interface Name</code></li>
+<li>语法：<code>define (Annotation | public | protected | private | abstract | static | final | strictfp )? interface Name</code></li>
 <li>示例: <code>define interface hello world</code>, <code>define interface hello</code></li>
 </ul>
 </li>
 <li>
 <p>定义<code>class</code>：</p>
 <ul>
-<li>语法：<code>define (Annotation | public | protected | private | abstract | static | final | strictfp ) class Name [extends Name]? [implements Name]?</code></li>
+<li>语法：<code>define (Annotation | public | protected | private | abstract | static | final | strictfp )* class Name [extends Name]? [implements Name]?</code></li>
 <li>示例: <code>define public class hello world</code>， <code>define public class hello world extends greeting implements good morning</code></li>
 </ul>
 </li>
@@ -76,7 +76,7 @@
 <li>
 <p>定义方法<code>method</code>:</p>
 <ul>
-<li>语法：<code>define (Annotation | public | protected | private | abstract | static | final | synchronized | native | strictfp) function Name [throws Exception]?</code></li>
+<li>语法：<code>define (Annotation | public | protected | private | abstract | static | final | synchronized | native | strictfp)* function Name [throws Exception]?</code></li>
 <li>示例: <code>define public function say hello</code>， <code>define public function say hello throws Exception</code></li>
 </ul>
 </li>
@@ -90,25 +90,22 @@
 <li>
 <p>属性/变量定义：</p>
 <ul>
-<li>语法：<code>define (Annotation | public | protected |private | static | final | transient | volatile) (Name list | Name [dot Name]? [with Name+]?) variable Name</code></li>
+<li>语法：<code>define (Annotation | public | protected |private | static | final | transient | volatile)* (Name list | Name [dot Name]? [with Name [and Name]*]?) variable Name</code></li>
 <li>示例：<code>define private int variable count</code>， <code>define int list variable list</code>， <code>define Pair with Integer String</code></li>
-<li>注意: <code>Name+</code>有二义性，possible solution: <code>Name [and Name]*</code></li>
 </ul>
 </li>
 <li>
 <p>定义类型：</p>
 <ul>
-<li>语法：<code>type (Name list | Name [dot Name]? [with Name+]?) [extends _]?</code></li>
+<li>语法：<code>type (Name list | Name [dot Name]? [with Name [and Name]*]?) [extends _]?</code></li>
 <li>示例: <code>type int</code>， <code>type void</code></li>
-<li>注意: <code>Name+</code>有二义性，possible solution: <code>Name [and Name]*</code></li>
 </ul>
 </li>
 <li>
 <p>定义参数：</p>
 <ul>
-<li>语法： <code>type (Name list | Name [dot Name]? [with Name+]?) variable Name</code></li>
+<li>语法： <code>type (Name list | Name [dot Name]? [with Name [and Name]*]?) variable Name</code></li>
 <li>示例：<code>type int variable count</code>，<code>type NodeList with Statement variable nodelist</code></li>
-<li>注意: <code>Name+</code>有二义性，possible solution: <code>Name [and Name]*</code></li>
 </ul>
 </li>
 <li>

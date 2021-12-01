@@ -17,7 +17,7 @@ public class PatternSet {
 
 		Pattern importPat = new Pattern("import", "import static? [_]+ [dot [[_]+|star]]*",
 				new Unit[] { new Unit("import"), new Unit("question", new Unit("static")), Name,
-						new Unit("asterisk", new Unit("dot"), new Unit("or", Name, new Unit("star"))) });
+						new Unit("asterisk", new Unit("dot"), new Unit("or", Name, new Unit())) });
 		patSet.add(importPat);
 
 		Unit classModifier = new Unit("or", new Unit("annotation"),
@@ -26,8 +26,8 @@ public class PatternSet {
 								new Unit("or", new Unit("private"), new Unit("or", new Unit("abstract"),
 										new Unit("or", new Unit("static"), new Unit("or", new Unit("final"), new Unit("strictfp"))))))));
 
-		Pattern interfacePat = new Pattern("interface", "define [public|private] interface [_]+",
-				new Unit[] { new Unit("define"), classModifier, new Unit("interface"), Name });
+		Pattern interfacePat = new Pattern("interface", "define [public|private]? interface [_]+",
+				new Unit[] { new Unit("define"), new Unit("question", classModifier), new Unit("interface"), Name });
 		patSet.add(interfacePat);
 
 		Pattern classPat = new Pattern("class",
@@ -91,7 +91,7 @@ public class PatternSet {
 								new Unit(new Unit[] { Name, new Unit("question", new Unit("dot"), Name),
 										new Unit("question", new Unit("with"),
 												new Unit("normal", Name, new Unit("asterisk", new Unit("and"), Name))) })),
-						new Unit("variable"), new Unit() });
+						new Unit("variable"), Name });
 		patSet.add(fieldPat);
 
 		// 定义参数
@@ -192,14 +192,6 @@ public class PatternSet {
 				ArrayUtils.addAll(letUnits, new Unit[] { new Unit("question", new Unit("expression")) }));
 		patSet.add(let6Pat);
 
-		Pattern let3Pat = new Pattern("let3", "let [_]+ [dot [_]+]? equal [_]+ [dot [_]+]* ",
-				ArrayUtils.addAll(letUnits, new Unit[] { Name, new Unit("asterisk", new Unit("dot"), Name) }));
-		patSet.add(let3Pat);
-
-		Pattern let4Pat = new Pattern("let4", "let [_]+ [dot [_]+]? equal [variable]? [_]+",
-				ArrayUtils.addAll(letUnits, new Unit[] { new Unit("question", new Unit("variable")), Name }));
-		patSet.add(let4Pat);
-
 		Unit typeUnit = new Unit("or", new Unit("int"),
 				new Unit("or", new Unit("byte"),
 						new Unit("or", new Unit("short"),
@@ -209,6 +201,14 @@ public class PatternSet {
 				"let [_]+ [dot [_]+]? equal (int | byte | short | long | char | float | double | boolean | string) [_]+ ",
 				ArrayUtils.addAll(letUnits, new Unit[] { typeUnit, Name }));
 		patSet.add(let5Pat);
+
+		Pattern let3Pat = new Pattern("let3", "let [_]+ [dot [_]+]? equal [_]+ [dot [_]+]* ",
+				ArrayUtils.addAll(letUnits, new Unit[] { Name, new Unit("asterisk", new Unit("dot"), Name) }));
+		patSet.add(let3Pat);
+
+		Pattern let4Pat = new Pattern("let4", "let [_]+ [dot [_]+]? equal [variable]? [_]+",
+				ArrayUtils.addAll(letUnits, new Unit[] { new Unit("question", new Unit("variable")), Name }));
+		patSet.add(let4Pat);
 
 		Pattern return1Pat = new Pattern("return1", "return call [_]+",
 				new Unit[] { new Unit("return"), new Unit("call"), Name });
@@ -222,6 +222,11 @@ public class PatternSet {
 				new Unit[] { new Unit("return"), new Unit("question", new Unit("expression")) });
 		patSet.add(return6Pat);
 
+		Pattern return5Pat = new Pattern("return5",
+				"return (int | byte | short | long | char | float | double | boolean | String) []+ ",
+				new Unit[] { new Unit("return"), typeUnit, Name });
+		patSet.add(return5Pat);
+
 		Pattern return3Pat = new Pattern("return3", "return [_]+ [dot [_]+]*",
 				new Unit[] { new Unit("return"), Name, new Unit("asterisk", new Unit("dot"), Name) });
 		patSet.add(return3Pat);
@@ -229,11 +234,6 @@ public class PatternSet {
 		Pattern return4Pat = new Pattern("return4", "return [variable]? [_]+",
 				new Unit[] { new Unit("return"), new Unit("question", new Unit("variable")), Name });
 		patSet.add(return4Pat);
-
-		Pattern return5Pat = new Pattern("return5",
-				"return (int | byte | short | long | char | float | double | boolean | String) []+ ",
-				new Unit[] { new Unit("return"), typeUnit, Name });
-		patSet.add(return5Pat);
 
 		Pattern expr1Pat = new Pattern("expr1", "[expression]? call [_]+",
 				new Unit[] { new Unit("question", new Unit("expression")), new Unit("call"), Name });
@@ -244,6 +244,15 @@ public class PatternSet {
 						new Unit("plus", new Unit("call"), Name) });
 		patSet.add(expr2Pat);
 
+		Pattern expr14Pat = new Pattern("expr14", "[expression]? string [_]+",
+				new Unit[] { new Unit("question", new Unit("expression")), new Unit("string"), Name });
+		patSet.add(expr14Pat);
+
+		Pattern expr5Pat = new Pattern("expr5",
+				"[expression]? (int | byte | short | long | char | float | double | boolean | String) [_]+",
+				new Unit[] { new Unit("question", new Unit("expression")), typeUnit, Name });
+		patSet.add(expr5Pat);
+
 		Pattern expr3Pat = new Pattern("expr3", "[expression]? [_]+ [dot [_]+]*",
 				new Unit[] { new Unit("question", new Unit("expression")), Name, new Unit("asterisk", new Unit("dot"), Name) });
 		patSet.add(expr3Pat);
@@ -251,11 +260,6 @@ public class PatternSet {
 		Pattern expr4Pat = new Pattern("expr4", "[expression]? [variable]? [_]+ ",
 				new Unit[] { new Unit("question", new Unit("expression")), new Unit("question", new Unit("variable")), Name });
 		patSet.add(expr4Pat);
-
-		Pattern expr5Pat = new Pattern("expr5",
-				"[expression]? (int | byte | short | long | char | float | double | boolean | String) [_]+",
-				new Unit[] { new Unit("question", new Unit("expression")), typeUnit, Name });
-		patSet.add(expr5Pat);
 
 		Pattern expr6Pat = new Pattern("expr6", "[expression]? [_]+ plus plus",
 				new Unit[] { new Unit("question", new Unit("expression")), Name, new Unit("plus"), new Unit("plus") });
@@ -300,9 +304,6 @@ public class PatternSet {
 				new Unit("question", new Unit("expression")), new Unit("variable"), Name, new Unit("index"), Name });
 		patSet.add(expr13Pat);
 
-		Pattern expr14Pat = new Pattern("expr14", "[expression]? string [_]+",
-				new Unit[] { new Unit("question", new Unit("expression")), new Unit("string"), Name });
-		patSet.add(expr14Pat);
 	}
 
 	public void addToSet(Pattern pat) {

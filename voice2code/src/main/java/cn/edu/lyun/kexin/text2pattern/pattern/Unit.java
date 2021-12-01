@@ -53,6 +53,10 @@ public class Unit {
 		return this.type;
 	}
 
+	public void setType(String type) {
+		this.type = type;
+	}
+
 	public String getKeyword() {
 		return this.keyword;
 	}

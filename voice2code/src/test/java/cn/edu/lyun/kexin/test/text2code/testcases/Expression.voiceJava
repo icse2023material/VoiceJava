@@ -1,4 +1,4 @@
-define public class ExpressionTest
+define public class hello test
 define public function test
 type void 
 move next 

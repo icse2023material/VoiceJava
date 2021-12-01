@@ -2,7 +2,7 @@ public class HelloWorld {
 
     public void sayHello(Name[] names) {
         if (i > 90) {
-            System.out.println("excellent");
+            System.Out.println("excellent");
         } else if (i >= 80)
             return;
     }

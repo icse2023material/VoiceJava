@@ -1,2 +1,2 @@
-define public class HelloWorld
+define public class hello world
 define private int variable count

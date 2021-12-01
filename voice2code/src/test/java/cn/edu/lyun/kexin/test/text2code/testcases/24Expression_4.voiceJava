@@ -1,5 +1,5 @@
-define public class HelloWorld
-define public function sayHello
+define public class hello world
+define public function say hello
 type void
 type Name list variable names
 move next

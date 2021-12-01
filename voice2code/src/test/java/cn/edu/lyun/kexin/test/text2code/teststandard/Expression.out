@@ -1,4 +1,4 @@
-public class ExpressionTest {
+public class HelloTest {
 
     public void test() {
         int a = 3 + 4;

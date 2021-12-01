@@ -1,6 +1,6 @@
 public class HelloWorld {
 
     public void sayHello(Name[] names) {
-        return list.sum();
+        return List.sum();
     }
 }

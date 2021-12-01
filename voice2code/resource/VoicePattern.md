@@ -10,35 +10,32 @@
     - 语法：`import static? Name [dot [Name | star]]*`
     - 示例: `import longyan university`， `import longyan dot university`， `import longyan dot star`
 3.  定义`interface`：
-    - 语法：`define interface Name`
+    - 语法：`define (Annotation | public | protected | private | abstract | static | final | strictfp )? interface Name`
     - 示例: `define interface hello world`, `define interface hello`
 4.  定义`class`：
-    - 语法：`define (Annotation | public | protected | private | abstract | static | final | strictfp ) class Name [extends Name]? [implements Name]?`
+    - 语法：`define (Annotation | public | protected | private | abstract | static | final | strictfp )* class Name [extends Name]? [implements Name]?`
     - 示例: `define public class hello world`， `define public class hello world extends greeting implements good morning`
 5.  定义构造函数
     - 语法：`define constructor`
     - 备注: 还未实现。
 6.  定义方法`method`:
-    - 语法：`define (Annotation | public | protected | private | abstract | static | final | synchronized | native | strictfp) function Name [throws Exception]?`
+    - 语法：`define (Annotation | public | protected | private | abstract | static | final | synchronized | native | strictfp)* function Name [throws Exception]?`
     - 示例: `define public function say hello`， `define public function say hello throws Exception`
 7.  定义箭头函数：
     - 语法：`define arrow function`
     - 示例：备注: 还未实现。
 8.  属性/变量定义：
-    - 语法：`define (Annotation | public | protected |private | static | final | transient | volatile) (Name list | Name [dot Name]? [with Name+]?) variable Name`
+    - 语法：`define (Annotation | public | protected |private | static | final | transient | volatile)* (Name list | Name [dot Name]? [with Name [and Name]*]?) variable Name`
     - 示例：`define private int variable count`， `define int list variable list`， `define Pair with Integer String`
-    - 注意: `Name+`有二义性，possible solution: `Name [and Name]*`
 9.  定义类型：
 
-    - 语法：`type (Name list | Name [dot Name]? [with Name+]?) [extends _]?`
+    - 语法：`type (Name list | Name [dot Name]? [with Name [and Name]*]?) [extends _]?`
     - 示例: `type int`， `type void`
-    - 注意: `Name+`有二义性，possible solution: `Name [and Name]*`
 
 10. 定义参数：
 
-    - 语法： `type (Name list | Name [dot Name]? [with Name+]?) variable Name`
+    - 语法： `type (Name list | Name [dot Name]? [with Name [and Name]*]?) variable Name`
     - 示例：`type int variable count`，`type NodeList with Statement variable nodelist`
-    - 注意: `Name+`有二义性，possible solution: `Name [and Name]*`
 
 11. 定义`for`循环：
 
@@ -83,7 +80,7 @@
 
 21. 抛出异常：
 
-    - 语法：`throw new _`
+    - 语法：`throw new [_]+`
 
 22. 6 种赋值形式：
 

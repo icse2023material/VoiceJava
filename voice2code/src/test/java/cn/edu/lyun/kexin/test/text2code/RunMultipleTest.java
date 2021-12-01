@@ -17,6 +17,7 @@ public class RunMultipleTest {
 			if (!RunMultipleTest.getFileExtension(file).equals(".voiceJava")) {
 				continue;
 			}
+			System.out.print(file.getName() + ": ");
 			Generate.generate(file.getAbsolutePath());
 			String fileName = file.getName();
 			fileName = fileName.substring(0, fileName.indexOf("."));
@@ -28,7 +29,7 @@ public class RunMultipleTest {
 				failCount++;
 			}
 			System.out.println(
-					file.getName() + ": " + (isEqual ? ANSI_GREEN + "true" + ANSI_RESET : ANSI_RED + "false" + ANSI_RESET));
+					(isEqual ? ANSI_GREEN + "true" + ANSI_RESET : ANSI_RED + "false" + ANSI_RESET));
 		}
 
 		RunMultipleTest.output(passCount, failCount);

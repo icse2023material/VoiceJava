@@ -1,2 +1,2 @@
-define public class HelloWorld
-define private function sayHello
+define public class hello world
+define private function say hello

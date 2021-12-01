@@ -1,13 +1,13 @@
-public class IfTest {
+public class HelloTest {
 
     public static void main(string[] args) {
         int n = 90;
         if (n > 90) {
-            System.out.prtinln("excellent");
+            System.Out.prtinln("excellent");
         } else if (n >= 60) {
-            System.out.prtinln("good");
+            System.Out.prtinln("good");
         } else {
-            System.out.println("bad");
+            System.Out.println("bad");
         }
         n = 2;
     }

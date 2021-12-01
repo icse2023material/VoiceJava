@@ -1,5 +1,12 @@
 package cn.edu.lyun.kexin.text2pattern.pattern;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import cn.edu.lyun.util.ListHelper;
+import cn.edu.lyun.util.Pair;
+
 public class Pattern {
 	private String name; // a specific name for the pattern
 	private String str;
@@ -8,7 +15,6 @@ public class Pattern {
 	public Pattern(String name, String str) {
 		this.name = name;
 		this.str = str;
-		// TODO: String to Unit[]
 	}
 
 	public Pattern(String name, String str, Unit[] units) {
@@ -49,5 +55,94 @@ public class Pattern {
 		}
 		return str;
 
+	}
+
+	private Unit createUnit(List<Unit> temp) {
+		if (name.equals("package") || name.equals("import")) {
+			return createUnitWithNotCamelString(temp);
+		} else if (name.equals("class") || name.equals("interface") || name.equals("newInstance") || name.equals("throw")) {
+			return createUnitWithCamelStringForClassOrInterface(temp);
+		} else {
+			return createUnitWithCamelString(temp);
+		}
+	}
+
+	public Pattern concatNames() {
+		// words after string shall not be concated. e.g string hello world.
+		if (units[0].getKeyword().equals("string")) {
+			return this;
+		}
+		List<Unit> unitList = new ArrayList<Unit>(Arrays.asList(units));
+		List<Unit> result = new ArrayList<Unit>();
+
+		List<Unit> temp = new ArrayList<Unit>();
+		while (unitList.size() != 0) {
+			Unit unit = unitList.remove(0);
+			if (unit.getType().equals("keyword") || TypeWordSet.isTypeWord(unit.getKeyword())) {
+				if (temp.size() != 0) {
+					result.add(createUnit(temp));
+					temp.clear();
+				}
+				result.add(unit);
+			} else {
+				temp.add(unit);
+			}
+		}
+		if (temp.size() != 0) {
+			result.add(createUnit(temp));
+		}
+
+		units = result.toArray(new Unit[result.size()]);
+		return this;
+	}
+
+	private Unit createUnitWithCamelString(List<Unit> units) {
+		Unit any = new Unit();
+		any.setAnyValue(concatCamelString(units));
+		return any;
+	}
+
+	private String concatCamelString(List<Unit> units) {
+		String str = "";
+		for (int i = 0; i < units.size(); i++) {
+			if (i == 0) {
+				str += units.get(i).getKeyword();
+			} else {
+				str += toCamelString(units.get(i).getKeyword());
+			}
+		}
+		return str;
+	}
+
+	private Unit createUnitWithCamelStringForClassOrInterface(List<Unit> units) {
+		Unit any = new Unit();
+		any.setAnyValue(concatFullCamelString(units));
+		return any;
+	}
+
+	private String concatFullCamelString(List<Unit> units) {
+		String str = "";
+		for (Unit unit : units) {
+			str += toCamelString(unit.getKeyword());
+		}
+		return str;
+	}
+
+	private Unit createUnitWithNotCamelString(List<Unit> units) {
+		Unit any = new Unit();
+		any.setAnyValue(concatStringNoCamel(units));
+		return any;
+	}
+
+	private String concatStringNoCamel(List<Unit> units) {
+		String str = "";
+		for (Unit unit : units) {
+			str += unit.getKeyword();
+		}
+		return str;
+	}
+
+	private String toCamelString(String str) {
+		return str.substring(0, 1).toUpperCase() + str.substring(1);
 	}
 }

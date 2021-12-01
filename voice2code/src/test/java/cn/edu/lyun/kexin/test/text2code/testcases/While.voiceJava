@@ -1,7 +1,7 @@
-define public class WhileTest
+define public class test
 define public static function main
 type void
-type string list variable args
+type String list variable args
 move next
 define int variable sum 
 int 0
@@ -12,6 +12,6 @@ expression n less equal 100
 expression n plus plus
 let sum equal expression 
 expression sum plus n
-System dot out call println 
+System dot Out call println 
 variable sum
 move next 

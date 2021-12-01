@@ -1,2 +1,2 @@
 define package lyun
-define public interface Person
+define public interface person

@@ -1,5 +1,5 @@
-define public class HelloWorld
-define public function sayHello
+define public class hello world
+define public function say hello
 type void
 type Name list variable names
 move next
@@ -11,11 +11,11 @@ expression a call sum
 move next
 let x equal expression
 expression call sum
-call plus
+call Plus
 move next
 let x equal expression
 expression call sum
-a call plus
+a call Plus
 move next
 let x equal expression
 expression call sum

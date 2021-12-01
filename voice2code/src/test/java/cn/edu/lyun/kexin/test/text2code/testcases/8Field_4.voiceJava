@@ -1,2 +1,2 @@
 define public class HelloWorld
-define public Node with Integer String variable nodelist
+define public Node with Integer and String variable nodelist

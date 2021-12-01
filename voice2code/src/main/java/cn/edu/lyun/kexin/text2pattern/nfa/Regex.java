@@ -8,6 +8,7 @@ import cn.edu.lyun.kexin.text2pattern.nfa.strategy.KeyWordSet;
 import cn.edu.lyun.kexin.text2pattern.nfa.strategy.MatchStrategy;
 import cn.edu.lyun.kexin.text2pattern.nfa.strategy.MatchStrategyManager;
 import cn.edu.lyun.kexin.text2pattern.pattern.Pattern;
+import cn.edu.lyun.kexin.text2pattern.pattern.TypeWordSet;
 import cn.edu.lyun.kexin.text2pattern.pattern.Unit;
 import cn.edu.lyun.util.Pair;
 
@@ -40,113 +41,113 @@ public class Regex {
 
 	public NFAGraph addUnitToNFAGraph(Unit unit, NFAGraph nfaGraph) {
 		switch (unit.getType()) {
-		case "keyword":
-			NFAState start = new NFAState();
-			NFAState end = new NFAState();
-			start.addNext(unit.getKeyword(), end);
-			NFAGraph newNFAGraph = new NFAGraph(start, end);
-			if (nfaGraph == null) {
-				nfaGraph = newNFAGraph;
-			} else {
-				nfaGraph.addSeriesGraph(newNFAGraph);
-			}
-			break;
-		case "any":
-			start = new NFAState();
-			end = new NFAState();
-			start.addNext("any", end);
-			newNFAGraph = new NFAGraph(start, end);
-			if (nfaGraph == null) {
-				nfaGraph = newNFAGraph;
-			} else {
-				nfaGraph.addSeriesGraph(newNFAGraph);
-			}
-			break;
-		case "normal":
-			Unit first = unit.getFirst();
-			if (first != null) {
-				newNFAGraph = addUnitToNFAGraph(first, nfaGraph);
+			case "keyword":
+				NFAState start = new NFAState();
+				NFAState end = new NFAState();
+				start.addNext(unit.getKeyword(), end);
+				NFAGraph newNFAGraph = new NFAGraph(start, end);
 				if (nfaGraph == null) {
 					nfaGraph = newNFAGraph;
 				} else {
 					nfaGraph.addSeriesGraph(newNFAGraph);
 				}
-			}
-			Unit second = unit.getSecond();
-			if (second != null) {
-				newNFAGraph = addUnitToNFAGraph(second, nfaGraph);
+				break;
+			case "any":
+				start = new NFAState();
+				end = new NFAState();
+				start.addNext("any", end);
+				newNFAGraph = new NFAGraph(start, end);
 				if (nfaGraph == null) {
 					nfaGraph = newNFAGraph;
 				} else {
 					nfaGraph.addSeriesGraph(newNFAGraph);
 				}
-			}
-			break;
-		case "question":
-			// create a new NFAGraph for subregex
-			// first() normally shall not be null
-			newNFAGraph = addUnitToNFAGraph(unit.getFirst(), null);
-			second = unit.getSecond();
-			if (second != null) {
-				NFAGraph nfaSecondGraph = addUnitToNFAGraph(second, null);
-				newNFAGraph.addSeriesGraph(nfaSecondGraph);
-			}
-			// then add quesiton
-			newNFAGraph.addEpsilonToEnd();
-			if (nfaGraph == null) {
-				nfaGraph = newNFAGraph;
-			} else {
-				nfaGraph.addSeriesGraph(newNFAGraph);
-			}
-			break;
-		case "plus":
-			newNFAGraph = addUnitToNFAGraph(unit.getFirst(), null);
-			second = unit.getSecond();
-			if (second != null) {
-				NFAGraph nfaSecondGraph = addUnitToNFAGraph(second, null);
-				newNFAGraph.addSeriesGraph(nfaSecondGraph);
-			}
-			newNFAGraph.repeatPlus();
-			if (nfaGraph == null) {
-				nfaGraph = newNFAGraph;
-			} else {
-				nfaGraph.addSeriesGraph(newNFAGraph);
-			}
-			break;
-		case "asterisk":
-			newNFAGraph = addUnitToNFAGraph(unit.getFirst(), null);
-			second = unit.getSecond();
-			if (second != null) {
-				NFAGraph secondNFAGraph = addUnitToNFAGraph(second, null);
-				newNFAGraph.addSeriesGraph(secondNFAGraph);
-			}
-			newNFAGraph.repeatStar();
-			if (nfaGraph == null) {
-				nfaGraph = newNFAGraph;
-			} else {
-				nfaGraph.addSeriesGraph(newNFAGraph);
-			}
-			break;
-		case "or":
-			first = unit.getFirst();
-			NFAGraph leftNFAGraph = addUnitToNFAGraph(unit.getFirst(), null);
-			NFAGraph rightNFAGraph = addUnitToNFAGraph(unit.getSecond(), null);
-			leftNFAGraph.addParallelGraph(rightNFAGraph);
-			if (nfaGraph == null) {
-				nfaGraph = leftNFAGraph;
-			} else {
-				nfaGraph.addSeriesGraph(leftNFAGraph);
-			}
-			break;
-		case "list":
-			newNFAGraph = unitsToNFAGraph(unit.getList());
-			newNFAGraph.end.stateType = StateType.GENERAL;
-			if (nfaGraph == null) {
-				nfaGraph = newNFAGraph;
-			} else {
-				nfaGraph.addSeriesGraph(newNFAGraph);
-			}
-			break;
+				break;
+			case "normal":
+				Unit first = unit.getFirst();
+				if (first != null) {
+					newNFAGraph = addUnitToNFAGraph(first, nfaGraph);
+					if (nfaGraph == null) {
+						nfaGraph = newNFAGraph;
+					} else {
+						nfaGraph.addSeriesGraph(newNFAGraph);
+					}
+				}
+				Unit second = unit.getSecond();
+				if (second != null) {
+					newNFAGraph = addUnitToNFAGraph(second, nfaGraph);
+					if (nfaGraph == null) {
+						nfaGraph = newNFAGraph;
+					} else {
+						nfaGraph.addSeriesGraph(newNFAGraph);
+					}
+				}
+				break;
+			case "question":
+				// create a new NFAGraph for subregex
+				// first() normally shall not be null
+				newNFAGraph = addUnitToNFAGraph(unit.getFirst(), null);
+				second = unit.getSecond();
+				if (second != null) {
+					NFAGraph nfaSecondGraph = addUnitToNFAGraph(second, null);
+					newNFAGraph.addSeriesGraph(nfaSecondGraph);
+				}
+				// then add quesiton
+				newNFAGraph.addEpsilonToEnd();
+				if (nfaGraph == null) {
+					nfaGraph = newNFAGraph;
+				} else {
+					nfaGraph.addSeriesGraph(newNFAGraph);
+				}
+				break;
+			case "plus":
+				newNFAGraph = addUnitToNFAGraph(unit.getFirst(), null);
+				second = unit.getSecond();
+				if (second != null) {
+					NFAGraph nfaSecondGraph = addUnitToNFAGraph(second, null);
+					newNFAGraph.addSeriesGraph(nfaSecondGraph);
+				}
+				newNFAGraph.repeatPlus();
+				if (nfaGraph == null) {
+					nfaGraph = newNFAGraph;
+				} else {
+					nfaGraph.addSeriesGraph(newNFAGraph);
+				}
+				break;
+			case "asterisk":
+				newNFAGraph = addUnitToNFAGraph(unit.getFirst(), null);
+				second = unit.getSecond();
+				if (second != null) {
+					NFAGraph secondNFAGraph = addUnitToNFAGraph(second, null);
+					newNFAGraph.addSeriesGraph(secondNFAGraph);
+				}
+				newNFAGraph.repeatStar();
+				if (nfaGraph == null) {
+					nfaGraph = newNFAGraph;
+				} else {
+					nfaGraph.addSeriesGraph(newNFAGraph);
+				}
+				break;
+			case "or":
+				first = unit.getFirst();
+				NFAGraph leftNFAGraph = addUnitToNFAGraph(unit.getFirst(), null);
+				NFAGraph rightNFAGraph = addUnitToNFAGraph(unit.getSecond(), null);
+				leftNFAGraph.addParallelGraph(rightNFAGraph);
+				if (nfaGraph == null) {
+					nfaGraph = leftNFAGraph;
+				} else {
+					nfaGraph.addSeriesGraph(leftNFAGraph);
+				}
+				break;
+			case "list":
+				newNFAGraph = unitsToNFAGraph(unit.getList());
+				newNFAGraph.end.stateType = StateType.GENERAL;
+				if (nfaGraph == null) {
+					nfaGraph = newNFAGraph;
+				} else {
+					nfaGraph.addSeriesGraph(newNFAGraph);
+				}
+				break;
 		}
 		return nfaGraph;
 	}
@@ -249,11 +250,12 @@ public class Regex {
 				}
 			} else {
 				MatchStrategy matchStrategy = null;
-				if (KeyWordSet.isKeyword(edge)) {
+				if (KeyWordSet.isKeyword(edge) || TypeWordSet.isTypeWord(edge)) {
 					matchStrategy = MatchStrategyManager.getStrategy("keyword");
 				} else {
 					matchStrategy = MatchStrategyManager.getStrategy(edge);
 				}
+				// System.out.println("edge: " + edge);
 				if (!matchStrategy.isMatch(tokenList[pos], edge)) {
 					continue;
 				}

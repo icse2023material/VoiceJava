@@ -1,7 +1,7 @@
 public class HelloWorld {
     public void sayHello(Name[] names) {
         for (; true; ) {
-            System.out.println("hello world");
+            System.Out.println("hello world");
         }
     }
 }

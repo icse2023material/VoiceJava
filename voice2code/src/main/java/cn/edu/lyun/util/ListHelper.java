@@ -44,6 +44,10 @@ public class ListHelper {
 				break;
 			}
 		}
+		// If splitAt does not exist, put all in left.
+		if (splitAtIndex == -1) {
+			splitAtIndex = units.size();
+		}
 		for (int i = 0; i < splitAtIndex; i++) {
 			units.remove(0);
 		}
@@ -107,6 +111,24 @@ public class ListHelper {
 			}
 		});
 		return units;
+	}
+
+	public List<List<Unit>> splitListIntoList(List<Unit> units, String splitAt) {
+		List<List<Unit>> result = new ArrayList<List<Unit>>();
+
+		List<Unit> segment = new ArrayList<Unit>();
+		for (int i = 0; i < units.size(); i++) {
+			if (!units.get(i).getKeyword().equals(splitAt)) {
+				segment.add(units.get(i));
+			} else {
+				result.add(segment);
+				segment = new ArrayList<Unit>();
+			}
+		}
+		if (segment.size() != 0) {
+			result.add(segment);
+		}
+		return result;
 	}
 
 }

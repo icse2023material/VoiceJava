@@ -91,13 +91,16 @@ public class TypeAST {
 		return str;
 	}
 
-	// with a b: <A,B>
+	// with a and b: <A,B>
 	public String generateWithTypeString(List<Unit> units) {
 		String str = "";
 		if (new ListHelper().containsKeyword(units, "with")) {
 			units.remove(0);
 			str += "<";
 			for (Unit unit : units) {
+				if (unit.getKeyword().equals("and")) {
+					continue;
+				}
 				str += unit.getKeyword() + ",";
 			}
 			str = str.substring(0, str.length() - 1);

@@ -1,4 +1,4 @@
-define public class HelloWorld
+define public class hello world
 define public int variable count
 expression a dot b
 define public int variable count

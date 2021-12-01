@@ -2,14 +2,14 @@ define package lyun
 import java dot util dot star
 import java dot lang dot reflect dot star
 move next
-define public class Hello
+define public class hello
 define public int variable count
 int 0
 define private int variable sum
 int 2
 define public String variable name
 move next
-define public function sayHello
+define public function say hello
 type int
 type int list variable intArray
 type String variable name
