@@ -183,8 +183,9 @@ public class PatternSet {
 				ArrayUtils.addAll(letUnits, new Unit[] { new Unit("call"), Name }));
 		patSet.add(let1Pat);
 
-		Pattern let2Pat = new Pattern("let2", "let [_]+ [dot [_]+]? equal [_]+ [call [_]+]+",
-				ArrayUtils.addAll(letUnits, new Unit[] { Name, new Unit("plus", new Unit("call"), Name) }));
+		Pattern let2Pat = new Pattern("let2", "let [_]+ [dot [_]+]? equal [_]+ [dot [_]+]* [call [_]+]+",
+				ArrayUtils.addAll(letUnits, new Unit[] { Name, new Unit("asterisk", new Unit("dot"), Name),
+						new Unit("plus", new Unit("call"), Name) }));
 		patSet.add(let2Pat);
 
 		// let6 must be put before let3

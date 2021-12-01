@@ -80,13 +80,13 @@
 
 21. 抛出异常：
 
-    - 语法：`throw new [_]+`
+    - 语法：`throw new Name`
 
 22. 6 种赋值形式：
 
     - `let Name [dot Name]? equal call Name`
       - 示例：`let count equal call compute`
-    - `let Name [dot Name]? equal Name [call Name]+`
+    - `let Name [dot Name]? equal Name [dot Name]* [call Name]+`
       - 示例：`let student dot score equal student call score`
     - `let Name [dot Name]? equal Name [dot Name]*`
       - 示例：`let score equal student first dot semester dot score`
@@ -100,7 +100,7 @@
 23. 6 种返回形式：
 
     - `return call Name`
-    - `return Name [call Name]+`
+    - `return Name [dot Name]* [call Name]+`
     - `return Name [dot Name]*`
     - `return [variable]? Name`
     - `return (int | byte | short | long | char | float | double | boolean | string) Name`
@@ -109,7 +109,7 @@
 24. 12 种表达式
 
     - `expression? call Name`
-    - `expression? Name [call Name]+`
+    - `expression? Name [dot Name]* [call Name]+`
     - `expression? Name [dot Name]?`
     - `expression? [variable]? Name`
     - `expression? (int | byte | short | long | char | float | double | boolean | string) Name`

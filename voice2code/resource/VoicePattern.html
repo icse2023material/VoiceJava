@@ -170,7 +170,7 @@
 <li>
 <p>抛出异常：</p>
 <ul>
-<li>语法：<code>throw new _</code></li>
+<li>语法：<code>throw new Name</code></li>
 </ul>
 </li>
 <li>
@@ -181,7 +181,7 @@
 <li>示例：<code>let count equal call compute</code></li>
 </ul>
 </li>
-<li><code>let Name [dot Name]? equal Name [call Name]+</code>
+<li><code>let Name [dot Name]? equal Name [dot Name]* [call Name]+</code>
 <ul>
 <li>示例：<code>let student dot score equal student call score</code></li>
 </ul>
@@ -212,7 +212,7 @@
 <p>6 种返回形式：</p>
 <ul>
 <li><code>return call Name</code></li>
-<li><code>return Name [call Name]+</code></li>
+<li><code>return Name [dot Name]* [call Name]+</code></li>
 <li><code>return Name [dot Name]*</code></li>
 <li><code>return [variable]? Name</code></li>
 <li><code>return (int | byte | short | long | char | float | double | boolean | string) Name</code></li>
@@ -223,7 +223,7 @@
 <p>12 种表达式</p>
 <ul>
 <li><code>expression? call Name</code></li>
-<li><code>expression? Name [call Name]+</code></li>
+<li><code>expression? Name [dot Name]* [call Name]+</code></li>
 <li><code>expression? Name [dot Name]?</code></li>
 <li><code>expression? [variable]? Name</code></li>
 <li><code>expression? (int | byte | short | long | char | float | double | boolean | string) Name</code></li>
