@@ -5,5 +5,6 @@ public class AnyMatchStrategy extends MatchStrategy {
 	public boolean isMatch(String str, String edge) {
 		// add constraint: cannot be keyword.
 		return !KeyWordSet.isKeyword(str);
+		// return true;
 	}
 }

@@ -4,12 +4,11 @@ import cn.edu.lyun.kexin.text2pattern.pattern.*;
 
 public class PatternTest {
 	public static void main(String[] args) {
-		Pattern pat = new Pattern("package", "define package [_]+ [dot [_]+]*",
-				new Unit[] { new Unit("define"), new Unit("package"), new Unit("plus", new Unit()),
-						new Unit("asterisk", new Unit("dot"), new Unit("plus", new Unit())) });
+		Pattern expr15Pat = new Pattern("expr15", "[expression]? null",
+				new Unit[] { new Unit("question", new Unit("expression")), new Unit("null") });
 
-		System.out.println(pat.toString());
-		System.out.println(pat.toVoiceJavaPattern());
+		System.out.println(expr15Pat.toString());
+		System.out.println(expr15Pat.toVoiceJavaPattern());
 	}
 
 }

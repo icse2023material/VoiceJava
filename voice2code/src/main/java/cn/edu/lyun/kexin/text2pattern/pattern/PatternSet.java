@@ -236,6 +236,10 @@ public class PatternSet {
 				new Unit[] { new Unit("return"), new Unit("question", new Unit("variable")), Name });
 		patSet.add(return4Pat);
 
+		Pattern expr15Pat = new Pattern("expr15", "[expression]? null",
+				new Unit[] { new Unit("question", new Unit("expression")), new Unit("null") });
+		patSet.add(expr15Pat);
+
 		Pattern expr1Pat = new Pattern("expr1", "[expression]? call [_]+",
 				new Unit[] { new Unit("question", new Unit("expression")), new Unit("call"), Name });
 		patSet.add(expr1Pat);

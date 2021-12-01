@@ -1,0 +1,7 @@
+public class HelloWorld {
+
+    public void sayHello() {
+        number = null;
+        number = null;
+    }
+}

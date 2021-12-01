@@ -6,7 +6,7 @@ import cn.edu.lyun.kexin.text2pattern.nfa.*;
 
 public class RegexSetTest {
 	public static void main(String[] args) {
-		String text = "import java dot lang dot reflect dot star";
+		String text = "expression null";
 		Pattern patternResult = RegexSet.compile(new PatternSet()).matchPattern(text);
 		System.out.println(patternResult.toString());
 		patternResult.concatNames();

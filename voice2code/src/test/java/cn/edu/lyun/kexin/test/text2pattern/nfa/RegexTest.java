@@ -5,17 +5,15 @@ import java.io.IOException;
 import cn.edu.lyun.util.Pair;
 
 import cn.edu.lyun.kexin.text2pattern.nfa.*;
-import org.apache.commons.lang3.ArrayUtils;
 
 public class RegexTest {
 
 	public static void main(String[] args) {
-		Unit Name = new Unit("plus", new Unit());
+		// Unit Name = new Unit("plus", new Unit());
+		Pattern expr15Pat = new Pattern("expr15", "[expression]? null",
+				new Unit[] { new Unit("question", new Unit("expression")), new Unit("null") });
 
-		Pattern importPat = new Pattern("import", "import static? [_]+ [dot [[_]+|star]]*",
-				new Unit[] { new Unit("import"), new Unit("question", new Unit("static")), Name,
-						new Unit("asterisk", new Unit("dot"), new Unit("or", Name, new Unit("star"))) });
-		Regex regex = new Regex(importPat);
+		Regex regex = new Regex(expr15Pat);
 		regex.writeDotFile();
 		Runtime rt = Runtime.getRuntime();
 		try {
@@ -24,7 +22,7 @@ public class RegexTest {
 			e.printStackTrace();
 		}
 
-		String text = "import java dot uitl dot star";
+		String text = "expression null";
 		Pair<Boolean, Pattern> result = regex.isMatch(text);
 		if (result.getFirst()) {
 			System.out.println("Matched:");

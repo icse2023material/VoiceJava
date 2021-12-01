@@ -1659,7 +1659,8 @@ public class Text2CompilationUnit {
 				break;
 			case "expr5":
 				holeTypeExpr = HoleType.Expr5;
-				this.generateExprForExpr5AndExpr14(parent, node, parentNodeClassStr, holeIndex, currentHole, parentHole,
+				this.generateExprForExpr5AndExpr14AndExpr15(parent, node, parentNodeClassStr, holeIndex, currentHole,
+						parentHole,
 						parentOfParentHole, parentOfParentOfParentHole, parentHoleType, holeTypeExpr);
 				break;
 			case "expr6":
@@ -2329,7 +2330,14 @@ public class Text2CompilationUnit {
 				break;
 			case "expr14":
 				holeTypeExpr = HoleType.Expr14;
-				this.generateExprForExpr5AndExpr14(parent, node, parentNodeClassStr, holeIndex, currentHole, parentHole,
+				this.generateExprForExpr5AndExpr14AndExpr15(parent, node, parentNodeClassStr, holeIndex, currentHole,
+						parentHole,
+						parentOfParentHole, parentOfParentOfParentHole, parentHoleType, holeTypeExpr);
+				break;
+			case "expr15":
+				holeTypeExpr = HoleType.Expr15;
+				this.generateExprForExpr5AndExpr14AndExpr15(parent, node, parentNodeClassStr, holeIndex, currentHole,
+						parentHole,
 						parentOfParentHole, parentOfParentOfParentHole, parentHoleType, holeTypeExpr);
 				break;
 		}
@@ -3615,7 +3623,7 @@ public class Text2CompilationUnit {
 		parentOfParentHole.addChild(holeNode);
 	}
 
-	private void generateExprForExpr5AndExpr14(Either<Node, Either<List<?>, NodeList<?>>> parent, Node node,
+	private void generateExprForExpr5AndExpr14AndExpr15(Either<Node, Either<List<?>, NodeList<?>>> parent, Node node,
 			String parentNodeClassStr, int holeIndex, HoleNode currentHole, HoleNode parentHole, HoleNode parentOfParentHole,
 			HoleNode parentOfParentOfParentHole, HoleType parentHoleType, HoleType holeTypeExpr) {
 		if (parentHoleType.equals(HoleType.Statements)) {
