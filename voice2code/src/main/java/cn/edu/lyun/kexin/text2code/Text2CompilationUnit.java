@@ -243,7 +243,6 @@ public class Text2CompilationUnit {
 					currentHole.addChild(holeNode);
 					holeNode.addChild(new HoleNode(HoleType.TypeExtends));
 				} else if (parentHoleType.equals(HoleType.BodyDeclarations)) {
-					// TODO: construct a BodyDeclarations example
 					NodeList<BodyDeclaration<?>> bodyDeclarations = (NodeList<BodyDeclaration<?>>) parent.get().get();
 					// Interface method, no body.
 					BodyDeclaration<?> bodyDeclaration0 = bodyDeclarations.get(0);

@@ -190,7 +190,7 @@ public class HoleAST {
 				HoleType.Expr11, HoleType.InnerExpr, HoleType.FieldDeclaration));
 		Set<HoleType> twoChildrenSet = new HashSet<HoleType>(Arrays.asList(HoleType.Let1Expr, HoleType.Let2Expr,
 				HoleType.SwitchEntry, HoleType.SwitchStmt, HoleType.Expr10));
-
+		Set<HoleType> threeChildrenSet = new HashSet<HoleType>(Arrays.asList(HoleType.BodyDeclaration));
 		if (holeNode.getHoleType().equals(HoleType.Wrapper)) {
 			HoleType holeType = holeNode.getHoleTypeOfOptionsIfOnlyOne();
 			if (holeType != null) {
@@ -216,6 +216,8 @@ public class HoleAST {
 					return holeNode.getNonUndefinedChildListSize() == 1;
 				} else if (twoChildrenSet.contains(holeType)) {
 					return holeNode.getNonUndefinedChildListSize() == 2;
+				} else if (threeChildrenSet.contains(holeType)) {
+					return holeNode.getNonUndefinedChildListSize() == 3;
 				}
 
 				return false;
