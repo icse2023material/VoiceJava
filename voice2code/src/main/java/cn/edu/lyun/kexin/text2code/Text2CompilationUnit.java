@@ -93,17 +93,15 @@ public class Text2CompilationUnit {
 		HoleNode parentHole = parentAndCurrentHole.getFirst();
 		HoleNode currentHole = parentAndCurrentHole.getSecond();
 		HoleType parentHoleType = parentHole.getHoleType();
-
-		Pair<Either<Node, Either<List<?>, NodeList<?>>>, Integer> parentAndIndex = this.getParentOfHole(path);
-		Either<Node, Either<List<?>, NodeList<?>>> parent = parentAndIndex.getFirst();
-		int holeIndex = parentAndIndex.getSecond();
 		HoleNode parentOfParentHole = parentHole.getParent();
 		HoleNode parentOfParentOfParentHole = null;
 		if (parentOfParentHole != null) {
 			parentOfParentOfParentHole = parentOfParentHole.getParent();
 		}
 
-		// the following code can be optimized.
+		Pair<Either<Node, Either<List<?>, NodeList<?>>>, Integer> parentAndIndex = this.getParentOfHole(path);
+		Either<Node, Either<List<?>, NodeList<?>>> parent = parentAndIndex.getFirst();
+		int holeIndex = parentAndIndex.getSecond();
 		String parentNodeClassStr = null;
 		if (parent.isLeft()) {
 			parentNodeClassStr = StringHelper.getClassName(parent.getLeft().getClass().toString());
@@ -175,14 +173,8 @@ public class Text2CompilationUnit {
 				}
 				break;
 			case "package":
-				CompilationUnit parentNode = null;
-				if (parent.isLeft()) {
-					parentNode = (CompilationUnit) parent.getLeft();
-				} else {
-					// TODO: shall not be other case.
-				}
+				CompilationUnit parentNode = (CompilationUnit) parent.getLeft();
 				parentNode.setPackageDeclaration((PackageDeclaration) node);
-				// update current hole
 				currentHole.set(HoleType.PackageDeclaration, false);
 				holeNode = new HoleNode();
 				holeNode.setHoleTypeOptions(new HoleType[] { HoleType.ImportDeclaration, HoleType.TypeDeclaration });
@@ -197,34 +189,24 @@ public class Text2CompilationUnit {
 						importNodeList.add((ImportDeclaration) node);
 						parentNode.setImports(importNodeList);
 						currentHole.set(HoleType.ImportDeclarations, false);
-						holeNode = new HoleNode(HoleType.ImportDeclaration, false);
-						holeNode.setHoleTypeOptions(new HoleType[] { HoleType.ImportDeclaration });
-						currentHole.addChild(holeNode);
-						holeNode = new HoleNode();
-						holeNode.setHoleTypeOptions(new HoleType[] { HoleType.ImportDeclaration }); // under wrapper: should only be
-						currentHole.addChild(holeNode);
+						currentHole.addChild(new HoleNode(HoleType.ImportDeclaration, false, HoleType.ImportDeclaration));
+						currentHole.addChild(new HoleNode(HoleType.ImportDeclaration, true, HoleType.ImportDeclaration));
 					}
 				} else {
 					NodeList<ImportDeclaration> importDeclarations = (NodeList<ImportDeclaration>) parent.get().get();
 					importDeclarations.add((ImportDeclaration) node);
 					currentHole.set(HoleType.ImportDeclaration, false);
-					holeNode = new HoleNode();
-					holeNode.setHoleTypeOptions(new HoleType[] { HoleType.ImportDeclaration });
-					parentHole.addChild(holeNode);
+					parentHole.addChild(new HoleNode(HoleType.ImportDeclaration, true, HoleType.ImportDeclaration));
 				}
 				break;
 			case "interface":
 				parentNode = (CompilationUnit) parent.getLeft();
 				parentNode.addType((ClassOrInterfaceDeclaration) node);
+
 				currentHole.set(HoleType.TypeDeclarations, false);
-
-				holeNode = new HoleNode(HoleType.Wrapper, false);
-				holeNode.setHoleTypeOptions(new HoleType[] { HoleType.InterfaceDeclaration });
+				holeNode = new HoleNode(HoleType.Wrapper, false, HoleType.InterfaceDeclaration);
 				currentHole.addChild(holeNode);
-
-				HoleNode childHoleNode0 = new HoleNode();
-				childHoleNode0.setHoleTypeOptions(new HoleType[] { HoleType.BodyDeclaration });
-				holeNode.addChild(childHoleNode0);
+				holeNode.addChild(new HoleNode(HoleType.BodyDeclaration));
 				break;
 			case "class": // Note: class and interface belongs to TypeDeclaration.
 				parentNode = null;
@@ -233,31 +215,35 @@ public class Text2CompilationUnit {
 					parentNode.addType((ClassOrInterfaceDeclaration) node);
 
 					currentHole.set(HoleType.TypeDeclarations, false);
-
-					holeNode = new HoleNode(HoleType.Wrapper, false);
-					holeNode.setHoleTypeOptions(new HoleType[] { HoleType.ClassDeclaration });
+					holeNode = new HoleNode(HoleType.Wrapper, false, HoleType.ClassDeclaration);
 					currentHole.addChild(holeNode);
-
-					HoleNode childHoleNode = new HoleNode();
-					childHoleNode.setHoleTypeOptions(new HoleType[] { HoleType.BodyDeclaration });
-					holeNode.addChild(childHoleNode);
+					holeNode.addChild(new HoleNode(HoleType.BodyDeclaration));
 				} else {
 					NodeList<ClassOrInterfaceDeclaration> classOrInterfaceDeclarations = (NodeList<ClassOrInterfaceDeclaration>) parent
 							.get().get();
 					classOrInterfaceDeclarations.add((ClassOrInterfaceDeclaration) node);
 
-					currentHole.set(HoleType.Wrapper, false);
-					currentHole.setHoleTypeOptions(new HoleType[] { HoleType.ClassDeclaration });
-
-					HoleNode childHoleNode = new HoleNode();
-					childHoleNode.setHoleTypeOptions(new HoleType[] { HoleType.BodyDeclaration });
-					currentHole.addChild(childHoleNode);
+					currentHole.set(HoleType.Wrapper, false, HoleType.ClassDeclaration);
+					currentHole.addChild(new HoleNode(HoleType.BodyDeclaration));
 				}
 				break;
 			case "constructor":
 				break;
 			case "method":
-				if (parentHoleType.equals(HoleType.BodyDeclarations)) {
+				if (parentNodeClassStr != null && parentNodeClassStr.equals("ClassOrInterfaceDeclaration")) {
+					ClassOrInterfaceDeclaration classOrInterfaceDeclaration = (ClassOrInterfaceDeclaration) parent.getLeft();
+					// If Interface, no body
+					if (classOrInterfaceDeclaration.isInterface()) {
+						((MethodDeclaration) node).removeBody();
+					}
+					classOrInterfaceDeclaration.addMember((BodyDeclaration<?>) node);
+
+					currentHole.set(HoleType.BodyDeclarations, false);
+					holeNode = new HoleNode(HoleType.Wrapper, false, HoleType.MethodDeclaration);
+					currentHole.addChild(holeNode);
+					holeNode.addChild(new HoleNode(HoleType.TypeExtends));
+				} else if (parentHoleType.equals(HoleType.BodyDeclarations)) {
+					// TODO: construct a BodyDeclarations example
 					NodeList<BodyDeclaration<?>> bodyDeclarations = (NodeList<BodyDeclaration<?>>) parent.get().get();
 					// Interface method, no body.
 					BodyDeclaration<?> bodyDeclaration0 = bodyDeclarations.get(0);
@@ -268,29 +254,8 @@ public class Text2CompilationUnit {
 					}
 					bodyDeclarations.add((BodyDeclaration<?>) node);
 
-					currentHole.set(HoleType.Wrapper, false);
-					currentHole.setHoleTypeOptions(new HoleType[] { HoleType.MethodDeclaration });
-					holeNode = new HoleNode();
-					holeNode.setHoleTypeOptions(new HoleType[] { HoleType.TypeExtends });
-					currentHole.addChild(holeNode);
-				}
-				if (parentNodeClassStr != null && parentNodeClassStr.equals("ClassOrInterfaceDeclaration")) {
-					ClassOrInterfaceDeclaration classOrInterfaceDeclaration = (ClassOrInterfaceDeclaration) parent.getLeft();
-					// If Interface, no body
-					if (classOrInterfaceDeclaration.isInterface()) {
-						((MethodDeclaration) node).removeBody();
-					}
-					classOrInterfaceDeclaration.addMember((BodyDeclaration<?>) node);
-
-					currentHole.set(HoleType.BodyDeclarations, false);
-
-					holeNode = new HoleNode(HoleType.Wrapper, false);
-					holeNode.setHoleTypeOptions(new HoleType[] { HoleType.MethodDeclaration });
-					currentHole.addChild(holeNode);
-
-					HoleNode chilHoleNode = new HoleNode();
-					chilHoleNode.setHoleTypeOptions(new HoleType[] { HoleType.TypeExtends });
-					holeNode.addChild(chilHoleNode);
+					currentHole.set(HoleType.Wrapper, false, HoleType.BodyDeclaration);
+					currentHole.addChild(new HoleNode(HoleType.TypeExtends));
 				}
 				break;
 			case "arrowFunction":

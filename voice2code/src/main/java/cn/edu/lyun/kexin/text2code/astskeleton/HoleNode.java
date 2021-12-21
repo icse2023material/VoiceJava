@@ -24,11 +24,27 @@ public class HoleNode {
 
 	}
 
+	/**
+	 * @param holeType
+	 * @param isHole
+	 * @param realHoleType
+	 */
 	public HoleNode(HoleType holeType, boolean isHole, HoleType realHoleType) {
 		this.holeType = holeType;
 		this.isHole = isHole;
 		this.holeTypeOptions = new HoleType[] { realHoleType };
 		this.childList = new ArrayList<HoleNode>();
+	}
+
+	/**
+	 * @param possibleHoleType
+	 */
+	public HoleNode(HoleType possibleHoleType) {
+		this.isHole = true;
+		this.holeType = HoleType.Undefined;
+		this.holeTypeOptions = new HoleType[] { possibleHoleType };
+		this.childList = new ArrayList<HoleNode>();
+		this.parent = null;
 	}
 
 	public void setHoleTypeOptions(HoleType[] holeTypeOptions) {
@@ -67,6 +83,10 @@ public class HoleNode {
 		return this.isHole;
 	}
 
+	/**
+	 * @param holeType
+	 * @param isHole
+	 */
 	public void set(HoleType holeType, boolean isHole) {
 		this.holeType = holeType;
 		this.isHole = isHole;
