@@ -4,9 +4,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import cn.edu.lyun.util.ListHelper;
-import cn.edu.lyun.util.Pair;
-
 public class Pattern {
 	private String name; // a specific name for the pattern
 	private String str;

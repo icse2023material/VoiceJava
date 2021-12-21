@@ -19,6 +19,10 @@ public class HoleAST {
 		this.root = cu;
 	}
 
+	/**
+	 * 
+	 * @return ((parentNode, currentNode), pathToCurrentNode)
+	 */
 	public Pair<Pair<HoleNode, HoleNode>, List<Integer>> getCurrentHole() {
 		List<Integer> path = new ArrayList<Integer>();
 		return getCurrentHoleRecursive(this.root, this.root, path);

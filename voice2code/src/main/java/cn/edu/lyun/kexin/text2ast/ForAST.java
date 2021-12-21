@@ -11,7 +11,7 @@ public class ForAST implements AST {
 	public Node generate(Pattern pattern) {
 		Unit[] units = pattern.getUnits();
 		List<Unit> unitList = new ArrayList<Unit>(Arrays.asList(units));
-		unitList.remove(0); // remove "import"
+		unitList.remove(0); // remove "define"
 
 		if (unitList.get(0).getKeyword().equals("for")) {
 			ForStmt forStmt = new ForStmt();

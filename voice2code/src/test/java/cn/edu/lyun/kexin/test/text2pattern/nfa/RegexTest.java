@@ -9,11 +9,13 @@ import cn.edu.lyun.kexin.text2pattern.nfa.*;
 public class RegexTest {
 
 	public static void main(String[] args) {
-		// Unit Name = new Unit("plus", new Unit());
-		Pattern expr15Pat = new Pattern("expr15", "[expression]? null",
-				new Unit[] { new Unit("question", new Unit("expression")), new Unit("null") });
 
-		Regex regex = new Regex(expr15Pat);
+		Unit Name = new Unit("plus", new Unit());
+
+		Pattern packagePat = new Pattern("package", "define package [_]+ [dot [_]+]*",
+				new Unit[] { new Unit("define"), new Unit("package"), Name, new Unit("asterisk", new Unit("dot"), Name) });
+
+		Regex regex = new Regex(packagePat);
 		regex.writeDotFile();
 		Runtime rt = Runtime.getRuntime();
 		try {
@@ -22,7 +24,7 @@ public class RegexTest {
 			e.printStackTrace();
 		}
 
-		String text = "expression null";
+		String text = "define package org dot hello world dot star";
 		Pair<Boolean, Pattern> result = regex.isMatch(text);
 		if (result.getFirst()) {
 			System.out.println("Matched:");

@@ -77,22 +77,31 @@ public class Text2CompilationUnit {
 
 	public CompilationUnit generate(String text) {
 		Pattern pattern = RegexSet.compile(new PatternSet()).matchPattern(text).concatNames();
-		Node node = ASTManager.generate(pattern);
+		if (pattern == null) {
+			System.out.println("Match failed");
+			return null;
+		}
 		if (this.isDebug) {
 			System.out.println("[log] matched pattern name: " + pattern.getName());
 		}
 
+		Node node = ASTManager.generate(pattern);
+
 		Pair<Pair<HoleNode, HoleNode>, List<Integer>> holePosition = this.holeAST.getCurrentHole();
 		List<Integer> path = holePosition.getSecond();
-		Pair<Either<Node, Either<List<?>, NodeList<?>>>, Integer> parentAndIndex = this.getParentOfHole(path);
-		int holeIndex = parentAndIndex.getSecond();
 		Pair<HoleNode, HoleNode> parentAndCurrentHole = holePosition.getFirst();
 		HoleNode parentHole = parentAndCurrentHole.getFirst();
 		HoleNode currentHole = parentAndCurrentHole.getSecond();
 		HoleType parentHoleType = parentHole.getHoleType();
+
+		Pair<Either<Node, Either<List<?>, NodeList<?>>>, Integer> parentAndIndex = this.getParentOfHole(path);
 		Either<Node, Either<List<?>, NodeList<?>>> parent = parentAndIndex.getFirst();
-		HoleNode parentOfParentHole = this.holeAST.getParentOfNode(path);
-		HoleNode parentOfParentOfParentHole = this.holeAST.getParentOfParentOfParentNode(path);
+		int holeIndex = parentAndIndex.getSecond();
+		HoleNode parentOfParentHole = parentHole.getParent();
+		HoleNode parentOfParentOfParentHole = null;
+		if (parentOfParentHole != null) {
+			parentOfParentOfParentHole = parentOfParentHole.getParent();
+		}
 
 		// the following code can be optimized.
 		String parentNodeClassStr = null;
@@ -2477,6 +2486,12 @@ public class Text2CompilationUnit {
 		return new Pair<Either<Node, Either<List<?>, NodeList<?>>>, Integer>(either, path.get(index));
 	}
 
+	/**
+	 * 
+	 * @param path the compuatation path in AST
+	 * @return (parent node in AST, current child node index), parent node can be a
+	 *         node, or a List or a NodeList
+	 */
 	public Pair<Either<Node, Either<List<?>, NodeList<?>>>, Integer> getParentOfHole(List<Integer> path) {
 		int index;
 		Node parent = this.compilationUnit;
