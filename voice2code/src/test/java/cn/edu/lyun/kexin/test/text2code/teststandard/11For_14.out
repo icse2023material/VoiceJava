@@ -1,0 +1,8 @@
+public class HelloWorld {
+
+    public void sayHello() {
+        if (counter < 10) {
+            for (; false; ) return;
+        }
+    }
+}

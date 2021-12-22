@@ -1,0 +1,7 @@
+public class HelloWorld {
+    public void sayHello(Name[] names) {
+        for (; true; ) {
+            for (; false; ) return;
+        }
+    }
+}
