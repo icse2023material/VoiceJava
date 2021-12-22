@@ -1,0 +1,1152 @@
+define public class hello world
+define public function say hello
+type void
+type String variable name
+define public class hello world
+define public function say hello
+type void
+type int list variable numList
+define public class hello world
+define public function say hello
+type void
+type Node dot Name variable name
+define public class hello world
+define public function say hello
+type void
+type Node dot ID with String variable id
+define public class hello world
+define public function say hello
+type void
+type Name list variable names
+move next
+define for
+define public class hello world
+define public function say hello
+type void
+type Name list variable names
+move next
+define for
+define int variable i 
+int 0
+expression i less than expression
+names dot length
+i plus plus
+let sum equal int 100
+continue
+define public class hello world
+define public function say hello
+type void
+type Name list variable names
+move next
+define for
+define int variable i 
+define public class hello world
+define public function say hello
+type void
+type Name list variable names
+move next
+define for
+define int variable i 
+int 0
+expression i less than expression
+names dot length
+define public class hello world
+define public function say hello
+type void
+type Name list variable names
+move next
+define for
+define int variable i 
+int 0
+expression i less than expression
+names dot length
+i plus plus
+define public class hello world
+define public function say hello
+type void
+type Name list variable names
+move next
+define for
+define int variable i 
+int 0
+expression i less than expression
+names dot length
+i plus plus
+System dot Out call println
+variable names index i
+define public class hello world
+define public function say hello
+type void
+type Name list variable names
+move next
+define for
+let i equal int 0
+define public class hello world
+define public function say hello
+type void
+type Name list variable names
+move next
+define for
+move next
+expression i less than 10
+define public class hello world
+define public function say hello
+type void
+type Name list variable names
+move next
+define for
+move next
+move next
+expression i plus plus
+define public class hello world
+define public function say hello
+type void
+type Name list variable names
+move next
+define for
+move next
+move next
+move next
+System dot Out call println
+string hello world
+define public class hello world
+define public function say hello
+type void
+type Name list variable names
+move next
+define while
+define public class hello world
+define public function say hello
+type void
+type Name list variable names
+move next
+define while
+expression i less than 10
+define public class hello world
+define public function say hello
+type void
+type Name list variable names
+move next
+define while
+expression i less than 10
+System dot Out call println
+variable i
+define public class hello world
+define public function say hello
+type void
+type Name list variable names
+move next
+define while
+boolean true
+define public class hello world
+define public function say hello
+type void
+type Name list variable names
+move next
+define while
+boolean true
+System dot Out call println
+string hello world
+define public class hello world
+define public function say hello
+type void
+type Name list variable names
+move next
+define if
+define public class hello world
+define public function say hello
+type void
+type Name list variable names
+move next
+define if
+expression i less than 10
+define public class hello world
+define public function say hello
+type void
+type Name list variable names
+move next
+define if
+expression i greater than 90
+System dot Out call println
+string excellent
+define public class hello world
+define public function say hello
+type void
+type Name list variable names
+move next
+define if
+expression i greater than 90
+System dot Out call println
+string excellent
+move next
+move next
+expression i greater equal 80
+define public class hello world
+define public function say hello
+type void
+type Name list variable names
+move next
+define if
+expression i greater than 90
+System dot Out call println
+string excellent
+move next
+move next
+expression i greater equal 80
+let sum equal expression
+sum plus i
+define public class hello world
+define public function say hello
+type void
+type Name list variable names
+move next
+define if
+expression i greater than 90
+System dot Out call println
+string excellent
+move next
+move next
+expression i greater equal 80
+let sum equal expression
+sum plus i
+move next
+move next
+define public class hello world
+define public function say hello
+type void
+type Name list variable names
+move next
+define if
+expression i greater than 90
+let sum equal expression 
+sum plus i
+move next
+move next
+System dot Out call println 
+string done
+define public class hello world
+define public function say hello
+type void
+type Name list variable names
+move next
+define if
+expression i greater than 90
+let sum equal int 100
+move next
+move next
+move next
+let i equal int 100
+define public class hello world
+define public function say hello
+type void
+type Name list variable names
+move next
+define switch
+define public class hello world
+define public function say hello
+type void
+type Name list variable names
+move next
+define switch
+variable option
+define public class hello world
+define public function say hello
+type void
+type Name list variable names
+move next
+define switch
+variable option
+int 1
+define public class hello world
+define public function say hello
+type void
+type Name list variable names
+move next
+define switch
+variable option
+int 1
+let sum equal int 0
+break
+define public class hello world
+define public function say hello
+type void
+type Name list variable names
+move next
+define switch
+variable option
+int 1
+let sum equal int 0
+break
+int 2
+define public class hello world
+define public function say hello
+type void
+type Name list variable names
+move next
+define switch
+variable option
+int 1
+let sum equal int 0
+break
+int 2
+let sum equal int 1
+break
+int 3
+move next
+int 4
+define public class hello world
+define public function say hello
+type void
+type Name list variable names
+move next
+define switch
+variable option
+int 1
+let sum equal int 0
+break
+int 2
+let sum equal int 1
+break
+int 3
+move next
+int 4
+let sum equal int 34
+break
+move next
+move next
+define public class hello world
+define public function say hello
+type void
+type Name list variable names
+move next
+define switch
+variable option
+int 1
+let sum equal int 0
+break
+int 2
+let sum equal int 1
+break
+int 3
+move next
+int 4
+let sum equal int 34
+break
+move next
+let sum equal int 100
+break
+define public class hello world
+define public function say hello
+type void
+type Name list variable names
+move next
+define switch
+variable option
+int 1
+let sum equal int 0
+break
+move next
+let sum equal int 100
+break
+move next
+System dot Out call println
+string nice
+define public class hello world
+define public function say hello
+type void
+move next
+let x equal expression
+expression plus expression
+subexpression
+call sum
+int 3
+move next
+subexpression
+call sum
+int 2
+move next
+define public class hello world
+define public function say hello
+type void
+move next
+let x equal expression
+subexpression
+subexpression
+define public class hello world
+define public function say hello
+type void
+move next
+let x equal expression
+expression 3 plus expression
+subexpression
+variable z
+let x equal expression
+expression plus expression
+subexpression
+expression a dot b
+subexpression
+expression a dot b
+let x equal expression
+subexpression
+variable y
+let x equal expression
+subexpression
+expression 3 plus 2
+define public class hello world
+define private int variable great 
+17 times expression
+subexpression
+18 plus 19
+define public class hello world
+define public function say hello
+type void
+move next
+define int variable count
+subexpression
+int 3
+define public class hello world
+define public function say hello
+type void
+type Name list variable names
+move next
+let sum equal expression
+subexpression
+define package lyun
+define package org dot elasticsearch dot search
+define package org dot elasticsearch dot star
+define public class hello world
+define public function say hello
+type void
+type Name list variable names
+move next
+let fib equal call fibonacci
+move next
+let sum dot fib equal call fibonacci
+define public class hello world
+define public function say hello
+type void
+type Name list variable names
+move next
+let fib equal Fib call fibonacci
+move next
+let sum dot fib equal fib call fibonacci
+define public class hello world
+define public function say hello
+type void
+type Name list variable names
+move next
+let x equal a
+let x equal a dot b
+let x dot y equal a
+let x dot y equal a dot b
+define public class hello world
+define public function say hello
+type void
+type Name list variable names
+move next
+let x equal variable a
+let x dot y equal variable a
+define public class hello world
+define public function say hello
+type void
+type Name list variable names
+move next
+let x equal long 2.12
+let x dot y equal int 2
+define public class hello world
+define public function say hello
+type void
+type Name list variable names
+move next
+let x equal expression
+string hello world
+let x dot y equal expression
+int 2
+define public class hello world
+define public function say hello
+type void
+type Name list variable names
+move next
+return call sum
+define public class hello world
+define public function say hello
+type void
+type Name list variable names
+move next
+return expression
+expression call sum
+define public class hello world
+define public function say hello
+type void
+type Name list variable names
+move next
+return List call sum
+define public class hello world
+define public function say hello
+type void
+type Name list variable names
+move next
+return a
+define public class hello world
+define public function say hello
+type void
+type Name list variable names
+move next
+return a dot b
+define public class hello world
+define public function say hello
+type void
+type Name list variable names
+move next
+return variable y
+define public class hello world
+define public function say hello
+type void
+type Name list variable names
+move next
+return y
+define public class hello world
+define public function say hello
+type void
+type Name list variable names
+move next
+return int 2
+define public class hello world
+define public function say hello
+type void
+type Name list variable names
+move next
+return expression
+define public class hello world
+define public function say hello
+type void
+type Name list variable names
+move next
+return
+define public class hello world
+define public function say hello
+type void
+type Name list variable names
+move next
+let x equal expression
+expression call sum
+move next
+let x equal expression
+expression a call sum
+move next
+let x equal expression
+expression call sum
+call Plus
+move next
+let x equal expression
+expression call sum
+a call Plus
+move next
+let x equal expression
+expression call sum
+expression a dot b
+move next
+let x equal expression
+expression call sum
+variable y
+move next
+let x equal expression
+expression call sum
+i plus plus
+move next
+let x equal expression
+expression call sum
+i minus minus
+move next
+let x equal expression
+expression call sum
+plus plus i
+move next
+let x equal expression
+expression call sum
+minus minus i
+move next
+let x equal expression
+expression call sum
+expression plus expression
+int 12
+int 13
+move next
+let x equal expression
+expression call sum
+expression 2 plus expression
+int 3
+move next
+let x equal expression
+expression call sum
+expression 2 plus 3
+move next
+
+define public class hello world
+define public function say hello
+type void
+move next
+let x equal expression
+expression plus expression
+int 2
+call sum
+move next
+let x equal expression
+expression plus expression
+call sum
+move next
+call sum
+move next
+define public class hello world
+define public function say hello
+type void
+move next
+let x equal expression
+expression plus expression
+expression 3 times expression
+int 2
+expression times expression
+int 30
+int 20
+
+define public class hello world
+define public function say hello
+type void
+move next
+let x equal expression
+expression plus expression
+expression times expression
+call sum
+move next
+call sum
+move next
+expression times expression
+call sum
+move next
+call sum 
+move next
+define public class hello world
+define public function say hello
+type void
+move next
+let x equal expression
+expression 3 plus expression
+expression 2 times expression
+call sum
+move next
+define public class hello world
+define public function say hello
+type void
+move next
+let x equal expression
+expression 3 plus 5
+let x equal expression
+variable ns index i
+let x equal expression
+string hello world !
+define public class hello world
+define public function say hello
+type void
+move next
+let number equal expression
+expression null
+let number equal expression
+null
+define public class hello world
+define public function say hello
+type void
+type Name list variable names
+move next
+let x equal expression
+expression a dot b
+let y equal expression
+expression c dot d
+define public class hello world
+define public function say hello
+type void
+type Name list variable names
+move next
+let x equal expression
+expression variable y
+let x equal expression
+variable y
+define public class hello world
+define public function say hello
+type void
+type Name list variable names
+move next
+let x equal expression
+int 2
+let x equal expression
+long 2.2
+define public class hello world
+define public function say hello
+type void
+type Name list variable names
+move next
+let x equal expression
+i plus plus
+let x equal expression
+i plus plus
+define public class hello world
+define public function say hello
+type void
+type Name list variable names
+move next
+let x equal expression
+i minus minus
+let x equal expression
+i minus minus
+define public class hello world
+define public function say hello
+type void
+type Name list variable names
+move next
+let x equal expression
+plus plus i
+let x equal expression
+plus plus i
+define public class hello world
+define public function say hello
+type void
+type Name list variable names
+move next
+let x equal expression
+minus minus i
+let x equal expression
+minus minus i
+define public class hello world
+define public function say hello
+type void
+type Name list variable names
+move next
+let x equal expression
+expression plus expression
+int 2
+int 3
+let x equal expression
+expression minus expression
+int 2
+int 3
+let x equal expression
+expression times expression
+int 2
+int 3
+let x equal expression
+expression divide expression
+int 2
+int 3
+let x equal expression
+expression mod expression
+int 2
+int 3
+let x equal expression
+expression less than expression
+int 2
+int 3
+let x equal expression
+expression less equal expression
+int 2
+int 3
+let x equal expression
+expression greater than expression
+int 2
+int 3
+let x equal expression
+expression greater equal expression
+int 2
+int 3
+let x equal expression
+expression double equal expression
+int 2
+int 3
+let x equal expression
+expression double and expression
+int 2
+int 3
+define package lyun
+import helper
+define package lyun
+import cn dot edu dot lyun
+define package lyun
+import cn dot edu dot lyun dot star
+define package lyun
+import static cn dot edu dot lyun dot star
+import static cn dot edu dot lyun dot star
+define public interface person
+define package lyun
+define public interface person
+define public class hello world
+define private class hello world extends greeting
+define protected class hello world extends greeting implements bonjour
+define abstract class hello world
+define static class hello world
+define public class hello world
+define public function say hello
+define public class hello world
+define private function say hello
+define public class hello world
+define private int variable count
+define public class hello world
+define public int list variable intList
+define public class hello world
+define public Node dot Name variable name
+define public class HelloWorld
+define public Node with Integer and String variable nodelist
+define public class hello world
+define public int variable count
+a call sum
+move next
+define public class hello world
+define public int variable count
+expression a dot b
+define public int variable count
+variable y
+define public int variable count
+int 2
+define public int variable count
+i plus plus
+define public int variable count
+i minus minus
+define public int variable count
+plus plus i
+define public int variable count
+minus minus i
+define public int variable count
+expression plus expression
+int 2
+int 3
+define public int variable count
+expression 2 plus expression
+int 3
+define public int variable count
+expression 2 plus 3
+define public int variable count
+subexpression
+int 2
+define public class hello world
+define public function say hello
+type void
+move next
+define int variable count
+call sum
+move next
+define int variable count
+a call sum
+move next
+define int variable count
+expression a dot b
+define int variable count
+variable y
+define int variable count
+int 2
+define int variable count
+i plus plus
+define int variable count
+i minus minus
+define int variable count
+plus plus i
+define int variable count
+minus minus i
+define int variable count
+expression plus expression
+int 2
+int 3
+define int variable count
+expression 2 plus expression
+int 3
+define int variable count
+expression 2 plus 3
+define int variable count
+subexpression
+int 2
+define public class hello world
+define public function say hello
+type int
+define public class hello world
+define public function say hello
+type int list
+define public class hello world
+define public function say hello
+type Node dot Name
+define public class hello world
+define public function say hello
+type Node with String and Integer
+define public class hello test
+define public function test
+type void 
+move next 
+define int variable a 
+expression 3 plus 4
+define int variable b
+define public class hello test
+define public function main
+type void
+type String list variable args
+move next
+define int list variable ns
+move next
+define for
+define int variable i
+int 0
+expression i less than expression
+ns dot length
+expression i plus plus
+expression System dot Out call println
+expression variable ns index i
+move next
+define int variable nsi
+variable ns index i
+let nsi equal expression
+variable ns index i
+move next
+return expression
+expression variable ns index i
+define package lyun
+import java dot util dot star
+import java dot lang dot reflect dot star
+move next
+define public class hello
+define public int variable count
+int 0
+define private int variable sum
+int 2
+define public String variable name
+move next
+define public function say hello
+type int
+type int list variable intArray
+type String variable name
+move next
+define int variable sum
+int 0
+define int variable b
+move next
+define for
+define int variable i
+int 0
+expression i less equal 10
+i plus plus
+let sum equal expression
+expression sum plus i
+let count equal expression
+expression count plus i
+define public class hello test
+define public static function main
+type void
+type string list variable args
+move next
+define int variable n
+int 90
+define if
+n greater than 90
+System dot Out call prtinln
+string excellent
+move next
+move next
+expression n greater equal 60
+System dot Out call prtinln
+string good
+move next
+move next
+move next
+System dot Out call println
+string bad
+move next
+move next
+let n equal int 2
+define package lyun
+import java dot uitl dot star
+import java dot lang dot reflect dot star
+move next
+define public class hello
+define private int variable greeting
+int 2
+define public function say hello
+type int
+type int list variable intArray
+type String variable name
+move next
+define int variable sum
+int 0
+define if
+i less than 10
+sum plus plus
+sum plus plus
+move next
+i greater than 10
+sum plus plus
+move next
+i double equal 10
+sum plus plus
+move next
+move next
+move next
+return sum
+define package lyun
+import java dot uitl dot star
+import java dot lang dot reflect dot star
+move next
+define public class hello
+define private int variable greeting
+int 2
+define public function say hello
+type int
+type int list variable intArray
+type String variable name
+move next
+let sum equal call sum
+move next
+let sum equal sum call sum
+int 10
+move next
+let sum equal score dot sum
+let sum equal variable sumResult
+let sum equal int 100
+let sum dot count equal
+variable sum
+define public class puppy
+define private int variable puppy age
+move next
+define private int variable puppy num
+move next
+define public function set age
+type void
+type int variable age
+move next
+let puppy age equal variable age
+move next
+define public function get age
+type int
+move next
+return variable puppy age
+define public static function main
+type void
+type String list variable args
+move next
+define Puppy variable my puppy
+new instance puppy
+expression string tommy
+move next
+my puppy call set age
+expression int 2
+move next
+my puppy call get age
+move next
+expression System dot Out call println
+expression my puppy dot puppy age
+define package lyun
+import java dot uitl dot star
+import java dot lang dot reflect dot star
+move next
+define public class hello
+define private int variable greeting
+int 2
+define public function say hello
+type int
+type int list variable intArray
+type String variable name
+move next
+call notify
+int 3
+int 5
+move next
+return hello call notify
+int 2
+move next
+define public class test
+define public static function main
+type void
+type string list variable args
+move next
+define int variable option
+int 2
+define switch
+variable option
+int 1
+System dot Out call println
+string Selected1
+move next
+break
+int 2
+move next
+int 3
+System dot Out call println
+string NotSelected 
+move next
+break
+move next
+System dot Out call println
+string bad
+move next
+break
+define package lyun
+import java dot uitl dot star
+import java dot lang dot reflect dot star
+move next
+define public class hello
+define private int variable greeting
+int 2
+define public function say hello
+type int
+type int list variable intArray
+type String variable name
+move next
+define int variable sum
+int 0
+define switch
+variable userType
+int 1
+let sum equal call fibonacci
+int 2
+move next
+expression 15 times 15
+expression 15 times sum
+move next
+int 2
+expression 15 times 15
+move next
+move next
+return sum
+define public class test
+define public static function main
+type void
+type String list variable args
+move next
+define int variable sum 
+int 0
+define int variable n 
+int 0
+define while
+expression n less equal 100
+expression n plus plus
+let sum equal expression 
+expression sum plus n
+System dot Out call println 
+variable sum
+move next 
+define package lyun
+import java dot uitl dot star
+import java dot lang dot reflect dot star
+move next
+define public class hello
+define private int variable greeting
+int 2
+define public function say hello
+type int
+type int list variable intArray
+type String variable name
+move next
+define int variable sum
+int 0
+define while
+i less than 10
+let sum equal call fibonacci
+move next
+let hello dot sum equal hello call fibonacci
+move next
+let sum equal hello dot sum
+let sum equal variable x
+let sum equal int 200
+let sum equal expression
+int 2
