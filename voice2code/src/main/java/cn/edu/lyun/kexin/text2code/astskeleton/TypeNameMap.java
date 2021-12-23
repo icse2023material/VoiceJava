@@ -33,6 +33,7 @@ public class TypeNameMap {
 		map.put(HoleType.ForCompare, "getCompare");
 		map.put(HoleType.InnerExpr, "getInner");
 		map.put(HoleType.WhileCondition, "getCondition");
+		map.put(HoleType.IfCondition, "getCondition");
 		return map;
 	}
 }
