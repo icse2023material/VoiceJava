@@ -1920,9 +1920,10 @@ public class Text2CompilationUnit {
 						// condition for the if.
 						// If condition
 						ifStmt.setCondition((Expression) node);
-						currentHole.set(HoleType.Expression, false);
-						currentHole.setHoleTypeOptions(new HoleType[] { HoleType.IfCondition });
-						parentHole.addChild(new HoleNode());
+						currentHole.set(HoleType.IfCondition, false);
+						HoleNode exprWrapperHole = new HoleNode(HoleType.Wrapper, false, holeTypeExpr);
+						currentHole.addChild(exprWrapperHole);
+						exprWrapperHole.addChild(new HoleNode());
 					} else if (parentHole.getChildList().size() == 2) {
 						// then branch
 						this.generateThenStmtInIfStmtForExpr10AndExpr11AndLet6(parent, node, currentHole, holeTypeExpr);
@@ -1933,9 +1934,11 @@ public class Text2CompilationUnit {
 						ifStmt.setElseStmt(elseBranch);
 
 						currentHole.set(HoleType.ElseStatement, false);
-						HoleNode holeNodeChild = new HoleNode(HoleType.Expression, false);
-						currentHole.addChild(holeNodeChild);
-						currentHole.addChild(new HoleNode());
+						HoleNode conditionHole = new HoleNode(HoleType.IfCondition, false);
+						currentHole.addChild(conditionHole);
+						HoleNode exprWraperHole = new HoleNode(HoleType.Wrapper, false, holeTypeExpr);
+						conditionHole.addChild(exprWraperHole);
+						exprWraperHole.addChild(new HoleNode());
 					}
 				} else if (parentNodeClassStr != null && parentNodeClassStr.equals("SwitchEntry")) {
 					this.generateSwitchEntryForExpr10AndExpr11AndLet6(parent, node, holeIndex, currentHole, holeTypeExpr);
@@ -2640,10 +2643,9 @@ public class Text2CompilationUnit {
 				binaryExpr.setLeft((Expression) node);
 
 				currentHole.set(HoleType.LeftSubExpr, false);
-				HoleNode anotherCurrentHole = new HoleNode(exprHoleType, false);
-				currentHole.addChild(anotherCurrentHole);
-				HoleNode holeNode = new HoleNode();
-				parentHole.addChild(holeNode);
+				HoleNode exprWrapperHole = new HoleNode(exprHoleType, false);
+				currentHole.addChild(exprWrapperHole);
+				parentHole.addChild(new HoleNode());
 			} else {
 				// right
 				binaryExpr.setRight((Expression) node);

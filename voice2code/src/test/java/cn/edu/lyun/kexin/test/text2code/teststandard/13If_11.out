@@ -1,0 +1,7 @@
+public class HelloWorld {
+
+    public int sayHello(Name[] names) {
+        if (10 < false)
+            return;
+    }
+}
