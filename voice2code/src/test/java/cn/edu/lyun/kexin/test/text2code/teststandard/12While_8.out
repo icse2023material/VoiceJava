@@ -1,7 +1,8 @@
 public class HelloWorld {
 
     public void sayHello(Name[] names) {
-        switch(option) {
+        if (counter < 10) {
+            while (false) return;
         }
     }
 }

@@ -1,0 +1,11 @@
+define public class hello world
+define public function say hello
+type void
+type Name list variable names
+move next
+define for
+define int variable counter
+int 0
+expression counter less than 10
+counter plus plus
+define while

@@ -471,27 +471,24 @@ public class Text2CompilationUnit {
 					} else {
 						// append
 						statements.add((Statement) node);
-						currentHole.set(HoleType.Wrapper, false);
-						currentHole.setHoleTypeOptions(new HoleType[] { HoleType.WhileStmt });
-						HoleNode holeNodeChild = new HoleNode();
-						holeNodeChild.setHoleTypeOptions(new HoleType[] { HoleType.Expression });
-						currentHole.addChild(holeNodeChild);
+						currentHole.set(HoleType.Wrapper, false, HoleType.WhileStmt);
+						currentHole.addChild(new HoleNode(HoleType.Expression));
 					}
 				} else if (parentNodeClassStr != null && parentNodeClassStr.equals("MethodDeclaration")) {
 					MethodDeclaration mNode = (MethodDeclaration) parent.getLeft();
 					Optional<BlockStmt> optionalBody = mNode.getBody();
-					currentHole.set(HoleType.Body, false);
-					HoleNode anotherCurrentHole = new HoleNode();
-					currentHole.addChild(anotherCurrentHole);
 					BlockStmt blockStmt = optionalBody.get();
 					NodeList<Statement> statements = blockStmt.getStatements();
+					currentHole.set(HoleType.Body, false);
+					HoleNode stmtsHole = new HoleNode(HoleType.Statements, false);
+					currentHole.addChild(stmtsHole);
 					if (statements.size() == 0) {
 						statements.add((Statement) node);
-						anotherCurrentHole.set(HoleType.Statements, false);
-						HoleNode childNode = new HoleNode(HoleType.Wrapper, false);
-						childNode.setHoleTypeOptionsOfOnlyOne(HoleType.WhileStmt);
-						anotherCurrentHole.addChild(childNode);
-						childNode.addChild(new HoleNode());
+						HoleNode whileStmtHole = new HoleNode(HoleType.Wrapper, false, HoleType.WhileStmt);
+						stmtsHole.addChild(whileStmtHole);
+						whileStmtHole.addChild(new HoleNode());
+					} else {
+						System.out.println("Shall not go to this branch");
 					}
 				} else if (parentNodeClassStr != null && parentNodeClassStr.equals("ForStmt")) {
 					ForStmt forStmt = (ForStmt) parent.getLeft();
@@ -506,16 +503,11 @@ public class Text2CompilationUnit {
 						forStmt.setBody(blockStmt);
 
 						currentHole.set(HoleType.Body, false);
-
-						HoleNode anotherCurrentHole = new HoleNode();
-						anotherCurrentHole.set(HoleType.Statements, false);
-						currentHole.addChild(anotherCurrentHole);
-
-						HoleNode childNode = new HoleNode();
-						childNode.set(HoleType.Wrapper, false);
-						childNode.setHoleTypeOptionsOfOnlyOne(HoleType.WhileStmt);
-						anotherCurrentHole.addChild(childNode);
-						childNode.addChild(new HoleNode());
+						HoleNode stmtsHole = new HoleNode(HoleType.Statements, false);
+						currentHole.addChild(stmtsHole);
+						HoleNode whileWrapperHole = new HoleNode(HoleType.Wrapper, false, HoleType.WhileStmt);
+						stmtsHole.addChild(whileWrapperHole);
+						whileWrapperHole.addChild(new HoleNode());
 					} else if (bodyClassStr.equals("BlockStmt")) {
 
 					} else {
@@ -533,14 +525,36 @@ public class Text2CompilationUnit {
 						whileStmt.setBody(blockStmt);
 
 						currentHole.set(HoleType.Body, false);
-						HoleNode anotherCurrentHole = new HoleNode(HoleType.Statements, false);
-						currentHole.addChild(anotherCurrentHole);
-						HoleNode childNode = new HoleNode(HoleType.Wrapper, false);
-						childNode.setHoleTypeOptionsOfOnlyOne(HoleType.WhileStmt);
-						anotherCurrentHole.addChild(childNode);
-						childNode.addChild(new HoleNode());
+						HoleNode stmtsHole = new HoleNode(HoleType.Statements, false);
+						currentHole.addChild(stmtsHole);
+						HoleNode whileWrapper = new HoleNode(HoleType.Wrapper, false, HoleType.WhileStmt);
+						stmtsHole.addChild(whileWrapper);
+						whileWrapper.addChild(new HoleNode(HoleType.Expression));
 					} else {
 						// TODO
+					}
+				} else if (parentNodeClassStr != null && parentNodeClassStr.equals("IfStmt")) {
+					IfStmt ifStmt = (IfStmt) parent.getLeft();
+					Statement stmt = ifStmt.getThenStmt();
+
+					currentHole.set(HoleType.ThenStatement, false);
+
+					String bodyClassStr = stmt.getClass().toString();
+					bodyClassStr = StringHelper.getClassName(bodyClassStr);
+					if (bodyClassStr.equals("ReturnStmt")) {
+						BlockStmt blockStmt = new BlockStmt();
+						NodeList<Statement> statements = new NodeList<Statement>();
+						statements.add((Statement) node);
+						blockStmt.setStatements(statements);
+						ifStmt.setThenStmt(blockStmt);
+
+						currentHole.set(HoleType.ThenStatement, false);
+						HoleNode stmtsNode = new HoleNode(HoleType.Statements, false);
+						currentHole.addChild(stmtsNode);
+						HoleNode whileWrapperHole = new HoleNode(HoleType.Wrapper, false, HoleType.WhileStmt);
+						stmtsNode.addChild(whileWrapperHole);
+						whileWrapperHole.addChild(new HoleNode(HoleType.Expression));
+					} else if (bodyClassStr.equals("BlockStmt")) {
 					}
 				}
 				break;
@@ -2208,8 +2222,8 @@ public class Text2CompilationUnit {
 						// i < 10 in while(i < 10){}
 						WhileStmt whileStmt = (WhileStmt) parent.getLeft();
 						whileStmt.setCondition((Expression) node);
-						currentHole.set(HoleType.Expression, false);
-						// holeNode = new HoleNode(HoleType.Body, true);
+						currentHole.set(HoleType.WhileCondition, false);
+						currentHole.addChild(new HoleNode(HoleType.Expression, false));
 						parentHole.addChild(new HoleNode());
 					} else {
 						this.generateExprStmtInWhileStmt(parent, currentHole, node, holeTypeExpr);
@@ -3372,23 +3386,21 @@ public class Text2CompilationUnit {
 
 				currentHole.set(HoleType.Body, false);
 
-				HoleNode anotherCurrentHole = new HoleNode(HoleType.Statements, false);
-				currentHole.addChild(anotherCurrentHole);
+				HoleNode stmtsHole = new HoleNode(HoleType.Statements, false);
+				currentHole.addChild(stmtsHole);
 
-				HoleNode childNode = new HoleNode(HoleType.Wrapper, false);
-				childNode.setHoleTypeOptions(new HoleType[] { HoleType.Statement });
-				anotherCurrentHole.addChild(childNode);
+				HoleNode stmtWrapperHole = new HoleNode(HoleType.Wrapper, false, HoleType.Statement);
+				stmtsHole.addChild(stmtWrapperHole);
 
-				HoleNode anotherChildNode = new HoleNode(HoleType.Expression, false);
-				childNode.addChild(anotherChildNode);
+				HoleNode exprHole = new HoleNode(HoleType.Expression, false);
+				stmtWrapperHole.addChild(exprHole);
 
-				HoleNode childOfanotherChildNode = new HoleNode(HoleType.Wrapper, false);
-				childOfanotherChildNode.setHoleTypeOptionsOfOnlyOne(holeTypeExpr);
-				anotherChildNode.addChild(childOfanotherChildNode);
+				HoleNode exprWrapperHole = new HoleNode(HoleType.Wrapper, false, holeTypeExpr);
+				exprHole.addChild(exprWrapperHole);
 
-				HoleNode argsWrapper = new HoleNode(HoleType.Arguments, false);
-				childOfanotherChildNode.addChild(argsWrapper);
-				argsWrapper.addChild(new HoleNode());
+				HoleNode argsHole = new HoleNode(HoleType.Arguments, false);
+				exprWrapperHole.addChild(argsHole);
+				argsHole.addChild(new HoleNode());
 			} else {
 				System.out.println("Should not go to this branch");
 			}
