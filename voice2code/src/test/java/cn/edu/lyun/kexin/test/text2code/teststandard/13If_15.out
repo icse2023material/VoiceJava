@@ -1,0 +1,8 @@
+public class HelloWorld {
+
+    public int sayHello(Name[] names) {
+        if (counter < 10)
+            if (false)
+                return;
+    }
+}
