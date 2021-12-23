@@ -1,7 +1,10 @@
 public class HelloWorld {
 
-    public void sayHello(Name[] names) {
-        switch(option) {
+    public int sayHello() {
+        if (counter < 10) {
+            return 0;
+        } else if (counter == 10) {
+            for (; false; ) return;
         }
     }
 }
