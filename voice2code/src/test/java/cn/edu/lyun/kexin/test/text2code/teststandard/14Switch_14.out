@@ -1,0 +1,11 @@
+public class HelloWorld {
+
+    public int sayHello(Name[] names) {
+        if (counter < 10) {
+            return 0;
+        } else {
+            switch(empty) {
+            }
+        }
+    }
+}
