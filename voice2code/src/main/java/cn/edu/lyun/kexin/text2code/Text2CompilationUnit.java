@@ -782,15 +782,12 @@ public class Text2CompilationUnit {
 					currentHole.set(HoleType.Expression, false);
 					defaultLabelHole = new HoleNode(HoleType.VariableDeclarator, false);
 					currentHole.addChild(defaultLabelHole);
-
-					HoleNode childHoleNode = new HoleNode(HoleType.Wrapper, false);
-					childHoleNode.setHoleTypeOptionsOfOnlyOne(HoleType.VariableDeclarator);
-					defaultLabelHole.addChild(childHoleNode);
-
-					HoleNode childOfChildNode = new HoleNode(HoleType.VariableInitializer, false);
-					childHoleNode.addChild(childOfChildNode);
+					HoleNode variableDeclaratorHole = new HoleNode(HoleType.Wrapper, false, HoleType.VariableDeclarator);
+					defaultLabelHole.addChild(variableDeclaratorHole);
+					HoleNode variableInitializerHole = new HoleNode(HoleType.VariableInitializer, false);
+					variableDeclaratorHole.addChild(variableInitializerHole);
 					HoleNode exprWrapper = new HoleNode(HoleType.Wrapper, false, holeTypeExpr);
-					childOfChildNode.addChild(exprWrapper);
+					variableInitializerHole.addChild(exprWrapper);
 					exprWrapper.addChild(new HoleNode());
 				}
 				break;
@@ -2707,9 +2704,9 @@ public class Text2CompilationUnit {
 				binaryExpr.setRight((Expression) node);
 
 				currentHole.set(HoleType.RightSubExpr, false);
-				HoleNode anotherCurrentHole = new HoleNode(HoleType.Wrapper, false, exprHoleType);
-				currentHole.addChild(anotherCurrentHole);
-				anotherCurrentHole.addChild(new HoleNode());
+				HoleNode exprWrapperHole = new HoleNode(HoleType.Wrapper, false, exprHoleType);
+				currentHole.addChild(exprWrapperHole);
+				exprWrapperHole.addChild(new HoleNode());
 			}
 		}
 	}
@@ -3238,11 +3235,11 @@ public class Text2CompilationUnit {
 		assignExpr.setValue((Expression) node);
 
 		currentHole.set(HoleType.AssignExprValue, false);
-		HoleNode anotherHole = new HoleNode(HoleType.Wrapper, false, holeType);
-		currentHole.addChild(anotherHole);
+		HoleNode wrapperHole = new HoleNode(HoleType.Wrapper, false, holeType);
+		currentHole.addChild(wrapperHole);
 		// HoleNode rightSubHole = new HoleNode(HoleType.RightSubExpr, false);
 		// anotherHole.addChild(rightSubHole);
-		anotherHole.addChild(new HoleNode());
+		wrapperHole.addChild(new HoleNode());
 	}
 
 	private void generateExprInArguments(Either<Node, Either<List<?>, NodeList<?>>> parent, Node node,
