@@ -1,0 +1,6 @@
+public class HelloWorld {
+
+    public void sayHello(Name[] names) {
+        while (i < 10) return;
+    }
+}
