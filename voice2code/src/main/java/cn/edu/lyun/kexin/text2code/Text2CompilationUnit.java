@@ -32,6 +32,7 @@ import com.github.javaparser.ast.stmt.BlockStmt;
 import com.github.javaparser.ast.stmt.ExpressionStmt;
 import com.github.javaparser.ast.stmt.ForStmt;
 import com.github.javaparser.ast.stmt.IfStmt;
+import com.github.javaparser.ast.stmt.LabeledStmt;
 import com.github.javaparser.ast.stmt.ReturnStmt;
 import com.github.javaparser.ast.stmt.Statement;
 import com.github.javaparser.ast.stmt.SwitchEntry;
@@ -109,50 +110,48 @@ public class Text2CompilationUnit {
 
 		switch (pattern.getName()) {
 			case "moveNext":
-				HoleNode forHole = new HoleNode(HoleType.Undefined, true);
+				HoleNode defaultLabelHole = new HoleNode(HoleType.Undefined, true);
 				if (currentHole.getHoleTypeOfOptionsIfOnlyOne() != null) {
 					HoleType holeType = currentHole.getHoleTypeOfOptionsIfOnlyOne();
 					if (holeType.equals(HoleType.TypeVariables)) {
 						currentHole.set(HoleType.TypeVariables, false);
-						parentHole.addChild(forHole);
+						parentHole.addChild(defaultLabelHole);
 					} else if (holeType.equals(HoleType.ForInitialization)) {
 						currentHole.set(HoleType.ForInitialization, false);
-						forHole.setHoleTypeOptionsOfOnlyOne(HoleType.ForCompare);
-						parentHole.addChild(forHole);
+						defaultLabelHole.setHoleTypeOptionsOfOnlyOne(HoleType.ForCompare);
+						parentHole.addChild(defaultLabelHole);
 					} else if (holeType.equals(HoleType.ForCompare)) {
 						ForStmt forStmt = (ForStmt) parent.getLeft();
 						forStmt.setCompare(new BooleanLiteralExpr(true));
 						currentHole.set(HoleType.ForCompare, false);
-						forHole.setHoleTypeOptionsOfOnlyOne(HoleType.ForExpression);
-						parentHole.addChild(forHole);
+						defaultLabelHole.setHoleTypeOptionsOfOnlyOne(HoleType.ForExpression);
+						parentHole.addChild(defaultLabelHole);
 					} else if (holeType.equals(HoleType.ForExpression)) {
 						currentHole.set(HoleType.ForExpression, false);
-						parentHole.addChild(forHole);
+						parentHole.addChild(defaultLabelHole);
 					} else {
 						// TODO: small step move. Not syntax-directed.
 						parentHole.deleteHole(holeIndex);
-						parentOfParentHole.addChild(forHole);
+						parentOfParentHole.addChild(defaultLabelHole);
 					}
 				} else if (parentHoleType.equals(HoleType.SwitchEntries)) {
 					HoleNode elderBrother = parentHole.getIthChild(holeIndex - 1);
 					// Not has default case yet, then add a default case
-					if (elderBrother.getIthChild(0).getHoleType().equals(HoleType.Expression)) {
+					if (elderBrother.getIthChild(0).getIthChild(0).getHoleType().equals(HoleType.Expression)) {
 						// generate SwitchEntry Sketch
 						NodeList<SwitchEntry> switchEntries = (NodeList<SwitchEntry>) parent.get().get();
 						SwitchEntry switchEntry = new SwitchEntry();
 						switchEntries.add(switchEntry);
 
-						currentHole.set(HoleType.Wrapper, false);
-						currentHole.setHoleTypeOptions(new HoleType[] { HoleType.SwitchEntry });
-
-						forHole = new HoleNode(HoleType.Wrapper, false);
-						forHole.setHoleTypeOptionsOfOnlyOne(HoleType.MoveNext);
-						currentHole.addChild(forHole);
-
+						currentHole.set(HoleType.Wrapper, false, HoleType.SwitchEntry);
+						HoleNode labelsHole = new HoleNode(HoleType.SwitchEntryLabels, false);
+						currentHole.addChild(labelsHole);
+						defaultLabelHole = new HoleNode(HoleType.Wrapper, false, HoleType.MoveNext);
+						labelsHole.addChild(defaultLabelHole);
 						currentHole.addChild(new HoleNode());
 					} else {
 						parentHole.deleteHole(holeIndex);
-						parentOfParentHole.addChild(forHole);
+						parentOfParentHole.addChild(defaultLabelHole);
 					}
 				} else if (parentHoleType.equals(HoleType.ElseStatement) || (parentHole.getHoleTypeOfOptionsIfOnlyOne() != null
 						&& parentHole.getHoleTypeOfOptionsIfOnlyOne().equals(HoleType.IfStmt))) {
@@ -169,16 +168,16 @@ public class Text2CompilationUnit {
 				} else {
 					// TODO: small step move. Not syntax-directed.
 					parentHole.deleteHole(holeIndex);
-					parentOfParentHole.addChild(forHole);
+					parentOfParentHole.addChild(defaultLabelHole);
 				}
 				break;
 			case "package":
 				CompilationUnit parentNode = (CompilationUnit) parent.getLeft();
 				parentNode.setPackageDeclaration((PackageDeclaration) node);
 				currentHole.set(HoleType.PackageDeclaration, false);
-				forHole = new HoleNode();
-				forHole.setHoleTypeOptions(new HoleType[] { HoleType.ImportDeclaration, HoleType.TypeDeclaration });
-				parentHole.addChild(forHole);
+				defaultLabelHole = new HoleNode();
+				defaultLabelHole.setHoleTypeOptions(new HoleType[] { HoleType.ImportDeclaration, HoleType.TypeDeclaration });
+				parentHole.addChild(defaultLabelHole);
 				break;
 			case "import":
 				parentNode = null;
@@ -204,9 +203,9 @@ public class Text2CompilationUnit {
 				parentNode.addType((ClassOrInterfaceDeclaration) node);
 
 				currentHole.set(HoleType.TypeDeclarations, false);
-				forHole = new HoleNode(HoleType.Wrapper, false, HoleType.InterfaceDeclaration);
-				currentHole.addChild(forHole);
-				forHole.addChild(new HoleNode(HoleType.BodyDeclaration));
+				defaultLabelHole = new HoleNode(HoleType.Wrapper, false, HoleType.InterfaceDeclaration);
+				currentHole.addChild(defaultLabelHole);
+				defaultLabelHole.addChild(new HoleNode(HoleType.BodyDeclaration));
 				break;
 			case "class": // Note: class and interface belongs to TypeDeclaration.
 				parentNode = null;
@@ -215,9 +214,9 @@ public class Text2CompilationUnit {
 					parentNode.addType((ClassOrInterfaceDeclaration) node);
 
 					currentHole.set(HoleType.TypeDeclarations, false);
-					forHole = new HoleNode(HoleType.Wrapper, false, HoleType.ClassDeclaration);
-					currentHole.addChild(forHole);
-					forHole.addChild(new HoleNode(HoleType.BodyDeclaration));
+					defaultLabelHole = new HoleNode(HoleType.Wrapper, false, HoleType.ClassDeclaration);
+					currentHole.addChild(defaultLabelHole);
+					defaultLabelHole.addChild(new HoleNode(HoleType.BodyDeclaration));
 				} else {
 					NodeList<ClassOrInterfaceDeclaration> classOrInterfaceDeclarations = (NodeList<ClassOrInterfaceDeclaration>) parent
 							.get().get();
@@ -239,9 +238,9 @@ public class Text2CompilationUnit {
 					classOrInterfaceDeclaration.addMember((BodyDeclaration<?>) node);
 
 					currentHole.set(HoleType.BodyDeclarations, false);
-					forHole = new HoleNode(HoleType.Wrapper, false, HoleType.MethodDeclaration);
-					currentHole.addChild(forHole);
-					forHole.addChild(new HoleNode(HoleType.TypeExtends));
+					defaultLabelHole = new HoleNode(HoleType.Wrapper, false, HoleType.MethodDeclaration);
+					currentHole.addChild(defaultLabelHole);
+					defaultLabelHole.addChild(new HoleNode(HoleType.TypeExtends));
 				} else if (parentHoleType.equals(HoleType.BodyDeclarations)) {
 					NodeList<BodyDeclaration<?>> bodyDeclarations = (NodeList<BodyDeclaration<?>>) parent.get().get();
 					// Interface method, no body.
@@ -267,9 +266,9 @@ public class Text2CompilationUnit {
 					classOrInterfaceDeclaration.addMember((BodyDeclaration<?>) node);
 
 					currentHole.set(HoleType.BodyDeclarations, false);
-					forHole = new HoleNode(HoleType.Wrapper, false, HoleType.FieldDeclaration);
-					currentHole.addChild(forHole);
-					forHole.addChild(new HoleNode(HoleType.Expression));
+					defaultLabelHole = new HoleNode(HoleType.Wrapper, false, HoleType.FieldDeclaration);
+					currentHole.addChild(defaultLabelHole);
+					defaultLabelHole.addChild(new HoleNode(HoleType.Expression));
 				} else if (parentHoleType.equals(HoleType.BodyDeclarations)) {
 					NodeList<BodyDeclaration<?>> bodyDeclarations = (NodeList<BodyDeclaration<?>>) parent.get().get();
 					bodyDeclarations.add((BodyDeclaration<?>) node);
@@ -293,9 +292,9 @@ public class Text2CompilationUnit {
 						statements.add((Statement) node);
 
 						anotherCurrentHole.set(HoleType.Statements, false);
-						forHole = new HoleNode(HoleType.Wrapper, false, HoleType.Statement);
-						anotherCurrentHole.addChild(forHole);
-						forHole.addChild(new HoleNode());
+						defaultLabelHole = new HoleNode(HoleType.Wrapper, false, HoleType.Statement);
+						anotherCurrentHole.addChild(defaultLabelHole);
+						defaultLabelHole.addChild(new HoleNode());
 					} else {
 						System.out.println("Should not go to this branch");
 					}
@@ -371,9 +370,9 @@ public class Text2CompilationUnit {
 					if (statements.size() == 0) {
 						statements.add((Statement) node);
 						stmtsHole.set(HoleType.Statements, false);
-						forHole = new HoleNode(HoleType.Wrapper, false, HoleType.ForStmt);
-						stmtsHole.addChild(forHole);
-						forHole.addChild(new HoleNode(HoleType.ForInitialization));
+						defaultLabelHole = new HoleNode(HoleType.Wrapper, false, HoleType.ForStmt);
+						stmtsHole.addChild(defaultLabelHole);
+						defaultLabelHole.addChild(new HoleNode(HoleType.ForInitialization));
 					}
 				} else if (parentNodeClassStr != null && parentNodeClassStr.equals("BlockStmt")) {
 					// TODO: not tested.
@@ -715,20 +714,16 @@ public class Text2CompilationUnit {
 				} else if (parentNodeClassStr != null && parentNodeClassStr.equals("MethodDeclaration")) {
 					MethodDeclaration mNode = (MethodDeclaration) parent.getLeft();
 					Optional<BlockStmt> optionalBody = mNode.getBody();
-					currentHole.set(HoleType.Body, false);
-					HoleNode anotherCurrentHole = new HoleNode();
-					currentHole.addChild(anotherCurrentHole);
 					BlockStmt blockStmt = optionalBody.get();
 					NodeList<Statement> statements = blockStmt.getStatements();
+					currentHole.set(HoleType.Body, false);
+					HoleNode stmtsHole = new HoleNode(HoleType.Statements, false);
+					currentHole.addChild(stmtsHole);
 					if (statements.size() == 0) {
 						statements.add((Statement) node);
-
-						anotherCurrentHole.set(HoleType.Statements, false);
-
-						HoleNode childNode = new HoleNode(HoleType.Wrapper, false);
-						childNode.setHoleTypeOptionsOfOnlyOne(HoleType.SwitchStmt);
-						anotherCurrentHole.addChild(childNode);
-						childNode.addChild(new HoleNode());
+						HoleNode switchWrapperHole = new HoleNode(HoleType.Wrapper, false, HoleType.SwitchStmt);
+						stmtsHole.addChild(switchWrapperHole);
+						switchWrapperHole.addChild(new HoleNode());
 					}
 				}
 				break;
@@ -779,12 +774,12 @@ public class Text2CompilationUnit {
 					variableDeclarators.get(0).setInitializer((Expression) node);
 
 					currentHole.set(HoleType.Expression, false);
-					forHole = new HoleNode(HoleType.VariableDeclarator, false);
-					currentHole.addChild(forHole);
+					defaultLabelHole = new HoleNode(HoleType.VariableDeclarator, false);
+					currentHole.addChild(defaultLabelHole);
 
 					HoleNode childHoleNode = new HoleNode(HoleType.Wrapper, false);
 					childHoleNode.setHoleTypeOptionsOfOnlyOne(HoleType.VariableDeclarator);
-					forHole.addChild(childHoleNode);
+					defaultLabelHole.addChild(childHoleNode);
 
 					HoleNode childOfChildNode = new HoleNode(HoleType.VariableInitializer, false);
 					childHoleNode.addChild(childOfChildNode);
@@ -825,12 +820,12 @@ public class Text2CompilationUnit {
 					variableDeclarators.get(0).setInitializer((Expression) node);
 
 					currentHole.set(HoleType.Expression, false);
-					forHole = new HoleNode(HoleType.VariableDeclarator, false);
-					currentHole.addChild(forHole);
+					defaultLabelHole = new HoleNode(HoleType.VariableDeclarator, false);
+					currentHole.addChild(defaultLabelHole);
 
 					HoleNode childHoleNode = new HoleNode(HoleType.Wrapper, false);
 					childHoleNode.setHoleTypeOptionsOfOnlyOne(HoleType.VariableDeclarator);
-					forHole.addChild(childHoleNode);
+					defaultLabelHole.addChild(childHoleNode);
 
 					HoleNode childOfChildNode = new HoleNode(HoleType.VariableInitializer, false);
 					childHoleNode.addChild(childOfChildNode);
@@ -862,8 +857,8 @@ public class Text2CompilationUnit {
 						statements.add((Statement) node);
 
 						anotherCurrentHole.set(HoleType.Statements, false);
-						forHole = new HoleNode(holeTypeExpr, false);
-						anotherCurrentHole.addChild(forHole);
+						defaultLabelHole = new HoleNode(holeTypeExpr, false);
+						anotherCurrentHole.addChild(defaultLabelHole);
 						parentOfParentHole.addChild(new HoleNode());
 					}
 				} else if (parentNodeClassStr != null && parentNodeClassStr.equals("WhileStmt")) {
@@ -1043,8 +1038,8 @@ public class Text2CompilationUnit {
 						statements.add(expressionStmt);
 
 						anotherCurrentHole.set(HoleType.Statements, false);
-						forHole = new HoleNode(HoleType.Expression, false);
-						anotherCurrentHole.addChild(forHole);
+						defaultLabelHole = new HoleNode(HoleType.Expression, false);
+						anotherCurrentHole.addChild(defaultLabelHole);
 
 						HoleNode holeNodeChild = new HoleNode();
 						holeNodeChild.setHoleTypeOptions(new HoleType[] { HoleType.Expression });
@@ -1088,12 +1083,12 @@ public class Text2CompilationUnit {
 
 						anotherCurrentHole.set(HoleType.Statements, false);
 
-						forHole = new HoleNode(HoleType.Expression, false);
-						anotherCurrentHole.addChild(forHole);
+						defaultLabelHole = new HoleNode(HoleType.Expression, false);
+						anotherCurrentHole.addChild(defaultLabelHole);
 
 						HoleNode exprNode = new HoleNode(HoleType.Wrapper, false);
 						exprNode.setHoleTypeOptionsOfOnlyOne(holeTypeExpr);
-						forHole.addChild(exprNode);
+						defaultLabelHole.addChild(exprNode);
 
 						HoleNode holeNodeChild = new HoleNode();
 						holeNodeChild.setHoleTypeOptions(new HoleType[] { HoleType.Expression });
@@ -1138,8 +1133,8 @@ public class Text2CompilationUnit {
 
 						anotherCurrentHole.set(HoleType.Statements, false);
 
-						forHole = new HoleNode(HoleType.Expression, false);
-						anotherCurrentHole.addChild(forHole);
+						defaultLabelHole = new HoleNode(HoleType.Expression, false);
+						anotherCurrentHole.addChild(defaultLabelHole);
 
 						HoleNode holeNodeChild = new HoleNode();
 						holeNodeChild.setHoleTypeOptions(new HoleType[] { HoleType.Expression });
@@ -1175,12 +1170,12 @@ public class Text2CompilationUnit {
 					currentHole.set(HoleType.Wrapper, false);
 					currentHole.setHoleTypeOptions(new HoleType[] { HoleType.Statement });
 
-					forHole = new HoleNode(HoleType.Expression, false);
-					currentHole.addChild(forHole);
+					defaultLabelHole = new HoleNode(HoleType.Expression, false);
+					currentHole.addChild(defaultLabelHole);
 
 					HoleNode exprHole = new HoleNode(HoleType.Wrapper, false);
 					exprHole.setHoleTypeOptionsOfOnlyOne(holeTypeExpr);
-					forHole.addChild(exprHole);
+					defaultLabelHole.addChild(exprHole);
 
 					exprHole.addChild(new HoleNode());
 				} else if (parentNodeClassStr != null && parentNodeClassStr.equals("ForStmt")) {
@@ -1356,8 +1351,8 @@ public class Text2CompilationUnit {
 
 						anotherCurrentHole.set(HoleType.Statements, false);
 
-						forHole = new HoleNode(HoleType.Return3, false);
-						anotherCurrentHole.addChild(forHole);
+						defaultLabelHole = new HoleNode(HoleType.Return3, false);
+						anotherCurrentHole.addChild(defaultLabelHole);
 						anotherCurrentHole.addChild(new HoleNode());
 					} else {
 						// TODO
@@ -1400,8 +1395,8 @@ public class Text2CompilationUnit {
 
 						anotherCurrentHole.set(HoleType.Statements, false);
 
-						forHole = new HoleNode(HoleType.Return4, false);
-						anotherCurrentHole.addChild(forHole);
+						defaultLabelHole = new HoleNode(HoleType.Return4, false);
+						anotherCurrentHole.addChild(defaultLabelHole);
 						parentOfParentHole.addChild(new HoleNode());
 					} else {
 						// TODO
@@ -1438,8 +1433,8 @@ public class Text2CompilationUnit {
 
 						anotherCurrentHole.set(HoleType.Statements, false);
 
-						forHole = new HoleNode(HoleType.Return5, false);
-						anotherCurrentHole.addChild(forHole);
+						defaultLabelHole = new HoleNode(HoleType.Return5, false);
+						anotherCurrentHole.addChild(defaultLabelHole);
 						anotherCurrentHole.addChild(new HoleNode());
 					} else {
 						// TODO
@@ -1478,13 +1473,13 @@ public class Text2CompilationUnit {
 						statements.add((Statement) node);
 
 						anotherCurrentHole.set(HoleType.Statements, false);
-						forHole = new HoleNode(HoleType.Wrapper, false);
-						forHole.setHoleTypeOptions(new HoleType[] { HoleType.Return6 });
-						anotherCurrentHole.addChild(forHole);
+						defaultLabelHole = new HoleNode(HoleType.Wrapper, false);
+						defaultLabelHole.setHoleTypeOptions(new HoleType[] { HoleType.Return6 });
+						anotherCurrentHole.addChild(defaultLabelHole);
 
 						HoleNode holeNodeChild = new HoleNode();
 						holeNodeChild.setHoleTypeOptions(new HoleType[] { HoleType.Expression });
-						forHole.addChild(holeNodeChild);
+						defaultLabelHole.addChild(holeNodeChild);
 					} else {
 						// TODO
 					}
@@ -1622,7 +1617,8 @@ public class Text2CompilationUnit {
 				} else if (parentNodeClassStr != null && parentNodeClassStr.equals("SwitchStmt")) {
 					SwitchStmt switchStmt = (SwitchStmt) parent.getLeft();
 					switchStmt.setSelector((Expression) node);
-					currentHole.set(HoleType.Expression, false);
+					currentHole.set(HoleType.SwitchSelector, false);
+					currentHole.addChild(new HoleNode(holeTypeExpr, false));
 					parentHole.addChild(new HoleNode());
 				} else if (parentNodeClassStr != null && parentNodeClassStr.equals("SwitchEntry")) {
 					this.generateSwitchEntry(parent, node, holeIndex, currentHole, holeTypeExpr);
@@ -1815,10 +1811,10 @@ public class Text2CompilationUnit {
 						binaryExpr.setRight((Expression) node);
 
 						currentHole.set(HoleType.RightSubExpr, false);
-						forHole = new HoleNode(HoleType.Wrapper, false);
-						forHole.setHoleTypeOptionsOfOnlyOne(holeTypeExpr);
-						currentHole.addChild(forHole);
-						forHole.addChild(new HoleNode());
+						defaultLabelHole = new HoleNode(HoleType.Wrapper, false);
+						defaultLabelHole.setHoleTypeOptionsOfOnlyOne(holeTypeExpr);
+						currentHole.addChild(defaultLabelHole);
+						defaultLabelHole.addChild(new HoleNode());
 					} else if ((parentHole.getHoleTypeOfOptionsIfOnlyOne() != null
 							&& parentHole.getHoleTypeOfOptionsIfOnlyOne().equals(HoleType.Expr10))
 							|| (parentOfParentHole.getHoleTypeOfOptionsIfOnlyOne() != null
@@ -2011,13 +2007,13 @@ public class Text2CompilationUnit {
 					if (parentHole.getHoleType().equals(HoleType.LeftSubExpr)) {
 						binaryExpr.setLeft((Expression) node);
 						currentHole.set(holeTypeExpr, false);
-						forHole = new HoleNode();
-						parentOfParentOfParentHole.addChild(forHole);
+						defaultLabelHole = new HoleNode();
+						parentOfParentOfParentHole.addChild(defaultLabelHole);
 					} else if (parentHole.getHoleType().equals(HoleType.RightSubExpr)) {
 						binaryExpr.setRight((Expression) node);
 						currentHole.set(HoleType.Expression, false);
-						forHole = new HoleNode();
-						parentOfParentOfParentHole.addChild(forHole);
+						defaultLabelHole = new HoleNode();
+						parentOfParentOfParentHole.addChild(defaultLabelHole);
 					} else if ((parentHole.getHoleTypeOfOptionsIfOnlyOne() != null
 							&& parentHole.getHoleTypeOfOptionsIfOnlyOne().equals(HoleType.Expr11))
 							|| (parentOfParentHole.getHoleTypeOfOptionsIfOnlyOne() != null
@@ -2929,17 +2925,16 @@ public class Text2CompilationUnit {
 			HoleNode currentHole, HoleType holeTypeExpr) {
 		SwitchEntry switchEntry = (SwitchEntry) parent.getLeft();
 		NodeList<Statement> statements = switchEntry.getStatements();
+		currentHole.set(HoleType.Statements, false);
 		if (holeIndex < statements.size()) {
 			// TODO
 		} else {
 			ExpressionStmt expressionStmt = new ExpressionStmt((Expression) node);
 			statements.add((Statement) expressionStmt);
 
-			currentHole.set(HoleType.Statements, false);
-			HoleNode holeNode = new HoleNode(HoleType.Expression, false);
-			currentHole.addChild(holeNode);
-			HoleNode childHoleNode = new HoleNode(holeTypeExpr, false);
-			holeNode.addChild(childHoleNode);
+			HoleNode exprStmtHole = new HoleNode(HoleType.Expression, false);
+			currentHole.addChild(exprStmtHole);
+			exprStmtHole.addChild(new HoleNode(holeTypeExpr, false));
 			currentHole.addChild(new HoleNode());
 		}
 	}
@@ -3262,17 +3257,14 @@ public class Text2CompilationUnit {
 			} else {
 				statements.add(new ExpressionStmt((Expression) node));
 
-				currentHole.set(HoleType.Wrapper, false);
-				currentHole.setHoleTypeOptionsOfOnlyOne(HoleType.Statement);
+				currentHole.set(HoleType.Wrapper, false, HoleType.Statement);
 				HoleNode exprHole = new HoleNode(HoleType.Expression, false);
 				currentHole.addChild(exprHole);
-				HoleNode holeNode = new HoleNode(HoleType.Wrapper, false);
-				holeNode.setHoleTypeOptionsOfOnlyOne(holeTypeExpr);
-				exprHole.addChild(holeNode);
-
-				HoleNode holdeNodeChild0 = new HoleNode(HoleType.Arguments, false);
-				holeNode.addChild(holdeNodeChild0);
-				holdeNodeChild0.addChild(new HoleNode());
+				HoleNode exprWrapperHole = new HoleNode(HoleType.Wrapper, false, holeTypeExpr);
+				exprHole.addChild(exprWrapperHole);
+				HoleNode argsHole = new HoleNode(HoleType.Arguments, false);
+				exprWrapperHole.addChild(argsHole);
+				argsHole.addChild(new HoleNode());
 			}
 
 		} else if (parentNodeClassStr != null && parentNodeClassStr.equals("MethodDeclaration")) {
@@ -3641,13 +3633,10 @@ public class Text2CompilationUnit {
 				switchEntry.setLabels(labels);
 				switchEntries.add(switchEntry);
 
-				currentHole.set(HoleType.Wrapper, false);
-				currentHole.setHoleTypeOptions(new HoleType[] { HoleType.SwitchEntry });
-
-				HoleNode holeNode = new HoleNode(HoleType.Expression, false);
-				holeNode.setHoleTypeOptionsOfOnlyOne(HoleType.Expr5);
-				currentHole.addChild(holeNode);
-
+				currentHole.set(HoleType.Wrapper, false, HoleType.SwitchEntry);
+				HoleNode labelsHole = new HoleNode(HoleType.SwitchEntryLabels, false);
+				currentHole.addChild(labelsHole);
+				labelsHole.addChild(new HoleNode(HoleType.Expression, false, holeTypeExpr));
 				currentHole.addChild(new HoleNode());
 			}
 		} else if (parentNodeClassStr != null && parentNodeClassStr.equals("SwitchEntry")) {
@@ -3673,6 +3662,7 @@ public class Text2CompilationUnit {
 		} else if (parentNodeClassStr != null && parentNodeClassStr.equals("SwitchStmt")) {
 			SwitchStmt switchStmt = (SwitchStmt) parent.getLeft();
 			NodeList<SwitchEntry> switchEntries = switchStmt.getEntries();
+			currentHole.set(HoleType.SwitchEntries, false);
 			if (switchEntries.size() == 0) {
 				SwitchEntry switchEntry = new SwitchEntry();
 				NodeList<Expression> labels = new NodeList<Expression>();
@@ -3680,15 +3670,12 @@ public class Text2CompilationUnit {
 				switchEntry.setLabels(labels);
 				switchEntries.add(switchEntry);
 
-				currentHole.set(HoleType.SwitchEntries, false);
-
-				HoleNode wrapperNode = new HoleNode(HoleType.Wrapper, false);
-				wrapperNode.setHoleTypeOptions(new HoleType[] { HoleType.SwitchEntry });
-				currentHole.addChild(wrapperNode);
-
-				HoleNode holeNode = new HoleNode(HoleType.Expression, false);
-				wrapperNode.addChild(holeNode);
-				wrapperNode.addChild(new HoleNode());
+				HoleNode switchEntryWrapperHole = new HoleNode(HoleType.Wrapper, false, HoleType.SwitchEntry);
+				currentHole.addChild(switchEntryWrapperHole);
+				HoleNode labelsHole = new HoleNode(HoleType.SwitchEntryLabels, false);
+				switchEntryWrapperHole.addChild(labelsHole);
+				labelsHole.addChild(new HoleNode(HoleType.Expression, false, holeTypeExpr));
+				switchEntryWrapperHole.addChild(new HoleNode());
 			} else {
 
 			}
@@ -3730,10 +3717,9 @@ public class Text2CompilationUnit {
 			ExpressionStmt expressionStmt = new ExpressionStmt((Expression) node);
 			statements.add(expressionStmt);
 			currentHole.set(HoleType.Statement, false);
-			HoleNode exprHole = new HoleNode(HoleType.Expression, false);
-			currentHole.addChild(exprHole);
-			HoleNode let3Hole = new HoleNode(holeTypeExpr, false);
-			exprHole.addChild(let3Hole);
+			HoleNode exprStmtHole = new HoleNode(HoleType.Expression, false);
+			currentHole.addChild(exprStmtHole);
+			exprStmtHole.addChild(new HoleNode(holeTypeExpr, false));
 			parentHole.addChild(new HoleNode());
 		}
 	}

@@ -10,6 +10,6 @@ public enum HoleType {
 	Return1, Return2, Return3, Return4, Return5, Return6, Expr1, Expr2, Expr3, Expr4, Expr5, Expr6, Expr7, Expr8, Expr9,
 	Expr10, Expr11, Expr12, Expr13, Expr14, Expr15, SubExpr, LeftSubExpr, RightSubExpr, AssignExprTarget, AssignExprValue,
 	MethodCallExpr, VariableInitializer, Arguments, Argument, ForExpression, Break, Continue, MoveNext,
-	InnerExpr, Throw, WhileCondition
+	InnerExpr, Throw, WhileCondition, SwitchSelector, SwitchEntryLabels, SwitchEntryLabel
 
 }
