@@ -1,0 +1,8 @@
+public class HelloWorld {
+
+    public void sayHello(Name[] names) {
+        for (int counter = 0; counter < names.length; counter++) {
+            x = compute();
+        }
+    }
+}

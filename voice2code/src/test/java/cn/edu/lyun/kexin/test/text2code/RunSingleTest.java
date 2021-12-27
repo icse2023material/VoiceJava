@@ -14,7 +14,7 @@ public class RunSingleTest {
 		Text2CompilationUnit text2CompilationUnit = new Text2CompilationUnit();
 		String filePath = dir
 				+
-				"/voice2code/src/test/java/cn/edu/lyun/kexin/test/text2code/testcases/22Let_11.voiceJava";
+				"/voice2code/src/test/java/cn/edu/lyun/kexin/test/text2code/testcases/22Let_15.voiceJava";
 		// + "/voice2code/src/test/java/cn/edu/lyun/kexin/test/text2code/.voiceJava";
 		BufferedReader br = new BufferedReader(new FileReader(filePath));
 		for (String line; (line = br.readLine()) != null;) {
