@@ -2,7 +2,7 @@ public class HelloWorld {
 
     public int sayHello(Name[] names) {
         if (counter < 10) {
-            return 100;
+            return sum(100);
         }
     }
 }
