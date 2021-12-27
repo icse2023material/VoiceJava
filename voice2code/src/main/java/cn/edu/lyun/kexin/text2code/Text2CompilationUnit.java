@@ -1172,14 +1172,16 @@ public class Text2CompilationUnit {
 
 						currentHole.set(HoleType.Body, false);
 
-						HoleNode anotherCurrentHole = new HoleNode(HoleType.Statements, false);
-						currentHole.addChild(anotherCurrentHole);
+						HoleNode stmtsHole = new HoleNode(HoleType.Statements, false);
+						currentHole.addChild(stmtsHole);
 
-						HoleNode childNode = new HoleNode(HoleType.Wrapper, false);
-						childNode.setHoleTypeOptionsOfOnlyOne(HoleType.Let6Expr);
-						anotherCurrentHole.addChild(childNode);
+						HoleNode stmtHole = new HoleNode(HoleType.Wrapper, false, HoleType.Statement);
+						stmtsHole.addChild(stmtHole);
 
-						childNode.addChild(new HoleNode());
+						HoleNode exprWrapperHole = new HoleNode(HoleType.Wrapper, false, holeTypeExpr);
+						stmtHole.addChild(exprWrapperHole);
+
+						exprWrapperHole.addChild(new HoleNode());
 					} else if (bodyClassStr.equals("BlockStmt")) {
 
 					} else {
@@ -1217,6 +1219,38 @@ public class Text2CompilationUnit {
 					this.generateThenStmtInIfStmtForExpr10AndExpr11AndLet6(parent, node, currentHole, holeTypeExpr);
 				} else if (parentNodeClassStr != null && parentNodeClassStr.equals("SwitchEntry")) {
 					this.generateSwitchEntryForExpr10AndExpr11AndLet6(parent, node, holeIndex, currentHole, holeTypeExpr);
+				} else if (parentNodeClassStr != null && parentNodeClassStr.equals("WhileStmt")) {
+					WhileStmt stmt = (WhileStmt) parent.getLeft();
+					if (holeIndex == 0) {
+						System.out.println("Shall not go to this branch");
+					} else {
+						Statement body = stmt.getBody();
+						String bodyClassStr = body.getClass().toString();
+						bodyClassStr = StringHelper.getClassName(bodyClassStr);
+						if (bodyClassStr.equals("ReturnStmt")) {
+							BlockStmt blockStmt = new BlockStmt();
+							NodeList<Statement> statements = new NodeList<Statement>();
+							ExpressionStmt expressionStmt = new ExpressionStmt((Expression) node);
+							statements.add(expressionStmt);
+							blockStmt.setStatements(statements);
+							stmt.setBody(blockStmt);
+
+							currentHole.set(HoleType.Body, false);
+							HoleNode stmtsHole = new HoleNode(HoleType.Statements, false);
+							currentHole.addChild(stmtsHole);
+							HoleNode stmtHole = new HoleNode(HoleType.Wrapper, false, HoleType.Statement);
+							stmtsHole.addChild(stmtHole);
+							HoleNode exprWrapperHole = new HoleNode(HoleType.Wrapper, false, holeTypeExpr);
+							stmtHole.addChild(exprWrapperHole);
+							exprHole = new HoleNode(HoleType.Expression, false);
+							exprWrapperHole.addChild(exprHole);
+							exprHole.addChild(new HoleNode());
+						} else if (bodyClassStr.equals("BlockStmt")) {
+
+						} else {
+							System.out.println("Should not go to this branch");
+						}
+					}
 				}
 				break;
 			case "return1":
@@ -2879,16 +2913,16 @@ public class Text2CompilationUnit {
 			HoleNode stmtsNode = new HoleNode(HoleType.Statements, false);
 			currentHole.addChild(stmtsNode);
 
-			HoleNode holeNodeChild = new HoleNode(HoleType.Expression, false);
-			stmtsNode.addChild(holeNodeChild);
+			HoleNode stmtNode = new HoleNode(HoleType.Wrapper, false, HoleType.Statement);
+			stmtsNode.addChild(stmtNode);
 
-			HoleNode childOfanotherChildNode = new HoleNode(HoleType.Wrapper, false);
-			childOfanotherChildNode.setHoleTypeOptionsOfOnlyOne(holeTypeExpr);
-			holeNodeChild.addChild(childOfanotherChildNode);
+			HoleNode exprHole = new HoleNode(HoleType.Expression, false);
+			stmtNode.addChild(exprHole);
 
-			HoleNode newHole = new HoleNode();
-			newHole.setHoleTypeOptionsOfOnlyOne(HoleType.Expression);
-			childOfanotherChildNode.addChild(newHole);
+			HoleNode exprWrapperHole = new HoleNode(HoleType.Wrapper, false, holeTypeExpr);
+			exprHole.addChild(exprWrapperHole);
+
+			exprWrapperHole.addChild(new HoleNode(HoleType.Expression));
 		} else if (thenStmtStr.equals("BlockStmt")) {
 		}
 	}
@@ -3007,8 +3041,10 @@ public class Text2CompilationUnit {
 		} else if (expressionClassStr.equals("AssignExpr")) {
 			AssignExpr assignExpr = (AssignExpr) expressionStmt.getExpression();
 			assignExpr.setValue((Expression) node);
-			currentHole.set(holeTypeExpr, false);
-			currentHole.setHoleTypeOptionsOfOnlyOne(HoleType.Expression);
+
+			currentHole.set(HoleType.AssignExprValue, false);
+			currentHole.addChild(new HoleNode(holeTypeExpr, false));
+
 			parentOfParentHole.addChild(new HoleNode());
 		}
 	}
