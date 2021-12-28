@@ -1,0 +1,8 @@
+public class HelloWorld {
+
+    public void sayHello(Name[] names) {
+        while (counter < 10) {
+            --sum;
+        }
+    }
+}

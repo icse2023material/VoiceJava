@@ -3447,8 +3447,7 @@ public class Text2CompilationUnit {
 			assignExpr.setValue((Expression) node);
 			currentHole.set(HoleType.AssignExprValue, false);
 
-			HoleNode exprHole = new HoleNode(HoleType.Wrapper, false);
-			exprHole.setHoleTypeOptionsOfOnlyOne(holeTypeExpr);
+			HoleNode exprHole = new HoleNode(HoleType.Wrapper, false, holeTypeExpr);
 			currentHole.addChild(exprHole);
 
 			HoleNode argsHole = new HoleNode(HoleType.Arguments, false);
