@@ -1,18 +1,22 @@
 define public class hello world
 define public function say hello
 type void
-type Name list variable names
+type list of Name variable names
 move next
 define if
-expression i greater than expression
+expression greater than expression
+variable i
 int ninety
 System dot Out call println
 string excellent
 move next
 move next
-expression i greater equal expression
+expression greater equal expression
+variable i
 int eighty
 let sum equal expression
-sum plus i
+expression plus expression
+variable sum
+variable i
 move next
 move next

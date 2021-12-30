@@ -2,7 +2,7 @@ define public class two dimension array test
 define public static function main 
 type void 
 type string list name args 
-define int list list variable ns 
+define list of int list variable ns 
 int sequence 1 2 3 4 
 int sequence 5 6 7 8
 int sequence 9 10 11 12

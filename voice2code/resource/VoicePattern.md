@@ -29,7 +29,7 @@
     - 示例：`define private int variable count`， `define int list variable list`， `define Pair with Integer String`
 9.  定义类型：
 
-    - 语法：`type (Name list | Name [dot Name]? [with Name [and Name]*]?) [extends _]?`
+    - 语法：`type (list of Name | Name [dot Name]? [with Name [and Name]*]?) [extends _]?`
     - 示例: `type int`， `type void`
 
 10. 定义参数：
@@ -90,7 +90,7 @@
       - 示例：`let student dot score equal student call score`
     - `let Name [dot Name]? equal Name [dot Name]*`
       - 示例：`let score equal student first dot semester dot score`
-    - `let Name [dot Name]? equal [variable]? Name`
+    - `let Name [dot Name]? equal variable Name`
       - 示例：`let score equal variable final score`
     - `let Name [dot Name]? equal (int | byte | short | long | char | float | double | boolean | string) Name`
       - 示例： `let score equal int 2`
@@ -102,7 +102,7 @@
     - `return call Name`
     - `return Name [dot Name]* [call Name]+`
     - `return Name [dot Name]*`
-    - `return [variable]? Name`
+    - `return variable Name`
     - `return (int | byte | short | long | char | float | double | boolean | string) Name`
     - `return [expression]?`
 
@@ -112,7 +112,7 @@
     - `expression? call Name`
     - `expression? Name [dot Name]* [call Name]+`
     - `expression? Name [dot Name]?`
-    - `expression? [variable]? Name`
+    - `expression? variable Name`
     - `expression? (int | byte | short | long | char | float | double | boolean | string) Name`
     - `expression? Name plus plus`
     - `expression? Name minus minus`

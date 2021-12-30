@@ -5,7 +5,7 @@ type String variable name
 define public class hello world
 define public function say hello
 type void
-type int list variable numList
+type list of int variable numList
 define public class hello world
 define public function say hello
 type void
@@ -17,13 +17,13 @@ type Node dot ID with String variable id
 define public class hello world
 define public function say hello
 type void
-type Name list variable names
+type list of Name variable names
 move next
 define for
 define public class hello world
 define public function say hello
 type void
-type Name list variable names
+type list of Name variable names
 move next
 define for
 define int variable i 
@@ -36,14 +36,14 @@ continue
 define public class hello world
 define public function say hello
 type void
-type Name list variable names
+type list of Name variable names
 move next
 define for
 define int variable i 
 define public class hello world
 define public function say hello
 type void
-type Name list variable names
+type list of Name variable names
 move next
 define for
 define int variable i 
@@ -53,7 +53,7 @@ names dot length
 define public class hello world
 define public function say hello
 type void
-type Name list variable names
+type list of Name variable names
 move next
 define for
 define int variable i 
@@ -64,7 +64,7 @@ i plus plus
 define public class hello world
 define public function say hello
 type void
-type Name list variable names
+type list of Name variable names
 move next
 define for
 define int variable i 
@@ -77,14 +77,14 @@ variable names index i
 define public class hello world
 define public function say hello
 type void
-type Name list variable names
+type list of Name variable names
 move next
 define for
 let i equal int 0
 define public class hello world
 define public function say hello
 type void
-type Name list variable names
+type list of Name variable names
 move next
 define for
 move next
@@ -92,7 +92,7 @@ expression i less than 10
 define public class hello world
 define public function say hello
 type void
-type Name list variable names
+type list of Name variable names
 move next
 define for
 move next
@@ -101,7 +101,7 @@ expression i plus plus
 define public class hello world
 define public function say hello
 type void
-type Name list variable names
+type list of Name variable names
 move next
 define for
 move next
@@ -112,20 +112,20 @@ string hello world
 define public class hello world
 define public function say hello
 type void
-type Name list variable names
+type list of Name variable names
 move next
 define while
 define public class hello world
 define public function say hello
 type void
-type Name list variable names
+type list of Name variable names
 move next
 define while
 expression i less than 10
 define public class hello world
 define public function say hello
 type void
-type Name list variable names
+type list of Name variable names
 move next
 define while
 expression i less than 10
@@ -134,14 +134,14 @@ variable i
 define public class hello world
 define public function say hello
 type void
-type Name list variable names
+type list of Name variable names
 move next
 define while
 boolean true
 define public class hello world
 define public function say hello
 type void
-type Name list variable names
+type list of Name variable names
 move next
 define while
 boolean true
@@ -150,20 +150,20 @@ string hello world
 define public class hello world
 define public function say hello
 type void
-type Name list variable names
+type list of Name variable names
 move next
 define if
 define public class hello world
 define public function say hello
 type void
-type Name list variable names
+type list of Name variable names
 move next
 define if
 expression i less than 10
 define public class hello world
 define public function say hello
 type void
-type Name list variable names
+type list of Name variable names
 move next
 define if
 expression i greater than 90
@@ -172,19 +172,7 @@ string excellent
 define public class hello world
 define public function say hello
 type void
-type Name list variable names
-move next
-define if
-expression i greater than 90
-System dot Out call println
-string excellent
-move next
-move next
-expression i greater equal 80
-define public class hello world
-define public function say hello
-type void
-type Name list variable names
+type list of Name variable names
 move next
 define if
 expression i greater than 90
@@ -193,12 +181,10 @@ string excellent
 move next
 move next
 expression i greater equal 80
-let sum equal expression
-sum plus i
 define public class hello world
 define public function say hello
 type void
-type Name list variable names
+type list of Name variable names
 move next
 define if
 expression i greater than 90
@@ -209,12 +195,26 @@ move next
 expression i greater equal 80
 let sum equal expression
 sum plus i
+define public class hello world
+define public function say hello
+type void
+type list of Name variable names
+move next
+define if
+expression i greater than 90
+System dot Out call println
+string excellent
+move next
+move next
+expression i greater equal 80
+let sum equal expression
+sum plus i
 move next
 move next
 define public class hello world
 define public function say hello
 type void
-type Name list variable names
+type list of Name variable names
 move next
 define if
 expression i greater than 90
@@ -227,7 +227,7 @@ string done
 define public class hello world
 define public function say hello
 type void
-type Name list variable names
+type list of Name variable names
 move next
 define if
 expression i greater than 90
@@ -239,20 +239,20 @@ let i equal int 100
 define public class hello world
 define public function say hello
 type void
-type Name list variable names
+type list of Name variable names
 move next
 define switch
 define public class hello world
 define public function say hello
 type void
-type Name list variable names
+type list of Name variable names
 move next
 define switch
 variable option
 define public class hello world
 define public function say hello
 type void
-type Name list variable names
+type list of Name variable names
 move next
 define switch
 variable option
@@ -260,7 +260,7 @@ int 1
 define public class hello world
 define public function say hello
 type void
-type Name list variable names
+type list of Name variable names
 move next
 define switch
 variable option
@@ -270,7 +270,7 @@ break
 define public class hello world
 define public function say hello
 type void
-type Name list variable names
+type list of Name variable names
 move next
 define switch
 variable option
@@ -281,7 +281,7 @@ int 2
 define public class hello world
 define public function say hello
 type void
-type Name list variable names
+type list of Name variable names
 move next
 define switch
 variable option
@@ -297,7 +297,7 @@ int 4
 define public class hello world
 define public function say hello
 type void
-type Name list variable names
+type list of Name variable names
 move next
 define switch
 variable option
@@ -317,7 +317,7 @@ move next
 define public class hello world
 define public function say hello
 type void
-type Name list variable names
+type list of Name variable names
 move next
 define switch
 variable option
@@ -338,7 +338,7 @@ break
 define public class hello world
 define public function say hello
 type void
-type Name list variable names
+type list of Name variable names
 move next
 define switch
 variable option
@@ -407,7 +407,7 @@ int 3
 define public class hello world
 define public function say hello
 type void
-type Name list variable names
+type list of Name variable names
 move next
 let sum equal expression
 subexpression
@@ -417,7 +417,7 @@ define package org dot elasticsearch dot star
 define public class hello world
 define public function say hello
 type void
-type Name list variable names
+type list of Name variable names
 move next
 let fib equal call fibonacci
 move next
@@ -425,7 +425,7 @@ let sum dot fib equal call fibonacci
 define public class hello world
 define public function say hello
 type void
-type Name list variable names
+type list of Name variable names
 move next
 let fib equal Fib call fibonacci
 move next
@@ -433,7 +433,7 @@ let sum dot fib equal fib call fibonacci
 define public class hello world
 define public function say hello
 type void
-type Name list variable names
+type list of Name variable names
 move next
 let x equal a
 let x equal a dot b
@@ -442,21 +442,21 @@ let x dot y equal a dot b
 define public class hello world
 define public function say hello
 type void
-type Name list variable names
+type list of Name variable names
 move next
 let x equal variable a
 let x dot y equal variable a
 define public class hello world
 define public function say hello
 type void
-type Name list variable names
+type list of Name variable names
 move next
 let x equal long 2.12
 let x dot y equal int 2
 define public class hello world
 define public function say hello
 type void
-type Name list variable names
+type list of Name variable names
 move next
 let x equal expression
 string hello world
@@ -465,68 +465,68 @@ int 2
 define public class hello world
 define public function say hello
 type void
-type Name list variable names
+type list of Name variable names
 move next
 return call sum
 define public class hello world
 define public function say hello
 type void
-type Name list variable names
+type list of Name variable names
 move next
 return expression
 expression call sum
 define public class hello world
 define public function say hello
 type void
-type Name list variable names
+type list of Name variable names
 move next
 return List call sum
 define public class hello world
 define public function say hello
 type void
-type Name list variable names
+type list of Name variable names
 move next
 return a
 define public class hello world
 define public function say hello
 type void
-type Name list variable names
+type list of Name variable names
 move next
 return a dot b
 define public class hello world
 define public function say hello
 type void
-type Name list variable names
+type list of Name variable names
 move next
 return variable y
 define public class hello world
 define public function say hello
 type void
-type Name list variable names
+type list of Name variable names
 move next
 return y
 define public class hello world
 define public function say hello
 type void
-type Name list variable names
+type list of Name variable names
 move next
 return int 2
 define public class hello world
 define public function say hello
 type void
-type Name list variable names
+type list of Name variable names
 move next
 return expression
 define public class hello world
 define public function say hello
 type void
-type Name list variable names
+type list of Name variable names
 move next
 return
 define public class hello world
 define public function say hello
 type void
-type Name list variable names
+type list of Name variable names
 move next
 let x equal expression
 expression call sum
@@ -655,7 +655,7 @@ null
 define public class hello world
 define public function say hello
 type void
-type Name list variable names
+type list of Name variable names
 move next
 let x equal expression
 expression a dot b
@@ -664,7 +664,7 @@ expression c dot d
 define public class hello world
 define public function say hello
 type void
-type Name list variable names
+type list of Name variable names
 move next
 let x equal expression
 expression variable y
@@ -673,7 +673,7 @@ variable y
 define public class hello world
 define public function say hello
 type void
-type Name list variable names
+type list of Name variable names
 move next
 let x equal expression
 int 2
@@ -682,7 +682,7 @@ long 2.2
 define public class hello world
 define public function say hello
 type void
-type Name list variable names
+type list of Name variable names
 move next
 let x equal expression
 i plus plus
@@ -691,7 +691,7 @@ i plus plus
 define public class hello world
 define public function say hello
 type void
-type Name list variable names
+type list of Name variable names
 move next
 let x equal expression
 i minus minus
@@ -700,7 +700,7 @@ i minus minus
 define public class hello world
 define public function say hello
 type void
-type Name list variable names
+type list of Name variable names
 move next
 let x equal expression
 plus plus i
@@ -709,7 +709,7 @@ plus plus i
 define public class hello world
 define public function say hello
 type void
-type Name list variable names
+type list of Name variable names
 move next
 let x equal expression
 minus minus i
@@ -718,7 +718,7 @@ minus minus i
 define public class hello world
 define public function say hello
 type void
-type Name list variable names
+type list of Name variable names
 move next
 let x equal expression
 expression plus expression
@@ -788,7 +788,7 @@ define private function say hello
 define public class hello world
 define private int variable count
 define public class hello world
-define public int list variable intList
+define public list of int variable intList
 define public class hello world
 define public Node dot Name variable name
 define public class HelloWorld
@@ -865,7 +865,7 @@ define public function say hello
 type int
 define public class hello world
 define public function say hello
-type int list
+type list of int
 define public class hello world
 define public function say hello
 type Node dot Name
@@ -884,7 +884,7 @@ define public function main
 type void
 type String list variable args
 move next
-define int list variable ns
+define list of int variable ns
 move next
 define for
 define int variable i
@@ -915,7 +915,7 @@ define public String variable name
 move next
 define public function say hello
 type int
-type int list variable intArray
+type list of int variable intArray
 type String variable name
 move next
 define int variable sum
@@ -964,7 +964,7 @@ define private int variable greeting
 int 2
 define public function say hello
 type int
-type int list variable intArray
+type list of int variable intArray
 type String variable name
 move next
 define int variable sum
@@ -992,7 +992,7 @@ define private int variable greeting
 int 2
 define public function say hello
 type int
-type int list variable intArray
+type list of int variable intArray
 type String variable name
 move next
 let sum equal call sum
@@ -1044,7 +1044,7 @@ define private int variable greeting
 int 2
 define public function say hello
 type int
-type int list variable intArray
+type list of int variable intArray
 type String variable name
 move next
 call notify
@@ -1089,7 +1089,7 @@ define private int variable greeting
 int 2
 define public function say hello
 type int
-type int list variable intArray
+type list of int variable intArray
 type String variable name
 move next
 define int variable sum
@@ -1134,7 +1134,7 @@ define private int variable greeting
 int 2
 define public function say hello
 type int
-type int list variable intArray
+type list of int variable intArray
 type String variable name
 move next
 define int variable sum

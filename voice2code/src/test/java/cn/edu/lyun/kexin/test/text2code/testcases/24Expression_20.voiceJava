@@ -1,10 +1,11 @@
 define public class hello world
 define public function say hello
 type void
-type Name list variable names
+type list of Name variable names
 move next
 define if
-counter less than expression
+expression less than expression
+variable counter
 int ten
 call sum
 int one hundred

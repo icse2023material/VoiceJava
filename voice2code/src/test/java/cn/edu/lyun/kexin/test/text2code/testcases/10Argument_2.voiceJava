@@ -1,4 +1,4 @@
 define public class hello world
 define public function say hello
 type void
-type int list variable numList
+type list of int variable numList

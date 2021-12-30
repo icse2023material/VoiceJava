@@ -7,22 +7,25 @@ define private int variable greeting
 int two
 define public function say hello
 type int
-type int list variable intArray
+type list of int variable intArray
 type String variable name
 move next
 define int variable sum
 int zero
 define if
-i less than expression
+expression less than expression
+variable i
 int ten
 sum plus plus
 sum plus plus
 move next
-i greater than expression
+expression greater than expression
+variable i
 int ten
 sum plus plus
 move next
-i double equal expression
+expression double equal expression
+variable i
 int ten
 sum plus plus
 move next

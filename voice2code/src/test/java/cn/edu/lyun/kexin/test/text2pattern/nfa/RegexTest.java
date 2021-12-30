@@ -12,10 +12,17 @@ public class RegexTest {
 
 		Unit Name = new Unit("plus", new Unit());
 
-		Pattern packagePat = new Pattern("package", "define package [_]+ [dot [_]+]*",
-				new Unit[] { new Unit("define"), new Unit("package"), Name, new Unit("asterisk", new Unit("dot"), Name) });
+		// 定义类型
+		Pattern typePat = new Pattern("typeExtends",
+				"type (list of [_]+  | [_]+ [dot [_]+]? [with [_]+ [and [_]+]*]?) [extends [_]+]?",
+				new Unit[] { new Unit("type"),
+						new Unit("or", new Unit("normal", new Unit("list"), new Unit("normal", new Unit("of"), (Name))),
+								new Unit(new Unit[] { Name, new Unit("question", new Unit("dot"), Name),
+										new Unit("question", new Unit("with"),
+												new Unit("normal", Name, new Unit("asterisk", new Unit("and"), Name))) })),
+						new Unit("question", new Unit("extends"), Name) });
 
-		Regex regex = new Regex(packagePat);
+		Regex regex = new Regex(typePat);
 		regex.writeDotFile();
 		Runtime rt = Runtime.getRuntime();
 		try {
@@ -24,7 +31,7 @@ public class RegexTest {
 			e.printStackTrace();
 		}
 
-		String text = "define package org dot hello world dot star";
+		String text = "type node list";
 		Pair<Boolean, Pattern> result = regex.isMatch(text);
 		if (result.getFirst()) {
 			System.out.println("Matched:");

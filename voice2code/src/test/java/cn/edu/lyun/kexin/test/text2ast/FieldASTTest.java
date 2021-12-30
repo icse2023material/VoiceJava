@@ -10,9 +10,9 @@ import com.github.javaparser.ast.*;
 public class FieldASTTest {
 	public static void main(String[] args) {
 		String[] textList = { "define public int variable count", "define int variable count",
-				"define public string list variable count", "define public hello dot world variable greeting",
+				"define public list of string variable count", "define public hello dot world variable greeting",
 				"define public hello dot world with a b variable greeting", "define public hello with a b variable greeting",
-				"define hello list variable greeting" };
+				"define list of hello variable greeting" };
 
 		FieldAST fieldAST = new FieldAST();
 

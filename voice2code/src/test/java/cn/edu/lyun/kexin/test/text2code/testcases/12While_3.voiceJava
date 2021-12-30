@@ -1,10 +1,11 @@
 define public class hello world
 define public function say hello
 type void
-type Name list variable names
+type list of Name variable names
 move next
 define while
-expression i less than expression
+expression less than expression
+variable i
 int ten
 System dot Out call println
 variable i

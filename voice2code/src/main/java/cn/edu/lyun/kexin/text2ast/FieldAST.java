@@ -23,6 +23,15 @@ public class FieldAST implements AST {
 		// Split modifiers part
 		Pair<List<Unit>, List<Unit>> pair = new ListHelper().splitListAtFirstAnyAndKeepAny(unitList);
 		List<Unit> modifierList = pair.getFirst();
+		// TODO: support complex name case
+		if (modifierList.size() >= 2) {
+			if (modifierList.get(modifierList.size() - 1).getKeyword().equals("of")) {
+				Unit u = modifierList.remove(modifierList.size() - 1);
+				unitList.add(0, u); // add of
+				u = modifierList.remove(modifierList.size() - 1);
+				unitList.add(0, u); // add list
+			}
+		}
 		NodeList<Modifier> modifierNodeList = new ModifierAST().generateModifierList(modifierList);
 
 		FieldDeclaration fieldDeclaration = new FieldDeclaration();

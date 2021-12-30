@@ -3,9 +3,11 @@ define public function say hello
 type int
 move next
 define if
-expression counter less than expression
+expression less than expression
+variable counter
 int ten
 return int zero
-expression counter double equal expression
+expression double equal expression
+variable counter
 int ten
 define for

@@ -2,6 +2,7 @@ package cn.edu.lyun.kexin.text2pattern.nfa;
 
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
 
@@ -20,7 +21,7 @@ public class State {
 	public void addNext(String edge, State nfaState) {
 		Set<State> set = next.get(edge);
 		if (set == null) {
-			set = new HashSet<>();
+			set = new LinkedHashSet<>();
 			next.put(edge, set);
 		}
 		set.add(nfaState);

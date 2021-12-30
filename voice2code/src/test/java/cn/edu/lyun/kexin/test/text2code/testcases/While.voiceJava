@@ -1,18 +1,21 @@
 define public class test
 define public static function main
 type void
-type String list variable args
+type list of String variable args
 move next
 define int variable sum 
 int zero
 define int variable n 
 int zero
 define while
-expression n less equal expression
+expression less equal expression
+variable n
 int one hundred
 expression n plus plus
 let sum equal expression 
-expression sum plus n
+expression plus expression
+variable sum
+variable n
 System dot Out call println 
 variable sum
 move next 

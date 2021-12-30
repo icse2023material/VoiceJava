@@ -7,13 +7,14 @@ define private int variable greeting
 int two
 define public function say hello
 type int
-type int list variable intArray
+type list of int variable intArray
 type String variable name
 move next
 define int variable sum
 int zero
 define while
-i less than expression
+expression less than expression
+variable i
 int ten
 let sum equal call fibonacci
 move next

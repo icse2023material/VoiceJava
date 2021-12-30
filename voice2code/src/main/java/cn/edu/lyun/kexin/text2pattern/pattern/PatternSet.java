@@ -85,9 +85,9 @@ public class PatternSet {
 						new Unit("or", new Unit("protected"), new Unit("or", new Unit("private"), new Unit("or", new Unit("static"),
 								new Unit("or", new Unit("final"), new Unit("or", new Unit("transient"), new Unit("volatile"))))))));
 		Pattern fieldPat = new Pattern("field",
-				"define [Annotation|public|protected|private|static|final|transient|volatile]* ([_]+ list | [_]+ [dot [_]+]? [with [_]+ [and [_]+]*]?) variable [_]+ ",
+				"define [Annotation|public|protected|private|static|final|transient|volatile]* (list of [_]+ | [_]+ [dot [_]+]? [with [_]+ [and [_]+]*]?) variable [_]+ ",
 				new Unit[] { new Unit("define"), new Unit("asterisk", fieldModifier),
-						new Unit("or", new Unit("normal", Name, new Unit("list")),
+						new Unit("or", new Unit("normal", new Unit("list"), new Unit("normal", new Unit("of"), (Name))),
 								new Unit(new Unit[] { Name, new Unit("question", new Unit("dot"), Name),
 										new Unit("question", new Unit("with"),
 												new Unit("normal", Name, new Unit("asterisk", new Unit("and"), Name))) })),
@@ -96,9 +96,10 @@ public class PatternSet {
 
 		// 定义参数
 		Pattern typePat2 = new Pattern("typeVariable",
-				"type ([_]+ list | [_]+ [dot [_]+]? [with [_]+ [and [_]+]*]?) variable [_]+",
+				"type (list of [_]+ | [_]+ [dot [_]+]? [with [_]+ [and [_]+]*]?) variable [_]+",
 				new Unit[] { new Unit("type"),
-						new Unit("or", new Unit("normal", Name, new Unit("list")),
+						new Unit("or",
+								new Unit("normal", new Unit("list"), new Unit("normal", new Unit("of"), (Name))),
 								new Unit(new Unit[] { Name, new Unit("question", new Unit("dot"), Name),
 										new Unit("question", new Unit("with"),
 												new Unit("normal", Name, new Unit("asterisk", new Unit("and"), Name))) })),
@@ -107,9 +108,9 @@ public class PatternSet {
 
 		// 定义类型
 		Pattern typePat = new Pattern("typeExtends",
-				"type ([_]+ list | [_]+ [dot [_]+]? [with [_]+ [and [_]+]*]?) [extends [_]+]?",
+				"type (list of [_]+  | [_]+ [dot [_]+]? [with [_]+ [and [_]+]*]?) [extends [_]+]?",
 				new Unit[] { new Unit("type"),
-						new Unit("or", new Unit("normal", Name, new Unit("list")),
+						new Unit("or", new Unit("normal", new Unit("list"), new Unit("normal", new Unit("of"), (Name))),
 								new Unit(new Unit[] { Name, new Unit("question", new Unit("dot"), Name),
 										new Unit("question", new Unit("with"),
 												new Unit("normal", Name, new Unit("asterisk", new Unit("and"), Name))) })),
@@ -179,6 +180,7 @@ public class PatternSet {
 
 		Unit[] letUnits = new Unit[] { new Unit("let"), Name, new Unit("question", new Unit("dot"), Name),
 				new Unit("equal") };
+
 		Pattern let1Pat = new Pattern("let1", "let [_]+ [dot [_]+]? equal call [_]+ ",
 				ArrayUtils.addAll(letUnits, new Unit[] { new Unit("call"), Name }));
 		patSet.add(let1Pat);
@@ -203,13 +205,13 @@ public class PatternSet {
 				ArrayUtils.addAll(letUnits, new Unit[] { typeUnit, Name }));
 		patSet.add(let5Pat);
 
+		Pattern let4Pat = new Pattern("let4", "let [_]+ [dot [_]+]? equal variable [_]+",
+				ArrayUtils.addAll(letUnits, new Unit[] { new Unit("normal", new Unit("variable")), Name }));
+		patSet.add(let4Pat);
+
 		Pattern let3Pat = new Pattern("let3", "let [_]+ [dot [_]+]? equal [_]+ [dot [_]+]* ",
 				ArrayUtils.addAll(letUnits, new Unit[] { Name, new Unit("asterisk", new Unit("dot"), Name) }));
 		patSet.add(let3Pat);
-
-		Pattern let4Pat = new Pattern("let4", "let [_]+ [dot [_]+]? equal [variable]? [_]+",
-				ArrayUtils.addAll(letUnits, new Unit[] { new Unit("question", new Unit("variable")), Name }));
-		patSet.add(let4Pat);
 
 		Pattern return1Pat = new Pattern("return1", "return call [_]+",
 				new Unit[] { new Unit("return"), new Unit("call"), Name });
@@ -228,13 +230,13 @@ public class PatternSet {
 				new Unit[] { new Unit("return"), typeUnit, Name });
 		patSet.add(return5Pat);
 
+		Pattern return4Pat = new Pattern("return4", "return variable [_]+",
+				new Unit[] { new Unit("return"), new Unit("normal", new Unit("variable")), Name });
+		patSet.add(return4Pat);
+
 		Pattern return3Pat = new Pattern("return3", "return [_]+ [dot [_]+]*",
 				new Unit[] { new Unit("return"), Name, new Unit("asterisk", new Unit("dot"), Name) });
 		patSet.add(return3Pat);
-
-		Pattern return4Pat = new Pattern("return4", "return [variable]? [_]+",
-				new Unit[] { new Unit("return"), new Unit("question", new Unit("variable")), Name });
-		patSet.add(return4Pat);
 
 		Pattern expr15Pat = new Pattern("expr15", "[expression]? null",
 				new Unit[] { new Unit("question", new Unit("expression")), new Unit("null") });
@@ -253,17 +255,27 @@ public class PatternSet {
 				new Unit[] { new Unit("question", new Unit("expression")), new Unit("string"), Name });
 		patSet.add(expr14Pat);
 
+		Unit opUnit = new Unit("or", new Unit("plus"), new Unit("or", new Unit("minus"),
+				new Unit("or", new Unit("times"), new Unit("or", new Unit("divide"), new Unit("mod")))));
+		Unit compareUnit = new Unit("or", new Unit("normal", new Unit("less"), new Unit("than")),
+				new Unit("or", new Unit("normal", new Unit("less"), new Unit("equal")),
+						new Unit("or", new Unit("normal", new Unit("greater"), new Unit("than")),
+								new Unit("or", new Unit("normal", new Unit("greater"), new Unit("equal")),
+										new Unit("or", new Unit("normal", new Unit("double"), new Unit("equal")),
+												new Unit("or", new Unit("and"), new Unit("normal", new Unit("double"), new Unit("and"))))))));
+
+		Pattern expr10Pat = new Pattern("expr10", "[expression]? expression (op | compare) expression",
+				new Unit[] { new Unit("question", new Unit("expression")), new Unit("expression"),
+						new Unit("or", opUnit, compareUnit), new Unit("expression") });
+		patSet.add(expr10Pat);
+
 		Pattern expr5Pat = new Pattern("expr5",
 				"[expression]? (int | byte | short | long | char | float | double | boolean | String) [_]+",
 				new Unit[] { new Unit("question", new Unit("expression")), typeUnit, Name });
 		patSet.add(expr5Pat);
 
-		Pattern expr3Pat = new Pattern("expr3", "[expression]? [_]+ [dot [_]+]*",
-				new Unit[] { new Unit("question", new Unit("expression")), Name, new Unit("asterisk", new Unit("dot"), Name) });
-		patSet.add(expr3Pat);
-
-		Pattern expr4Pat = new Pattern("expr4", "[expression]? [variable]? [_]+ ",
-				new Unit[] { new Unit("question", new Unit("expression")), new Unit("question", new Unit("variable")), Name });
+		Pattern expr4Pat = new Pattern("expr4", "[expression]? variable [_]+ ",
+				new Unit[] { new Unit("question", new Unit("expression")), new Unit("normal", new Unit("variable")), Name });
 		patSet.add(expr4Pat);
 
 		Pattern expr6Pat = new Pattern("expr6", "[expression]? [_]+ plus plus",
@@ -282,32 +294,26 @@ public class PatternSet {
 				new Unit[] { new Unit("question", new Unit("expression")), new Unit("minus"), new Unit("minus"), Name });
 		patSet.add(expr9Pat);
 
-		Unit opUnit = new Unit("or", new Unit("plus"), new Unit("or", new Unit("minus"),
-				new Unit("or", new Unit("times"), new Unit("or", new Unit("divide"), new Unit("mod")))));
-		Unit compareUnit = new Unit("or", new Unit("normal", new Unit("less"), new Unit("than")),
-				new Unit("or", new Unit("normal", new Unit("less"), new Unit("equal")),
-						new Unit("or", new Unit("normal", new Unit("greater"), new Unit("than")),
-								new Unit("or", new Unit("normal", new Unit("greater"), new Unit("equal")),
-										new Unit("or", new Unit("normal", new Unit("double"), new Unit("equal")),
-												new Unit("or", new Unit("and"), new Unit("normal", new Unit("double"), new Unit("and"))))))));
-
-		Pattern expr10Pat = new Pattern("expr10", "[expression]? expression (op | compare) expression",
-				new Unit[] { new Unit("question", new Unit("expression")), new Unit("expression"),
-						new Unit("or", opUnit, compareUnit), new Unit("expression") });
-		patSet.add(expr10Pat);
-
-		Pattern expr11Pat = new Pattern("expr11", "[expression]? [_]+ (op | compare) expression",
-				new Unit[] { new Unit("question", new Unit("expression")), Name, new Unit("or", opUnit, compareUnit),
-						new Unit("expression") });
-		patSet.add(expr11Pat);
-
-		Pattern expr12Pat = new Pattern("expr12", "[expression]? [_]+ (op | compare) [_]+",
-				new Unit[] { new Unit("question", new Unit("expression")), Name, new Unit("or", opUnit, compareUnit), Name });
-		patSet.add(expr12Pat);
-
 		Pattern expr13Pat = new Pattern("expr13", "[expression]? variable [_]+ index [_]+", new Unit[] {
 				new Unit("question", new Unit("expression")), new Unit("variable"), Name, new Unit("index"), Name });
 		patSet.add(expr13Pat);
+
+		Pattern expr3Pat = new Pattern("expr3", "[expression]? [_]+ [dot [_]+]*",
+				new Unit[] { new Unit("question", new Unit("expression")), Name, new Unit("asterisk", new Unit("dot"), Name) });
+		patSet.add(expr3Pat);
+
+		// Pattern expr11Pat = new Pattern("expr11", "[expression]? [_]+ (op | compare)
+		// expression",
+		// new Unit[] { new Unit("question", new Unit("expression")), Name, new
+		// Unit("or", opUnit, compareUnit),
+		// new Unit("expression") });
+		// patSet.add(expr11Pat);
+
+		// Pattern expr12Pat = new Pattern("expr12", "[expression]? [_]+ (op | compare)
+		// [_]+",
+		// new Unit[] { new Unit("question", new Unit("expression")), Name, new
+		// Unit("or", opUnit, compareUnit), Name });
+		// patSet.add(expr12Pat);
 
 	}
 

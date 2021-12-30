@@ -3,12 +3,13 @@ define public function main
 type void
 type String list variable args
 move next
-define int list variable ns
+define list of int variable ns
 move next
 define for
 define int variable i
 int zero
-expression i less than expression
+expression less than expression
+variable i
 ns dot length
 expression i plus plus
 expression System dot Out call println

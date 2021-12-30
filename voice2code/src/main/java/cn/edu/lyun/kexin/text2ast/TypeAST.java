@@ -17,9 +17,9 @@ public class TypeAST {
 			return StaticJavaParser.parseType(units.get(0).getKeyword());
 		}
 		// case 2: e.g. int list
-		else if (units.size() == 2) {
+		else if (units.get(0).getKeyword().equals("list")) {
 			List<Unit> subUnits = new ArrayList<Unit>();
-			subUnits.add(units.get(0));
+			subUnits.add(units.get(units.size() - 1));
 			Type type = generateType(subUnits);
 			// may have bug: ArrayType exptects more than one argument
 			// see:

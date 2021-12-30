@@ -11,7 +11,7 @@ define public String variable name
 move next
 define public function say hello
 type int
-type int list variable intArray
+type list of int variable intArray
 type String variable name
 move next
 define int variable sum
@@ -21,10 +21,13 @@ move next
 define for
 define int variable i
 int zero
-expression i less equal expression
+expression less equal expression
+variable i
 int ten
 i plus plus
 let sum equal expression
 expression sum plus i
 let count equal expression
-expression count plus i
+expression plus expression
+variable count
+variable i

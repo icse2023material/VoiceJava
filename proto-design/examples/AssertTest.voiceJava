@@ -12,7 +12,7 @@ variable x
 move next 
 define function sort 
 type void 
-type int list name arr 
+type list of int name arr 
 define if 
 expression variable arr double equal null 
 throw new illegal argument exception 

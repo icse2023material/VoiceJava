@@ -3,7 +3,8 @@ define public function say hello
 type void
 move next
 define if
-expression counter less than expression
+expression less than expression
+variable counter
 int ten
 return int zero
 move next

@@ -2,7 +2,7 @@ define public class for test
 define public static function main 
 type void 
 type string list name args 
-define int list variable ns 
+define list of int variable ns 
 int sequence 1 4 9 16 25 
 define for 
 define int variable i 

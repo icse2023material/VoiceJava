@@ -1,7 +1,7 @@
 define public class test
 define public static function main
 type void
-type string list variable args
+type list of String variable args
 move next
 define int variable option
 int two
