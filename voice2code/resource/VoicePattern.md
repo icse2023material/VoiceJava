@@ -25,8 +25,8 @@
     - 语法：`define arrow function`
     - 示例：备注: 还未实现。
 8.  属性/变量定义：
-    - 语法：`define (Annotation | public | protected |private | static | final | transient | volatile)* (Name list | Name [dot Name]? [with Name [and Name]*]?) variable Name`
-    - 示例：`define private int variable count`， `define int list variable list`， `define Pair with Integer String`
+    - 语法：`define (Annotation | public | protected |private | static | final | transient | volatile)* (list of Name | Name [dot Name]? [with Name [and Name]*]?) variable Name`
+    - 示例：`define private int variable count`， `define list of int variable list`， `define Pair with Integer String`
 9.  定义类型：
 
     - 语法：`type (list of Name | Name [dot Name]? [with Name [and Name]*]?) [extends _]?`
@@ -34,7 +34,7 @@
 
 10. 定义参数：
 
-    - 语法： `type (Name list | Name [dot Name]? [with Name [and Name]*]?) variable Name`
+    - 语法： `type (list of Name | Name [dot Name]? [with Name [and Name]*]?) variable Name`
     - 示例：`type int variable count`，`type NodeList with Statement variable nodelist`
 
 11. 定义`for`循环：
@@ -119,11 +119,6 @@
     - `expression? plus plus Name`
     - `expression? minus minus Name`
     - `expression? expression (op | compare) expression`
-    - `expression? Name (op | compare) expression`
-      - 示例：`expression 3 times expression`
-      - 注意: 语音如何区分数字和字母？
-    - `expression? Name (op | compare) Name`
-      - 示例：`expression 3 plus 4`
     - `expression? variable Name index Name`
       - 示例: `expression variable name list index index`, 数组索引
     - `expression? string Name`

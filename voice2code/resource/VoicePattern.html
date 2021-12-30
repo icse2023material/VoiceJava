@@ -90,21 +90,21 @@
 <li>
 <p>属性/变量定义：</p>
 <ul>
-<li>语法：<code>define (Annotation | public | protected |private | static | final | transient | volatile)* (Name list | Name [dot Name]? [with Name [and Name]*]?) variable Name</code></li>
-<li>示例：<code>define private int variable count</code>， <code>define int list variable list</code>， <code>define Pair with Integer String</code></li>
+<li>语法：<code>define (Annotation | public | protected |private | static | final | transient | volatile)* (list of Name | Name [dot Name]? [with Name [and Name]*]?) variable Name</code></li>
+<li>示例：<code>define private int variable count</code>， <code>define list of int variable list</code>， <code>define Pair with Integer String</code></li>
 </ul>
 </li>
 <li>
 <p>定义类型：</p>
 <ul>
-<li>语法：<code>type (Name list | Name [dot Name]? [with Name [and Name]*]?) [extends _]?</code></li>
+<li>语法：<code>type (list of Name | Name [dot Name]? [with Name [and Name]*]?) [extends _]?</code></li>
 <li>示例: <code>type int</code>， <code>type void</code></li>
 </ul>
 </li>
 <li>
 <p>定义参数：</p>
 <ul>
-<li>语法： <code>type (Name list | Name [dot Name]? [with Name [and Name]*]?) variable Name</code></li>
+<li>语法： <code>type (list of Name | Name [dot Name]? [with Name [and Name]*]?) variable Name</code></li>
 <li>示例：<code>type int variable count</code>，<code>type NodeList with Statement variable nodelist</code></li>
 </ul>
 </li>
@@ -191,7 +191,7 @@
 <li>示例：<code>let score equal student first dot semester dot score</code></li>
 </ul>
 </li>
-<li><code>let Name [dot Name]? equal [variable]? Name</code>
+<li><code>let Name [dot Name]? equal variable Name</code>
 <ul>
 <li>示例：<code>let score equal variable final score</code></li>
 </ul>
@@ -214,7 +214,7 @@
 <li><code>return call Name</code></li>
 <li><code>return Name [dot Name]* [call Name]+</code></li>
 <li><code>return Name [dot Name]*</code></li>
-<li><code>return [variable]? Name</code></li>
+<li><code>return variable Name</code></li>
 <li><code>return (int | byte | short | long | char | float | double | boolean | string) Name</code></li>
 <li><code>return [expression]?</code></li>
 </ul>
@@ -222,27 +222,17 @@
 <li>
 <p>12 种表达式</p>
 <ul>
+<li><code>expression? null</code></li>
 <li><code>expression? call Name</code></li>
 <li><code>expression? Name [dot Name]* [call Name]+</code></li>
 <li><code>expression? Name [dot Name]?</code></li>
-<li><code>expression? [variable]? Name</code></li>
+<li><code>expression? variable Name</code></li>
 <li><code>expression? (int | byte | short | long | char | float | double | boolean | string) Name</code></li>
 <li><code>expression? Name plus plus</code></li>
 <li><code>expression? Name minus minus</code></li>
 <li><code>expression? plus plus Name</code></li>
 <li><code>expression? minus minus Name</code></li>
 <li><code>expression? expression (op | compare) expression</code></li>
-<li><code>expression? Name (op | compare) expression</code>
-<ul>
-<li>示例：<code>expression 3 times expression</code></li>
-<li>注意: 语音如何区分数字和字母？</li>
-</ul>
-</li>
-<li><code>expression? Name (op | compare) Name</code>
-<ul>
-<li>示例：<code>expression 3 plus 4</code></li>
-</ul>
-</li>
 <li><code>expression? variable Name index Name</code>
 <ul>
 <li>示例: <code>expression variable name list index index</code>, 数组索引</li>
