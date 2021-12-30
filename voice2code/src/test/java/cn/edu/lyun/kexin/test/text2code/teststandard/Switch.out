@@ -4,14 +4,14 @@ public class Test {
         int option = 2;
         switch(option) {
             case 1:
-                System.Out.println("Selected1");
+                System.out.println("Selected1");
                 break;
             case 2:
             case 3:
-                System.Out.println("NotSelected");
+                System.out.println("NotSelected");
                 break;
             default:
-                System.Out.println("bad");
+                System.out.println("bad");
                 break;
         }
     }

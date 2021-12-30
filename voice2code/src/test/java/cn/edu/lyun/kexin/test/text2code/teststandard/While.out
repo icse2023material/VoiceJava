@@ -6,7 +6,7 @@ public class Test {
 		while (n <= 100) {
 			n++;
 			sum = sum + n;
-			System.Out.println(sum);
+			System.out.println(sum);
 		}
 	}
 }

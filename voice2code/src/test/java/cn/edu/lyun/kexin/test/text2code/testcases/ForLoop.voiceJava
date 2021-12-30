@@ -12,7 +12,7 @@ expression less than expression
 variable i
 ns dot length
 expression i plus plus
-expression System dot Out call println
+expression System dot out call println
 expression variable ns index i
 move next
 define int variable nsi

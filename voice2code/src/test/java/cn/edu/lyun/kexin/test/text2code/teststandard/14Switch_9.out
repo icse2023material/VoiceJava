@@ -9,6 +9,6 @@ public class HelloWorld {
                 sum = 100;
                 break;
         }
-        System.Out.println("nice");
+        System.out.println("nice");
     }
 }

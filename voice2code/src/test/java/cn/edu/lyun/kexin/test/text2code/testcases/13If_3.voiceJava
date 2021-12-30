@@ -7,5 +7,5 @@ define if
 expression greater than expression
 variable i
 int ninety
-System dot Out call println
+System dot out call println
 string excellent

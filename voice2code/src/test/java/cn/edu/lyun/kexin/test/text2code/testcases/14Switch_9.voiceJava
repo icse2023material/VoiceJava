@@ -12,5 +12,5 @@ move next
 let sum equal int one hundred
 break
 move next
-System dot Out call println
+System dot out call println
 string nice

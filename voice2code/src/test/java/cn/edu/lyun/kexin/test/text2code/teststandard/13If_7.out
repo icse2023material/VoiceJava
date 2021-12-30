@@ -4,7 +4,7 @@ public class HelloWorld {
         if (i > 90) {
             sum = sum + i;
         } else {
-            System.Out.println("done");
+            System.out.println("done");
         }
     }
 }

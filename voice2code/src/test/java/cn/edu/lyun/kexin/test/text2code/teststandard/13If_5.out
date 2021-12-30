@@ -2,7 +2,7 @@ public class HelloWorld {
 
     public void sayHello(Name[] names) {
         if (i > 90) {
-            System.Out.println("excellent");
+            System.out.println("excellent");
         } else if (i >= 80) {
             sum = sum + i;
         }

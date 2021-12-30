@@ -7,5 +7,5 @@ define for
 move next
 move next
 move next
-System dot Out call println
+System dot out call println
 string hello world

@@ -72,7 +72,7 @@ int 0
 expression i less than expression
 names dot length
 i plus plus
-System dot Out call println
+System dot out call println
 variable names index i
 define public class hello world
 define public function say hello
@@ -107,7 +107,7 @@ define for
 move next
 move next
 move next
-System dot Out call println
+System dot out call println
 string hello world
 define public class hello world
 define public function say hello
@@ -129,7 +129,7 @@ type list of Name variable names
 move next
 define while
 expression i less than 10
-System dot Out call println
+System dot out call println
 variable i
 define public class hello world
 define public function say hello
@@ -145,7 +145,7 @@ type list of Name variable names
 move next
 define while
 boolean true
-System dot Out call println
+System dot out call println
 string hello world
 define public class hello world
 define public function say hello
@@ -167,7 +167,7 @@ type list of Name variable names
 move next
 define if
 expression i greater than 90
-System dot Out call println
+System dot out call println
 string excellent
 define public class hello world
 define public function say hello
@@ -176,7 +176,7 @@ type list of Name variable names
 move next
 define if
 expression i greater than 90
-System dot Out call println
+System dot out call println
 string excellent
 move next
 move next
@@ -188,7 +188,7 @@ type list of Name variable names
 move next
 define if
 expression i greater than 90
-System dot Out call println
+System dot out call println
 string excellent
 move next
 move next
@@ -202,7 +202,7 @@ type list of Name variable names
 move next
 define if
 expression i greater than 90
-System dot Out call println
+System dot out call println
 string excellent
 move next
 move next
@@ -222,7 +222,7 @@ let sum equal expression
 sum plus i
 move next
 move next
-System dot Out call println 
+System dot out call println 
 string done
 define public class hello world
 define public function say hello
@@ -349,7 +349,7 @@ move next
 let sum equal int 100
 break
 move next
-System dot Out call println
+System dot out call println
 string nice
 define public class hello world
 define public function say hello
@@ -892,7 +892,7 @@ int 0
 expression i less than expression
 ns dot length
 expression i plus plus
-expression System dot Out call println
+expression System dot out call println
 expression variable ns index i
 move next
 define int variable nsi
@@ -940,17 +940,17 @@ define int variable n
 int 90
 define if
 n greater than 90
-System dot Out call prtinln
+System dot out call prtinln
 string excellent
 move next
 move next
 expression n greater equal 60
-System dot Out call prtinln
+System dot out call prtinln
 string good
 move next
 move next
 move next
-System dot Out call println
+System dot out call println
 string bad
 move next
 move next
@@ -1033,7 +1033,7 @@ expression int 2
 move next
 my puppy call get age
 move next
-expression System dot Out call println
+expression System dot out call println
 expression my puppy dot puppy age
 define package lyun
 import java dot uitl dot star
@@ -1064,19 +1064,19 @@ int 2
 define switch
 variable option
 int 1
-System dot Out call println
+System dot out call println
 string Selected1
 move next
 break
 int 2
 move next
 int 3
-System dot Out call println
+System dot out call println
 string NotSelected 
 move next
 break
 move next
-System dot Out call println
+System dot out call println
 string bad
 move next
 break
@@ -1122,7 +1122,7 @@ expression n less equal 100
 expression n plus plus
 let sum equal expression 
 expression sum plus n
-System dot Out call println 
+System dot out call println 
 variable sum
 move next 
 define package lyun

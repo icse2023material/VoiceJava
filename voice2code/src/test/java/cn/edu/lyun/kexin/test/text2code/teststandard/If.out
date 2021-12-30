@@ -3,11 +3,11 @@ public class HelloTest {
     public static void main(string[] args) {
         int n = 90;
         if (n > 90) {
-            System.Out.prtinln("excellent");
+            System.out.prtinln("excellent");
         } else if (n >= 60) {
-            System.Out.prtinln("good");
+            System.out.prtinln("good");
         } else {
-            System.Out.println("bad");
+            System.out.println("bad");
         }
         n = 2;
     }

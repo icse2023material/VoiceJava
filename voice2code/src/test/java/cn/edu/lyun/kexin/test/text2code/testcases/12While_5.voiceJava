@@ -5,5 +5,5 @@ type list of Name variable names
 move next
 define while
 boolean true
-System dot Out call println
+System dot out call println
 string hello world

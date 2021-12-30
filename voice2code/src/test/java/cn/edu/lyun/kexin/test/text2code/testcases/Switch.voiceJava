@@ -8,19 +8,19 @@ int two
 define switch
 variable option
 int one
-System dot Out call println
+System dot out call println
 string Selected1
 move next
 break
 int two
 move next
 int three
-System dot Out call println
+System dot out call println
 string NotSelected 
 move next
 break
 move next
-System dot Out call println
+System dot out call println
 string bad
 move next
 break

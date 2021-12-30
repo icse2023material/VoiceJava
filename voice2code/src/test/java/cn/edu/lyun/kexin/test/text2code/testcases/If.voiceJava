@@ -9,19 +9,19 @@ define if
 expression greater than expression
 variable n
 int ninety
-System dot Out call prtinln
+System dot out call prtinln
 string excellent
 move next
 move next
 expression greater equal expression
 variable n
 int sixty
-System dot Out call prtinln
+System dot out call prtinln
 string good
 move next
 move next
 move next
-System dot Out call println
+System dot out call println
 string bad
 move next
 move next

@@ -7,5 +7,5 @@ define while
 expression less than expression
 variable i
 int ten
-System dot Out call println
+System dot out call println
 variable i

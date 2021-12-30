@@ -16,6 +16,6 @@ let sum equal expression
 expression plus expression
 variable sum
 variable n
-System dot Out call println 
+System dot out call println 
 variable sum
 move next 

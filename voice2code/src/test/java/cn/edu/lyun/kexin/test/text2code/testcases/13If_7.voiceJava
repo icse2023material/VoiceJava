@@ -13,5 +13,5 @@ variable sum
 variable i
 move next
 move next
-System dot Out call println 
+System dot out call println 
 string done

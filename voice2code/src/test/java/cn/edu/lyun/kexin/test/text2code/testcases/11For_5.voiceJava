@@ -10,5 +10,5 @@ expression less than expression
 variable i
 names dot length
 i plus plus
-System dot Out call println
+System dot out call println
 variable names
