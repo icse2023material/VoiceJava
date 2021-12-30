@@ -1,7 +1,7 @@
 define public class hello test
 define public function main
 type void
-type String list variable args
+type list of String variable args
 move next
 define list of int variable ns
 move next

@@ -26,7 +26,9 @@ variable i
 int ten
 i plus plus
 let sum equal expression
-expression sum plus i
+expression plus expression
+variable sum
+variable i
 let count equal expression
 expression plus expression
 variable count

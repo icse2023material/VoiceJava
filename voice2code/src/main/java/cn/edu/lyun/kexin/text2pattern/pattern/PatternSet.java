@@ -274,6 +274,11 @@ public class PatternSet {
 				new Unit[] { new Unit("question", new Unit("expression")), typeUnit, Name });
 		patSet.add(expr5Pat);
 
+		// expr13 must be put before expr4
+		Pattern expr13Pat = new Pattern("expr13", "[expression]? variable [_]+ index [_]+", new Unit[] {
+				new Unit("question", new Unit("expression")), new Unit("variable"), Name, new Unit("index"), Name });
+		patSet.add(expr13Pat);
+
 		Pattern expr4Pat = new Pattern("expr4", "[expression]? variable [_]+ ",
 				new Unit[] { new Unit("question", new Unit("expression")), new Unit("normal", new Unit("variable")), Name });
 		patSet.add(expr4Pat);
@@ -293,10 +298,6 @@ public class PatternSet {
 		Pattern expr9Pat = new Pattern("expr9", "[expression]? minus minus [_]+",
 				new Unit[] { new Unit("question", new Unit("expression")), new Unit("minus"), new Unit("minus"), Name });
 		patSet.add(expr9Pat);
-
-		Pattern expr13Pat = new Pattern("expr13", "[expression]? variable [_]+ index [_]+", new Unit[] {
-				new Unit("question", new Unit("expression")), new Unit("variable"), Name, new Unit("index"), Name });
-		patSet.add(expr13Pat);
 
 		Pattern expr3Pat = new Pattern("expr3", "[expression]? [_]+ [dot [_]+]*",
 				new Unit[] { new Unit("question", new Unit("expression")), Name, new Unit("asterisk", new Unit("dot"), Name) });
