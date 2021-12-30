@@ -65,8 +65,9 @@ public class Pattern {
 	}
 
 	public Pattern concatNames() {
-		// words after string shall not be concated. e.g string hello world.
-		if (units[0].getKeyword().equals("string")) {
+		List<String> shouldNotConcatKeywords = new ArrayList<String>(
+				Arrays.asList(new String[] { "return5", "let5", "expr5", "expr14" }));
+		if (shouldNotConcatKeywords.contains(this.name)) {
 			return this;
 		}
 		List<Unit> unitList = new ArrayList<Unit>(Arrays.asList(units));

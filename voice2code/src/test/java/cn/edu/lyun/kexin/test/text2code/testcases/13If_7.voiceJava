@@ -4,7 +4,8 @@ type void
 type Name list variable names
 move next
 define if
-expression i greater than 90
+expression i greater than expression
+int ninety
 let sum equal expression 
 sum plus i
 move next

@@ -5,9 +5,9 @@ type Name list variable names
 move next
 define for
 define int variable counter
-int 0
+int zero
 expression counter less than expression
 names dot length
 counter plus plus
 let x equal expression
-int 100
+int one hundred

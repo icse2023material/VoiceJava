@@ -13,7 +13,7 @@ expression a dot b
 define int variable count
 variable y
 define int variable count
-int 2
+int two
 define int variable count
 i plus plus
 define int variable count
@@ -24,13 +24,16 @@ define int variable count
 minus minus i
 define int variable count
 expression plus expression
-int 2
-int 3
+int two
+int three
 define int variable count
-expression 2 plus expression
-int 3
+expression expression plus expression
+int two
+int three
 define int variable count
-expression 2 plus 3
+expression expression plus expression
+int two
+int three
 define int variable count
 subexpression
-int 2
+int two

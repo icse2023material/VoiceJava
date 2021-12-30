@@ -4,7 +4,7 @@ type void
 move next
 let x equal expression
 expression plus expression
-int 2
+int two
 call sum
 move next
 let x equal expression

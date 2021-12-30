@@ -4,6 +4,6 @@ type void
 type Name list variable names
 move next
 define for
-let counter equal int 0
+let counter equal int zero
 counter less than expression
-int 10
+int ten

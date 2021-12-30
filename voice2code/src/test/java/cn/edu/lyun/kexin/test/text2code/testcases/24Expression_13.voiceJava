@@ -3,7 +3,9 @@ define public function say hello
 type void
 move next
 let x equal expression
-expression 3 plus expression
-expression 2 times expression
+expression plus expression
+int three
+expression times expression
+int two
 call sum
 move next

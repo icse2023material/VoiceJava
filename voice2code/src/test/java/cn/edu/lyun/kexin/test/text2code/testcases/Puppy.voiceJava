@@ -22,7 +22,7 @@ new instance puppy
 expression string tommy
 move next
 my puppy call set age
-expression int 2
+expression int two
 move next
 my puppy call get age
 move next

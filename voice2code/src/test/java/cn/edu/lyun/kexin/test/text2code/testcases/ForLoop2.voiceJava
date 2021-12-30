@@ -4,9 +4,9 @@ import java dot lang dot reflect dot star
 move next
 define public class hello
 define public int variable count
-int 0
+int zero
 define private int variable sum
-int 2
+int two
 define public String variable name
 move next
 define public function say hello
@@ -15,13 +15,14 @@ type int list variable intArray
 type String variable name
 move next
 define int variable sum
-int 0
+int zero
 define int variable b
 move next
 define for
 define int variable i
-int 0
-expression i less equal 10
+int zero
+expression i less equal expression
+int ten
 i plus plus
 let sum equal expression
 expression sum plus i

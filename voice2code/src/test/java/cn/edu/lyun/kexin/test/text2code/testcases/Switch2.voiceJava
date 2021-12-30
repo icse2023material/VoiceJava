@@ -4,25 +4,31 @@ import java dot lang dot reflect dot star
 move next
 define public class hello
 define private int variable greeting
-int 2
+int two
 define public function say hello
 type int
 type int list variable intArray
 type String variable name
 move next
 define int variable sum
-int 0
+int zero
 define switch
 variable userType
-int 1
+int one
 let sum equal call fibonacci
-int 2
+int two
 move next
-expression 15 times 15
-expression 15 times sum
+expression times expression
+int fifteen
+int fifteen
+expression times expression
+int fifteen
+variable sum
 move next
-int 2
-expression 15 times 15
+int two
+expression times expression
+int fifteen
+int fifteen
 move next
 move next
 return sum

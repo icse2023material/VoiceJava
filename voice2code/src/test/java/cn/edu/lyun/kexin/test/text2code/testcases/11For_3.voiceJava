@@ -5,6 +5,6 @@ type Name list variable names
 move next
 define for
 define int variable i 
-int 0
+int zero
 expression i less than expression
 names dot length

@@ -5,4 +5,4 @@ type Name list variable names
 move next
 define switch
 variable option
-int 1
+int one

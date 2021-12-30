@@ -5,5 +5,5 @@ type Name list variable names
 move next
 define while
 expression counter less than expression
-int 10
-return int 10
+int ten
+return int ten

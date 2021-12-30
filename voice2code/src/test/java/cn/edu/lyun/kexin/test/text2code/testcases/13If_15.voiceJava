@@ -4,5 +4,6 @@ type int
 type Name list variable names
 move next
 define if
-expression counter less than 10
+expression counter less than expression
+int ten
 define if

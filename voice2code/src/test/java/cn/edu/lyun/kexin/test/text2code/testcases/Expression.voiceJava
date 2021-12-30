@@ -3,5 +3,7 @@ define public function test
 type void 
 move next 
 define int variable a 
-expression 3 plus 4
+expression plus expression
+int three
+int four
 define int variable b

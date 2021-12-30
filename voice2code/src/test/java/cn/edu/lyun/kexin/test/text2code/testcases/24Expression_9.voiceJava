@@ -5,45 +5,45 @@ type Name list variable names
 move next
 let x equal expression
 expression plus expression
-int 2
-int 3
+int two
+int three
 let x equal expression
 expression minus expression
-int 2
-int 3
+int two
+int three
 let x equal expression
 expression times expression
-int 2
-int 3
+int two
+int three
 let x equal expression
 expression divide expression
-int 2
-int 3
+int two
+int three
 let x equal expression
 expression mod expression
-int 2
-int 3
+int two
+int three
 let x equal expression
 expression less than expression
-int 2
-int 3
+int two
+int three
 let x equal expression
 expression less equal expression
-int 2
-int 3
+int two
+int three
 let x equal expression
 expression greater than expression
-int 2
-int 3
+int two
+int three
 let x equal expression
 expression greater equal expression
-int 2
-int 3
+int two
+int three
 let x equal expression
 expression double equal expression
-int 2
-int 3
+int two
+int three
 let x equal expression
 expression double and expression
-int 2
-int 3
+int two
+int three

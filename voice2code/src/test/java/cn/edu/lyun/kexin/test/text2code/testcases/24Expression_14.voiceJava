@@ -3,7 +3,9 @@ define public function say hello
 type void
 move next
 let x equal expression
-expression 3 plus 5
+expression plus expression
+int three
+int five
 let x equal expression
 variable ns index i
 let x equal expression

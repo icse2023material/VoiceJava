@@ -3,4 +3,4 @@ define public function say hello
 type void
 type Name list variable names
 move next
-return int 2
+return int two

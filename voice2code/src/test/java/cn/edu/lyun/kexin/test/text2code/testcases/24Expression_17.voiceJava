@@ -5,8 +5,8 @@ type Name list variable names
 move next
 define for
 define int variable counter
-int 0
+int zero
 counter less than expression
-int 10
+int ten
 plus plus counter
 expression sum plus plus

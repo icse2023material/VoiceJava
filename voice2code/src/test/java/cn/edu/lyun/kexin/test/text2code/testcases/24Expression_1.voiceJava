@@ -44,15 +44,18 @@ move next
 let x equal expression
 expression call sum
 expression plus expression
-int 12
-int 13
+int twelve
+int thirteen
 move next
 let x equal expression
 expression call sum
-expression 2 plus expression
-int 3
+expression expression plus expression
+int two
+int three
 move next
 let x equal expression
 expression call sum
-expression 2 plus 3
+expression expression plus expression
+int two
+int three
 move next

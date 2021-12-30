@@ -3,5 +3,5 @@ define public function say hello
 type void
 type Name list variable names
 move next
-let counter equal int 0
+let counter equal int zero
 define for

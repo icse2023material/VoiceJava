@@ -4,17 +4,17 @@ type void
 type string list variable args
 move next
 define int variable option
-int 2
+int two
 define switch
 variable option
-int 1
+int one
 System dot Out call println
 string Selected1
 move next
 break
-int 2
+int two
 move next
-int 3
+int three
 System dot Out call println
 string NotSelected 
 move next

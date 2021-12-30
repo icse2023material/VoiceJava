@@ -4,9 +4,10 @@ type void
 type Name list variable names
 move next
 define if
-expression i greater than 90
-let sum equal int 100
+expression i greater than expression
+int ninety
+let sum equal int one hundred
 move next
 move next
 move next
-let i equal int 100
+let i equal int one hundred

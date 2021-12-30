@@ -4,8 +4,9 @@ type void
 move next
 let x equal expression
 expression plus expression
-expression 3 times expression
-int 2
 expression times expression
-int 30
-int 20
+int three
+int two
+expression times expression
+int thirty
+int twenty

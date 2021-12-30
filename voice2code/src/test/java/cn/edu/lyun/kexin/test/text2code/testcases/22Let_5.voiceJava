@@ -3,5 +3,5 @@ define public function say hello
 type void
 type Name list variable names
 move next
-let x equal long 2.12
-let x dot y equal int 2
+let x equal long two
+let x dot y equal int two

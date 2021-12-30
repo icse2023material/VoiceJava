@@ -4,6 +4,7 @@ type void
 type Name list variable names
 move next
 define while
-expression i less than 10
+expression i less than expression
+int ten
 System dot Out call println
 variable i

@@ -4,4 +4,4 @@ type void
 type Name list variable names
 move next
 define for
-let i equal int 0
+let i equal int zero

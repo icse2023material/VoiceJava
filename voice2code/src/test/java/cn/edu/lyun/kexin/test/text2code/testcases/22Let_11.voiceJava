@@ -5,10 +5,10 @@ type Name list variable names
 move next
 define if
 expression counter less than expression
-int 10
+int ten
 let x equal expression
-int 100
+int one hundred
 move next
 move next
 let x equal expression
-int 200
+int two hundred

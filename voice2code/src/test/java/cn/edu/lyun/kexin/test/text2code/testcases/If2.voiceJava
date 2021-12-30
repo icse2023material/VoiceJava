@@ -4,23 +4,26 @@ import java dot lang dot reflect dot star
 move next
 define public class hello
 define private int variable greeting
-int 2
+int two
 define public function say hello
 type int
 type int list variable intArray
 type String variable name
 move next
 define int variable sum
-int 0
+int zero
 define if
-i less than 10
+i less than expression
+int ten
 sum plus plus
 sum plus plus
 move next
-i greater than 10
+i greater than expression
+int ten
 sum plus plus
 move next
-i double equal 10
+i double equal expression
+int ten
 sum plus plus
 move next
 move next

@@ -5,4 +5,4 @@ type Name list variable names
 move next
 define while
 expression i less than expression
-int 10
+int ten

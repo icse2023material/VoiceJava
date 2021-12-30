@@ -4,16 +4,16 @@ import java dot lang dot reflect dot star
 move next
 define public class hello
 define private int variable greeting
-int 2
+int two
 define public function say hello
 type int
 type int list variable intArray
 type String variable name
 move next
 call notify
-int 3
-int 5
+int three
+int five
 move next
 return hello call notify
-int 2
+int two
 move next

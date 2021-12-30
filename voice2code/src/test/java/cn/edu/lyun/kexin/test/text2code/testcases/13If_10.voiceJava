@@ -5,6 +5,6 @@ type Name list variable names
 move next
 define if
 expression counter less than expression
-int 10
-return 0
+int ten
+return int zero
 expression counter double equal expression

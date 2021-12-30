@@ -4,4 +4,4 @@ type void
 move next
 define int variable count
 subexpression
-int 3
+int three

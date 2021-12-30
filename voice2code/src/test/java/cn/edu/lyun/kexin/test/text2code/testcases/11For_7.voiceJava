@@ -5,4 +5,5 @@ type Name list variable names
 move next
 define for
 move next
-expression i less than 10
+expression i less than expression
+int ten

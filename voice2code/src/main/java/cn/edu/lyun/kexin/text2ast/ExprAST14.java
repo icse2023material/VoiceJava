@@ -18,10 +18,7 @@ public class ExprAST14 implements AST {
 		if (unitList.get(0).getKeyword().equals("string")) {
 			unitList.remove(0); // remove "string"
 		}
-		String value = "";
-		for (Unit unit : unitList) {
-			value += " " + unit.getKeyword();
-		}
+		String value = PrimitiveTypeAST.generateStrFromUnits("string", unitList);
 		return new StringLiteralExpr(value.strip());
 	}
 }

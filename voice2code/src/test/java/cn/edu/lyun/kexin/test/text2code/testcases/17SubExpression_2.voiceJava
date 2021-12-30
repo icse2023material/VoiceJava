@@ -6,9 +6,9 @@ let x equal expression
 expression plus expression
 subexpression
 call sum
-int 3
+int three
 move next
 subexpression
 call sum
-int 2
+int two
 move next

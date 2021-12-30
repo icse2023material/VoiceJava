@@ -6,4 +6,4 @@ move next
 let x equal expression
 string hello world
 let x dot y equal expression
-int 2
+int two

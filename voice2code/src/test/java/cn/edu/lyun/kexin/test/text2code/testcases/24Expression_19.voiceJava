@@ -5,5 +5,5 @@ type Name list variable names
 move next
 define while
 counter less than expression
-int 10
+int ten
 minus minus sum

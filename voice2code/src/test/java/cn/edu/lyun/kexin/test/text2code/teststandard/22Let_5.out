@@ -1,7 +1,7 @@
 public class HelloWorld {
 
     public void sayHello(Name[] names) {
-        x = 2.12;
+        x = 2;
         x.y = 2;
     }
 }

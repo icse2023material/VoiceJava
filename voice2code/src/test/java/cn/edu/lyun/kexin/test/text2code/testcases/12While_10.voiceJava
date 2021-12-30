@@ -4,7 +4,9 @@ type int
 type Name list variable names
 move next
 define if
-expression counter less than 10
-return int 0
-expression counter double equal 10
+expression counter less than expression
+int ten
+return int zero
+expression counter double equal expression
+int ten
 define while

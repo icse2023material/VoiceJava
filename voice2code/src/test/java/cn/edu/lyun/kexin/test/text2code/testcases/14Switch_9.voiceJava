@@ -5,11 +5,11 @@ type Name list variable names
 move next
 define switch
 variable option
-int 1
-let sum equal int 0
+int one
+let sum equal int zero
 break
 move next
-let sum equal int 100
+let sum equal int one hundred
 break
 move next
 System dot Out call println
