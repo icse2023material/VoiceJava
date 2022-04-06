@@ -7,11 +7,12 @@ import cn.edu.lyun.kexin.text2pattern.pattern.PatternSet;
 
 import com.github.javaparser.ast.*;
 
-public class ReturnStmtAST4Test {
+// return [expression]?
+public class ReturnStmtASTTest {
 	public static void main(String[] args) {
-		String[] textList = { "return hello", "return variable hello" };
+		String[] textList = { "return", "return expression" };
 
-		AST ast = new ReturnStmtAST4();
+		AST ast = new ReturnStmtAST();
 
 		for (String text : textList) {
 			Pattern pattern = RegexSet.compile(new PatternSet()).matchPattern(text);
@@ -19,5 +20,4 @@ public class ReturnStmtAST4Test {
 			System.out.println(n.toString());
 		}
 	}
-
 }

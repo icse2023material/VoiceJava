@@ -9,12 +9,14 @@ import com.github.javaparser.ast.*;
 public class LetStmtASTTest {
 
 	public static void main(String[] args) {
-		String[] textList = { "let hello equal call world", "let hello dot world equal call world" };
+		// let _ [dot _]? equal [expression]?
+		String[] textList = { "let world equal expression", "let hello dot world equal expression" };
+
 		for (String text : textList) {
 			Pattern pattern = RegexSet.compile(new PatternSet()).matchPattern(text);
 			System.out.println(pattern.showInstance());
 
-			LetStmtAST stmt = new LetStmtAST();
+			AST stmt = new LetStmtAST();
 			Node node = stmt.generate(pattern);
 			System.out.println(node);
 		}

@@ -49,30 +49,10 @@ public class ASTManager {
 				return new NewInstanceAST().generate(pattern);
 			case "throw":
 				return new ThrowAST().generate(pattern);
-			case "let1":
+			case "let":
 				return new LetStmtAST().generate(pattern);
-			case "let2":
-				return new LetStmtAST2().generate(pattern);
-			case "let3":
-				return new LetStmtAST3().generate(pattern);
-			case "let4":
-				return new LetStmtAST4().generate(pattern);
-			case "let5":
-				return new LetStmtAST5().generate(pattern);
-			case "let6":
-				return new LetStmtAST6().generate(pattern);
-			case "return1":
-				return new ReturnStmtAST1().generate(pattern);
-			case "return2":
-				return new ReturnStmtAST2().generate(pattern);
-			case "return3":
-				return new ReturnStmtAST3().generate(pattern);
-			case "return4":
-				return new ReturnStmtAST4().generate(pattern);
-			case "return5":
-				return new ReturnStmtAST5().generate(pattern);
-			case "return6":
-				return new ReturnStmtAST6().generate(pattern);
+  		case "return":
+				return new ReturnStmtAST().generate(pattern);
 			case "expr1":
 				return new ExprAST().generate(pattern);
 			case "expr2":
