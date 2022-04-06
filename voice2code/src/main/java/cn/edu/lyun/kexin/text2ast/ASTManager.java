@@ -23,7 +23,7 @@ public class ASTManager {
 				return null;
 			case "field":
 				return new FieldAST().generate(pattern);
-			case "typeExtends":
+			case "type":
 				return new TypeExtendAST().generate(pattern);
 			case "typeVariable":
 				return new TypeVariableAST().generate(pattern);

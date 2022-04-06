@@ -21,16 +21,16 @@ import com.github.javaparser.ast.body.MethodDeclaration;
 import com.github.javaparser.ast.body.Parameter;
 import com.github.javaparser.ast.type.Type;
 import com.github.javaparser.ast.body.VariableDeclarator;
-import com.github.javaparser.ast.comments.LineComment;
 import com.github.javaparser.ast.expr.AssignExpr;
 import com.github.javaparser.ast.expr.BinaryExpr;
 import com.github.javaparser.ast.expr.BooleanLiteralExpr;
 import com.github.javaparser.ast.expr.EnclosedExpr;
 import com.github.javaparser.ast.expr.Expression;
+import com.github.javaparser.ast.expr.Name;
+import com.github.javaparser.ast.expr.NameExpr;
 import com.github.javaparser.ast.expr.ObjectCreationExpr;
 import com.github.javaparser.ast.expr.VariableDeclarationExpr;
 import com.github.javaparser.ast.stmt.BlockStmt;
-import com.github.javaparser.ast.stmt.EmptyStmt;
 import com.github.javaparser.ast.stmt.ExpressionStmt;
 import com.github.javaparser.ast.stmt.ForStmt;
 import com.github.javaparser.ast.stmt.IfStmt;
@@ -114,8 +114,8 @@ public class Text2CompilationUnit {
 				HoleNode exprHole = new HoleNode(HoleType.Undefined, true);
 				if (currentHole.getHoleTypeOfOptionsIfOnlyOne() != null) {
 					HoleType holeType = currentHole.getHoleTypeOfOptionsIfOnlyOne();
-					if (holeType.equals(HoleType.TypeVariables)) {
-						currentHole.set(HoleType.TypeVariables, false);
+					if (holeType.equals(HoleType.Parameters)) {
+						currentHole.set(HoleType.Parameters, false);
 						parentHole.addChild(exprHole);
 					} else if (holeType.equals(HoleType.ForInitialization)) {
 						currentHole.set(HoleType.ForInitialization, false);
@@ -241,7 +241,7 @@ public class Text2CompilationUnit {
 					currentHole.set(HoleType.BodyDeclarations, false);
 					exprHole = new HoleNode(HoleType.Wrapper, false, HoleType.MethodDeclaration);
 					currentHole.addChild(exprHole);
-					exprHole.addChild(new HoleNode(HoleType.TypeExtends));
+					exprHole.addChild(new HoleNode(HoleType.Type));
 				} else if (parentHoleType.equals(HoleType.BodyDeclarations)) {
 					NodeList<BodyDeclaration<?>> bodyDeclarations = (NodeList<BodyDeclaration<?>>) parent.get().get();
 					// Interface method, no body.
@@ -254,7 +254,7 @@ public class Text2CompilationUnit {
 					bodyDeclarations.add((BodyDeclaration<?>) node);
 
 					currentHole.set(HoleType.Wrapper, false, HoleType.BodyDeclaration);
-					currentHole.addChild(new HoleNode(HoleType.TypeExtends));
+					currentHole.addChild(new HoleNode(HoleType.Type));
 				}
 				break;
 			case "arrowFunction":
@@ -328,30 +328,35 @@ public class Text2CompilationUnit {
 					currentHole.addChild(new HoleNode());
 				}
 				break;
-			case "typeExtends":
+			case "type":
 				if (parentNodeClassStr != null && parentNodeClassStr.equals("MethodDeclaration")) {
 					MethodDeclaration mNode = (MethodDeclaration) parent.getLeft();
-					mNode.setType((Type) node);
-					currentHole.set(HoleType.TypeExtends, false);
-					// arguments
-					parentHole.addChild(new HoleNode(HoleType.TypeVariables));
-				}
-				break;
-			case "typeVariable":
-				if (parentNodeClassStr != null && parentNodeClassStr.equals("MethodDeclaration")) {
-					MethodDeclaration mNode = (MethodDeclaration) parent.getLeft();
-					NodeList<Parameter> nodeList = new NodeList<Parameter>();
-					nodeList.add((Parameter) node);
-					mNode.setParameters(nodeList);
-					currentHole.set(HoleType.TypeVariables, false);
-					currentHole.addChild(new HoleNode(HoleType.TypeVariable, false, HoleType.TypeVariable));
-					currentHole.addChild(new HoleNode(HoleType.TypeVariable));
-				} else if (parentHoleType.equals(HoleType.TypeVariables)) {
-					NodeList<Parameter> nodeList = (NodeList<Parameter>) parent.get().get();
-					nodeList.add((Parameter) node);
-					currentHole.set(HoleType.TypeVariable, false);
-					parentHole.addChild(new HoleNode(HoleType.TypeVariable));
-				}
+          if(parentHole.getChildListSize()==1){
+  					mNode.setType((Type) node);
+	  				currentHole.set(HoleType.Type, false);
+		  			// arguments
+			  		parentHole.addChild(new HoleNode(HoleType.Parameters));
+          } else {
+           	NodeList<Parameter> nodeList = new NodeList<Parameter>();
+             Parameter parameter = new Parameter();
+             parameter.setType((Type)(node));
+             nodeList.add(parameter);
+					   mNode.setParameters(nodeList);
+					   currentHole.set(HoleType.Parameters, false);
+             HoleNode parameterHole = new HoleNode(HoleType.Wrapper, false, HoleType.Parameter);
+					   currentHole.addChild(parameterHole);
+             parameterHole.addChild(new HoleNode(HoleType.Type, false));
+             parameterHole.addChild(new HoleNode());
+          }
+			  } else if (parentHoleType.equals(HoleType.Parameters)) {
+        		NodeList<Parameter> nodeList = (NodeList<Parameter>) parent.get().get();
+            Parameter parameter = new Parameter();
+            parameter.setType((Type)(node));
+        		nodeList.add(parameter);
+        		currentHole.set(HoleType.Wrapper, false, HoleType.Parameter);
+            currentHole.addChild(new HoleNode(HoleType.Type, false));
+            currentHole.addChild(new HoleNode());
+        }
 				break;
 			case "for":
 				HoleType holeTypeFor = HoleType.ForStmt;
@@ -901,217 +906,8 @@ public class Text2CompilationUnit {
 					this.generateSwitchEntryForTotalReturnStmt(parent, node, holeIndex, currentHole, holeTypeExpr);
 				}
 				break;
-			case "let1":
-				holeTypeExpr = HoleType.Let1Expr;
-				if (parentHoleType.equals(HoleType.Statements)) {
-					this.generateExprStmtForLet1AndLet2(parent, node, holeIndex, currentHole, parentHole, holeTypeExpr);
-				} else if (parentNodeClassStr != null && parentNodeClassStr.equals("WhileStmt")) {
-					WhileStmt whileStmt = (WhileStmt) parent.getLeft();
-					Statement body = whileStmt.getBody();
-					String bodyClassStr = StringHelper.getClassName(body.getClass().toString());
-					if (bodyClassStr.equals("ReturnStmt")) {
-						BlockStmt blockStmt = new BlockStmt();
-						NodeList<Statement> statements = new NodeList<Statement>();
-						ExpressionStmt expressionStmt = new ExpressionStmt((Expression) node);
-						statements.add(expressionStmt);
-						blockStmt.setStatements(statements);
-						whileStmt.setBody(blockStmt);
-
-						currentHole.set(HoleType.Body, false);
-						HoleNode stmtsHole = new HoleNode(HoleType.Statements, false);
-						currentHole.addChild(stmtsHole);
-						stmtsHole.addChild(this.constructHoleASTOfAssignStmtForLet1AndLet2(holeTypeExpr));
-					} else {
-						// TODO
-					}
-				} else if (parentNodeClassStr != null && parentNodeClassStr.equals("MethodDeclaration")) {
-					MethodDeclaration mNode = (MethodDeclaration) parent.getLeft();
-					Optional<BlockStmt> optionalBody = mNode.getBody();
-					currentHole.set(HoleType.Body, false);
-
-					HoleNode stmtsNode = new HoleNode(HoleType.Statements, false);
-					currentHole.addChild(stmtsNode);
-
-					BlockStmt blockStmt = optionalBody.get();
-					NodeList<Statement> statements = blockStmt.getStatements();
-					if (statements.size() == 0) {
-						ExpressionStmt expressionStmt = new ExpressionStmt((Expression) node);
-						statements.add(expressionStmt);
-						stmtsNode.addChild(this.constructHoleASTOfAssignStmtForLet1AndLet2(holeTypeExpr));
-					}
-				} else if (parentNodeClassStr != null && parentNodeClassStr.equals("ForStmt")) {
-					this.generateExprStmtInForStmtForLet1AndLet2(parent, currentHole, node, holeTypeExpr);
-				} else if (parentNodeClassStr != null && parentNodeClassStr.equals("IfStmt")) {
-					this.generateThenStmtInIfStmtForLet1AndLet2(parent, node, currentHole, holeTypeExpr);
-				} else if (parentNodeClassStr != null && parentNodeClassStr.equals("SwitchEntry")) {
-					this.generateSwitchEntryForLet1AndLet2(parent, node, holeIndex, currentHole, holeTypeExpr);
-				}
-				break;
-			case "let2":
-				holeTypeExpr = HoleType.Let2Expr;
-				if (parentHoleType.equals(HoleType.Statements)) {
-					this.generateExprStmtForLet1AndLet2(parent, node, holeIndex, currentHole, parentHole, holeTypeExpr);
-				} else if (parentNodeClassStr != null && parentNodeClassStr.equals("WhileStmt")) {
-					this.generateExprStmtInWhileStmtForLet1AndLet2(parent, node, holeIndex, currentHole, parentHole,
-							holeTypeExpr);
-				} else if (parentNodeClassStr != null && parentNodeClassStr.equals("BlockStmt")) {
-					BlockStmt blockStmt = (BlockStmt) parent.getLeft();
-					NodeList<Statement> statements = blockStmt.getStatements();
-					ExpressionStmt expressionStmt = new ExpressionStmt((Expression) node);
-					statements.add(expressionStmt);
-
-					exprHole = this.constructHoleASTOfAssignStmtForLet1AndLet2(holeTypeExpr).getIthChild(0);
-					currentHole.set(HoleType.Wrapper, false, HoleType.Statement);
-					currentHole.addChild(exprHole);
-				} else if (parentNodeClassStr != null && parentNodeClassStr.equals("MethodDeclaration")) {
-					MethodDeclaration mNode = (MethodDeclaration) parent.getLeft();
-					Optional<BlockStmt> optionalBody = mNode.getBody();
-					BlockStmt blockStmt = optionalBody.get();
-					NodeList<Statement> statements = blockStmt.getStatements();
-
-					currentHole.set(HoleType.Body, false);
-					HoleNode stmtsNode = new HoleNode(HoleType.Statements, false);
-					currentHole.addChild(stmtsNode);
-					if (statements.size() == 0) {
-						ExpressionStmt expressionStmt = new ExpressionStmt((Expression) node);
-						statements.add(expressionStmt);
-						stmtsNode.addChild(this.constructHoleASTOfAssignStmtForLet1AndLet2(holeTypeExpr));
-					} else {
-						// TODO
-					}
-				} else if (parentNodeClassStr != null && parentNodeClassStr.equals("ForStmt")) {
-					this.generateExprStmtInForStmtForLet1AndLet2(parent, currentHole, node, holeTypeExpr);
-				} else if (parentNodeClassStr != null && parentNodeClassStr.equals("IfStmt")) {
-					this.generateThenStmtInIfStmtForLet1AndLet2(parent, node, currentHole, holeTypeExpr);
-				} else if (parentNodeClassStr != null && parentNodeClassStr.equals("SwitchEntry")) {
-					this.generateSwitchEntryForLet1AndLet2(parent, node, holeIndex, currentHole, holeTypeExpr);
-				}
-				break;
-			case "let3":
-				holeTypeExpr = HoleType.Let3Expr;
-				if (parentHoleType.equals(HoleType.Statements)) {
-					this.generateExprForLetInStmts(parent, node, holeIndex, currentHole, parentHole, holeTypeExpr);
-				} else if (parentNodeClassStr != null && parentNodeClassStr.equals("BlockStmt")) {
-					this.generateBlockStmt(parent, node, currentHole, holeIndex, parentHole, holeTypeExpr);
-				} else if (parentNodeClassStr != null && parentNodeClassStr.equals("MethodDeclaration")) {
-					MethodDeclaration mNode = (MethodDeclaration) parent.getLeft();
-					Optional<BlockStmt> optionalBody = mNode.getBody();
-					currentHole.set(HoleType.Body, false);
-
-					HoleNode stmtsHole = new HoleNode(HoleType.Statements, false);
-					currentHole.addChild(stmtsHole);
-
-					BlockStmt blockStmt = optionalBody.get();
-					NodeList<Statement> statements = blockStmt.getStatements();
-					if (statements.size() == 0) {
-						ExpressionStmt expressionStmt = new ExpressionStmt((Expression) node);
-						statements.add(expressionStmt);
-
-						exprHole = new HoleNode(HoleType.Expression, false);
-						stmtsHole.addChild(exprHole);
-						exprHole.addChild(new HoleNode(holeTypeExpr, false));
-						stmtsHole.addChild(new HoleNode());
-					} else {
-						// TODO
-					}
-				} else if (parentNodeClassStr != null && parentNodeClassStr.equals("ForStmt")) {
-					this.generateExprStmtInForStmt(parent, currentHole, node, holeTypeExpr);
-				} else if (parentNodeClassStr != null && parentNodeClassStr.equals("IfStmt")) {
-					this.generateThenStmtInIfStmt(parent, node, currentHole, holeTypeExpr);
-				} else if (parentNodeClassStr != null && parentNodeClassStr.equals("SwitchEntry")) {
-					this.generateSwitchEntry(parent, node, holeIndex, currentHole, holeTypeExpr);
-				} else if (parentNodeClassStr != null && parentNodeClassStr.equals("WhileStmt")) {
-					this.generateExprStmtInWhileStmt(parent, currentHole, node, holeTypeExpr);
-				}
-				break;
-			case "let4":
-				holeTypeExpr = HoleType.Let4Expr;
-				if (parentHoleType.equals(HoleType.Statements)) {
-					this.generateExprForLetInStmts(parent, node, holeIndex, currentHole, parentHole, holeTypeExpr);
-				} else if (parentNodeClassStr != null && parentNodeClassStr.equals("BlockStmt")) {
-					this.generateBlockStmt(parent, node, currentHole, holeIndex, parentHole, holeTypeExpr);
-				} else if (parentNodeClassStr != null && parentNodeClassStr.equals("MethodDeclaration")) {
-					MethodDeclaration mNode = (MethodDeclaration) parent.getLeft();
-					Optional<BlockStmt> optionalBody = mNode.getBody();
-					BlockStmt blockStmt = optionalBody.get();
-					NodeList<Statement> statements = blockStmt.getStatements();
-					currentHole.set(HoleType.Body, false);
-					HoleNode stmtsHole = new HoleNode(HoleType.Statements, false);
-					currentHole.addChild(stmtsHole);
-					if (statements.size() == 0) {
-						ExpressionStmt expressionStmt = new ExpressionStmt((Expression) node);
-						statements.add(expressionStmt);
-						HoleNode stmtHole = new HoleNode(HoleType.Wrapper, false, HoleType.Statement);
-						stmtsHole.addChild(stmtHole);
-						exprHole = new HoleNode(HoleType.Expression, false);
-						stmtHole.addChild(exprHole);
-						exprHole.addChild(new HoleNode(holeTypeExpr, false));
-						stmtsHole.addChild(new HoleNode());
-					} else {
-						// TODO
-					}
-
-				} else if (parentNodeClassStr != null && parentNodeClassStr.equals("ForStmt")) {
-					this.generateExprStmtInForStmt(parent, currentHole, node, holeTypeExpr);
-				} else if (parentNodeClassStr != null && parentNodeClassStr.equals("IfStmt")) {
-					this.generateThenStmtInIfStmt(parent, node, currentHole, holeTypeExpr);
-				} else if (parentNodeClassStr != null && parentNodeClassStr.equals("SwitchEntry")) {
-					this.generateSwitchEntry(parent, node, holeIndex, currentHole, holeTypeExpr);
-				} else if (parentNodeClassStr != null && parentNodeClassStr.equals("WhileStmt")) {
-					this.generateExprStmtInWhileStmt(parent, currentHole, node, holeTypeExpr);
-				}
-				break;
-			case "let5":
-				holeTypeExpr = HoleType.Let5Expr;
-				if (parentHoleType.equals(HoleType.Statements)) {
-					this.generateExprForLetInStmts(parent, node, holeIndex, currentHole, parentHole, holeTypeExpr);
-				} else if (parentNodeClassStr != null && parentNodeClassStr.equals("BlockStmt")) {
-					this.generateBlockStmt(parent, node, currentHole, holeIndex, parentHole, holeTypeExpr);
-				} else if (parentNodeClassStr != null && parentNodeClassStr.equals("MethodDeclaration")) {
-					MethodDeclaration mNode = (MethodDeclaration) parent.getLeft();
-					Optional<BlockStmt> optionalBody = mNode.getBody();
-					BlockStmt blockStmt = optionalBody.get();
-					NodeList<Statement> statements = blockStmt.getStatements();
-
-					currentHole.set(HoleType.Body, false);
-					HoleNode stmtsHole = new HoleNode(HoleType.Statements, false);
-					currentHole.addChild(stmtsHole);
-					if (statements.size() == 0) {
-						ExpressionStmt expressionStmt = new ExpressionStmt((Expression) node);
-						statements.add(expressionStmt);
-
-						HoleNode stmtHole = new HoleNode(HoleType.Wrapper, false, HoleType.Statement);
-						stmtsHole.addChild(stmtHole);
-						exprHole = new HoleNode(HoleType.Expression, false);
-						stmtHole.addChild(exprHole);
-						exprHole.addChild(new HoleNode(holeTypeExpr, false));
-						stmtsHole.addChild(new HoleNode());
-					} else {
-						// TODO
-					}
-
-				} else if (parentNodeClassStr != null && parentNodeClassStr.equals("ForStmt")) {
-					if (holeIndex == 0) {
-						ForStmt forStmt = (ForStmt) parent.getLeft();
-						NodeList<Expression> initializationList = new NodeList<Expression>();
-						initializationList.add((Expression) node);
-						forStmt.setInitialization(initializationList);
-
-						currentHole.set(HoleType.ForInitialization, false);
-						parentHole.addChild(new HoleNode());
-					} else {
-						this.generateExprStmtInForStmt(parent, currentHole, node, holeTypeExpr);
-					}
-				} else if (parentNodeClassStr != null && parentNodeClassStr.equals("IfStmt")) {
-					this.generateThenStmtInIfStmt(parent, node, currentHole, holeTypeExpr);
-				} else if (parentNodeClassStr != null && parentNodeClassStr.equals("SwitchEntry")) {
-					this.generateSwitchEntry(parent, node, holeIndex, currentHole, holeTypeExpr);
-				} else if (parentNodeClassStr != null && parentNodeClassStr.equals("WhileStmt")) {
-					this.generateExprStmtInWhileStmt(parent, currentHole, node, holeTypeExpr);
-				}
-				break;
-			case "let6":
-				holeTypeExpr = HoleType.Let6Expr;
+			case "let":
+				holeTypeExpr = HoleType.LetExpr;
 				if (parentHoleType.equals(HoleType.Statements)) {
 					NodeList<Statement> statements = (NodeList<Statement>) parent.get().get();
 					ExpressionStmt expressionStmt = new ExpressionStmt((Expression) node);
@@ -1221,103 +1017,13 @@ public class Text2CompilationUnit {
 					}
 				}
 				break;
-			case "return1":
-				holeTypeExpr = HoleType.Return1;
-				if (parentHoleType.equals(HoleType.Statements)) {
-					this.generateReturnStmtInStmtsForReturn1AndReturn2(parent, node, currentHole, parentHole, holeTypeExpr);
-				} else if (parentNodeClassStr != null && parentNodeClassStr.equals("MethodDeclaration")) {
-					this.generateReturnStmtInMethodDeclarationForReturn1AndReturn2(parent, node, currentHole, parentHole,
-							holeTypeExpr);
-				} else if (parentNodeClassStr != null && parentNodeClassStr.equals("ForStmt")) {
-					this.generateReturnStmtInForStmtForReturn1AndReturn2(parent, node, currentHole, parentOfParentHole,
-							holeTypeExpr);
-				} else if (parentNodeClassStr != null && parentNodeClassStr.equals("WhileStmt")) {
-					this.generateReturnStmtInWhiletmtForReturn1AndReturn2(parent, node, currentHole, parentHole, holeTypeExpr);
-				} else if (parentNodeClassStr != null && parentNodeClassStr.equals("IfStmt")) {
-					this.generateTotalStmtInIfThenStmtForReturn1AndReturn2(parent, node, currentHole, parentHole, holeTypeExpr);
-				} else if (parentNodeClassStr != null && parentNodeClassStr.equals("SwitchEntry")) {
-					this.generateSwitchEntryForReturn11AndReturn2(parent, node, holeIndex, currentHole, holeTypeExpr);
-				}
-				break;
-			case "return2":
-				holeTypeExpr = HoleType.Return2;
-				if (parentHoleType.equals(HoleType.Statements)) {
-					this.generateReturnStmtInStmtsForReturn1AndReturn2(parent, node, currentHole, parentHole, holeTypeExpr);
-				} else if (parentNodeClassStr != null && parentNodeClassStr.equals("MethodDeclaration")) {
-					this.generateReturnStmtInMethodDeclarationForReturn1AndReturn2(parent, node, currentHole, parentHole,
-							holeTypeExpr);
-				} else if (parentNodeClassStr != null && parentNodeClassStr.equals("ForStmt")) {
-					this.generateReturnStmtInForStmtForReturn1AndReturn2(parent, node, currentHole, parentOfParentHole,
-							holeTypeExpr);
-				} else if (parentNodeClassStr != null && parentNodeClassStr.equals("WhileStmt")) {
-					this.generateReturnStmtInWhiletmtForReturn1AndReturn2(parent, node, currentHole, parentHole, holeTypeExpr);
-				} else if (parentNodeClassStr != null && parentNodeClassStr.equals("IfStmt")) {
-					this.generateTotalStmtInIfThenStmtForReturn1AndReturn2(parent, node, currentHole, parentHole, holeTypeExpr);
-				} else if (parentNodeClassStr != null && parentNodeClassStr.equals("SwitchEntry")) {
-					this.generateSwitchEntryForReturn11AndReturn2(parent, node, holeIndex, currentHole, holeTypeExpr);
-				}
-				break;
-			case "return3":
-				holeTypeExpr = HoleType.Return3;
-				if (parentHoleType.equals(HoleType.Statements)) {
-					this.generateReturnStmtInStmts(parent, node, holeIndex, currentHole, parentHole, holeTypeExpr);
-				} else if (parentNodeClassStr != null && parentNodeClassStr.equals("MethodDeclaration")) {
-					this.generateReturnStmtInMethodDeclaration(parent, node, currentHole, parentHole, holeTypeExpr);
-				} else if (parentNodeClassStr != null && parentNodeClassStr.equals("BlockStmt")) {
-					BlockStmt blockStmt = (BlockStmt) parentAndIndex.getFirst();
-					NodeList<Statement> statements = blockStmt.getStatements();
-					statements.add((Statement) node);
-					currentHole.set(HoleType.Statement, false);
-					parentHole.addChild(new HoleNode());
-				} else if (parentNodeClassStr != null && parentNodeClassStr.equals("ForStmt")) {
-					this.generateReturnStmtInForStmt(parent, node, currentHole, parentOfParentHole, holeTypeExpr);
-				} else if (parentNodeClassStr != null && parentNodeClassStr.equals("WhileStmt")) {
-					this.generateReturnStmtInWhiletmt(parent, node, currentHole, parentHole, holeTypeExpr);
-				} else if (parentNodeClassStr != null && parentNodeClassStr.equals("IfStmt")) {
-					this.generateTotalStmtInIfThenStmt(parent, node, currentHole, parentHole, holeTypeExpr);
-				} else if (parentNodeClassStr != null && parentNodeClassStr.equals("SwitchEntry")) {
-					this.generateSwitchEntryForTotalReturnStmt(parent, node, holeIndex, currentHole, holeTypeExpr);
-				}
-				break;
-			case "return4":
-				holeTypeExpr = HoleType.Return4;
-				if (parentHoleType.equals(HoleType.Statements)) {
-					this.generateReturnStmtInStmts(parent, node, holeIndex, currentHole, parentHole, holeTypeExpr);
-				} else if (parentNodeClassStr != null && parentNodeClassStr.equals("MethodDeclaration")) {
-					this.generateReturnStmtInMethodDeclaration(parent, node, currentHole, parentHole, holeTypeExpr);
-				} else if (parentNodeClassStr != null && parentNodeClassStr.equals("ForStmt")) {
-					this.generateReturnStmtInForStmt(parent, node, currentHole, parentOfParentHole, holeTypeExpr);
-				} else if (parentNodeClassStr != null && parentNodeClassStr.equals("WhileStmt")) {
-					this.generateReturnStmtInWhiletmt(parent, node, currentHole, parentHole, holeTypeExpr);
-				} else if (parentNodeClassStr != null && parentNodeClassStr.equals("IfStmt")) {
-					this.generateTotalStmtInIfThenStmt(parent, node, currentHole, parentHole, holeTypeExpr);
-				} else if (parentNodeClassStr != null && parentNodeClassStr.equals("SwitchEntry")) {
-					this.generateSwitchEntryForTotalReturnStmt(parent, node, holeIndex, currentHole, holeTypeExpr);
-				}
-				break;
-			case "return5":
-				holeTypeExpr = HoleType.Return5;
-				if (parentHoleType.equals(HoleType.Statements)) {
-					this.generateReturnStmtInStmts(parent, node, holeIndex, currentHole, parentHole, holeTypeExpr);
-				} else if (parentNodeClassStr != null && parentNodeClassStr.equals("MethodDeclaration")) {
-					this.generateReturnStmtInMethodDeclaration(parent, node, currentHole, parentHole, holeTypeExpr);
-				} else if (parentNodeClassStr != null && parentNodeClassStr.equals("ForStmt")) {
-					this.generateReturnStmtInForStmt(parent, node, currentHole, parentOfParentHole, holeTypeExpr);
-				} else if (parentNodeClassStr != null && parentNodeClassStr.equals("WhileStmt")) {
-					this.generateReturnStmtInWhiletmt(parent, node, currentHole, parentHole, holeTypeExpr);
-				} else if (parentNodeClassStr != null && parentNodeClassStr.equals("IfStmt")) {
-					this.generateTotalStmtInIfThenStmt(parent, node, currentHole, parentHole, holeTypeExpr);
-				} else if (parentNodeClassStr != null && parentNodeClassStr.equals("SwitchEntry")) {
-					this.generateSwitchEntryForTotalReturnStmt(parent, node, holeIndex, currentHole, holeTypeExpr);
-				}
-				break;
-			case "return6":
-				holeTypeExpr = HoleType.Return6;
+			case "return":
+				holeTypeExpr = HoleType.Return;
 				if (parentHoleType.equals(HoleType.Statements)) {
 					NodeList<Statement> statements = (NodeList<Statement>) parent.get().get();
 					statements.add((Statement) node);
 					currentHole.set(HoleType.Wrapper, false);
-					currentHole.setHoleTypeOptions(new HoleType[] { HoleType.Return6 });
+					currentHole.setHoleTypeOptions(new HoleType[] { holeTypeExpr });
 					HoleNode holeNodeChild = new HoleNode();
 					holeNodeChild.setHoleTypeOptions(new HoleType[] { HoleType.Expression });
 					currentHole.addChild(holeNodeChild);
@@ -1334,7 +1040,7 @@ public class Text2CompilationUnit {
 					if (statements.size() == 0) {
 						statements.add((Statement) node);
 
-						exprHole = new HoleNode(HoleType.Wrapper, false, HoleType.Return6);
+						exprHole = new HoleNode(HoleType.Wrapper, false, holeTypeExpr);
 						stmtsHole.addChild(exprHole);
 						exprHole.addChild(new HoleNode(HoleType.Expression));
 					} else {
@@ -1491,7 +1197,13 @@ public class Text2CompilationUnit {
 					this.generateExprForEnclosedExpr(parent, node, currentHole, parentOfParentHole, holeTypeExpr);
 				} else if (parentNodeClassStr != null && parentNodeClassStr.equals("FieldDeclaration")) {
 					this.generateExprForFieldDeclaration(parent, node, currentHole, parentOfParentHole, holeTypeExpr);
-				}
+				} else if (parentNodeClassStr != null && parentNodeClassStr.equals("Parameter")){
+          Parameter parameter = (Parameter)(parent.getLeft());
+          NameExpr nameExpr = (NameExpr)node;
+          parameter.setName(nameExpr.getName());
+          currentHole.set(HoleType.Name, false);
+          parentOfParentHole.addChild(new HoleNode());
+        }
 				break;
 			case "expr5":
 				holeTypeExpr = HoleType.Expr5;
@@ -2586,14 +2298,6 @@ public class Text2CompilationUnit {
 		forStmt.setBody(body);
 	}
 
-	private void generateExprStmtInForStmtForLet1AndLet2(Either<Node, Either<List<?>, NodeList<?>>> parent,
-			HoleNode currentHole, Node node, HoleType exprHoleType) {
-		ForStmt forStmt = (ForStmt) parent.getLeft();
-		Statement body = this.generateExprStmtBodyForStmtsForLet1AndLet2(forStmt.getBody(), currentHole, node,
-				exprHoleType);
-		forStmt.setBody(body);
-	}
-
 	private void generateExprStmtInForStmtForPlusPLus(Either<Node, Either<List<?>, NodeList<?>>> parent,
 			HoleNode currentHole, Node node, HoleType exprHoleType, int holeIndex, HoleNode parentHole) {
 		if (holeIndex == 2) {
@@ -2713,30 +2417,6 @@ public class Text2CompilationUnit {
 		}
 	}
 
-	private void generateThenStmtInIfStmtForLet1AndLet2(Either<Node, Either<List<?>, NodeList<?>>> parent, Node node,
-			HoleNode currentHole, HoleType holeTypeExpr) {
-		IfStmt ifStmt = (IfStmt) parent.getLeft();
-		Statement thenStmt = ifStmt.getThenStmt();
-		String thenStmtStr = StringHelper.getClassName(thenStmt.getClass().toString());
-		if (thenStmtStr.equals("ReturnStmt")) {
-			BlockStmt blockStmt = new BlockStmt();
-			NodeList<Statement> statements = new NodeList<Statement>();
-			ExpressionStmt expressionStmt = new ExpressionStmt((Expression) node);
-			statements.add(expressionStmt);
-			blockStmt.setStatements(statements);
-			ifStmt.setThenStmt(blockStmt);
-
-			// [condition,then, else, else]
-			currentHole.set(HoleType.ThenStatement, false);
-			HoleNode stmtsHole = new HoleNode(HoleType.Statements, false);
-			currentHole.addChild(stmtsHole);
-			stmtsHole.addChild(this.constructHoleASTOfAssignStmtForLet1AndLet2(holeTypeExpr));
-		} else if (thenStmtStr.equals("BlockStmt")) {
-			// Jump out of current if statement.
-
-		}
-	}
-
 	private void generateBlockStmt(Either<Node, Either<List<?>, NodeList<?>>> parent, Node node, HoleNode currentHole,
 			int holeIndex, HoleNode parentHole, HoleType holeTypeExpr) {
 		BlockStmt blockStmt = (BlockStmt) parent.getLeft();
@@ -2808,21 +2488,6 @@ public class Text2CompilationUnit {
 		}
 	}
 
-	private void generateSwitchEntryForLet1AndLet2(Either<Node, Either<List<?>, NodeList<?>>> parent, Node node,
-			int holeIndex, HoleNode currentHole, HoleType holeTypeExpr) {
-		SwitchEntry switchEntry = (SwitchEntry) parent.getLeft();
-		NodeList<Statement> statements = switchEntry.getStatements();
-		if (holeIndex < statements.size()) {
-			// TODO
-		} else {
-			ExpressionStmt expressionStmt = new ExpressionStmt((Expression) node);
-			statements.add((Statement) expressionStmt);
-
-			currentHole.set(HoleType.Statements, false);
-			currentHole.addChild(this.constructHoleASTOfAssignStmtForLet1AndLet2(holeTypeExpr));
-		}
-	}
-
 	private void generateSwitchEntryForExpr10AndExpr11AndLet6(Either<Node, Either<List<?>, NodeList<?>>> parent,
 			Node node, int holeIndex, HoleNode currentHole, HoleType holeTypeExpr) {
 		SwitchEntry switchEntry = (SwitchEntry) parent.getLeft();
@@ -2863,28 +2528,6 @@ public class Text2CompilationUnit {
 		}
 	}
 
-	private void generateSwitchEntryForReturn11AndReturn2(Either<Node, Either<List<?>, NodeList<?>>> parent, Node node,
-			int holeIndex, HoleNode currentHole, HoleType holeTypeExpr) {
-		SwitchEntry switchEntry = (SwitchEntry) parent.getLeft();
-		NodeList<Statement> statements = switchEntry.getStatements();
-		if (holeIndex < statements.size()) {
-			// TODO
-		} else {
-			statements.add((Statement) node);
-			currentHole.set(HoleType.Statements, false);
-
-			HoleNode holeNode = new HoleNode(HoleType.Expression, false);
-			currentHole.addChild(holeNode);
-
-			HoleNode childHoleNode = new HoleNode(HoleType.Wrapper, false);
-			childHoleNode.setHoleTypeOptionsOfOnlyOne(holeTypeExpr);
-			holeNode.addChild(childHoleNode);
-
-			HoleNode argsNode = new HoleNode(HoleType.Arguments, false);
-			childHoleNode.addChild(argsNode);
-			argsNode.addChild(new HoleNode());
-		}
-	}
 
 	private void generateExpForExpressionStmt(Either<Node, Either<List<?>, NodeList<?>>> parent, Node node, int holeIndex,
 			HoleNode currentHole, HoleNode parentOfParentHole, HoleType holeTypeExpr) {
@@ -2912,102 +2555,6 @@ public class Text2CompilationUnit {
 		}
 	}
 
-	private void generateReturnStmtInForStmt(Either<Node, Either<List<?>, NodeList<?>>> parent, Node node,
-			HoleNode currentHole, HoleNode parentHole, HoleType holeType) {
-		ForStmt forStmt = (ForStmt) parent.getLeft();
-		Statement body = this.generateTotalStmt(forStmt.getBody(), node, currentHole, parentHole, holeType);
-		forStmt.setBody(body);
-	}
-
-	private void generateReturnStmtInStmts(Either<Node, Either<List<?>, NodeList<?>>> parent, Node node, int holeIndex,
-			HoleNode currentHole, HoleNode parentHole, HoleType holeType) {
-		NodeList<Statement> statements = (NodeList<Statement>) parent.get().get();
-		if (holeIndex < statements.size()) {
-			// TODO
-		} else {
-			statements.add((Statement) node);
-			currentHole.set(HoleType.Return3, false);
-			parentHole.addChild(new HoleNode());
-		}
-	}
-
-	private void generateReturnStmtInMethodDeclaration(Either<Node, Either<List<?>, NodeList<?>>> parent, Node node,
-			HoleNode currentHole, HoleNode parentHole, HoleType holeType) {
-		MethodDeclaration mNode = (MethodDeclaration) parent.getLeft();
-		Optional<BlockStmt> optionalBody = mNode.getBody();
-		BlockStmt blockStmt = optionalBody.get();
-		NodeList<Statement> statements = blockStmt.getStatements();
-
-		currentHole.set(HoleType.Body, false);
-		HoleNode stmtsHole = new HoleNode(HoleType.Statements, false);
-		currentHole.addChild(stmtsHole);
-
-		if (statements.size() == 0) {
-			statements.add((Statement) node);
-
-			HoleNode exprHole = new HoleNode(holeType, false);
-			stmtsHole.addChild(exprHole);
-			currentHole.addChild(new HoleNode());
-		} else {
-			// TODO
-		}
-	}
-
-	private void generateReturnStmtInMethodDeclarationForReturn1AndReturn2(
-			Either<Node, Either<List<?>, NodeList<?>>> parent,
-			Node node, HoleNode currentHole, HoleNode parentHole, HoleType holeTypeExpr) {
-		MethodDeclaration mNode = (MethodDeclaration) parent.getLeft();
-		Optional<BlockStmt> optionalBody = mNode.getBody();
-		currentHole.set(HoleType.Body, false);
-
-		HoleNode anotherCurrentHole = new HoleNode();
-		currentHole.addChild(anotherCurrentHole);
-
-		BlockStmt blockStmt = optionalBody.get();
-		NodeList<Statement> statements = blockStmt.getStatements();
-		if (statements.size() == 0) {
-			statements.add((Statement) node);
-
-			anotherCurrentHole.set(HoleType.Statements, false);
-			anotherCurrentHole.addChild(this.constructHoleASTOfReturnStmtForReturn1AndReturn2(holeTypeExpr));
-		} else {
-			// TODO
-		}
-	}
-
-	private void generateReturnStmtInStmtsForReturn1AndReturn2(Either<Node, Either<List<?>, NodeList<?>>> parent,
-			Node node, HoleNode currentHole, HoleNode parentHole, HoleType holeTypeExpr) {
-		NodeList<Statement> statements = (NodeList<Statement>) parent.get().get();
-		statements.add((Statement) node);
-
-		HoleNode exprHole = this.constructHoleASTOfReturnStmtForReturn1AndReturn2(holeTypeExpr).getIthChild(0);
-		currentHole.set(HoleType.Wrapper, false, holeTypeExpr);
-		currentHole.addChild(exprHole);
-	}
-
-	private void generateReturnStmtInForStmtForReturn1AndReturn2(Either<Node, Either<List<?>, NodeList<?>>> parent,
-			Node node, HoleNode currentHole, HoleNode parentHole, HoleType holeType) {
-		ForStmt forStmt = (ForStmt) parent.getLeft();
-		Statement body = this.generateTotalStmtForReturn1AndReturn2(forStmt.getBody(), node, currentHole, parentHole,
-				holeType);
-		forStmt.setBody(body);
-	}
-
-	private void generateReturnStmtInWhiletmt(Either<Node, Either<List<?>, NodeList<?>>> parent, Node node,
-			HoleNode currentHole, HoleNode parentHole, HoleType holeType) {
-		WhileStmt stmt = (WhileStmt) parent.getLeft();
-		Statement body = this.generateTotalStmt(stmt.getBody(), node, currentHole, parentHole, holeType);
-		stmt.setBody(body);
-	}
-
-	private void generateReturnStmtInWhiletmtForReturn1AndReturn2(Either<Node, Either<List<?>, NodeList<?>>> parent,
-			Node node, HoleNode currentHole, HoleNode parentHole, HoleType holeType) {
-		WhileStmt stmt = (WhileStmt) parent.getLeft();
-		Statement body = this.generateTotalStmtForReturn1AndReturn2(stmt.getBody(), node, currentHole, parentHole,
-				holeType);
-		stmt.setBody(body);
-	}
-
 	private Statement generateTotalStmt(Statement body, Node node, HoleNode currentHole, HoleNode parentHole,
 			HoleType holeType) {
 		String bodyClassStr = body.getClass().toString();
@@ -3033,28 +2580,7 @@ public class Text2CompilationUnit {
 		return body;
 	}
 
-	private Statement generateTotalStmtForReturn1AndReturn2(Statement body, Node node, HoleNode currentHole,
-			HoleNode parentHole, HoleType holeType) {
-		String bodyClassStr = body.getClass().toString();
-		bodyClassStr = StringHelper.getClassName(bodyClassStr);
-		if (bodyClassStr.equals("ReturnStmt")) {
-			BlockStmt blockStmt = new BlockStmt();
-			NodeList<Statement> statements = new NodeList<Statement>();
-			statements.add((Statement) node);
-			blockStmt.setStatements(statements);
-
-			currentHole.set(HoleType.Body, false);
-			HoleNode stmtsHole = new HoleNode(HoleType.Statements, false);
-			currentHole.addChild(stmtsHole);
-			stmtsHole.addChild(this.constructHoleASTOfReturnStmtForReturn1AndReturn2(holeType));
-			return blockStmt;
-		} else if (bodyClassStr.equals("BlockStmt")) {
-
-		} else {
-			System.out.println("Should not go to this branch");
-		}
-		return body;
-	}
+	
 
 	private Statement generateReturnStmt6(Statement body, Node node, HoleNode currentHole, HoleNode parentHole,
 			HoleType holeType) {
@@ -3101,25 +2627,6 @@ public class Text2CompilationUnit {
 		}
 	}
 
-	private void generateTotalStmtInIfThenStmtForReturn1AndReturn2(Either<Node, Either<List<?>, NodeList<?>>> parent,
-			Node node, HoleNode currentHole, HoleNode parentHole, HoleType holeType) {
-		IfStmt ifStmt = (IfStmt) parent.getLeft();
-		Statement thenStmt = ifStmt.getThenStmt();
-		String thenStmtStr = StringHelper.getClassName(thenStmt.getClass().toString());
-		if (thenStmtStr.equals("ReturnStmt")) {
-			BlockStmt blockStmt = new BlockStmt();
-			NodeList<Statement> statements = new NodeList<Statement>();
-			statements.add((Statement) node);
-			blockStmt.setStatements(statements);
-			ifStmt.setThenStmt(blockStmt);
-
-			currentHole.set(HoleType.ThenStatement, false);
-			HoleNode stmtsNode = new HoleNode(HoleType.Statements, false);
-			currentHole.addChild(stmtsNode);
-			stmtsNode.addChild(this.constructHoleASTOfReturnStmtForReturn1AndReturn2(holeType));
-		} else if (thenStmtStr.equals("BlockStmt")) {
-		}
-	}
 
 	private void generateReturn6(Either<Node, Either<List<?>, NodeList<?>>> parent, Node node, HoleNode currentHole,
 			HoleNode parentHole, HoleNode parentOfParentHole, HoleType holeType) {
@@ -3633,58 +3140,6 @@ public class Text2CompilationUnit {
 		}
 	}
 
-	private void generateExprForLetInStmts(Either<Node, Either<List<?>, NodeList<?>>> parent, Node node, int holeIndex,
-			HoleNode currentHole, HoleNode parentHole, HoleType holeTypeExpr) {
-		NodeList<Statement> statements = (NodeList<Statement>) parent.get().get();
-		if (holeIndex < statements.size()) {
-			// TODO
-		} else {
-			ExpressionStmt expressionStmt = new ExpressionStmt((Expression) node);
-			statements.add(expressionStmt);
-			currentHole.set(HoleType.Wrapper, false, HoleType.Statement);
-			HoleNode exprStmtHole = new HoleNode(HoleType.Expression, false);
-			currentHole.addChild(exprStmtHole);
-			exprStmtHole.addChild(new HoleNode(holeTypeExpr, false));
-			parentHole.addChild(new HoleNode());
-		}
-	}
-
-	private void generateExprStmtForLet1AndLet2(Either<Node, Either<List<?>, NodeList<?>>> parent, Node node,
-			int holeIndex, HoleNode currentHole, HoleNode parentHole, HoleType holeTypeExpr) {
-		NodeList<Statement> statements = (NodeList<Statement>) parent.get().get();
-		if (holeIndex < statements.size()) {
-			// TODO
-		} else {
-			ExpressionStmt expressionStmt = new ExpressionStmt((Expression) node);
-			statements.add(expressionStmt);
-			HoleNode exprHole = this.constructHoleASTOfAssignStmtForLet1AndLet2(holeTypeExpr).getIthChild(0);
-			currentHole.set(HoleType.Wrapper, false, HoleType.Statement);
-			currentHole.addChild(exprHole);
-		}
-	}
-
-	private void generateExprStmtInWhileStmtForLet1AndLet2(Either<Node, Either<List<?>, NodeList<?>>> parent, Node node,
-			int holeIndex, HoleNode currentHole, HoleNode parentHole, HoleType holeTypeExpr) {
-		WhileStmt whileStmt = (WhileStmt) parent.getLeft();
-		Statement body = whileStmt.getBody();
-		String bodyClassStr = StringHelper.getClassName(body.getClass().toString());
-		if (bodyClassStr.equals("ReturnStmt")) {
-			BlockStmt blockStmt = new BlockStmt();
-			NodeList<Statement> statements = new NodeList<Statement>();
-			ExpressionStmt expressionStmt = new ExpressionStmt((Expression) node);
-			statements.add(expressionStmt);
-			blockStmt.setStatements(statements);
-			whileStmt.setBody(blockStmt);
-
-			currentHole.set(HoleType.Body, false);
-			HoleNode stmtsHole = new HoleNode(HoleType.Statements, false);
-			currentHole.addChild(stmtsHole);
-			stmtsHole.addChild(this.constructHoleASTOfAssignStmtForLet1AndLet2(holeTypeExpr));
-		} else {
-			// TODO
-		}
-	}
-
 	private HoleNode constructHoleASTOfAssignStmtForLet1AndLet2(HoleType holeTypeExpr) {
 		HoleNode stmtNode = new HoleNode(HoleType.Wrapper, false, HoleType.Statement);
 
@@ -3703,22 +3158,6 @@ public class Text2CompilationUnit {
 
 		HoleNode methodCallHole = new HoleNode(HoleType.Wrapper, false, HoleType.MethodCallExpr);
 		assignValueHole.addChild(methodCallHole);
-
-		HoleNode argsHole = new HoleNode(HoleType.Arguments, false);
-		methodCallHole.addChild(argsHole);
-		argsHole.addChild(new HoleNode());
-
-		return stmtNode;
-	}
-
-	private HoleNode constructHoleASTOfReturnStmtForReturn1AndReturn2(HoleType holeTypeExpr) {
-		HoleNode stmtNode = new HoleNode(HoleType.Wrapper, false, holeTypeExpr);
-
-		HoleNode exprNode = new HoleNode(HoleType.Expression, false);
-		stmtNode.addChild(exprNode);
-
-		HoleNode methodCallHole = new HoleNode(HoleType.Wrapper, false, HoleType.MethodCallExpr);
-		exprNode.addChild(methodCallHole);
 
 		HoleNode argsHole = new HoleNode(HoleType.Arguments, false);
 		methodCallHole.addChild(argsHole);

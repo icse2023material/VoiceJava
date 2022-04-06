@@ -1,7 +1,6 @@
 public class HelloWorld {
 
-    public void sayHello(Name[] names) {
-        if (counter < 10)
-            return;
+    public void sayHello(String card, Node.ID<String> id, Node.Name name) {
+        name = "empty";
     }
 }

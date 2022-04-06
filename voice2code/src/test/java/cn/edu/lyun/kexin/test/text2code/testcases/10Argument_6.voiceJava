@@ -2,6 +2,10 @@ define public class hello world
 define public function say hello
 type void
 type String
-variable name
+variable card
 type Node dot ID with String
 variable id
+type Node dot Name
+variable name
+move next
+let name equal expression

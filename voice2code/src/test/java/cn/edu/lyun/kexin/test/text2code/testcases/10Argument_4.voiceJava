@@ -1,4 +1,5 @@
 define public class hello world
 define public function say hello
 type void
-type Node dot ID with String variable id
+type Node dot ID with String
+variable id
