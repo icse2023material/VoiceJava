@@ -94,20 +94,8 @@ public class PatternSet {
 						new Unit("variable"), Name });
 		patSet.add(fieldPat);
 
-		// 定义参数
-		Pattern typePat2 = new Pattern("typeVariable",
-				"type (list of [_]+ | [_]+ [dot [_]+]? [with [_]+ [and [_]+]*]?) variable [_]+",
-				new Unit[] { new Unit("type"),
-						new Unit("or",
-								new Unit("normal", new Unit("list"), new Unit("normal", new Unit("of"), (Name))),
-								new Unit(new Unit[] { Name, new Unit("question", new Unit("dot"), Name),
-										new Unit("question", new Unit("with"),
-												new Unit("normal", Name, new Unit("asterisk", new Unit("and"), Name))) })),
-						new Unit("variable"), Name });
-		patSet.add(typePat2);
-
 		// 定义类型
-		Pattern typePat = new Pattern("typeExtends",
+		Pattern typePat = new Pattern("type",
 				"type (list of [_]+  | [_]+ [dot [_]+]? [with [_]+ [and [_]+]*]?) [extends [_]+]?",
 				new Unit[] { new Unit("type"),
 						new Unit("or", new Unit("normal", new Unit("list"), new Unit("normal", new Unit("of"), (Name))),
@@ -136,111 +124,32 @@ public class PatternSet {
 		Pattern moveNextPat = new Pattern("moveNext", "move next", new Unit[] { new Unit("move"), new Unit("next") });
 		patSet.add(moveNextPat);
 
-		Pattern jumpOutPat = new Pattern("jumpOut", "jump out", new Unit[] { new Unit("jump"), new Unit("out") });
-		patSet.add(jumpOutPat);
-
-		Pattern jumpBeforePat = new Pattern("jumpBefore", "jump before _",
-				new Unit[] { new Unit("jump"), new Unit("before"), new Unit() });
-		patSet.add(jumpBeforePat);
-
-		Pattern jumpAfterPat = new Pattern("jumpAfter", "jump after _",
-				new Unit[] { new Unit("jump"), new Unit("after"), new Unit() });
-		patSet.add(jumpAfterPat);
-
-		Pattern jumpToPat = new Pattern("jumpToLine", "jump to line [_]? [start | end]?",
-				new Unit[] { new Unit("jump"), new Unit("to"), new Unit("line"), new Unit("question", new Unit()),
-						new Unit("question", new Unit("or", new Unit("start"), new Unit("end"))) });
-		patSet.add(jumpToPat);
-		Pattern upPat = new Pattern("up", "up [_ lines]?",
-				new Unit[] { new Unit("up"), new Unit("question", new Unit("normal", new Unit(), new Unit("lines"))) });
-		patSet.add(upPat);
-		Pattern downPat = new Pattern("down", "down [_ lines]?",
-				new Unit[] { new Unit("down"), new Unit("question", new Unit("normal", new Unit(), new Unit("lines"))) });
-		patSet.add(downPat);
-		Pattern leftPat = new Pattern("left", "left", new Unit[] { new Unit("left") });
-		patSet.add(leftPat);
-		Pattern rightPat = new Pattern("right", "right", new Unit[] { new Unit("right") });
-		patSet.add(rightPat);
-		Pattern selectLinePat = new Pattern("selectLine", "select line",
-				new Unit[] { new Unit("select"), new Unit("line") });
-		patSet.add(selectLinePat);
-		Pattern selectBodyPat = new Pattern("selectBody", "select body",
-				new Unit[] { new Unit("select"), new Unit("body") });
-		patSet.add(selectBodyPat);
-		Pattern selectNamePat = new Pattern("selectName", "select _", new Unit[] { new Unit("select"), new Unit() });
-		patSet.add(selectNamePat);
-		Pattern selectFunctionPat = new Pattern("selectFunction", "select function [_]?",
-				new Unit[] { new Unit("select"), new Unit("function"), new Unit("question", new Unit()) });
-		patSet.add(selectFunctionPat);
-		Pattern replacePat = new Pattern("replace", "replace _ to _",
-				new Unit[] { new Unit("replace"), new Unit(), new Unit("to"), new Unit() });
-		patSet.add(replacePat);
-		Pattern deletePat = new Pattern("delete", "delete", new Unit[] { new Unit("delete") });
-		patSet.add(deletePat);
-
-		Unit[] letUnits = new Unit[] { new Unit("let"), Name, new Unit("question", new Unit("dot"), Name),
-				new Unit("equal") };
-
-		Pattern let1Pat = new Pattern("let1", "let [_]+ [dot [_]+]? equal call [_]+ ",
-				ArrayUtils.addAll(letUnits, new Unit[] { new Unit("call"), Name }));
-		patSet.add(let1Pat);
-
-		Pattern let2Pat = new Pattern("let2", "let [_]+ [dot [_]+]? equal [_]+ [dot [_]+]* [call [_]+]+",
-				ArrayUtils.addAll(letUnits, new Unit[] { Name, new Unit("asterisk", new Unit("dot"), Name),
-						new Unit("plus", new Unit("call"), Name) }));
-		patSet.add(let2Pat);
-
-		// let6 must be put before let3
-		Pattern let6Pat = new Pattern("let6", "let [_]+ [dot [_]+]? equal [expression]? ",
-				ArrayUtils.addAll(letUnits, new Unit[] { new Unit("question", new Unit("expression")) }));
-		patSet.add(let6Pat);
-
-		Unit typeUnit = new Unit("or", new Unit("int"),
+	Unit typeUnit = new Unit("or", new Unit("int"),
 				new Unit("or", new Unit("byte"),
 						new Unit("or", new Unit("short"),
 								new Unit("or", new Unit("long"), new Unit("or", new Unit("char"), new Unit("or", new Unit("float"),
 										new Unit("or", new Unit("double"), new Unit("or", new Unit("boolean"), new Unit("string")))))))));
-		Pattern let5Pat = new Pattern("let5",
-				"let [_]+ [dot [_]+]? equal (int | byte | short | long | char | float | double | boolean | string) [_]+ ",
-				ArrayUtils.addAll(letUnits, new Unit[] { typeUnit, Name }));
-		patSet.add(let5Pat);
 
-		Pattern let4Pat = new Pattern("let4", "let [_]+ [dot [_]+]? equal variable [_]+",
-				ArrayUtils.addAll(letUnits, new Unit[] { new Unit("normal", new Unit("variable")), Name }));
-		patSet.add(let4Pat);
+		Unit[] letUnits = new Unit[] { new Unit("let"), Name, new Unit("question", new Unit("dot"), Name),
+				new Unit("equal") };
 
-		Pattern let3Pat = new Pattern("let3", "let [_]+ [dot [_]+]? equal [_]+ [dot [_]+]* ",
-				ArrayUtils.addAll(letUnits, new Unit[] { Name, new Unit("asterisk", new Unit("dot"), Name) }));
-		patSet.add(let3Pat);
+		Pattern letPat = new Pattern("let", "let [_]+ [dot [_]+]? equal [expression]? ",
+				ArrayUtils.addAll(letUnits, new Unit[] { new Unit("question", new Unit("expression")) }));
+		patSet.add(letPat);
 
-		Pattern return1Pat = new Pattern("return1", "return call [_]+",
+    Pattern returnPat = new Pattern("return", "return call [_]+",
 				new Unit[] { new Unit("return"), new Unit("call"), Name });
-		patSet.add(return1Pat);
+		patSet.add(returnPat);
 
-		Pattern return2Pat = new Pattern("return2", "return [_]+ [dot [_]+]* [call [_]+]+", new Unit[] { new Unit("return"),
-				Name, new Unit("asterisk", new Unit("dot"), Name), new Unit("plus", new Unit("call"), Name) });
-		patSet.add(return2Pat);
+		Unit opUnit = new Unit("or", new Unit("plus"), new Unit("or", new Unit("minus"),
+				new Unit("or", new Unit("times"), new Unit("or", new Unit("divide"), new Unit("mod")))));
+		Unit compareUnit = new Unit("or", new Unit("normal", new Unit("less"), new Unit("than")),
+				new Unit("or", new Unit("normal", new Unit("less"), new Unit("equal")),
+						new Unit("or", new Unit("normal", new Unit("greater"), new Unit("than")),
+								new Unit("or", new Unit("normal", new Unit("greater"), new Unit("equal")),
+										new Unit("or", new Unit("normal", new Unit("double"), new Unit("equal")),
+												new Unit("or", new Unit("and"), new Unit("normal", new Unit("double"), new Unit("and"))))))));
 
-		Pattern return6Pat = new Pattern("return6", "return [expression]? ",
-				new Unit[] { new Unit("return"), new Unit("question", new Unit("expression")) });
-		patSet.add(return6Pat);
-
-		Pattern return5Pat = new Pattern("return5",
-				"return (int | byte | short | long | char | float | double | boolean | String) []+ ",
-				new Unit[] { new Unit("return"), typeUnit, Name });
-		patSet.add(return5Pat);
-
-		Pattern return4Pat = new Pattern("return4", "return variable [_]+",
-				new Unit[] { new Unit("return"), new Unit("normal", new Unit("variable")), Name });
-		patSet.add(return4Pat);
-
-		Pattern return3Pat = new Pattern("return3", "return [_]+ [dot [_]+]*",
-				new Unit[] { new Unit("return"), Name, new Unit("asterisk", new Unit("dot"), Name) });
-		patSet.add(return3Pat);
-
-		Pattern expr15Pat = new Pattern("expr15", "[expression]? null",
-				new Unit[] { new Unit("question", new Unit("expression")), new Unit("null") });
-		patSet.add(expr15Pat);
 
 		Pattern expr1Pat = new Pattern("expr1", "[expression]? call [_]+",
 				new Unit[] { new Unit("question", new Unit("expression")), new Unit("call"), Name });
@@ -254,15 +163,6 @@ public class PatternSet {
 		Pattern expr14Pat = new Pattern("expr14", "[expression]? string [_]+",
 				new Unit[] { new Unit("question", new Unit("expression")), new Unit("string"), Name });
 		patSet.add(expr14Pat);
-
-		Unit opUnit = new Unit("or", new Unit("plus"), new Unit("or", new Unit("minus"),
-				new Unit("or", new Unit("times"), new Unit("or", new Unit("divide"), new Unit("mod")))));
-		Unit compareUnit = new Unit("or", new Unit("normal", new Unit("less"), new Unit("than")),
-				new Unit("or", new Unit("normal", new Unit("less"), new Unit("equal")),
-						new Unit("or", new Unit("normal", new Unit("greater"), new Unit("than")),
-								new Unit("or", new Unit("normal", new Unit("greater"), new Unit("equal")),
-										new Unit("or", new Unit("normal", new Unit("double"), new Unit("equal")),
-												new Unit("or", new Unit("and"), new Unit("normal", new Unit("double"), new Unit("and"))))))));
 
 		Pattern expr10Pat = new Pattern("expr10", "[expression]? expression (op | compare) expression",
 				new Unit[] { new Unit("question", new Unit("expression")), new Unit("expression"),
@@ -303,19 +203,51 @@ public class PatternSet {
 				new Unit[] { new Unit("question", new Unit("expression")), Name, new Unit("asterisk", new Unit("dot"), Name) });
 		patSet.add(expr3Pat);
 
-		// Pattern expr11Pat = new Pattern("expr11", "[expression]? [_]+ (op | compare)
-		// expression",
-		// new Unit[] { new Unit("question", new Unit("expression")), Name, new
-		// Unit("or", opUnit, compareUnit),
-		// new Unit("expression") });
-		// patSet.add(expr11Pat);
+    // null belongs to expr3
+		// Pattern expr15Pat = new Pattern("expr15", "[expression]? null",
+		// 		new Unit[] { new Unit("question", new Unit("expression")), new Unit("null") });
+		// patSet.add(expr15Pat);
+		// Pattern jumpOutPat = new Pattern("jumpOut", "jump out", new Unit[] { new Unit("jump"), new Unit("out") });
+		// patSet.add(jumpOutPat);
 
-		// Pattern expr12Pat = new Pattern("expr12", "[expression]? [_]+ (op | compare)
-		// [_]+",
-		// new Unit[] { new Unit("question", new Unit("expression")), Name, new
-		// Unit("or", opUnit, compareUnit), Name });
-		// patSet.add(expr12Pat);
+		// Pattern jumpBeforePat = new Pattern("jumpBefore", "jump before _",
+		// 		new Unit[] { new Unit("jump"), new Unit("before"), new Unit() });
+		// patSet.add(jumpBeforePat);
 
+		// Pattern jumpAfterPat = new Pattern("jumpAfter", "jump after _",
+		// 		new Unit[] { new Unit("jump"), new Unit("after"), new Unit() });
+		// patSet.add(jumpAfterPat);
+
+		// Pattern jumpToPat = new Pattern("jumpToLine", "jump to line [_]? [start | end]?",
+		// 		new Unit[] { new Unit("jump"), new Unit("to"), new Unit("line"), new Unit("question", new Unit()),
+		// 				new Unit("question", new Unit("or", new Unit("start"), new Unit("end"))) });
+		// patSet.add(jumpToPat);
+		// Pattern upPat = new Pattern("up", "up [_ lines]?",
+		// 		new Unit[] { new Unit("up"), new Unit("question", new Unit("normal", new Unit(), new Unit("lines"))) });
+		// patSet.add(upPat);
+		// Pattern downPat = new Pattern("down", "down [_ lines]?",
+		// 		new Unit[] { new Unit("down"), new Unit("question", new Unit("normal", new Unit(), new Unit("lines"))) });
+		// patSet.add(downPat);
+		// Pattern leftPat = new Pattern("left", "left", new Unit[] { new Unit("left") });
+		// patSet.add(leftPat);
+		// Pattern rightPat = new Pattern("right", "right", new Unit[] { new Unit("right") });
+		// patSet.add(rightPat);
+		// Pattern selectLinePat = new Pattern("selectLine", "select line",
+		// 		new Unit[] { new Unit("select"), new Unit("line") });
+		// patSet.add(selectLinePat);
+		// Pattern selectBodyPat = new Pattern("selectBody", "select body",
+		// 		new Unit[] { new Unit("select"), new Unit("body") });
+		// patSet.add(selectBodyPat);
+		// Pattern selectNamePat = new Pattern("selectName", "select _", new Unit[] { new Unit("select"), new Unit() });
+		// patSet.add(selectNamePat);
+		// Pattern selectFunctionPat = new Pattern("selectFunction", "select function [_]?",
+		// 		new Unit[] { new Unit("select"), new Unit("function"), new Unit("question", new Unit()) });
+		// patSet.add(selectFunctionPat);
+		// Pattern replacePat = new Pattern("replace", "replace _ to _",
+		// 		new Unit[] { new Unit("replace"), new Unit(), new Unit("to"), new Unit() });
+		// patSet.add(replacePat);
+		// Pattern deletePat = new Pattern("delete", "delete", new Unit[] { new Unit("delete") });
+		// patSet.add(deletePat);
 	}
 
 	public void addToSet(Pattern pat) {
