@@ -22,7 +22,9 @@ public class RegexTest {
 												new Unit("normal", Name, new Unit("asterisk", new Unit("and"), Name))) })),
 						new Unit("question", new Unit("extends"), Name) });
 
-		Regex regex = new Regex(typePat);
+    Pattern packagePat = new Pattern("package", "define package [_]+ [dot [_]+]*",
+            new Unit[] { new Unit("define"), new Unit("package"), Name, new Unit("asterisk", new Unit("dot"), Name) });
+		Regex regex = new Regex(packagePat);
 		regex.writeDotFile();
 		Runtime rt = Runtime.getRuntime();
 		try {
@@ -31,7 +33,7 @@ public class RegexTest {
 			e.printStackTrace();
 		}
 
-		String text = "type node list";
+		String text = "define package hello dot world";
 		Pair<Boolean, Pattern> result = regex.isMatch(text);
 		if (result.getFirst()) {
 			System.out.println("Matched:");

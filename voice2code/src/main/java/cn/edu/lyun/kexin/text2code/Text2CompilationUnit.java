@@ -2346,12 +2346,12 @@ public class Text2CompilationUnit {
 			HoleNode temp = parentHole.getIthChild(path.get(index));
 			parentHole = temp;
 
+			int indexOfHole = path.get(index + 1);
 			HoleType holeType = parentHole.getHoleType();
 			if (holeType.equals(HoleType.Wrapper)) {
 				continue;
 			}
 
-			int indexOfHole = path.get(index + 1);
 			String name = TypeNameMap.map.get(holeType);
 			Class parentClass = parent.getClass();
 			Method method;

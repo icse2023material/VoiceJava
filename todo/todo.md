@@ -24,3 +24,10 @@
 [] `byte, float, short`没有?
 [] 如果 any 不能是 keyword,那么会出现局限性。比如`define node list with statement variable node list`，本意表述: `NodeList<Statement> nodeList`, 但是因为`list`是关键字，首先匹配失败。
 其次，`node list`还可能是`Node[]`, 这个如何区分？
+
+## 优化建议
+
+1. 设计不一致问题
+   a. 定义属性: define private int variable puppy age
+   b. 定义函数: define public function set age
+   万一 puppyAge 的类型很复杂，这个命令就不好用嘴巴念出来，应该改为 defeine private variable puppy age.
