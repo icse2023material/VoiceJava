@@ -1,9 +1,14 @@
 define public class hello world
 define public function say hello
 type void
-type list of Name variable names
+type list of Name 
+variable names
 move next
-let x equal a
-let x equal a dot b
-let x dot y equal a
-let x dot y equal a dot b
+let x equal expression
+variable a
+let x equal expression
+a dot b
+let x dot y equal expression
+variable a
+let x dot y equal expression
+a dot b

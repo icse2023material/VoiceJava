@@ -1,8 +1,11 @@
 define public class hello world
 define public function say hello
 type void
-type list of Name variable names
+type list of Name 
+variable names
 move next
-let fib equal call fibonacci
+let fib equal expression
+call fibonacci
 move next
-let sum dot fib equal call fibonacci
+let sum dot fib equal expression
+call fibonacci
