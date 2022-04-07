@@ -1,7 +1,7 @@
 public class HelloWorld {
 
-    public void sayHello() {
-        x = 2 + sum();
-        x = sum() + sum();
+    public void sayHello(Name[] names) {
+        if (counter < 10)
+            return;
     }
 }

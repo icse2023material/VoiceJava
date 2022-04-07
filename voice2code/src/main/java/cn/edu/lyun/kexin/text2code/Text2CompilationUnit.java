@@ -919,36 +919,44 @@ public class Text2CompilationUnit {
 					exprWrapperHole.addChild(new HoleNode());
 				} else if (parentNodeClassStr != null && parentNodeClassStr.equals("ForStmt")) {
 					// Note: we only support BlockStmt.
-					// https://www.javadoc.io/static/com.github.javaparser/javaparser-core/3.23.1/com/github/javaparser/ast/stmt/ForStmt.html
-					// sum = sum + i in for(; i < 10 ;){ ;sum = sum + i; }
-					ForStmt forStmt = (ForStmt) parent.getLeft();
+				ForStmt forStmt = (ForStmt) parent.getLeft();
 					Statement body = forStmt.getBody();
 					String bodyClassStr = body.getClass().toString();
 					bodyClassStr = StringHelper.getClassName(bodyClassStr);
-					if (bodyClassStr.equals("ReturnStmt")) {
-						BlockStmt blockStmt = new BlockStmt();
-						NodeList<Statement> statements = new NodeList<Statement>();
-						ExpressionStmt expressionStmt = new ExpressionStmt((Expression) node);
-						statements.add(expressionStmt);
-						blockStmt.setStatements(statements);
-						forStmt.setBody(blockStmt);
-
-						currentHole.set(HoleType.Body, false);
-
-						HoleNode stmtsHole = new HoleNode(HoleType.Statements, false);
-						currentHole.addChild(stmtsHole);
-
-						HoleNode stmtHole = new HoleNode(HoleType.Wrapper, false, HoleType.Statement);
-						stmtsHole.addChild(stmtHole);
-
-						HoleNode exprWrapperHole = new HoleNode(HoleType.Wrapper, false, holeTypeExpr);
-						stmtHole.addChild(exprWrapperHole);
-
-						exprWrapperHole.addChild(new HoleNode());
-					} else if (bodyClassStr.equals("BlockStmt")) {
-
+          if (holeIndex == 0) {
+						NodeList<Expression> initializationList = new NodeList<Expression>();
+						initializationList.add((Expression) node);
+						forStmt.setInitialization(initializationList);
+						currentHole.set(HoleType.ForInitialization, false);
+						currentHole.addChild(new HoleNode());
 					} else {
-						System.out.println("Should not go to this branch");
+					// https://www.javadoc.io/static/com.github.javaparser/javaparser-core/3.23.1/com/github/javaparser/ast/stmt/ForStmt.html
+					// sum = sum + i in for(; i < 10 ;){ ;sum = sum + i; }
+            if (bodyClassStr.equals("ReturnStmt")) {
+              BlockStmt blockStmt = new BlockStmt();
+              NodeList<Statement> statements = new NodeList<Statement>();
+              ExpressionStmt expressionStmt = new ExpressionStmt((Expression) node);
+              statements.add(expressionStmt);
+              blockStmt.setStatements(statements);
+              forStmt.setBody(blockStmt);
+  
+              currentHole.set(HoleType.Body, false);
+  
+              HoleNode stmtsHole = new HoleNode(HoleType.Statements, false);
+              currentHole.addChild(stmtsHole);
+  
+              HoleNode stmtHole = new HoleNode(HoleType.Wrapper, false, HoleType.Statement);
+              stmtsHole.addChild(stmtHole);
+  
+              HoleNode exprWrapperHole = new HoleNode(HoleType.Wrapper, false, holeTypeExpr);
+              stmtHole.addChild(exprWrapperHole);
+  
+              exprWrapperHole.addChild(new HoleNode());
+            } else if (bodyClassStr.equals("BlockStmt")) {
+  
+            } else {
+              System.out.println("Should not go to this branch");
+            }
 					}
 				} else if (parentNodeClassStr != null && parentNodeClassStr.equals("BlockStmt")) {
 					BlockStmt blockStmt = (BlockStmt) parent.getLeft();
@@ -1087,11 +1095,18 @@ public class Text2CompilationUnit {
 					String bodyClassStr = stmt.getClass().toString();
 					bodyClassStr = StringHelper.getClassName(bodyClassStr);
 					if (bodyClassStr.equals("ReturnStmt")) {
-						ifStmt.setThenStmt((Statement) node);
-
-						HoleNode exprWrapper = new HoleNode(HoleType.Wrapper, false, holeTypeExpr);
-						currentHole.addChild(exprWrapper);
-						exprWrapper.addChild(new HoleNode(HoleType.Expression));
+            BlockStmt blockStmt = new BlockStmt();
+            NodeList<Statement> statements = new NodeList<Statement>();
+            statements.add((Statement) node);
+            blockStmt.setStatements(statements);
+            ifStmt.setThenStmt(blockStmt);
+      
+            currentHole.set(HoleType.ThenStatement, false);
+            HoleNode stmtsNode = new HoleNode(HoleType.Statements, false);
+            currentHole.addChild(stmtsNode);
+            HoleNode holeNodeChild = new HoleNode(HoleType.Wrapper, false, holeTypeExpr);
+            stmtsNode.addChild(holeNodeChild);
+            holeNodeChild.addChild(new HoleNode());
 					} else if (bodyClassStr.equals("BlockStmt")) {
 
 					} else {
@@ -2586,13 +2601,15 @@ public class Text2CompilationUnit {
 		String bodyClassStr = body.getClass().toString();
 		bodyClassStr = StringHelper.getClassName(bodyClassStr);
 		if (bodyClassStr.equals("ReturnStmt")) {
-			currentHole.set(HoleType.Wrapper, false, HoleType.ReturnStmt);
-			// HoleNode exprHole = new HoleNode(HoleType.Expression, false);
-			// currentHole.addChild(exprHole);
+      BlockStmt blockStmt = new BlockStmt();
+			NodeList<Statement> statements = new NodeList<Statement>();
+			statements.add((Statement)node);
+			blockStmt.setStatements(statements);
+      currentHole.set(HoleType.Statements, false); 
 			HoleNode exprWrapperHole = new HoleNode(HoleType.Wrapper, false, holeType);
 			currentHole.addChild(exprWrapperHole);
 			exprWrapperHole.addChild(new HoleNode());
-			return (Statement) node;
+      return blockStmt;
 		} else if (bodyClassStr.equals("BlockStmt")) {
 
 		} else {
@@ -2632,7 +2649,9 @@ public class Text2CompilationUnit {
 		ReturnStmt stmt = (ReturnStmt) parent.getLeft();
 		stmt.setExpression((Expression) node);
 		currentHole.set(holeType, false);
-		parentOfParentHole.addChild(new HoleNode());
+    // since parentOfParentHole is statements hole, it is not suitable for return stmt, so 
+    // use parent of it, it is ThenStatement hole node.
+    parentOfParentHole.getParent().addChild(new HoleNode());
 	}
 
 	private void generateReturn6ForExpr10AndExpr11(Either<Node, Either<List<?>, NodeList<?>>> parent, Node node,

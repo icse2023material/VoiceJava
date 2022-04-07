@@ -4,5 +4,6 @@ type void
 type list of Name
 variable names
 move next
-let counter equal int zero
+let counter equal
+int zero
 define for

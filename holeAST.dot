@@ -1,32 +1,21 @@
 digraph {
-CompilationUnit_1054932644 -> TypeDeclarations_1213349904
-TypeDeclarations_1213349904 -> Wrapper_ClassDeclaration_1259769769
-Wrapper_ClassDeclaration_1259769769 -> BodyDeclarations_444920847
-BodyDeclarations_444920847 -> Wrapper_MethodDeclaration_428566321
-Wrapper_MethodDeclaration_428566321 -> Type_2087258327
-Wrapper_MethodDeclaration_428566321 -> Parameters_638169719
-Wrapper_MethodDeclaration_428566321 -> Body_452842611
-Body_452842611 -> Statements_350069300
-Statements_350069300 -> Wrapper_Statement_1060703587
-Statements_350069300 -> Wrapper_Statement_1373861264
-Statements_350069300 -> Undefined_1417941371 [color = red] 
-Wrapper_Statement_1060703587 -> Expression_1957078537
-Wrapper_Statement_1373861264 -> Expression_877804870
-Expression_1957078537 -> Wrapper_LetExpr_1514214932
-Expression_877804870 -> Wrapper_LetExpr_2095970915
-Wrapper_LetExpr_1514214932 -> AssignExprValue_594858858
-Wrapper_LetExpr_2095970915 -> AssignExprValue_65551384
-AssignExprValue_594858858 -> Wrapper_Expr10_749981943
-AssignExprValue_65551384 -> Wrapper_Expr10_1001958076
-Wrapper_Expr10_749981943 -> LeftSubExpr_1313960293
-Wrapper_Expr10_749981943 -> RightSubExpr_229919394
-Wrapper_Expr10_1001958076 -> LeftSubExpr_1847410999
-Wrapper_Expr10_1001958076 -> RightSubExpr_1181947538
-LeftSubExpr_1313960293 -> Expr5_769877691
-RightSubExpr_229919394 -> Wrapper_Expr1_1237144823
-LeftSubExpr_1847410999 -> Wrapper_Expr1_1255395942
-RightSubExpr_1181947538 -> Wrapper_Expr1_1332121385
-Wrapper_Expr1_1237144823 -> Arguments_1801422599
-Wrapper_Expr1_1255395942 -> Arguments_892591894
-Wrapper_Expr1_1332121385 -> Arguments_1903051549
+CompilationUnit_211360098 -> TypeDeclarations_1866222377
+TypeDeclarations_1866222377 -> Wrapper_ClassDeclaration_969896807
+Wrapper_ClassDeclaration_969896807 -> BodyDeclarations_1893035798
+BodyDeclarations_1893035798 -> Wrapper_MethodDeclaration_885209703
+Wrapper_MethodDeclaration_885209703 -> Type_959142613
+Wrapper_MethodDeclaration_885209703 -> Parameters_2076005084
+Wrapper_MethodDeclaration_885209703 -> Body_550186850
+Parameters_2076005084 -> Wrapper_Parameter_234236190
+Body_550186850 -> Statements_1860712327
+Wrapper_Parameter_234236190 -> Type_2136122164
+Wrapper_Parameter_234236190 -> Name_102445955
+Statements_1860712327 -> Wrapper_IfStmt_983127175
+Wrapper_IfStmt_983127175 -> IfCondition_367134812
+Wrapper_IfStmt_983127175 -> Undefined_2143503063 [color = red] 
+IfCondition_367134812 -> Wrapper_Expr10_547086727
+Wrapper_Expr10_547086727 -> LeftSubExpr_1347855487
+Wrapper_Expr10_547086727 -> RightSubExpr_1442047681
+LeftSubExpr_1347855487 -> Expr4_809747282
+RightSubExpr_1442047681 -> Expr5_1336642308
 }

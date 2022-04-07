@@ -4,13 +4,10 @@ type int
 type list of Name
 variable names
 move next
-define if
+define while
 expression less than expression
 variable counter
 int ten
-return 
-int zero
-expression double equal expression
-variable counter
+return expression
 int ten
-define if
+let i equal expression

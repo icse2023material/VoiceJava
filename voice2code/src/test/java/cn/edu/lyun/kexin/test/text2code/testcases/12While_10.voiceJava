@@ -8,7 +8,8 @@ define if
 expression less than expression
 variable counter
 int ten
-return int zero
+return 
+int zero
 expression double equal expression
 variable counter
 int ten
