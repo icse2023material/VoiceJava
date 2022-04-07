@@ -32,83 +32,62 @@
     - 语法：`type (list of Name | Name [dot Name]? [with Name [and Name]*]?) [extends _]?`
     - 示例: `type int`， `type void`
 
-10. 定义参数：
-
-    - 语法： `type (list of Name | Name [dot Name]? [with Name [and Name]*]?) variable Name`
-    - 示例：`type int variable count`，`type NodeList with Statement variable nodelist`
-
-11. 定义`for`循环：
+10. 定义`for`循环：
 
     - 语法：`define [enchanced]? for`
     - 备注: `enhanced`还未实现。
 
-12. 定义`while`循环：
+11. 定义`while`循环：
 
     - 语法：`define [do]? while`
     - 备注: `do`还未实现
 
-13. 定义`if`:
+12. 定义`if`:
 
     - 语法：`define if`
 
-14. 定义`switch`:
+13. 定义`switch`:
 
     - 语法：`define switch`
 
-15. 定义`try-catch`:
+14. 定义`try-catch`:
 
     - 语法：`define try catch`
     - 备注: 还未实现。
 
-16. 定义`@Override`
+15. 定义`@Override`
 
     - 语法：`define at override`
     - 备注：还未实现。
 
-17. 定义子表达式，即括号。
+16. 定义子表达式，即括号。
 
     - 语法：`subexpression`
 
-18. `break`
+17. `break`
 
-19. `continue`
+18. `continue`
 
-20. 构建新实例：
+19. 构建新实例：
 
     - 语法： `new instance Name [dot Name]*`
     - 示例：`new instance puppy`， `new instance hash map dot entry`
 
-21. 抛出异常：
+20. 抛出异常：
 
     - 语法：`throw new Name`
 
-22. 6 种赋值形式：
+21. let赋值：
 
-    - `let Name [dot Name]? equal call Name`
-      - 示例：`let count equal call compute`
-    - `let Name [dot Name]? equal Name [dot Name]* [call Name]+`
-      - 示例：`let student dot score equal student call score`
-    - `let Name [dot Name]? equal Name [dot Name]*`
-      - 示例：`let score equal student first dot semester dot score`
-    - `let Name [dot Name]? equal variable Name`
-      - 示例：`let score equal variable final score`
-    - `let Name [dot Name]? equal (int | byte | short | long | char | float | double | boolean | string) Name`
-      - 示例： `let score equal int 2`
-    - `let Name [dot Name]? equal [expression]?`
+   - `let Name [dot Name]? equal [expression]?`
       - 示例：`let score equal`，`let score equal expression`
 
-23. 6 种返回形式：
+23. return返回：
 
-    - `return call Name`
-    - `return Name [dot Name]* [call Name]+`
-    - `return Name [dot Name]*`
-    - `return variable Name`
-    - `return (int | byte | short | long | char | float | double | boolean | string) Name`
-    - `return [expression]?`
+   - `return [expression]?`
 
 24. 12 种表达式
 
-    - `expression? null`
     - `expression? call Name`
     - `expression? Name [dot Name]* [call Name]+`
     - `expression? Name [dot Name]?`

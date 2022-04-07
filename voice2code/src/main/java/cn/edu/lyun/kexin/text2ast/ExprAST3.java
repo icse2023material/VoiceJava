@@ -1,6 +1,8 @@
 package cn.edu.lyun.kexin.text2ast;
 
 import com.github.javaparser.ast.*;
+import com.github.javaparser.ast.expr.NullLiteralExpr;
+
 import java.util.*;
 import cn.edu.lyun.kexin.text2pattern.pattern.Pattern;
 import cn.edu.lyun.kexin.text2pattern.pattern.Unit;
@@ -13,6 +15,11 @@ public class ExprAST3 implements AST {
 		if (unitList.get(0).getKeyword().equals("expression")) {
 			unitList.remove(0); // remove "expression"
 		}
-		return new FieldAccessAST().generate(unitList);
+    // case: expression null
+    if(unitList.size()==1 && unitList.get(0).getKeyword().equals("null")){
+      return new NullLiteralExpr();
+    } else {
+		  return new FieldAccessAST().generate(unitList);
+    }
 	}
 }
