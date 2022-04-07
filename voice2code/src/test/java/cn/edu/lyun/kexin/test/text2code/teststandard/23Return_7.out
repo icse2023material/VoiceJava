@@ -1,6 +1,6 @@
 public class HelloWorld {
 
-    public void sayHello(Name[] names) {
+    public int sayHello(Name[] names) {
         return 2;
     }
 }

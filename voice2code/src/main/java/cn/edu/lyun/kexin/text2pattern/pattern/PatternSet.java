@@ -137,8 +137,8 @@ public class PatternSet {
 				ArrayUtils.addAll(letUnits, new Unit[] { new Unit("question", new Unit("expression")) }));
 		patSet.add(letPat);
 
-    Pattern returnPat = new Pattern("return", "return call [_]+",
-				new Unit[] { new Unit("return"), new Unit("call"), Name });
+    Pattern returnPat = new Pattern("return", "return [expression]?",
+				new Unit[] { new Unit("return"), new Unit("question", new Unit("expression"))});
 		patSet.add(returnPat);
 
 		Unit opUnit = new Unit("or", new Unit("plus"), new Unit("or", new Unit("minus"),

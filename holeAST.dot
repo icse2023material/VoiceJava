@@ -1,29 +1,24 @@
 digraph {
-CompilationUnit_589835301 -> TypeDeclarations_2032188048
-TypeDeclarations_2032188048 -> Wrapper_ClassDeclaration_112466394
-Wrapper_ClassDeclaration_112466394 -> BodyDeclarations_992846223
-BodyDeclarations_992846223 -> Wrapper_MethodDeclaration_198099809
-Wrapper_MethodDeclaration_198099809 -> Type_645482568
-Wrapper_MethodDeclaration_198099809 -> Parameters_2024415090
-Wrapper_MethodDeclaration_198099809 -> Body_970781872
-Parameters_2024415090 -> Wrapper_Parameter_1327871893
-Body_970781872 -> Statements_461516748
-Wrapper_Parameter_1327871893 -> Type_1874028013
-Wrapper_Parameter_1327871893 -> Name_1855261647
-Statements_461516748 -> Wrapper_IfStmt_614580607
-Wrapper_IfStmt_614580607 -> IfCondition_1443900956
-Wrapper_IfStmt_614580607 -> ThenStatement_1106468732
-IfCondition_1443900956 -> Wrapper_Expr10_997294994
-ThenStatement_1106468732 -> Statements_753162875
-Wrapper_Expr10_997294994 -> LeftSubExpr_1830969563
-Wrapper_Expr10_997294994 -> RightSubExpr_1243495105
-Statements_753162875 -> Wrapper_Statement_356338363
-LeftSubExpr_1830969563 -> Expr4_1853422837
-RightSubExpr_1243495105 -> Expr5_1120072844
-Wrapper_Statement_356338363 -> Expression_1833707324
-Expression_1833707324 -> Wrapper_LetExpr_1516759394
-Wrapper_LetExpr_1516759394 -> AssignExprValue_1415469015
-AssignExprValue_1415469015 -> Wrapper_Expr1_962927234
-Wrapper_Expr1_962927234 -> Arguments_1810349933
-Arguments_1810349933 -> Undefined_323761934 [color = red] 
+CompilationUnit_1054932644 -> TypeDeclarations_1213349904
+TypeDeclarations_1213349904 -> Wrapper_ClassDeclaration_1259769769
+Wrapper_ClassDeclaration_1259769769 -> BodyDeclarations_444920847
+BodyDeclarations_444920847 -> Wrapper_MethodDeclaration_428566321
+Wrapper_MethodDeclaration_428566321 -> Type_2087258327
+Wrapper_MethodDeclaration_428566321 -> Parameters_1446922577
+Wrapper_MethodDeclaration_428566321 -> Body_494894055
+Parameters_1446922577 -> Wrapper_Parameter_1077873186
+Body_494894055 -> Statements_2014233765
+Wrapper_Parameter_1077873186 -> Type_1346292516
+Wrapper_Parameter_1077873186 -> Name_1280429864
+Statements_2014233765 -> Wrapper_IfStmt_237297104
+Wrapper_IfStmt_237297104 -> IfCondition_1869673263
+Wrapper_IfStmt_237297104 -> ThenStatement_1457148583
+Wrapper_IfStmt_237297104 -> Undefined_1488352537 [color = red] 
+IfCondition_1869673263 -> Wrapper_Expr10_1998882269
+ThenStatement_1457148583 -> Wrapper_Return_161672347
+Wrapper_Expr10_1998882269 -> LeftSubExpr_1511180072
+Wrapper_Expr10_1998882269 -> RightSubExpr_1492822331
+Wrapper_Return_161672347 -> Expr5_1477520324
+LeftSubExpr_1511180072 -> Expr4_1596009860
+RightSubExpr_1492822331 -> Expr5_602830277
 }
