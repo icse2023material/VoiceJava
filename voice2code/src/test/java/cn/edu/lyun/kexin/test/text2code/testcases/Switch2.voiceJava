@@ -7,15 +7,18 @@ define private int variable greeting
 int two
 define public function say hello
 type int
-type list of int variable intArray
-type String variable name
+type list of int 
+variable intArray
+type String 
+variable name
 move next
 define int variable sum
 int zero
 define switch
 variable userType
 int one
-let sum equal call fibonacci
+let sum equal 
+call fibonacci
 int two
 move next
 expression times expression
@@ -31,4 +34,5 @@ int fifteen
 int fifteen
 move next
 move next
-return sum
+return 
+variable sum

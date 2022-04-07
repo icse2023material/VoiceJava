@@ -11,8 +11,10 @@ define public String variable name
 move next
 define public function say hello
 type int
-type list of int variable intArray
-type String variable name
+type list of int 
+variable intArray
+type String
+variable name
 move next
 define int variable sum
 int zero

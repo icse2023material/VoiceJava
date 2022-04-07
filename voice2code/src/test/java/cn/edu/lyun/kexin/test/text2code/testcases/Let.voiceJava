@@ -7,16 +7,23 @@ define private int variable greeting
 int two
 define public function say hello
 type int
-type list of int variable intArray
-type String variable name
+type list of int 
+variable intArray
+type String 
+variable name
 move next
-let sum equal call sum
+let sum equal expression 
+call sum
 move next
-let sum equal sum call sum
+let sum equal expression 
+sum call sum
 int ten
 move next
-let sum equal score dot sum
-let sum equal variable sumResult
-let sum equal int one hundred
+let sum equal expression 
+score dot sum
+let sum equal expression
+variable sumResult
+let sum equal expression 
+int one hundred
 let sum dot count equal
 variable sum

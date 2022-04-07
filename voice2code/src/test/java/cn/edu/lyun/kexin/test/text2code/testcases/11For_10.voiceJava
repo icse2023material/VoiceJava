@@ -1,7 +1,8 @@
 define public class hello world
 define public function say hello
 type void
-type list of Name variable names
+type list of Name
+variable names
 move next
 define for
 define int variable i 
@@ -10,5 +11,6 @@ expression less than expression
 variable i
 names dot length
 i plus plus
-let sum equal int one hundred
+let sum equal expression 
+int one hundred
 continue

@@ -1,15 +1,18 @@
 define public class hello world
 define public function say hello
 type void
-type list of Name variable names
+type list of Name
+variable names
 move next
 define switch
 variable option
 int one
-let sum equal int zero
+let sum equal expression 
+int zero
 break
 int two
-let sum equal int one
+let sum equal expression 
+int one
 break
 int three
 move next

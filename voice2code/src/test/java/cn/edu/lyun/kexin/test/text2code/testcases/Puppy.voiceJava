@@ -5,17 +5,21 @@ define private int variable puppy num
 move next
 define public function set age
 type void
-type int variable age
+type int 
+variable age
 move next
-let puppy age equal variable age
+let puppy age equal expression 
+variable age
 move next
 define public function get age
 type int
 move next
-return variable puppy age
+return 
+variable puppy age
 define public static function main
 type void
-type list of String variable args
+type list of String 
+variable args
 move next
 define Puppy variable my puppy
 new instance puppy

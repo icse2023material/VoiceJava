@@ -7,13 +7,16 @@ define private int variable greeting
 int two
 define public function say hello
 type int
-type list of int variable intArray
-type String variable name
+type list of int 
+variable intArray
+type String 
+variable name
 move next
 call notify
 int three
 int five
 move next
-return hello call notify
+return 
+hello call notify
 int two
 move next

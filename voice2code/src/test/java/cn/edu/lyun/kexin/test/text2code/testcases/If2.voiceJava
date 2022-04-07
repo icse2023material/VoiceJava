@@ -7,8 +7,10 @@ define private int variable greeting
 int two
 define public function say hello
 type int
-type list of int variable intArray
-type String variable name
+type list of int 
+variable intArray
+type String 
+variable name
 move next
 define int variable sum
 int zero
@@ -31,4 +33,5 @@ sum plus plus
 move next
 move next
 move next
-return sum
+return expression 
+variable sum

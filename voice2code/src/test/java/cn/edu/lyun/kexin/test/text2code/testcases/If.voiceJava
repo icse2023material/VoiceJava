@@ -1,7 +1,8 @@
 define public class hello test
 define public static function main
 type void
-type list of string variable args
+type list of string
+variable args
 move next
 define int variable n
 int ninety
@@ -25,4 +26,5 @@ System dot out call println
 string bad
 move next
 move next
-let n equal int two
+let n equal expression 
+int two
