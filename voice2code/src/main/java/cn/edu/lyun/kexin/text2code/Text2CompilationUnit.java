@@ -332,7 +332,11 @@ public class Text2CompilationUnit {
 					forStmt.setInitialization(initializationList);
 
 					currentHole.set(HoleType.ForInitialization, false);
-					currentHole.addChild(new HoleNode());
+          HoleNode variableDeclarationExprHole = new HoleNode(HoleType.Wrapper, false, HoleType.VariableDeclarationExpr);
+					currentHole.addChild(variableDeclarationExprHole);
+          HoleNode variablesHole = new HoleNode(HoleType.VariableDeclarators, false);
+          variableDeclarationExprHole.addChild(variablesHole);
+          variablesHole.addChild(new HoleNode());
 				} else if (parentHoleType.equals(HoleType.Statements)) {
 					node = new FieldAST().generateVariableDeclarationExpr(pattern);
 					NodeList<Statement> statements = (NodeList<Statement>) parent.get().get();
@@ -380,8 +384,9 @@ public class Text2CompilationUnit {
 				else if(parentNodeClassStr != null && parentNodeClassStr.equals("VariableDeclarator")){
           VariableDeclarator variableDeclarator= (VariableDeclarator)parent.getLeft();
           variableDeclarator.setType((Type)node);
-          currentHole.set(HoleType.Type, false);
-          parentHole.addChild(new HoleNode());
+          currentHole.set(HoleType.Wrapper, false, HoleType.VariableDeclarator);
+          currentHole.addChild(new HoleNode(HoleType.Type, false));
+          currentHole.addChild(new HoleNode());
         } else if(parentNodeClassStr != null && parentNodeClassStr.equals("VariableDeclarationExpr")){
         }
         break;

@@ -177,16 +177,16 @@ public class HoleAST {
 	}
 
 	public boolean hashOnlyOneChild(HoleNode holeNode) {
-		Set<HoleType> set = new HashSet<HoleType>(Arrays.asList(HoleType.ImportDeclaration, HoleType.TypeDeclaration, HoleType.VariableDeclarators,
-				HoleType.Expression, HoleType.Body, HoleType.Statement, HoleType.VariableInitializer,
+		Set<HoleType> set = new HashSet<HoleType>(Arrays.asList(HoleType.ImportDeclaration, HoleType.TypeDeclaration, HoleType.VariableDeclarators, HoleType.VariableDeclarationExpr,
+				HoleType.Expression, HoleType.Body, HoleType.Statement, HoleType.VariableInitializer, HoleType.ForInitialization,
 				HoleType.Expr1, HoleType.Expr2, HoleType.ThenStatement, HoleType.AssignExprValue,
 				HoleType.RightSubExpr, HoleType.LeftSubExpr, HoleType.InnerExpr));
 		return holeNode.getNonUndefinedChildListSize() == 1 && set.contains(holeNode.getHoleType());
 	}
 
 	public boolean isNodeChildrenFull(HoleNode holeNode) {
-		Set<HoleType> oneChildSet = new HashSet<HoleType>(Arrays.asList(HoleType.Statement, HoleType.VariableDeclarators,
-				HoleType.Expr1, HoleType.Expr2, HoleType.MethodCallExpr, HoleType.LetExpr,
+		Set<HoleType> oneChildSet = new HashSet<HoleType>(Arrays.asList(HoleType.Statement, HoleType.VariableDeclarators, HoleType.VariableDeclarationExpr,
+				HoleType.Expr1, HoleType.Expr2, HoleType.MethodCallExpr, HoleType.LetExpr, HoleType.ForInitialization,
 				HoleType.Expr11, HoleType.InnerExpr, HoleType.FieldDeclaration));
 		Set<HoleType> twoChildrenSet = new HashSet<HoleType>(Arrays.asList(HoleType.LetExpr,
 				HoleType.SwitchEntry, HoleType.SwitchStmt, HoleType.Expr10, HoleType.WhileStmt, HoleType.VariableDeclarator));

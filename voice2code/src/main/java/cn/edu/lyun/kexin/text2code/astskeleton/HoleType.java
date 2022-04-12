@@ -3,7 +3,7 @@ package cn.edu.lyun.kexin.text2code.astskeleton;
 public enum HoleType {
 	Undefined, Wrapper, CompilationUnit, PackageDeclaration, ImportDeclarations, ImportDeclaration, TypeDeclarations,
 	TypeDeclaration, InterfaceDeclaration, ClassDeclaration, FieldDeclarations, BodyDeclarations, FieldDeclaration,
-	MethodDeclaration, VariableDeclarators, VariableDeclarator, BodyDeclaration, Expression, Type, Parameters, Parameter, Name, Body,
+	MethodDeclaration, VariableDeclarators, VariableDeclarator, VariableDeclarationExpr, BodyDeclaration, Expression, Type, Parameters, Parameter, Name, Body,
 	Statements, Statement, ForStmt, WhileStmt, ForInitialization, ForCompare, ForUpdate, BlockStmt, IfStmt, IfCondition,
 	ThenStatement,
 	ElseStatement, SwitchStmt, SwitchEntry, SwitchEntries, LetExpr,
