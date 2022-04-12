@@ -1,4 +1,5 @@
 define public class hello world
-define public int variable count
+define public variable count
+type int
 a call sum
 move next

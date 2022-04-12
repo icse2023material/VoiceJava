@@ -86,12 +86,7 @@ public class PatternSet {
 								new Unit("or", new Unit("final"), new Unit("or", new Unit("transient"), new Unit("volatile"))))))));
 		Pattern fieldPat = new Pattern("field",
 				"define [Annotation|public|protected|private|static|final|transient|volatile]* (list of [_]+ | [_]+ [dot [_]+]? [with [_]+ [and [_]+]*]?) variable [_]+ ",
-				new Unit[] { new Unit("define"), new Unit("asterisk", fieldModifier),
-						new Unit("or", new Unit("normal", new Unit("list"), new Unit("normal", new Unit("of"), (Name))),
-								new Unit(new Unit[] { Name, new Unit("question", new Unit("dot"), Name),
-										new Unit("question", new Unit("with"),
-												new Unit("normal", Name, new Unit("asterisk", new Unit("and"), Name))) })),
-						new Unit("variable"), Name });
+				new Unit[] { new Unit("define"), new Unit("asterisk", fieldModifier), new Unit("variable"), Name });
 		patSet.add(fieldPat);
 
 		// 定义类型

@@ -15,7 +15,7 @@ public class TypeNameMap {
 		map.put(HoleType.FieldDeclarations, "getFields");
 		map.put(HoleType.MethodDeclaration, "getMethods");
 		map.put(HoleType.Parameters, "getParameters");
-		map.put(HoleType.VariableDeclarator, "getVariables");
+		map.put(HoleType.VariableDeclarators, "getVariables");
 		map.put(HoleType.Type, "getType");
 		map.put(HoleType.Body, "getBody");
 		map.put(HoleType.Statements, "getStatements");

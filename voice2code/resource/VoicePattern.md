@@ -25,8 +25,8 @@
     - 语法：`define arrow function`
     - 示例：备注: 还未实现。
 8.  属性/变量定义：
-    - 语法：`define (Annotation | public | protected |private | static | final | transient | volatile)* (list of Name | Name [dot Name]? [with Name [and Name]*]?) variable Name`
-    - 示例：`define private int variable count`， `define list of int variable list`， `define Pair with Integer String`
+    - 语法：`define (Annotation | public | protected |private | static | final | transient | volatile)* variable Name`
+    - 示例：`define private variable count`， `define variable list`
 9.  定义类型：
 
     - 语法：`type (list of Name | Name [dot Name]? [with Name [and Name]*]?) [extends _]?`

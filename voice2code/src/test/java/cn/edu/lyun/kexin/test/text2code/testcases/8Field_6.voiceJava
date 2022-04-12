@@ -1,30 +1,41 @@
 define public class hello world
-define public int variable count
+define public variable count
+type int
 expression a dot b
-define public int variable count
+define public variable count
+type int
 variable y
-define public int variable count
+define public variable count
+type int
 int two
-define public int variable count
+define public variable count
+type int
 i plus plus
-define public int variable count
+define public variable count
+type int
 i minus minus
-define public int variable count
+define public variable count
+type int
 plus plus i
-define public int variable count
+define public variable count
+type int
 minus minus i
-define public int variable count
+define public variable count
+type int
 expression plus expression
 int two
 int three
-define public int variable count
+define public variable count
+type int
 expression expression plus expression
 int two
 int three
-define public int variable count
+define public variable count
+type int
 expression expression plus expression
 int two
 int three
-define public int variable count
+define public variable count
+type int
 subexpression
 int two

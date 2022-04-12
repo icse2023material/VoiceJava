@@ -1,2 +1,3 @@
 define public class hello world
-define public list of int variable intList
+define public variable intList
+type list of int 

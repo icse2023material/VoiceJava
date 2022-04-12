@@ -2,38 +2,51 @@ define public class hello world
 define public function say hello
 type void
 move next
-define int variable count
+define variable count
+type int
 call sum
 move next
-define int variable count
+define variable count
+type int
 a call sum
 move next
-define int variable count
+define variable count
+type int
 expression a dot b
-define int variable count
+define variable count
+type int
 variable y
-define int variable count
+define variable count
+type int
 int two
-define int variable count
+define variable count
+type int
 i plus plus
-define int variable count
+define variable count
+type int
 i minus minus
-define int variable count
+define variable count
+type int
 plus plus i
-define int variable count
+define variable count
+type int
 minus minus i
-define int variable count
+define variable count
+type int
 expression plus expression
 int two
 int three
-define int variable count
+define variable count
+type int
 expression expression plus expression
 int two
 int three
-define int variable count
+define variable count
+type int
 expression expression plus expression
 int two
 int three
-define int variable count
+define variable count
+type int
 subexpression
 int two

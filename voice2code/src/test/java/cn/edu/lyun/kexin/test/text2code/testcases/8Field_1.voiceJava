@@ -1,2 +1,3 @@
 define public class hello world
-define private int variable count
+define private variable count
+type int
