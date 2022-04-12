@@ -3,11 +3,14 @@ import java dot util dot star
 import java dot lang dot reflect dot star
 move next
 define public class hello
-define public int variable count
+define public variable count
+type int
 int zero
-define private int variable sum
+define private variable sum
+type int
 int two
-define public String variable name
+define public variable name
+type String 
 move next
 define public function say hello
 type int
@@ -16,12 +19,15 @@ variable intArray
 type String
 variable name
 move next
-define int variable sum
+define variable sum
+type int
 int zero
-define int variable b
+define variable b
+type int
 move next
 define for
-define int variable i
+define variable i
+type int
 int zero
 expression less equal expression
 variable i

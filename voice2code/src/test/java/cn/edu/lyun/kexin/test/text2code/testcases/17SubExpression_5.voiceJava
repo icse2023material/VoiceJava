@@ -1,5 +1,6 @@
 define public class hello world
-define private int variable great 
+define private variable great 
+type int
 expression times expression
 int seventeen
 subexpression

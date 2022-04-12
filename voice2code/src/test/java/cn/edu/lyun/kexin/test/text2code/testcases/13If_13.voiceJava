@@ -5,7 +5,8 @@ type list of Name
 variable names
 move next
 define for
-define int variable counter
+define variable counter
+type int
 int zero
 expression less than expression
 variable counter

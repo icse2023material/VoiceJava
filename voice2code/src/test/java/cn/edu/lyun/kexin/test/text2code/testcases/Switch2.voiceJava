@@ -3,7 +3,8 @@ import java dot uitl dot star
 import java dot lang dot reflect dot star
 move next
 define public class hello
-define private int variable greeting
+define private variable greeting
+type int
 int two
 define public function say hello
 type int
@@ -12,7 +13,8 @@ variable intArray
 type String 
 variable name
 move next
-define int variable sum
+define variable sum
+type int
 int zero
 define switch
 variable userType

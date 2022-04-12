@@ -4,7 +4,8 @@ type void
 type list of String 
 variable args
 move next
-define int variable option
+define variable option
+type int
 int two
 define switch
 variable option

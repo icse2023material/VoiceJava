@@ -1,7 +1,9 @@
 define public class puppy
-define private int variable puppy age
+define private variable puppy age
+type int
 move next
-define private int variable puppy num
+define private variable puppy num
+type int
 move next
 define public function set age
 type void
@@ -21,7 +23,8 @@ type void
 type list of String 
 variable args
 move next
-define Puppy variable my puppy
+define variable my puppy
+type Puppy
 new instance puppy
 expression string tommy
 move next

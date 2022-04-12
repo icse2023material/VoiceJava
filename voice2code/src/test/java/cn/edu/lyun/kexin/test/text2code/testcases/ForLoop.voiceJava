@@ -4,10 +4,12 @@ type void
 type list of String
 variable args
 move next
-define list of int variable ns
+define variable ns
+type list of int
 move next
 define for
-define int variable i
+define variable i
+type int
 int zero
 expression less than expression
 variable i
@@ -16,7 +18,8 @@ expression i plus plus
 expression System dot out call println
 expression variable ns index i
 move next
-define int variable nsi
+define variable nsi
+type int
 variable ns index i
 let nsi equal expression
 variable ns index i

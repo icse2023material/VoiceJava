@@ -4,7 +4,8 @@ type void
 type list of string
 variable args
 move next
-define int variable n
+define variable n
+type int
 int ninety
 define if
 expression greater than expression

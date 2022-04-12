@@ -4,9 +4,11 @@ type void
 type list of String
 variable args
 move next
-define int variable sum 
+define variable sum 
+type int
 int zero
-define int variable n 
+define variable n 
+type int
 int zero
 define while
 expression less equal expression

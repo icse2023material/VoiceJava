@@ -2,8 +2,10 @@ define public class hello test
 define public function test
 type void 
 move next 
-define int variable a 
+define variable a 
+type int
 expression plus expression
 int three
 int four
-define int variable b
+define variable b
+type int

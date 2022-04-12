@@ -2,6 +2,7 @@ define public class hello world
 define public function say hello
 type void
 move next
-define int variable count
+define variable count
+type int
 subexpression
 int three
