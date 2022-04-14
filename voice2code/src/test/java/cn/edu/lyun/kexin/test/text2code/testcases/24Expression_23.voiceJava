@@ -5,3 +5,4 @@ move next
 let x equal expression
 expression a dot b
 let y equal expression
+variable c

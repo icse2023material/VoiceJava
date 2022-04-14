@@ -1,7 +1,7 @@
 public class HelloWorld {
 
-    public void sayHello() {
-        x = a.b;
-        y = "empty";
+    public void sayHello(Name[] names) {
+        if (counter < 10)
+            return;
     }
 }
