@@ -88,9 +88,10 @@
 
 24. 12 种表达式
 
-    - `expression? call Name`
-    - `expression? Name [dot Name]* [call Name]`
-    - `expression? Name [dot Name]?`
+    - `expression? dot Name` // 仅可作用于 `Name [dot Name]+`, 暂不支持其它。
+    - `expression? call Name` // 后可`move next`, 然后继续`call Name`
+    - `expression? Name [dot Name]* [call Name]` // 后可`move next`, 然后继续`call Name`
+    - `expression? Name [dot Name]*`
     - `expression? variable Name`
     - `expression? (int | byte | short | long | char | float | double | boolean | string) Name`
     - `expression? Name plus plus`

@@ -1,7 +1,6 @@
 public class HelloWorld {
 
     public void sayHello() {
-        x = a.b;
-        y = "empty";
+        x = a.b.c.d;
     }
 }

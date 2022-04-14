@@ -53,6 +53,8 @@ public class ASTManager {
 				return new LetStmtAST().generate(pattern);
   		case "return":
 				return new ReturnStmtAST().generate(pattern);
+			case "expr0":
+				return new ExprAST0().generate(pattern);
 			case "expr1":
 				return new ExprAST().generate(pattern);
 			case "expr2":

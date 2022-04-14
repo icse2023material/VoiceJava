@@ -1,11 +1,7 @@
 define public class hello world
 define public function say hello
 type void
-type list of Name
-variable names
 move next
 let x equal expression
 expression a dot b
-move next
 let y equal expression
-expression c dot d

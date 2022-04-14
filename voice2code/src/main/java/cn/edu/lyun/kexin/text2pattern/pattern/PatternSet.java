@@ -193,6 +193,11 @@ public class PatternSet {
 				new Unit[] { new Unit("question", new Unit("expression")), new Unit("minus"), new Unit("minus"), Name });
 		patSet.add(expr9Pat);
 
+		Pattern expr0Pat = new Pattern("expr0", "[expression]? [dot [_]+]",
+				new Unit[] { new Unit("dot"), Name });
+		patSet.add(expr0Pat);
+
+
 		Pattern expr3Pat = new Pattern("expr3", "[expression]? [_]+ [dot [_]+]*",
 				new Unit[] { new Unit("question", new Unit("expression")), Name, new Unit("asterisk", new Unit("dot"), Name) });
 		patSet.add(expr3Pat);

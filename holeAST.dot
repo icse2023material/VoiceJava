@@ -1,21 +1,20 @@
 digraph {
-CompilationUnit_1278515873 -> TypeDeclarations_539348586
-TypeDeclarations_539348586 -> Wrapper_ClassDeclaration_1508011133
-Wrapper_ClassDeclaration_1508011133 -> BodyDeclarations_1932474356
-BodyDeclarations_1932474356 -> Wrapper_MethodDeclaration_463887010
-Wrapper_MethodDeclaration_463887010 -> Type_369000738
-Wrapper_MethodDeclaration_463887010 -> Parameters_1605736036
-Wrapper_MethodDeclaration_463887010 -> Body_1437571825
-Parameters_1605736036 -> Wrapper_Parameter_2088090028
-Body_1437571825 -> Statements_501469329
-Wrapper_Parameter_2088090028 -> Type_1846961151
-Wrapper_Parameter_2088090028 -> Name_1204229342
-Statements_501469329 -> Wrapper_IfStmt_380534099
-Wrapper_IfStmt_380534099 -> IfCondition_365580367
-Wrapper_IfStmt_380534099 -> Undefined_1218367634 [color = red] 
-IfCondition_365580367 -> Wrapper_Expr10_931155131
-Wrapper_Expr10_931155131 -> LeftSubExpr_1377958909
-Wrapper_Expr10_931155131 -> RightSubExpr_363762142
-LeftSubExpr_1377958909 -> Expr4_730519993
-RightSubExpr_363762142 -> Expr5_517651943
+CompilationUnit_315860201 -> TypeDeclarations_604125138
+TypeDeclarations_604125138 -> Wrapper_ClassDeclaration_631659383
+Wrapper_ClassDeclaration_631659383 -> BodyDeclarations_785447854
+BodyDeclarations_785447854 -> Wrapper_MethodDeclaration_1084502906
+Wrapper_MethodDeclaration_1084502906 -> Type_1613095350
+Wrapper_MethodDeclaration_1084502906 -> Parameters_253011924
+Wrapper_MethodDeclaration_1084502906 -> Body_147022238
+Body_147022238 -> Statements_873309260
+Statements_873309260 -> Wrapper_Statement_1112456099
+Statements_873309260 -> Wrapper_Statement_1671811074
+Wrapper_Statement_1112456099 -> Expression_923083575
+Wrapper_Statement_1671811074 -> Expression_332244937
+Expression_923083575 -> Wrapper_LetExpr_589363823
+Expression_332244937 -> Wrapper_LetExpr_1520836654
+Wrapper_LetExpr_589363823 -> AssignExprValue_2052457859
+Wrapper_LetExpr_1520836654 -> Undefined_989440614 [color = red] 
+AssignExprValue_2052457859 -> Wrapper_NameDotChain_1527086220
+Wrapper_NameDotChain_1527086220 -> Expr3_515273883
 }

@@ -27,7 +27,9 @@ import com.github.javaparser.ast.expr.BinaryExpr;
 import com.github.javaparser.ast.expr.BooleanLiteralExpr;
 import com.github.javaparser.ast.expr.EnclosedExpr;
 import com.github.javaparser.ast.expr.Expression;
+import com.github.javaparser.ast.expr.FieldAccessExpr;
 import com.github.javaparser.ast.expr.MethodCallExpr;
+import com.github.javaparser.ast.expr.Name;
 import com.github.javaparser.ast.expr.NameExpr;
 import com.github.javaparser.ast.expr.ObjectCreationExpr;
 import com.github.javaparser.ast.expr.SimpleName;
@@ -1055,7 +1057,10 @@ public class Text2CompilationUnit {
 						}
 					}
 				}
-				break;
+				else if (parentNodeClassStr != null && parentNodeClassStr.equals("FieldAccessExpr")){
+          this.inefficientMove(text);
+        }
+        break;
 			case "return":
 				holeTypeExpr = HoleType.Return;
 				if (parentHoleType.equals(HoleType.Statements)) {
@@ -1160,7 +1165,20 @@ public class Text2CompilationUnit {
 					}
 				}
 				break;
-			case "expr1":
+      case "expr0":  
+        holeTypeExpr = HoleType.Expr0;
+        if(parentHole.getHoleTypeOfOptionsIfOnlyOne()!=null && parentHole.getHoleTypeOfOptionsIfOnlyOne().equals(HoleType.NameDotChain)){
+          FieldAccessExpr fieldAccessExpr = (FieldAccessExpr)parent.getLeft();
+          FieldAccessExpr newScope = new FieldAccessExpr(fieldAccessExpr.getScope(), fieldAccessExpr.getName().getIdentifier());
+          fieldAccessExpr.setScope(newScope);
+          NameExpr nameExpr = (NameExpr)node;
+          fieldAccessExpr.setName(nameExpr.getName().getIdentifier());
+          currentHole.set(holeTypeExpr, false);
+          parentHole.addChild(new HoleNode());
+        } else {
+          System.out.println("dot Name only follows Name dot Name");
+        }
+      case "expr1":
 				holeTypeExpr = HoleType.Expr1;
 				this.generateCallFunctionExpr(parent, node, currentHole, parentHole, parentOfParentHole, parentHoleType,
 						holeIndex, parentNodeClassStr, holeTypeExpr);
@@ -1194,7 +1212,7 @@ public class Text2CompilationUnit {
 				} else if (parentNodeClassStr != null && parentNodeClassStr.equals("ReturnStmt")) {
 					this.generateReturn6(parent, node, currentHole, parentHole, parentOfParentHole, holeTypeExpr);
 				} else if (parentNodeClassStr != null && parentNodeClassStr.equals("AssignExpr")) {
-					this.generateExprInAssignExpr(parent, node, currentHole, parentOfParentHole, holeTypeExpr);
+					this.generateExprInAssignExprForExpr3(parent, node, currentHole, parentOfParentHole, holeTypeExpr);
 				} else if (parentHoleType.equals(HoleType.Arguments)) {
 					this.generateExprInArguments(parent, node, currentHole, parentHole, holeTypeExpr);
 				} else if (parentNodeClassStr != null && parentNodeClassStr.equals("EnclosedExpr")) {
@@ -2418,14 +2436,32 @@ public class Text2CompilationUnit {
 		anotherHole.addChild(new HoleNode());
 	}
 
-	private void generateExprInAssignExpr(Either<Node, Either<List<?>, NodeList<?>>> parent, Node node,
+	private void generateExprInAssignExprForExpr3(Either<Node, Either<List<?>, NodeList<?>>> parent, Node node,
 			HoleNode currentHole, HoleNode parentOfParentHole, HoleType holeType) {
 		AssignExpr assignExpr = (AssignExpr) parent.getLeft();
 		assignExpr.setValue((Expression) node);
-		currentHole.set(HoleType.AssignExprValue, false);
-		currentHole.addChild(new HoleNode(holeType, false));
-		parentOfParentHole.addChild(new HoleNode());
+		String nodeClassStr = StringHelper.getClassName(node.getClass().toString());
+    if(nodeClassStr.equals("FieldAccessExpr")){
+      // Name dot Name case
+      currentHole.set(HoleType.AssignExprValue, false);
+      HoleNode nameDotChainHole = new HoleNode(HoleType.Wrapper, false, HoleType.NameDotChain);
+      currentHole.addChild(nameDotChainHole);
+      nameDotChainHole.addChild(new HoleNode(holeType, false));
+      nameDotChainHole.addChild(new HoleNode());
+    } else {
+      currentHole.set(HoleType.AssignExprValue, false);
+      currentHole.addChild(new HoleNode(holeType, false));
+      parentOfParentHole.addChild(new HoleNode()); 
+    }
 	}
+
+  private void generateExprInAssignExpr(Either<Node, Either<List<?>, NodeList<?>>> parent, Node node, HoleNode currentHole, HoleNode parentOfParentHole, HoleType holeType) {
+    AssignExpr assignExpr = (AssignExpr) parent.getLeft();
+    assignExpr.setValue((Expression) node);
+    currentHole.set(HoleType.AssignExprValue, false);
+    currentHole.addChild(new HoleNode(holeType, false));
+    parentOfParentHole.addChild(new HoleNode());
+  }
 
 	private void generateExprInAssignExprForExpr10AndExpr11(Either<Node, Either<List<?>, NodeList<?>>> parent, Node node,
 			HoleNode currentHole, HoleNode parentOfParentHole, HoleType holeType) {
@@ -3048,4 +3084,10 @@ public class Text2CompilationUnit {
 			exprHole.addChild(new HoleNode());
 		}
 	}
+
+
+  private void inefficientMove(String text){
+    this.generate("move next");
+    this.generate(text);
+  }
 }
