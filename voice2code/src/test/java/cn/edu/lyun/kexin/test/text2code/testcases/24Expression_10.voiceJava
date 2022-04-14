@@ -7,9 +7,12 @@ expression plus expression
 int two
 call sum
 move next
+move next
 let x equal expression
 expression plus expression
 call sum
 move next
+move next
 call sum
+move next
 move next

@@ -23,6 +23,7 @@ let sum equal
 call fibonacci
 int two
 move next
+move next
 expression times expression
 int fifteen
 int fifteen

@@ -9,3 +9,4 @@ expression times expression
 int two
 call sum
 move next
+move next

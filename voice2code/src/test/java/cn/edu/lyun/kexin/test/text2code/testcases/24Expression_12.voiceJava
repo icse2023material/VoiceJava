@@ -7,10 +7,14 @@ expression plus expression
 expression times expression
 call sum
 move next
+move next
 call sum
+move next
 move next
 expression times expression
 call sum
 move next
+move next
 call sum 
+move next
 move next

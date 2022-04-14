@@ -89,7 +89,7 @@
 24. 12 种表达式
 
     - `expression? call Name`
-    - `expression? Name [dot Name]* [call Name]+`
+    - `expression? Name [dot Name]* [call Name]`
     - `expression? Name [dot Name]?`
     - `expression? variable Name`
     - `expression? (int | byte | short | long | char | float | double | boolean | string) Name`

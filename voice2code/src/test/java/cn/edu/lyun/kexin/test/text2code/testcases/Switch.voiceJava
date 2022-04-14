@@ -13,6 +13,7 @@ int one
 System dot out call println
 string Selected1
 move next
+move next
 break
 int two
 move next
@@ -20,9 +21,11 @@ int three
 System dot out call println
 string NotSelected 
 move next
+move next
 break
 move next
 System dot out call println
 string bad
+move next
 move next
 break

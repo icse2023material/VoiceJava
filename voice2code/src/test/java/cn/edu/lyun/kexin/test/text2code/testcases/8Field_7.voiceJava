@@ -6,9 +6,11 @@ define variable count
 type int
 call sum
 move next
+move next
 define variable count
 type int
 a call sum
+move next
 move next
 define variable count
 type int

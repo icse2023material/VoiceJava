@@ -150,9 +150,8 @@ public class PatternSet {
 				new Unit[] { new Unit("question", new Unit("expression")), new Unit("call"), Name });
 		patSet.add(expr1Pat);
 
-		Pattern expr2Pat = new Pattern("expr2", "[expression]? [_]+ [dot [_]+]* [call [_]+]+",
-				new Unit[] { new Unit("question", new Unit("expression")), Name, new Unit("asterisk", new Unit("dot"), Name),
-						new Unit("plus", new Unit("call"), Name) });
+		Pattern expr2Pat = new Pattern("expr2", "[expression]? [_]+ [dot [_]+]* [call [_]+]",
+				new Unit[] { new Unit("question", new Unit("expression")), Name, new Unit("asterisk", new Unit("dot"), Name), new Unit("call"), Name });
 		patSet.add(expr2Pat);
 
 		Pattern expr14Pat = new Pattern("expr14", "[expression]? string [_]+",

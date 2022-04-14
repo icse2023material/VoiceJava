@@ -17,6 +17,7 @@ call notify
 int three
 int five
 move next
+move next
 return 
 hello call notify
 int two

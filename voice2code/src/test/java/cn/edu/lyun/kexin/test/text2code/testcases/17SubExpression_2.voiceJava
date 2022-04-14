@@ -8,7 +8,9 @@ subexpression
 call sum
 int three
 move next
+move next
 subexpression
 call sum
 int two
+move next
 move next

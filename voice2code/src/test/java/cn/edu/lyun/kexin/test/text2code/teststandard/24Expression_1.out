@@ -1,10 +1,11 @@
 public class HelloWorld {
 
     public void sayHello(Name[] names) {
+        x = sum(a.plus());
+        plus().minus();
+        x = a.sum().aggregate();
+        x = sum().aggregate();
         x = sum();
-        x = a.sum();
-        x = sum(Plus());
-        x = sum(a.Plus());
         x = sum(a.b);
         x = sum(y);
         x = sum(i++);

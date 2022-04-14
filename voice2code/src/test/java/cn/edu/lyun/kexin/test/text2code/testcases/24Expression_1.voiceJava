@@ -6,41 +6,61 @@ variable names
 move next
 let x equal expression
 expression call sum
+a call plus
+move next
+move next
+move next
+move next
+call plus
+move next
+call minus
+move next
 move next
 let x equal expression
 expression a call sum
 move next
-let x equal expression
-expression call sum
-call Plus
+call aggregate
+move next
 move next
 let x equal expression
 expression call sum
-a call Plus
+move next
+call aggregate
+move next
+move next
+let x equal expression
+expression call sum
+move next
 move next
 let x equal expression
 expression call sum
 expression a dot b
 move next
+move next
 let x equal expression
 expression call sum
 variable y
+move next
 move next
 let x equal expression
 expression call sum
 i plus plus
 move next
+move next
 let x equal expression
 expression call sum
 i minus minus
+move next
 move next
 let x equal expression
 expression call sum
 plus plus i
 move next
+move next
 let x equal expression
 expression call sum
 minus minus i
+move next
 move next
 let x equal expression
 expression call sum
@@ -48,15 +68,18 @@ expression plus expression
 int twelve
 int thirteen
 move next
-let x equal expression
-expression call sum
-expression expression plus expression
-int two
-int three
 move next
 let x equal expression
 expression call sum
 expression expression plus expression
 int two
 int three
+move next
+move next
+let x equal expression
+expression call sum
+expression expression plus expression
+int two
+int three
+move next
 move next

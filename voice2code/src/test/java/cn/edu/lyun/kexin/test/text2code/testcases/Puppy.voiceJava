@@ -31,7 +31,9 @@ move next
 my puppy call set age
 expression int two
 move next
+move next
 my puppy call get age
+move next
 move next
 expression System dot out call println
 expression my puppy dot puppy age

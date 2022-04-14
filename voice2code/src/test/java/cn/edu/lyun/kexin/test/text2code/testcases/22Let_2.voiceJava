@@ -7,5 +7,6 @@ move next
 let fib equal expression
 Fib call fibonacci
 move next
+move next
 let sum dot fib equal expression
 fib call fibonacci

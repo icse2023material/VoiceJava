@@ -27,8 +27,10 @@ import com.github.javaparser.ast.expr.BinaryExpr;
 import com.github.javaparser.ast.expr.BooleanLiteralExpr;
 import com.github.javaparser.ast.expr.EnclosedExpr;
 import com.github.javaparser.ast.expr.Expression;
+import com.github.javaparser.ast.expr.MethodCallExpr;
 import com.github.javaparser.ast.expr.NameExpr;
 import com.github.javaparser.ast.expr.ObjectCreationExpr;
+import com.github.javaparser.ast.expr.SimpleName;
 import com.github.javaparser.ast.expr.VariableDeclarationExpr;
 import com.github.javaparser.ast.stmt.BlockStmt;
 import com.github.javaparser.ast.stmt.ExpressionStmt;
@@ -2443,16 +2445,51 @@ public class Text2CompilationUnit {
 		NodeList<Expression> arguments = (NodeList<Expression>) parent.get().get();
 		arguments.add((Expression) node);
 
-		currentHole.set(HoleType.Wrapper, false, HoleType.Argument);
-		currentHole.addChild(new HoleNode(holeTypeExpr, false));
-		parentHole.addChild(new HoleNode(HoleType.Argument));
+	  currentHole.set(HoleType.Wrapper, false, HoleType.Argument);
+    // function call
+    if(holeTypeExpr.equals(HoleType.Expr1) || holeTypeExpr.equals(HoleType.Expr2)){
+      HoleNode methodCallChainHole = new HoleNode(HoleType.Wrapper, false, HoleType.MethodCallExprChain);
+      currentHole.addChild(methodCallChainHole);
+      HoleNode exprWrapperHole = new HoleNode(HoleType.Wrapper, false, holeTypeExpr);
+      methodCallChainHole.addChild(exprWrapperHole);
+      HoleNode argsHole = new HoleNode(HoleType.Arguments, false);
+      exprWrapperHole.addChild(argsHole);
+      argsHole.addChild(new HoleNode());
+    } else if (holeTypeExpr.equals(HoleType.Expr10)){
+      // expression case
+      HoleNode exprWrapperHole = new HoleNode(HoleType.Wrapper, false, holeTypeExpr);
+      currentHole.addChild(exprWrapperHole);
+      exprWrapperHole.addChild(new HoleNode());
+    } else {
+		  currentHole.addChild(new HoleNode(holeTypeExpr, false));
+		  parentHole.addChild(new HoleNode(HoleType.Argument));
+    }
 	}
 
 	private void generateCallFunctionExpr(Either<Node, Either<List<?>, NodeList<?>>> parent, Node node,
 			HoleNode currentHole, HoleNode parentHole, HoleNode parentOfParentHole, HoleType parentHoleType, int holeIndex,
 			String parentNodeClassStr, HoleType holeTypeExpr) {
 		String nodeClassStr = StringHelper.getClassName(node.getClass().toString());
-		if (parentHoleType.equals(HoleType.Statements)) {
+		if(parentHole.getHoleTypeOfOptionsIfOnlyOne()!=null && parentHole.getHoleTypeOfOptionsIfOnlyOne().equals(HoleType.MethodCallExprChain)){
+      MethodCallExpr methodCallExpr = (MethodCallExpr)parent.getLeft();
+
+      // Reconstruct a MethodCallExpr as a new scope: newScope.
+      Optional<Expression> scope = methodCallExpr.getScope();
+      String name = methodCallExpr.getName().getIdentifier();
+      MethodCallExpr newScope = new MethodCallExpr(name);      
+      if(scope.isPresent()){
+        newScope.setScope(scope.get());
+      } 
+      MethodCallExpr eNode = (MethodCallExpr)node;
+      methodCallExpr.setScope(newScope);
+      methodCallExpr.setName(eNode.getName());
+
+      currentHole.set(HoleType.Wrapper, false, holeTypeExpr);
+      HoleNode argsHole = new HoleNode(HoleType.Arguments, false);
+      currentHole.addChild(argsHole);
+			argsHole.addChild(new HoleNode());
+    }
+    else if (parentHoleType.equals(HoleType.Statements)) {
 			NodeList<Statement> statements = (NodeList<Statement>) parent.get().get();
 			if (holeIndex < statements.size()) {
 				// TODO
@@ -2462,8 +2499,10 @@ public class Text2CompilationUnit {
 				currentHole.set(HoleType.Wrapper, false, HoleType.Statement);
 				HoleNode exprHole = new HoleNode(HoleType.Expression, false);
 				currentHole.addChild(exprHole);
+        HoleNode methodCallChainHole = new HoleNode(HoleType.Wrapper, false, HoleType.MethodCallExprChain);
+        exprHole.addChild(methodCallChainHole);
 				HoleNode exprWrapperHole = new HoleNode(HoleType.Wrapper, false, holeTypeExpr);
-				exprHole.addChild(exprWrapperHole);
+				methodCallChainHole.addChild(exprWrapperHole);
 				HoleNode argsHole = new HoleNode(HoleType.Arguments, false);
 				exprWrapperHole.addChild(argsHole);
 				argsHole.addChild(new HoleNode());
@@ -2485,15 +2524,17 @@ public class Text2CompilationUnit {
 
 				anotherCurrentHole.set(HoleType.Statements, false);
 
-				HoleNode holdeNodeChild0 = new HoleNode(HoleType.Expression, false);
-				anotherCurrentHole.addChild(holdeNodeChild0);
+				HoleNode expressionHole = new HoleNode(HoleType.Expression, false);
+				anotherCurrentHole.addChild(expressionHole);
 
-				HoleNode holeNode = new HoleNode(HoleType.Wrapper, false);
-				holeNode.setHoleTypeOptions(new HoleType[] { holeTypeExpr });
-				holdeNodeChild0.addChild(holeNode);
+        HoleNode methodCallChainHole = new HoleNode(HoleType.Wrapper, false, HoleType.MethodCallExprChain);
+        expressionHole.addChild(methodCallChainHole);
+
+				HoleNode exprWrapperHole = new HoleNode(HoleType.Wrapper, false, holeTypeExpr);
+				methodCallChainHole.addChild(exprWrapperHole);
 
 				HoleNode holeNodeChild = new HoleNode(HoleType.Arguments, false);
-				holeNode.addChild(holeNodeChild);
+				exprWrapperHole.addChild(holeNodeChild);
 				holeNodeChild.addChild(new HoleNode());
 			} else {
 				// TODO
@@ -2505,22 +2546,12 @@ public class Text2CompilationUnit {
 			} else if (parentHole.getHoleType().equals(HoleType.RightSubExpr)) {
 				binaryExpr.setRight((Expression) node);
 				currentHole.set(HoleType.Expression, false);
-				HoleNode holeNode = new HoleNode(HoleType.Wrapper, false);
-				holeNode.setHoleTypeOptionsOfOnlyOne(holeTypeExpr);
-				currentHole.addChild(holeNode);
+        HoleNode methodCallChainHole = new HoleNode(HoleType.Wrapper, false, HoleType.MethodCallExprChain);
+        currentHole.addChild(methodCallChainHole);
+				HoleNode holeNode = new HoleNode(HoleType.Wrapper, false, holeTypeExpr);
+				methodCallChainHole.addChild(holeNode);
 				HoleNode anotherHoleNode = new HoleNode(HoleType.Arguments, false);
 				holeNode.addChild(anotherHoleNode);
-				anotherHoleNode.addChild(new HoleNode());
-			} else if ((parentHole.getHoleTypeOfOptionsIfOnlyOne() != null
-					&& parentHole.getHoleTypeOfOptionsIfOnlyOne().equals(HoleType.Expr11))
-					|| (parentOfParentHole.getHoleTypeOfOptionsIfOnlyOne() != null
-							&& parentOfParentHole.getHoleTypeOfOptionsIfOnlyOne().equals(HoleType.Expr11))) {
-				binaryExpr.setRight((Expression) node);
-				currentHole.set(HoleType.RightSubExpr, false);
-				HoleNode exprWrapper = new HoleNode(HoleType.Wrapper, false, holeTypeExpr);
-				currentHole.addChild(exprWrapper);
-				HoleNode anotherHoleNode = new HoleNode(HoleType.Arguments, false);
-				exprWrapper.addChild(anotherHoleNode);
 				anotherHoleNode.addChild(new HoleNode());
 			} else if ((parentHole.getHoleTypeOfOptionsIfOnlyOne() != null
 					&& parentHole.getHoleTypeOfOptionsIfOnlyOne().equals(HoleType.Expr10))
@@ -2531,8 +2562,10 @@ public class Text2CompilationUnit {
 					// right
 					binaryExpr.setLeft((Expression) node);
 					currentHole.set(HoleType.LeftSubExpr, false);
+          HoleNode methodCallChainHole = new HoleNode(HoleType.Wrapper, false, HoleType.MethodCallExprChain);
+          currentHole.addChild(methodCallChainHole);
 					HoleNode exprWrapper = new HoleNode(HoleType.Wrapper, false, holeTypeExpr);
-					currentHole.addChild(exprWrapper);
+					methodCallChainHole.addChild(exprWrapper);
 					HoleNode anotherHoleNode = new HoleNode(HoleType.Arguments, false);
 					exprWrapper.addChild(anotherHoleNode);
 					anotherHoleNode.addChild(new HoleNode());
@@ -2540,8 +2573,10 @@ public class Text2CompilationUnit {
 					// right
 					binaryExpr.setRight((Expression) node);
 					currentHole.set(HoleType.RightSubExpr, false);
+          HoleNode methodCallChainHole = new HoleNode(HoleType.Wrapper, false, HoleType.MethodCallExprChain);
+          currentHole.addChild(methodCallChainHole);
 					HoleNode exprWrapper = new HoleNode(HoleType.Wrapper, false, holeTypeExpr);
-					currentHole.addChild(exprWrapper);
+					methodCallChainHole.addChild(exprWrapper);
 					HoleNode anotherHoleNode = new HoleNode(HoleType.Arguments, false);
 					exprWrapper.addChild(anotherHoleNode);
 					anotherHoleNode.addChild(new HoleNode());
@@ -2566,8 +2601,10 @@ public class Text2CompilationUnit {
 				stmtsHole.addChild(stmtWrapperHole);
 				HoleNode exprHole = new HoleNode(HoleType.Expression, false);
 				stmtWrapperHole.addChild(exprHole);
+        HoleNode methodCallExprChainHole = new HoleNode(HoleType.Wrapper, false, HoleType.MethodCallExprChain);
+				exprHole.addChild(methodCallExprChainHole);
 				HoleNode exprWrapperHole = new HoleNode(HoleType.Wrapper, false, holeTypeExpr);
-				exprHole.addChild(exprWrapperHole);
+				methodCallExprChainHole.addChild(exprWrapperHole);
 				HoleNode argsHole = new HoleNode(HoleType.Arguments, false);
 				exprWrapperHole.addChild(argsHole);
 				argsHole.addChild(new HoleNode());
@@ -2597,8 +2634,11 @@ public class Text2CompilationUnit {
 				HoleNode exprHole = new HoleNode(HoleType.Expression, false);
 				stmtWrapperHole.addChild(exprHole);
 
+        HoleNode methodCallExprChainHole = new HoleNode(HoleType.Wrapper, false, HoleType.MethodCallExprChain);
+        exprHole.addChild(methodCallExprChainHole);
+
 				HoleNode exprWrapperHole = new HoleNode(HoleType.Wrapper, false, holeTypeExpr);
-				exprHole.addChild(exprWrapperHole);
+				methodCallExprChainHole.addChild(exprWrapperHole);
 
 				HoleNode argsHole = new HoleNode(HoleType.Arguments, false);
 				exprWrapperHole.addChild(argsHole);
@@ -2630,8 +2670,11 @@ public class Text2CompilationUnit {
 				HoleNode exprHole = new HoleNode(HoleType.Expression, false);
 				statementHole.addChild(exprHole);
 
+        HoleNode methodCallExprChainHole = new HoleNode(HoleType.Wrapper, false, HoleType.MethodCallExprChain);
+        exprHole.addChild(methodCallExprChainHole);
+
 				HoleNode exprWrapperHole = new HoleNode(HoleType.Wrapper, false, holeTypeExpr);
-				exprHole.addChild(exprWrapperHole);
+				methodCallExprChainHole.addChild(exprWrapperHole);
 
 				HoleNode argsHole = new HoleNode(HoleType.Arguments, false);
 				exprWrapperHole.addChild(argsHole);
@@ -2647,12 +2690,14 @@ public class Text2CompilationUnit {
 			} else {
 				ExpressionStmt expressionStmt = new ExpressionStmt((Expression) node);
 				statements.add(expressionStmt);
-				currentHole.setIsHole(false);
-				currentHole.setHoleType(HoleType.Expression);
 
-				HoleNode exprHole = new HoleNode(HoleType.Wrapper, false);
-				exprHole.setHoleTypeOptionsOfOnlyOne(holeTypeExpr);
-				currentHole.addChild(exprHole);
+        currentHole.set(HoleType.Expression, false);
+
+        HoleNode methodCallExprChainHole = new HoleNode(HoleType.Wrapper, false, HoleType.MethodCallExprChain);
+        currentHole.addChild(methodCallExprChainHole);
+
+				HoleNode exprHole = new HoleNode(HoleType.Wrapper, false, holeTypeExpr);
+				methodCallExprChainHole.addChild(exprHole);
 
 				HoleNode holeNode = new HoleNode(HoleType.Arguments, false);
 				parentHole.addChild(holeNode);
@@ -2671,9 +2716,11 @@ public class Text2CompilationUnit {
 				HoleNode holeNode = new HoleNode(HoleType.Expression, false);
 				currentHole.addChild(holeNode);
 
-				HoleNode childHoleNode = new HoleNode(HoleType.Wrapper, false);
-				childHoleNode.setHoleTypeOptionsOfOnlyOne(holeTypeExpr);
-				holeNode.addChild(childHoleNode);
+        HoleNode methodCallExprChainHole = new HoleNode(HoleType.Wrapper, false, HoleType.MethodCallExprChain);
+        holeNode.addChild(methodCallExprChainHole);
+
+				HoleNode childHoleNode = new HoleNode(HoleType.Wrapper, false, holeTypeExpr);
+				methodCallExprChainHole.addChild(childHoleNode);
 
 				HoleNode argsNode = new HoleNode(HoleType.Arguments, false);
 				childHoleNode.addChild(argsNode);
@@ -2699,8 +2746,11 @@ public class Text2CompilationUnit {
 				HoleNode initializerHole = new HoleNode(HoleType.VariableInitializer, false);
 				variableHole.addChild(initializerHole);
 
+        HoleNode methodCallExprChainHole = new HoleNode(HoleType.Wrapper, false, HoleType.MethodCallExprChain);
+        initializerHole.addChild(methodCallExprChainHole);
+
 				HoleNode innerHole = new HoleNode(HoleType.Wrapper, false, holeTypeExpr);
-				initializerHole.addChild(innerHole);
+				methodCallExprChainHole.addChild(innerHole);
 
 				HoleNode args = new HoleNode(HoleType.Arguments, false);
 				innerHole.addChild(args);
@@ -2711,9 +2761,11 @@ public class Text2CompilationUnit {
 				assignExpr.setValue((Expression) node);
 				currentHole.set(HoleType.Expression, false);
 
-				HoleNode exprHole = new HoleNode(HoleType.Wrapper, false);
-				exprHole.setHoleTypeOptionsOfOnlyOne(holeTypeExpr);
-				currentHole.addChild(exprHole);
+        HoleNode methodCallExprChainHole = new HoleNode(HoleType.Wrapper, false, HoleType.MethodCallExprChain);
+        currentHole.addChild(methodCallExprChainHole);
+
+				HoleNode exprHole = new HoleNode(HoleType.Wrapper, false, holeTypeExpr);
+				methodCallExprChainHole.addChild(exprHole);
 
 				HoleNode argsHole = new HoleNode(HoleType.Arguments, false);
 				exprHole.addChild(argsHole);
@@ -2725,9 +2777,11 @@ public class Text2CompilationUnit {
 			stmt.setExpression((Expression) node);
 			currentHole.set(HoleType.Expression, false);
 
-			HoleNode exprHole = new HoleNode(HoleType.Wrapper, false);
-			exprHole.setHoleTypeOptionsOfOnlyOne(holeTypeExpr);
-			currentHole.addChild(exprHole);
+      HoleNode methodCallExprChainHole = new HoleNode(HoleType.Wrapper, false, HoleType.MethodCallExprChain);
+      currentHole.addChild(methodCallExprChainHole);
+
+			HoleNode exprHole = new HoleNode(HoleType.Wrapper, false, holeTypeExpr);
+			methodCallExprChainHole.addChild(exprHole);
 
 			HoleNode argsHole = new HoleNode(HoleType.Arguments, false);
 			exprHole.addChild(argsHole);
@@ -2737,8 +2791,11 @@ public class Text2CompilationUnit {
 			assignExpr.setValue((Expression) node);
 			currentHole.set(HoleType.AssignExprValue, false);
 
+      HoleNode methodCallExprChainHole = new HoleNode(HoleType.Wrapper, false, HoleType.MethodCallExprChain);
+      currentHole.addChild(methodCallExprChainHole);
+
 			HoleNode exprHole = new HoleNode(HoleType.Wrapper, false, holeTypeExpr);
-			currentHole.addChild(exprHole);
+			methodCallExprChainHole.addChild(exprHole);
 
 			HoleNode argsHole = new HoleNode(HoleType.Arguments, false);
 			exprHole.addChild(argsHole);
@@ -2749,8 +2806,10 @@ public class Text2CompilationUnit {
 			EnclosedExpr enclosedExpr = (EnclosedExpr) parent.getLeft();
 			enclosedExpr.setInner((Expression) node);
 			currentHole.set(HoleType.InnerExpr, false);
+      HoleNode methodCallExprChainHole = new HoleNode(HoleType.Wrapper, false, HoleType.MethodCallExprChain);
+      currentHole.addChild(methodCallExprChainHole);
 			HoleNode exprWrapper = new HoleNode(HoleType.Wrapper, false, holeTypeExpr);
-			currentHole.addChild(exprWrapper);
+			methodCallExprChainHole.addChild(exprWrapper);
 			HoleNode argsHole = new HoleNode(HoleType.Arguments, false);
 			exprWrapper.addChild(argsHole);
 			argsHole.addChild(new HoleNode());
@@ -2768,15 +2827,19 @@ public class Text2CompilationUnit {
 			HoleNode initializerHole = new HoleNode(HoleType.VariableInitializer, false);
 			variableHole.addChild(initializerHole);
 
+      HoleNode methodCallExprChainHole = new HoleNode(HoleType.Wrapper, false, HoleType.MethodCallExprChain);
+      initializerHole.addChild(methodCallExprChainHole);
 			HoleNode innerHole = new HoleNode(HoleType.Wrapper, false, holeTypeExpr);
-			initializerHole.addChild(innerHole);
+			methodCallExprChainHole.addChild(innerHole);
 			innerHole.addChild(new HoleNode());
 		}
     else if(parentNodeClassStr != null && parentNodeClassStr.equals("VariableDeclarator")){
       VariableDeclarator variableDeclarator = (VariableDeclarator)parent.getLeft();
       variableDeclarator.setInitializer((Expression)node);
-      currentHole.set(HoleType.Wrapper, false, holeTypeExpr);
-      currentHole.addChild(new HoleNode()); 
+      currentHole.set(HoleType.Wrapper, false, HoleType.MethodCallExprChain);
+      HoleNode exprWrapperHole = new HoleNode(HoleType.Wrapper, false, holeTypeExpr);
+      currentHole.addChild(exprWrapperHole);
+      exprWrapperHole.addChild(new HoleNode()); 
     }
   }
 

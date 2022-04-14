@@ -16,9 +16,11 @@ move next
 let sum equal expression 
 call sum
 move next
+move next
 let sum equal expression 
 sum call sum
 int ten
+move next
 move next
 let sum equal expression 
 score dot sum

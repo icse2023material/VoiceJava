@@ -23,8 +23,10 @@ int ten
 let sum equal 
 call fibonacci
 move next
+move next
 let hello dot sum equal 
 hello call fibonacci
+move next
 move next
 let sum equal 
 hello dot sum

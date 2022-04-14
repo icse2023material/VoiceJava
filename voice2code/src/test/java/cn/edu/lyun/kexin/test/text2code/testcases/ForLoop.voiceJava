@@ -18,6 +18,7 @@ expression i plus plus
 expression System dot out call println
 expression variable ns index i
 move next
+move next
 define variable nsi
 type int
 variable ns index i
