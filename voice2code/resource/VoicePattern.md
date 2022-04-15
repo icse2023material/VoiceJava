@@ -88,6 +88,7 @@
 
 24. 12 种表达式
 
+    - `expression? lambda expression` // lambda expression
     - `expression? not expression` // unary not expression
     - `expression? dot Name` // 仅可作用于 `Name [dot Name]+`, 暂不支持其它。
     - `expression? call Name` // 后可`move next`, 然后继续`call Name`

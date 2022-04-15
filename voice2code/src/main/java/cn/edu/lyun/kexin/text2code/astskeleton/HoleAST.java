@@ -179,7 +179,7 @@ public class HoleAST {
 	public boolean hashOnlyOneChild(HoleNode holeNode) {
 		Set<HoleType> set = new HashSet<HoleType>(Arrays.asList(HoleType.ImportDeclaration, HoleType.TypeDeclaration, HoleType.VariableDeclarators, HoleType.VariableDeclarationExpr,
 				HoleType.Expression, HoleType.Body, HoleType.Statement, HoleType.VariableInitializer, HoleType.ForInitialization,
-				HoleType.Expr1, HoleType.Expr2, HoleType.ThenStatement, HoleType.AssignExprValue, HoleType.Expr16,
+				HoleType.Expr1, HoleType.Expr2, HoleType.ThenStatement, HoleType.AssignExprValue, HoleType.Expr16, HoleType.Return,
         HoleType.Argument, HoleType.ConditionalExprThen, HoleType.ConditionalExprElse, HoleType.ConditionalExprCondition,
 				HoleType.RightSubExpr, HoleType.LeftSubExpr, HoleType.InnerExpr));
 		return holeNode.getNonUndefinedChildListSize() == 1 && set.contains(holeNode.getHoleType());
@@ -188,10 +188,10 @@ public class HoleAST {
 	public boolean isNodeChildrenFull(HoleNode holeNode) {
 		Set<HoleType> oneChildSet = new HashSet<HoleType>(Arrays.asList(HoleType.Statement, HoleType.VariableDeclarators, HoleType.VariableDeclarationExpr,
 				HoleType.Expr1, HoleType.Expr2, HoleType.MethodCallExpr, HoleType.LetExpr, HoleType.ForInitialization,HoleType.ConditionalExprThen, HoleType.ConditionalExprElse, HoleType.ConditionalExprCondition,
-        HoleType.Argument, HoleType.LeftSubExpr, HoleType.RightSubExpr, HoleType.Expr16,
+        HoleType.Argument, HoleType.LeftSubExpr, HoleType.RightSubExpr, HoleType.Expr16, HoleType.Return,
 				HoleType.Expr11, HoleType.InnerExpr, HoleType.FieldDeclaration));
 		Set<HoleType> twoChildrenSet = new HashSet<HoleType>(Arrays.asList(HoleType.LetExpr,
-				HoleType.SwitchEntry, HoleType.SwitchStmt, HoleType.Expr10, HoleType.WhileStmt, HoleType.VariableDeclarator));
+				HoleType.SwitchEntry, HoleType.SwitchStmt, HoleType.Expr10, HoleType.WhileStmt, HoleType.VariableDeclarator, HoleType.Expr17));
 		Set<HoleType> threeChildrenSet = new HashSet<HoleType>(Arrays.asList(HoleType.BodyDeclaration, HoleType.Expr15));
 		if (holeNode.getHoleType().equals(HoleType.Wrapper)) {
 			HoleType holeType = holeNode.getHoleTypeOfOptionsIfOnlyOne();

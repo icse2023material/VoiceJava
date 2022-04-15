@@ -150,6 +150,9 @@ public class PatternSet {
                         new Unit[] { new Unit("question", new Unit("expression")), new Unit("not"), new Unit("expression") });
     patSet.add(expr16Pat);
 
+    Pattern expr17Pat = new Pattern("expr17", "expression? lambda expression", new Unit[] { new Unit("question", new Unit("expression")), new Unit("lambda"), new Unit("expression") });
+    patSet.add(expr17Pat);
+
 
 		Pattern expr15Pat = new Pattern("expr15", "conditional expression",
 				new Unit[] { new Unit("conditional"), new Unit("expression") });

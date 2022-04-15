@@ -29,6 +29,7 @@ import com.github.javaparser.ast.expr.ConditionalExpr;
 import com.github.javaparser.ast.expr.EnclosedExpr;
 import com.github.javaparser.ast.expr.Expression;
 import com.github.javaparser.ast.expr.FieldAccessExpr;
+import com.github.javaparser.ast.expr.LambdaExpr;
 import com.github.javaparser.ast.expr.MethodCallExpr;
 import com.github.javaparser.ast.expr.Name;
 import com.github.javaparser.ast.expr.NameExpr;
@@ -1166,7 +1167,32 @@ public class Text2CompilationUnit {
 						childHoleNode.addChild(new HoleNode());
 					}
 				}
-				break;
+				else if (parentNodeClassStr != null && parentNodeClassStr.equals("LambdaExpr")){
+          LambdaExpr lambdaExpr = (LambdaExpr)parent.getLeft();
+          Statement body = lambdaExpr.getBody();
+    
+          String bodyClassStr = body.getClass().toString();
+          bodyClassStr = StringHelper.getClassName(bodyClassStr);
+          if (bodyClassStr.equals("ReturnStmt")) {
+            BlockStmt blockStmt = new BlockStmt();
+            NodeList<Statement> statements = new NodeList<Statement>();
+            statements.add((Statement)node);
+            blockStmt.setStatements(statements);
+            lambdaExpr.setBody(blockStmt);
+    
+            currentHole.set(HoleType.Body, false);
+            HoleNode stmtsNode = new HoleNode(HoleType.Statements, false);
+            currentHole.addChild(stmtsNode);
+            HoleNode holeNodeChild = new HoleNode(HoleType.Wrapper, false, holeTypeExpr);
+            stmtsNode.addChild(holeNodeChild);
+            holeNodeChild.addChild(new HoleNode());
+          } else if (bodyClassStr.equals("BlockStmt")) {
+    
+          } else {
+            System.out.println("Should not go to this branch");
+          } 
+        }
+        break;
       case "expr0":  
         holeTypeExpr = HoleType.Expr0;
         if(parentHole.getHoleTypeOfOptionsIfOnlyOne()!=null && parentHole.getHoleTypeOfOptionsIfOnlyOne().equals(HoleType.NameDotChain)){
@@ -1290,6 +1316,14 @@ public class Text2CompilationUnit {
 					this.generateExprForEnclosedExpr(parent, node, currentHole, parentOfParentHole, holeTypeExpr);
 				} else if (parentNodeClassStr != null && parentNodeClassStr.equals("FieldDeclaration")) {
 					this.generateExprForFieldDeclaration(parent, node, currentHole, parentOfParentHole, holeTypeExpr);
+				} else if (parentHoleType.equals(HoleType.Parameters)){
+          NodeList<Parameter> parameters = (NodeList<Parameter>)parent.get().get();
+          Parameter parameter = new Parameter();
+          NameExpr nameExpr = (NameExpr)node;
+          parameter.setName(nameExpr.getName());
+          parameters.add(parameter);
+          currentHole.set(holeTypeExpr, false);
+          parentHole.addChild(new HoleNode());
 				} else if (parentNodeClassStr != null && parentNodeClassStr.equals("Parameter")){
           Parameter parameter = (Parameter)(parent.getLeft());
           NameExpr nameExpr = (NameExpr)node;
@@ -1303,6 +1337,9 @@ public class Text2CompilationUnit {
           this.generateConditionExprThenElseSimple(parent, node, holeIndex, currentHole, parentHole, holeTypeExpr);
         } else if (parentNodeClassStr != null && parentNodeClassStr.equals("UnaryExpr")) {
           this.generateExprInUnaryExpr(parent, node, holeIndex, currentHole, parentHole, holeTypeExpr);
+        } else if (parentNodeClassStr != null && parentNodeClassStr.equals("LambdaExpr")) {
+          LambdaExpr lambdaExpr = (LambdaExpr)parent.getLeft();
+
         }
 				break;
 			case "expr5":
@@ -1786,6 +1823,18 @@ public class Text2CompilationUnit {
           exprWrapperHole.addChild(new HoleNode());
         } 
         break;
+      case "expr17":
+        holeTypeExpr = HoleType.Expr17;
+        if(parentHoleType.equals(HoleType.Arguments)){
+          NodeList<Expression> arguments = (NodeList<Expression>) parent.get().get();
+          arguments.add((Expression) node);
+          currentHole.set(HoleType.Wrapper, false, HoleType.Argument);
+          HoleNode exprWrapperHole = new HoleNode(HoleType.Wrapper, false, holeTypeExpr);
+          currentHole.addChild(exprWrapperHole);
+          HoleNode parasHole = new HoleNode(HoleType.Parameters, false);
+          exprWrapperHole.addChild(parasHole);
+          parasHole.addChild(new HoleNode());
+        }
       }
 
 		// this.holeAST.generateDotAndPNGOfHoleAST();
@@ -2606,13 +2655,17 @@ public class Text2CompilationUnit {
       // Reconstruct a MethodCallExpr as a new scope: newScope.
       Optional<Expression> scope = methodCallExpr.getScope();
       String name = methodCallExpr.getName().getIdentifier();
+      NodeList<Expression> arguments = methodCallExpr.getArguments();
       MethodCallExpr newScope = new MethodCallExpr(name);      
+      newScope.setArguments(arguments);
       if(scope.isPresent()){
         newScope.setScope(scope.get());
       } 
       MethodCallExpr eNode = (MethodCallExpr)node;
       methodCallExpr.setScope(newScope);
       methodCallExpr.setName(eNode.getName());
+      NodeList<Expression> emptyList = new NodeList<Expression>();
+      methodCallExpr.setArguments(emptyList);
 
       currentHole.set(HoleType.Wrapper, false, holeTypeExpr);
       HoleNode argsHole = new HoleNode(HoleType.Arguments, false);
@@ -2985,6 +3038,36 @@ public class Text2CompilationUnit {
       HoleNode argsHole = new HoleNode(HoleType.Arguments, false);
 			exprWrapperHole.addChild(argsHole);
 			argsHole.addChild(new HoleNode());
+    } else if (parentNodeClassStr != null && parentNodeClassStr.equals("LambdaExpr")){
+      LambdaExpr lambdaExpr = (LambdaExpr)parent.getLeft();
+      Statement body = lambdaExpr.getBody();
+
+      String bodyClassStr = body.getClass().toString();
+      bodyClassStr = StringHelper.getClassName(bodyClassStr);
+      if (bodyClassStr.equals("ReturnStmt")) {
+        BlockStmt blockStmt = new BlockStmt();
+        NodeList<Statement> statements = new NodeList<Statement>();
+        ExpressionStmt expressionStmt = new ExpressionStmt((Expression) node);
+				statements.add(expressionStmt);
+        blockStmt.setStatements(statements);
+        lambdaExpr.setBody(blockStmt);
+
+        currentHole.set(HoleType.Body, false);
+        HoleNode stmtsNode = new HoleNode(HoleType.Statements, false);
+        currentHole.addChild(stmtsNode);
+        HoleNode exprNodeHole = new HoleNode(HoleType.Expression, false);
+        stmtsNode.addChild(exprNodeHole);
+        HoleNode holeNodeChild = new HoleNode(HoleType.Wrapper, false, holeTypeExpr);
+        exprNodeHole.addChild(holeNodeChild);
+        HoleNode argsHole = new HoleNode(HoleType.Arguments, false);
+        holeNodeChild.addChild(argsHole);
+        argsHole.addChild(new HoleNode());
+      } else if (bodyClassStr.equals("BlockStmt")) {
+
+      } else {
+        System.out.println("Should not go to this branch");
+      }
+
     }
   }
 
