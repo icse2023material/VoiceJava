@@ -34,6 +34,7 @@ import com.github.javaparser.ast.expr.Name;
 import com.github.javaparser.ast.expr.NameExpr;
 import com.github.javaparser.ast.expr.ObjectCreationExpr;
 import com.github.javaparser.ast.expr.SimpleName;
+import com.github.javaparser.ast.expr.UnaryExpr;
 import com.github.javaparser.ast.expr.VariableDeclarationExpr;
 import com.github.javaparser.ast.stmt.BlockStmt;
 import com.github.javaparser.ast.stmt.ExpressionStmt;
@@ -1239,6 +1240,14 @@ public class Text2CompilationUnit {
           currentHole.addChild(dotChainHole);
           dotChainHole.addChild(new HoleNode(holeTypeExpr, false));
           dotChainHole.addChild(new HoleNode());
+        } else if (parentNodeClassStr != null && parentNodeClassStr.equals("UnaryExpr")){
+          UnaryExpr unaryExpr = (UnaryExpr)parent.getLeft();
+          unaryExpr.setExpression((Expression)node);
+          currentHole.set(HoleType.Expression, false);
+          HoleNode dotChainHole = new HoleNode(HoleType.Wrapper, false, HoleType.NameDotChain);
+          currentHole.addChild(dotChainHole);
+          dotChainHole.addChild(new HoleNode(holeTypeExpr, false));
+          dotChainHole.addChild(new HoleNode());
         }
 				break;
 			case "expr4":
@@ -1292,6 +1301,8 @@ public class Text2CompilationUnit {
         }
         else if (parentNodeClassStr != null && parentNodeClassStr.equals("ConditionalExpr")) {
           this.generateConditionExprThenElseSimple(parent, node, holeIndex, currentHole, parentHole, holeTypeExpr);
+        } else if (parentNodeClassStr != null && parentNodeClassStr.equals("UnaryExpr")) {
+          this.generateExprInUnaryExpr(parent, node, holeIndex, currentHole, parentHole, holeTypeExpr);
         }
 				break;
 			case "expr5":
@@ -1336,6 +1347,8 @@ public class Text2CompilationUnit {
         this.generateExpressionForVariableDecalator(parent, node, currentHole, parentOfParentHole, holeTypeExpr);
       } else if (parentNodeClassStr != null && parentNodeClassStr.equals("ConditionalExpr")) {
         this.generateConditionExprThenElseSimple(parent, node, holeIndex, currentHole, parentHole, holeTypeExpr);
+      } else if (parentNodeClassStr != null && parentNodeClassStr.equals("UnaryExpr")) {
+        this.generateExprInUnaryExpr(parent, node, holeIndex, currentHole, parentHole, holeTypeExpr); 
       }
 				break;
 			case "expr7":
@@ -1374,6 +1387,8 @@ public class Text2CompilationUnit {
         this.generateExpressionForVariableDecalator(parent, node, currentHole, parentOfParentHole, holeTypeExpr);
       } else if (parentNodeClassStr != null && parentNodeClassStr.equals("ConditionalExpr")) {
         this.generateConditionExprThenElseSimple(parent, node, holeIndex, currentHole, parentHole, holeTypeExpr);
+      } else if (parentNodeClassStr != null && parentNodeClassStr.equals("UnaryExpr")) {
+          this.generateExprInUnaryExpr(parent, node, holeIndex, currentHole, parentHole, holeTypeExpr);
       }
 	
 				break;
@@ -1413,6 +1428,8 @@ public class Text2CompilationUnit {
           this.generateExpressionForVariableDecalator(parent, node, currentHole, parentOfParentHole, holeTypeExpr);
         } else if (parentNodeClassStr != null && parentNodeClassStr.equals("ConditionalExpr")) {
           this.generateConditionExprThenElseSimple(parent, node, holeIndex, currentHole, parentHole, holeTypeExpr);
+        } else if (parentNodeClassStr != null && parentNodeClassStr.equals("UnaryExpr")) {
+          this.generateExprInUnaryExpr(parent, node, holeIndex, currentHole, parentHole, holeTypeExpr); 
         }
 				break;
 			case "expr9":
@@ -1451,6 +1468,8 @@ public class Text2CompilationUnit {
           this.generateExpressionForVariableDecalator(parent, node, currentHole, parentOfParentHole, holeTypeExpr);
         } else if (parentNodeClassStr != null && parentNodeClassStr.equals("ConditionalExpr")) {
           this.generateConditionExprThenElseSimple(parent, node, holeIndex, currentHole, parentHole, holeTypeExpr);
+        } else if (parentNodeClassStr != null && parentNodeClassStr.equals("UnaryExpr")) {
+          this.generateExprInUnaryExpr(parent, node, holeIndex, currentHole, parentHole, holeTypeExpr); 
         }
 				break;
 			case "expr10":
@@ -1734,6 +1753,8 @@ public class Text2CompilationUnit {
           this.generateExpressionForVariableDecalator(parent, node, currentHole, parentOfParentHole, holeTypeExpr);
         } else if (parentNodeClassStr != null && parentNodeClassStr.equals("ConditionalExpr")) {
           this.generateConditionExprThenElseSimple(parent, node, holeIndex, currentHole, parentHole, holeTypeExpr);
+        } else if (parentNodeClassStr != null && parentNodeClassStr.equals("UnaryExpr")) {
+          this.generateExprInUnaryExpr(parent, node, holeIndex, currentHole, parentHole, holeTypeExpr); 
         }
 				break;
 			case "expr14":
@@ -1753,7 +1774,19 @@ public class Text2CompilationUnit {
           exprWrapperHole.addChild(new HoleNode());
         } 
 				break;
-		}
+
+      case "expr16":
+        holeTypeExpr = HoleType.Expr16;
+        if(parentNodeClassStr!=null && parentNodeClassStr.equals("AssignExpr")){
+          AssignExpr assignExpr = (AssignExpr)parent.getLeft();
+          assignExpr.setValue((Expression)node);
+          currentHole.set(HoleType.AssignExprValue, false);
+          HoleNode exprWrapperHole = new HoleNode(HoleType.Wrapper, false, holeTypeExpr);
+          currentHole.addChild(exprWrapperHole);
+          exprWrapperHole.addChild(new HoleNode());
+        } 
+        break;
+      }
 
 		// this.holeAST.generateDotAndPNGOfHoleAST();
 		this.holeAST.cleverMove();
@@ -2941,6 +2974,18 @@ public class Text2CompilationUnit {
     else if (parentNodeClassStr != null && parentNodeClassStr.equals("ConditionalExpr")){
       this.generateConditionExprThenElseForCall(parent, node, currentHole, parentHole, parentOfParentHole, holeTypeExpr);
     }
+    else if (parentNodeClassStr != null && parentNodeClassStr.equals("UnaryExpr")){
+      UnaryExpr unaryExpr = (UnaryExpr)parent.getLeft();
+      unaryExpr.setExpression((Expression)node);
+      currentHole.set(HoleType.Expression, false);
+      HoleNode methodCallChainHole = new HoleNode(HoleType.Wrapper, false, HoleType.MethodCallExprChain);
+      currentHole.addChild(methodCallChainHole);
+      HoleNode exprWrapperHole = new HoleNode(HoleType.Wrapper, false, holeTypeExpr);
+      methodCallChainHole.addChild(exprWrapperHole);
+      HoleNode argsHole = new HoleNode(HoleType.Arguments, false);
+			exprWrapperHole.addChild(argsHole);
+			argsHole.addChild(new HoleNode());
+    }
   }
 
   private void generateConditionExprThenElseForCall(Either<Node, Either<List<?>, NodeList<?>>> parent, Node node, 	HoleNode currentHole, HoleNode parentHole, HoleNode parentOfParentHole, HoleType holeTypeExpr){
@@ -3116,8 +3161,23 @@ public class Text2CompilationUnit {
       this.generateExpressionForVariableDecalator(parent, node, currentHole, parentOfParentHole, holeTypeExpr);
     } else if (parentNodeClassStr != null && parentNodeClassStr.equals("ConditionalExpr")) {
       this.generateConditionExprThenElseSimple(parent, node, holeIndex, currentHole, parentHole, holeTypeExpr);
+    } else if (parentNodeClassStr != null && parentNodeClassStr.equals("UnaryExpr")) {
+      UnaryExpr unaryExpr = (UnaryExpr)parent.getLeft();
+      unaryExpr.setExpression((Expression)node);
+      currentHole.set(HoleType.Expression, false);
+      currentHole.addChild(new HoleNode(holeTypeExpr, false));
+      parentHole.addChild(new HoleNode());
     }
 	}
+
+  private void generateExprInUnaryExpr(Either<Node, Either<List<?>, NodeList<?>>> parent, Node node,
+  int holeIndex, HoleNode currentHole, HoleNode parentHole, HoleType holeTypeExpr){
+    UnaryExpr unaryExpr = (UnaryExpr)parent.getLeft();
+    unaryExpr.setExpression((Expression)node);
+    currentHole.set(HoleType.Expression, false); 
+    currentHole.addChild(new HoleNode(holeTypeExpr, false));
+    parentHole.addChild(new HoleNode());
+  }
 
   private void generateConditionExprThenElseSimple(Either<Node, Either<List<?>, NodeList<?>>> parent, Node node,
   int holeIndex, HoleNode currentHole, HoleNode parentHole, HoleType holeTypeExpr){

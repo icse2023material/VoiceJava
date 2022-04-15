@@ -145,6 +145,10 @@ public class PatternSet {
 										new Unit("or", new Unit("normal", new Unit("double"), new Unit("equal")),
 												new Unit("or", new Unit("and"), new Unit("normal", new Unit("double"), new Unit("and"))))))));
 
+                        
+    Pattern expr16Pat = new Pattern("expr16", "expression? not expression",
+                        new Unit[] { new Unit("question", new Unit("expression")), new Unit("not"), new Unit("expression") });
+    patSet.add(expr16Pat);
 
 
 		Pattern expr15Pat = new Pattern("expr15", "conditional expression",
