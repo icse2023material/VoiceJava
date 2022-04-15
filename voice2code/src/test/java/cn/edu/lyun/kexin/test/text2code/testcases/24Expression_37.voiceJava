@@ -1,0 +1,14 @@
+define public class hello world
+define public function say hello
+type void
+move next
+define if
+not expression
+boolean false
+let x equal expression
+int one 
+move next
+not expression
+boolean true
+let y equal expression
+int two

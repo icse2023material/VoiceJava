@@ -169,6 +169,10 @@ public class HoleAST {
 				parentHole.deleteHole(index);
 			}
 			parentHole = parentHole.getParent();
+      // Patch: ForCompare -> Expr16 Case
+      if(parentHole.getHoleType().equals(HoleType.ForCompare) && parentHole.getIthChild(0).getHoleTypeOfOptionsIfOnlyOne().equals(HoleType.Expr16)){
+        parentHole = parentHole.getParent();
+      }
 		}
 		if (deleted) {
 			HoleNode newHole = new HoleNode();
@@ -178,7 +182,7 @@ public class HoleAST {
 
 	public boolean hashOnlyOneChild(HoleNode holeNode) {
 		Set<HoleType> set = new HashSet<HoleType>(Arrays.asList(HoleType.ImportDeclaration, HoleType.TypeDeclaration, HoleType.VariableDeclarators, HoleType.VariableDeclarationExpr,
-				HoleType.Expression, HoleType.Body, HoleType.Statement, HoleType.VariableInitializer, HoleType.ForInitialization,
+				HoleType.Expression, HoleType.Body, HoleType.Statement, HoleType.VariableInitializer, HoleType.ForInitialization, HoleType.IfCondition,
 				HoleType.Expr1, HoleType.Expr2, HoleType.ThenStatement, HoleType.AssignExprValue, HoleType.Expr16, HoleType.Return,
         HoleType.Argument, HoleType.ConditionalExprThen, HoleType.ConditionalExprElse, HoleType.ConditionalExprCondition,
 				HoleType.RightSubExpr, HoleType.LeftSubExpr, HoleType.InnerExpr));
@@ -188,7 +192,7 @@ public class HoleAST {
 	public boolean isNodeChildrenFull(HoleNode holeNode) {
 		Set<HoleType> oneChildSet = new HashSet<HoleType>(Arrays.asList(HoleType.Statement, HoleType.VariableDeclarators, HoleType.VariableDeclarationExpr,
 				HoleType.Expr1, HoleType.Expr2, HoleType.MethodCallExpr, HoleType.LetExpr, HoleType.ForInitialization,HoleType.ConditionalExprThen, HoleType.ConditionalExprElse, HoleType.ConditionalExprCondition,
-        HoleType.Argument, HoleType.LeftSubExpr, HoleType.RightSubExpr, HoleType.Expr16, HoleType.Return,
+        HoleType.Argument, HoleType.LeftSubExpr, HoleType.RightSubExpr, HoleType.Expr16, HoleType.Return, HoleType.IfCondition,
 				HoleType.Expr11, HoleType.InnerExpr, HoleType.FieldDeclaration));
 		Set<HoleType> twoChildrenSet = new HashSet<HoleType>(Arrays.asList(HoleType.LetExpr,
 				HoleType.SwitchEntry, HoleType.SwitchStmt, HoleType.Expr10, HoleType.WhileStmt, HoleType.VariableDeclarator, HoleType.Expr17));

@@ -1618,34 +1618,8 @@ public class Text2CompilationUnit {
 							System.out.println("Should not go to this branch");
 						}
 					}
-
 				} else if (parentNodeClassStr != null && parentNodeClassStr.equals("IfStmt")) {
-					IfStmt ifStmt = (IfStmt) parent.getLeft();
-					if (parentHoleType.equals(HoleType.Wrapper) && parentHole.getChildList().size() == 1) {
-						// parentHole.getChildList().size() == 1 means one child hole, it shall be
-						// condition for the if.
-						// If condition
-						ifStmt.setCondition((Expression) node);
-						currentHole.set(HoleType.IfCondition, false);
-						HoleNode exprWrapperHole = new HoleNode(HoleType.Wrapper, false, holeTypeExpr);
-						currentHole.addChild(exprWrapperHole);
-						exprWrapperHole.addChild(new HoleNode());
-					} else if (parentHole.getChildList().size() == 2) {
-						// then branch
-						this.generateThenStmtInIfStmtForExpr10AndExpr11AndLet6(parent, node, currentHole, holeTypeExpr);
-					} else if (parentHole.getChildList().size() > 2) {
-						// else branch
-						IfStmt elseBranch = new IfStmt();
-						elseBranch.setCondition((Expression) node);
-						ifStmt.setElseStmt(elseBranch);
-
-						currentHole.set(HoleType.ElseStatement, false);
-						HoleNode conditionHole = new HoleNode(HoleType.IfCondition, false);
-						currentHole.addChild(conditionHole);
-						HoleNode exprWraperHole = new HoleNode(HoleType.Wrapper, false, holeTypeExpr);
-						conditionHole.addChild(exprWraperHole);
-						exprWraperHole.addChild(new HoleNode());
-					}
+          this.generateCondExprInIfForExpr10AndExpr16(parent, holeIndex, node, currentHole, parentHole, holeTypeExpr, parentHoleType);
 				} else if (parentNodeClassStr != null && parentNodeClassStr.equals("WhileStmt")) {
 					WhileStmt stmt = (WhileStmt) parent.getLeft();
 					if (holeIndex == 0) {
@@ -1821,7 +1795,54 @@ public class Text2CompilationUnit {
           HoleNode exprWrapperHole = new HoleNode(HoleType.Wrapper, false, holeTypeExpr);
           currentHole.addChild(exprWrapperHole);
           exprWrapperHole.addChild(new HoleNode());
-        } 
+        } else if(parentNodeClassStr!=null && parentNodeClassStr.equals("ConditionalExpr")){
+          ConditionalExpr conditionalExpr = (ConditionalExpr)parent.getLeft();
+          conditionalExpr.setCondition((Expression)node);
+          currentHole.set(HoleType.ConditionalExprCondition, false);
+          HoleNode exprWrapperHole = new HoleNode(HoleType.Wrapper, false, holeTypeExpr);
+          currentHole.addChild(exprWrapperHole);
+          exprWrapperHole.addChild(new HoleNode());
+        } else if(parentNodeClassStr!=null && parentNodeClassStr.equals("IfStmt")){
+          this.generateCondExprInIfForExpr10AndExpr16(parent, holeIndex, node, currentHole, parentHole, holeTypeExpr, parentHoleType);
+        } else if(parentNodeClassStr!=null && parentNodeClassStr.equals("ForStmt")){
+          if (holeIndex == 1) {
+						// !expression in for(; !expression ;){}
+						ForStmt forStmt = (ForStmt) parent.getLeft();
+						forStmt.setCompare((Expression) node);
+
+						currentHole.set(HoleType.ForCompare, false);
+						HoleNode wrapperHoleForExpr = new HoleNode(HoleType.Wrapper, false, holeTypeExpr);
+						currentHole.addChild(wrapperHoleForExpr);
+						wrapperHoleForExpr.addChild(new HoleNode(HoleType.Expression));
+					}
+        } else if(parentHoleType.equals(HoleType.Arguments)){
+          NodeList<Expression> arguments = (NodeList<Expression>) parent.get().get();
+          arguments.add((Expression) node);
+          currentHole.set(HoleType.Wrapper, false, HoleType.Argument);
+          HoleNode exprWrapperHole = new HoleNode(HoleType.Wrapper, false, holeTypeExpr);
+          currentHole.addChild(exprWrapperHole);
+          exprWrapperHole.addChild(new HoleNode());
+        } else if(parentNodeClassStr!=null && parentNodeClassStr.equals("BinaryExpr")){
+          BinaryExpr binaryExpr = (BinaryExpr) parent.getLeft();
+         if ((parentHole.getHoleTypeOfOptionsIfOnlyOne() != null
+              && parentHole.getHoleTypeOfOptionsIfOnlyOne().equals(HoleType.Expr10))) {
+            if (holeIndex == 0) {
+              // left
+              binaryExpr.setLeft((Expression) node);
+              currentHole.set(HoleType.LeftSubExpr, false);
+              HoleNode exprWrapper = new HoleNode(HoleType.Wrapper, false, holeTypeExpr);
+              currentHole.addChild(exprWrapper);
+              exprWrapper.addChild(new HoleNode());
+            } else {
+              // right
+              binaryExpr.setRight((Expression) node);
+              currentHole.set(HoleType.RightSubExpr, false);
+              HoleNode exprWrapper = new HoleNode(HoleType.Wrapper, false, holeTypeExpr);
+              currentHole.addChild(exprWrapper);
+              exprWrapper.addChild(new HoleNode());
+            }
+          }
+        }
         break;
       case "expr17":
         holeTypeExpr = HoleType.Expr17;
@@ -1846,6 +1867,36 @@ public class Text2CompilationUnit {
 		this.lexicalPreseveToJavaFile();
 		return this.compilationUnit;
 	}
+
+  private void generateCondExprInIfForExpr10AndExpr16(Either<Node, Either<List<?>, NodeList<?>>> parent, int holeIndex, Node node,
+  HoleNode currentHole, HoleNode parentHole, HoleType holeTypeExpr, HoleType parentHoleType){
+    IfStmt ifStmt = (IfStmt) parent.getLeft();
+    if (parentHoleType.equals(HoleType.Wrapper) && parentHole.getChildList().size() == 1) {
+      // parentHole.getChildList().size() == 1 means one child hole, it shall be
+      // condition for the if.
+      // If condition
+      ifStmt.setCondition((Expression) node);
+      currentHole.set(HoleType.IfCondition, false);
+      HoleNode exprWrapperHole = new HoleNode(HoleType.Wrapper, false, holeTypeExpr);
+      currentHole.addChild(exprWrapperHole);
+      exprWrapperHole.addChild(new HoleNode());
+    } else if (parentHole.getChildList().size() == 2) {
+      // then branch
+      this.generateThenStmtInIfStmtForExpr10AndExpr11AndLet6(parent, node, currentHole, holeTypeExpr);
+    } else if (parentHole.getChildList().size() > 2) {
+      // else branch
+      IfStmt elseBranch = new IfStmt();
+      elseBranch.setCondition((Expression) node);
+      ifStmt.setElseStmt(elseBranch);
+
+      currentHole.set(HoleType.ElseStatement, false);
+      HoleNode conditionHole = new HoleNode(HoleType.IfCondition, false);
+      currentHole.addChild(conditionHole);
+      HoleNode exprWraperHole = new HoleNode(HoleType.Wrapper, false, holeTypeExpr);
+      conditionHole.addChild(exprWraperHole);
+      exprWraperHole.addChild(new HoleNode());
+    }
+  }
 
 	public Pair<Node, Integer> getParentNodeOfHole(List<Integer> path) {
 		int index;

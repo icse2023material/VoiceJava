@@ -109,7 +109,7 @@
     - `conditional expression` 三目运算 ?:
     - 备注：
       - `op ::= plus | minus | times | divide | mod`
-      - `compare ::= less than | less equal | greater than | greater equal | double equal | and | doube and`
+      - `compare ::= less than | less equal | greater than | greater equal | double equal | and | doube and | or`
       - 备注: `and`还不支持
 
 25. 常用指令：

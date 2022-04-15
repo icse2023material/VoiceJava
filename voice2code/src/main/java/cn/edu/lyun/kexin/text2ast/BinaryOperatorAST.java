@@ -10,7 +10,7 @@ public class BinaryOperatorAST {
 		String operatorStr = units.remove(0).getKeyword();
 		Unit anOtherOperatorUnit = units.get(0);
 		String anOtherOperatorStr = anOtherOperatorUnit.getKeyword();
-		List<String> opList = new ArrayList<String>(Arrays.asList(new String[] { "than", "equal", "and" }));
+		List<String> opList = new ArrayList<String>(Arrays.asList(new String[] { "than", "equal", "and", "or" }));
 		if (opList.contains(anOtherOperatorStr)) {
 			operatorStr += " " + anOtherOperatorStr;
 			units.remove(0);
@@ -42,6 +42,8 @@ public class BinaryOperatorAST {
 			return BinaryExpr.Operator.EQUALS;
 		case "double and":
 			return BinaryExpr.Operator.AND;
+    case "double or":
+      return BinaryExpr.Operator.OR;
 		}
 		return null;
 	}

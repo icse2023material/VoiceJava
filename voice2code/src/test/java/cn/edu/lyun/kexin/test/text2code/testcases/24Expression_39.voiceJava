@@ -1,0 +1,7 @@
+define public class hello world
+define public function say hello
+type void
+move next
+call sum
+not expression
+boolean false

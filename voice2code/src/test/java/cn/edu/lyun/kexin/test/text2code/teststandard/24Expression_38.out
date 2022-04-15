@@ -1,0 +1,6 @@
+public class HelloWorld {
+
+    public void sayHello() {
+        for (int i = 0; !false; i++) return;
+    }
+}
