@@ -101,8 +101,8 @@
 <li>
 <p>属性/变量定义：</p>
 <ul>
-<li>语法：<code>define (Annotation | public | protected |private | static | final | transient | volatile)* (list of Name | Name [dot Name]? [with Name [and Name]*]?) variable Name</code></li>
-<li>示例：<code>define private int variable count</code>， <code>define list of int variable list</code>， <code>define Pair with Integer String</code></li>
+<li>语法：<code>define (Annotation | public | protected |private | static | final | transient | volatile)* variable Name</code></li>
+<li>示例：<code>define private variable count</code>， <code>define variable list</code></li>
 </ul>
 </li>
 <li>
@@ -198,9 +198,12 @@
 <li>
 <p>12 种表达式</p>
 <ul>
-<li><code>expression? call Name</code></li>
-<li><code>expression? Name [dot Name]* [call Name]+</code></li>
-<li><code>expression? Name [dot Name]?</code></li>
+<li><code>expression? lambda expression</code> // lambda expression</li>
+<li><code>expression? not expression</code> // unary not expression</li>
+<li><code>expression? dot Name</code> // 仅可作用于 <code>Name [dot Name]+</code>, 暂不支持其它。</li>
+<li><code>expression? call Name</code> // 后可<code>move next</code>, 然后继续<code>call Name</code></li>
+<li><code>expression? Name [dot Name]* [call Name]</code> // 后可<code>move next</code>, 然后继续<code>call Name</code></li>
+<li><code>expression? Name [dot Name]*</code></li>
 <li><code>expression? variable Name</code></li>
 <li><code>expression? (int | byte | short | long | char | float | double | boolean | string) Name</code></li>
 <li><code>expression? Name plus plus</code></li>
@@ -219,10 +222,11 @@
 <li>注意: 和前面重复。</li>
 </ul>
 </li>
+<li><code>conditional expression</code> 三目运算 ?:</li>
 <li>备注：
 <ul>
 <li><code>op ::= plus | minus | times | divide | mod</code></li>
-<li><code>compare ::= less than | less equal | greater than | greater equal | double equal | and | doube and</code></li>
+<li><code>compare ::= less than | less equal | greater than | greater equal | double equal | and | doube and | double or</code></li>
 <li>备注: <code>and</code>还不支持</li>
 </ul>
 </li>
