@@ -146,6 +146,11 @@ public class PatternSet {
 												new Unit("or", new Unit("and"), new Unit("normal", new Unit("double"), new Unit("and"))))))));
 
 
+
+		Pattern expr15Pat = new Pattern("expr15", "conditional expression",
+				new Unit[] { new Unit("conditional"), new Unit("expression") });
+		patSet.add(expr15Pat);
+
 		Pattern expr1Pat = new Pattern("expr1", "[expression]? call [_]+",
 				new Unit[] { new Unit("question", new Unit("expression")), new Unit("call"), Name });
 		patSet.add(expr1Pat);
@@ -202,10 +207,6 @@ public class PatternSet {
 				new Unit[] { new Unit("question", new Unit("expression")), Name, new Unit("asterisk", new Unit("dot"), Name) });
 		patSet.add(expr3Pat);
 
-    // null belongs to expr3
-		// Pattern expr15Pat = new Pattern("expr15", "[expression]? null",
-		// 		new Unit[] { new Unit("question", new Unit("expression")), new Unit("null") });
-		// patSet.add(expr15Pat);
 		// Pattern jumpOutPat = new Pattern("jumpOut", "jump out", new Unit[] { new Unit("jump"), new Unit("out") });
 		// patSet.add(jumpOutPat);
 

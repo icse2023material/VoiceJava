@@ -104,6 +104,7 @@
     - `expression? string Name`
       - 示例：`string hello world`，支持多个单词。
       - 注意: 和前面重复。
+    - `conditional expression` 三目运算 ?:
     - 备注：
       - `op ::= plus | minus | times | divide | mod`
       - `compare ::= less than | less equal | greater than | greater equal | double equal | and | doube and`

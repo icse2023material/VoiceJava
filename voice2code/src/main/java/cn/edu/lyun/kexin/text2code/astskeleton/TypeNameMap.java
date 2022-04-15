@@ -34,6 +34,9 @@ public class TypeNameMap {
 		map.put(HoleType.InnerExpr, "getInner");
 		map.put(HoleType.WhileCondition, "getCondition");
 		map.put(HoleType.IfCondition, "getCondition");
+    map.put(HoleType.ConditionalExprCondition, "getCondition");
+    map.put(HoleType.ConditionalExprThen, "getThenExpr");
+    map.put(HoleType.ConditionalExprElse, "getElseExpr");
 		map.put(HoleType.SwitchSelector, "getSelector");
 		map.put(HoleType.SwitchEntryLabels, "getLabels");
 		return map;
