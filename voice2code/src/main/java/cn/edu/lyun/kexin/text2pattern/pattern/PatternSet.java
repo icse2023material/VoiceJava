@@ -96,8 +96,10 @@ public class PatternSet {
 						new Unit("or", new Unit("normal", new Unit("list"), new Unit("normal", new Unit("of"), (Name))),
 								new Unit(new Unit[] { Name, new Unit("question", new Unit("dot"), Name),
 										new Unit("question", new Unit("with"),
-												new Unit("normal", Name, new Unit("asterisk", new Unit("and"), Name))) })),
-						new Unit("question", new Unit("extends"), Name) });
+                        new Unit("or", 
+												  new Unit("normal", Name, new Unit("asterisk", new Unit("and"), Name)),
+                          new Unit("question", Name)))})),
+						            new Unit("question", new Unit("extends"), Name) });
 		patSet.add(typePat);
 
 		Pattern subExpressionPat = new Pattern("subexpression", "subexpression", new Unit[] { new Unit("subexpression") });

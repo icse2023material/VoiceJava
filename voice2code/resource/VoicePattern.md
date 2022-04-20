@@ -29,8 +29,9 @@
     - 示例：`define private variable count`， `define variable list`
 9.  定义类型：
 
-    - 语法：`type (list of Name | Name [dot Name]? [with Name [and Name]*]?) [extends _]?`
-    - 示例: `type int`， `type void`
+    - 语法：`type (list of Name | Name [dot Name]? [with Name? [and Name]*]?) [extends _]?`
+    - 示例: `type int`， `type void`, `type Node with Integer` => `Node<Integer>`, `type Node with` => `Node<>`
+    - 注意: 若`Name`为`question mark`，则转换为`?`，比如: `type Node with question mark` => `Node<?>`
 
 10. 定义`for`循环：
 
@@ -70,7 +71,7 @@
 
 19. 构建新实例：
 
-    - 语法： `new instance Name [dot Name]*`
+    - 语法： `new instance Name [dot Name]* [with Name [and Name]*]?`
     - 示例：`new instance puppy`， `new instance hash map dot entry`
 
 20. 抛出异常：

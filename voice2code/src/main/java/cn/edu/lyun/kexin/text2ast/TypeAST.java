@@ -101,9 +101,13 @@ public class TypeAST {
 				if (unit.getKeyword().equals("and")) {
 					continue;
 				}
-				str += unit.getKeyword() + ",";
+        String name = unit.getKeyword();
+        name = name.equals("questionMark") ? "?" : name;
+				str += name + ",";
 			}
-			str = str.substring(0, str.length() - 1);
+      if(str.length()>1){
+			  str = str.substring(0, str.length() - 1);
+      } // else "<"
 			str += ">";
 		}
 

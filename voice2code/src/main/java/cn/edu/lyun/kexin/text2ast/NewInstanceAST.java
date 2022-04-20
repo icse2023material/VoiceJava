@@ -7,6 +7,9 @@ import com.github.javaparser.ast.expr.ObjectCreationExpr;
 import java.util.*;
 import cn.edu.lyun.kexin.text2pattern.pattern.Unit;
 
+import com.github.javaparser.ast.type.ClassOrInterfaceType;
+import com.github.javaparser.ast.type.Type;
+
 public class NewInstanceAST implements AST {
 	public Node generate(Pattern pattern) {
 		Unit[] units = pattern.getUnits();
@@ -14,13 +17,9 @@ public class NewInstanceAST implements AST {
 		unitList.remove(0); // remove "new"
 		unitList.remove(0); // remove "instance"
 		ObjectCreationExpr objCreationExpr = new ObjectCreationExpr();
-		String name = "";
-		for (Unit unit : unitList) {
-			String str = unit.getKeyword();
-			name += str.equals("dot") ? "." : str;
-		}
+    Type type = new TypeAST().generateType(unitList);
 
-		objCreationExpr.setType(name);
+		objCreationExpr.setType((ClassOrInterfaceType)type);
 		return objCreationExpr;
 	}
 

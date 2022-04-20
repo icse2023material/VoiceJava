@@ -1,0 +1,5 @@
+public class HelloWorld {
+
+    public Node<> sayHello() {
+    }
+}
