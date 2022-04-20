@@ -1,0 +1,19 @@
+define public class hello world
+define public function say hello
+type void
+move next
+define variable my puppy
+type Puppy
+new instance puppy with question mark
+move next
+define variable my puppy
+type Puppy
+new instance puppy with
+move next
+define variable my puppy
+type Puppy
+new instance puppy with dog
+move next
+define variable my puppy
+type Puppy
+new instance puppy with dog and cat

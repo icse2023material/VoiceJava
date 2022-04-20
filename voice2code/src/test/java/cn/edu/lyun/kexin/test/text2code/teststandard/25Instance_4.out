@@ -1,0 +1,8 @@
+public class HelloWorld {
+
+    public void sayHello() {
+        new Puppy<?>(a, 2);
+        new Puppy<>(b);
+        new Puppy<Dog, Cat>(dog, cat);
+    }
+}

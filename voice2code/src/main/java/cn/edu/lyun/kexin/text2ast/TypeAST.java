@@ -102,7 +102,7 @@ public class TypeAST {
 					continue;
 				}
         String name = unit.getKeyword();
-        name = name.equals("questionMark") ? "?" : name;
+        name = name.equals("QuestionMark") || name.equals("questionMark") ? "?" : name;
 				str += name + ",";
 			}
       if(str.length()>1){

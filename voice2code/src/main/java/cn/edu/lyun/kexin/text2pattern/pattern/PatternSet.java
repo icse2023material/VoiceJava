@@ -89,17 +89,18 @@ public class PatternSet {
 				new Unit[] { new Unit("define"), new Unit("asterisk", fieldModifier), new Unit("variable"), Name });
 		patSet.add(fieldPat);
 
+    Unit typePatPat = 	new Unit("or", new Unit("normal", new Unit("list"), new Unit("normal", new Unit("of"), (Name))),
+    new Unit(new Unit[] { Name, new Unit("question", new Unit("dot"), Name),
+        new Unit("question", new Unit("with"),
+            new Unit("or", 
+              new Unit("normal", Name, new Unit("asterisk", new Unit("and"), Name)),
+              new Unit("question", Name)))}));
 		// 定义类型
 		Pattern typePat = new Pattern("type",
 				"type (list of [_]+  | [_]+ [dot [_]+]? [with [_]+ [and [_]+]*]?) [extends [_]+]?",
 				new Unit[] { new Unit("type"),
-						new Unit("or", new Unit("normal", new Unit("list"), new Unit("normal", new Unit("of"), (Name))),
-								new Unit(new Unit[] { Name, new Unit("question", new Unit("dot"), Name),
-										new Unit("question", new Unit("with"),
-                        new Unit("or", 
-												  new Unit("normal", Name, new Unit("asterisk", new Unit("and"), Name)),
-                          new Unit("question", Name)))})),
-						            new Unit("question", new Unit("extends"), Name) });
+				typePatPat,
+				new Unit("question", new Unit("extends"), Name) });
 		patSet.add(typePat);
 
 		Pattern subExpressionPat = new Pattern("subexpression", "subexpression", new Unit[] { new Unit("subexpression") });
@@ -111,8 +112,8 @@ public class PatternSet {
 		Pattern continuePat = new Pattern("continue", "continue", new Unit[] { new Unit("continue") });
 		patSet.add(continuePat);
 
-		Pattern newInstancePat = new Pattern("newInstance", "new instance [_]+ [dot [_]+]*",
-				new Unit[] { new Unit("new"), new Unit("instance"), Name, new Unit("asterisk", new Unit("dot"), Name) });
+		Pattern newInstancePat = new Pattern("newInstance", "new instance (list of [_]+  | [_]+ [dot [_]+]? [with [_]+ [and [_]+]*]?)",
+				new Unit[] { new Unit("new"), new Unit("instance"), typePatPat });
 		patSet.add(newInstancePat);
 
 		Pattern throwPat = new Pattern("throw", "throw new [_]+", new Unit[] { new Unit("throw"), new Unit("new"), Name });

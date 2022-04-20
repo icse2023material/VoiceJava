@@ -870,12 +870,65 @@ public class Text2CompilationUnit {
 				}
 				break;
 			case "newInstance":
+        holeTypeExpr=HoleType.NewInstance;
 				if (parentNodeClassStr != null && parentNodeClassStr.equals("VariableDeclarator")){
           VariableDeclarator variableDeclarator = (VariableDeclarator)parent.getLeft();
           variableDeclarator.setInitializer((Expression)node);
           currentHole.set(HoleType.VariableInitializer, false);
-          currentHole.addChild(new HoleNode());
+          HoleNode exprWrapperHole = new HoleNode(HoleType.Wrapper, false, holeTypeExpr);
+          currentHole.addChild(exprWrapperHole);
+          HoleNode argumentsHole = new HoleNode(HoleType.Arguments, false);
+          exprWrapperHole.addChild(argumentsHole);
+          argumentsHole.addChild(new HoleNode());
+        } else if(parentNodeClassStr != null && parentNodeClassStr.equals("AssignExpr")){
+          AssignExpr assignExpr = (AssignExpr)parent.getLeft();
+          assignExpr.setValue((Expression)node);
+          currentHole.set(HoleType.AssignExprValue, false);
+          HoleNode exprWrapperHole = new HoleNode(HoleType.Wrapper, false, holeTypeExpr);
+          currentHole.addChild(exprWrapperHole);
+          HoleNode argumentsHole = new HoleNode(HoleType.Arguments, false);
+          exprWrapperHole.addChild(argumentsHole);
+          argumentsHole.addChild(new HoleNode());
+        } else if(parentNodeClassStr != null && parentNodeClassStr.equals("MethodDeclaration")){
+          MethodDeclaration mNode = (MethodDeclaration) parent.getLeft();
+					Optional<BlockStmt> optionalBody = mNode.getBody();
+					currentHole.set(HoleType.Body, false);
+
+					HoleNode stmtsHole = new HoleNode();
+					currentHole.addChild(stmtsHole);
+
+					BlockStmt blockStmt = optionalBody.get();
+					NodeList<Statement> statements = blockStmt.getStatements();
+					if (statements.size() == 0) { 
+            statements.add(new ExpressionStmt((Expression)node));
+						stmtsHole.set(HoleType.Statements, false);
+            HoleNode stmtHole = new HoleNode(HoleType.Wrapper, false, HoleType.Statement);
+            stmtsHole.addChild(stmtHole);
+            HoleNode expressionHole = new HoleNode(HoleType.Expression, false);
+            stmtHole.addChild(expressionHole);
+            HoleNode exprWrapperHole = new HoleNode(HoleType.Wrapper, false, holeTypeExpr);
+            expressionHole.addChild(exprWrapperHole);
+            HoleNode argsHole = new HoleNode(HoleType.Arguments, false);
+            exprWrapperHole.addChild(argsHole);
+            argsHole.addChild(new HoleNode());
+          }
+        } else if (parentHoleType.equals(HoleType.Statements)) {
+          NodeList<Statement> statements = (NodeList<Statement>)parent.get().get();
+          if (holeIndex < statements.size()) {
+						// TODO
+					} else {
+						statements.add(new ExpressionStmt((Expression)node));
+            currentHole.set(HoleType.Wrapper, false, HoleType.Statement);
+            HoleNode expressionHole = new HoleNode(HoleType.Expression, false);
+            currentHole.addChild(expressionHole);
+            HoleNode exprWrapperHole = new HoleNode(HoleType.Wrapper, false, holeTypeExpr);
+            expressionHole.addChild(exprWrapperHole);
+            HoleNode argsHole = new HoleNode(HoleType.Arguments, false);
+            exprWrapperHole.addChild(argsHole);
+            argsHole.addChild(new HoleNode());
+					} 
         }
+        
         break;
 			case "throw":
 				holeTypeExpr = HoleType.Throw;
