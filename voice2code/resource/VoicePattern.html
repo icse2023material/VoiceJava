@@ -2,7 +2,7 @@
     <html>
     <head>
         <meta charset="UTF-8">
-        <title>VoiceJava &#x5B9A;&#x4E49;</title>
+        <title>VoiceJava &#x5b9a;&#x4e49;</title>
         <style>
 /* From extension vscode.github */
 /*---------------------------------------------------------------------------------------------
@@ -35,8 +35,6 @@
         <style>
 .task-list-item { list-style-type: none; } .task-list-item-checkbox { margin-left: -20px; vertical-align: middle; }
 </style>
-        
-        
         
     </head>
     <body class="vscode-body vscode-light">
@@ -108,8 +106,9 @@
 <li>
 <p>定义类型：</p>
 <ul>
-<li>语法：<code>type (list of Name | Name [dot Name]? [with Name [and Name]*]?) [extends _]?</code></li>
-<li>示例: <code>type int</code>， <code>type void</code></li>
+<li>语法：<code>type (list of Name | Name [dot Name]? [with Name? [and Name]*]?) [extends _]?</code></li>
+<li>示例: <code>type int</code>， <code>type void</code>, <code>type Node with Integer</code> =&gt; <code>Node&lt;Integer&gt;</code>, <code>type Node with</code> =&gt; <code>Node&lt;&gt;</code></li>
+<li>注意: 若<code>Name</code>为<code>question mark</code>，则转换为<code>?</code>，比如: <code>type Node with question mark</code> =&gt; <code>Node&lt;?&gt;</code></li>
 </ul>
 </li>
 <li>
@@ -167,8 +166,8 @@
 <li>
 <p>构建新实例：</p>
 <ul>
-<li>语法： <code>new instance Name [dot Name]*</code></li>
-<li>示例：<code>new instance puppy</code>， <code>new instance hash map dot entry</code></li>
+<li>语法： <code>new instance Name [dot Name]* [with Name [and Name]*]?</code></li>
+<li>示例：<code>new instance puppy</code>， <code>new instance hash map dot entry</code>, <code>new instance puppy with</code> =&gt; <code>new Puppy&lt;&gt;()</code>, <code>new instance puppy with question mark</code> =&gt; <code>new Puppy&lt;?&gt;()</code>, <code>new instance puppy with cat and dog</code> =&gt; <code>new Puppy&lt;cat, dog&gt;()</code></li>
 </ul>
 </li>
 <li>
@@ -288,5 +287,7 @@
 </li>
 </ol>
 
+        
+        
     </body>
     </html>

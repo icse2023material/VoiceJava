@@ -72,7 +72,7 @@
 19. 构建新实例：
 
     - 语法： `new instance Name [dot Name]* [with Name [and Name]*]?`
-    - 示例：`new instance puppy`， `new instance hash map dot entry`
+    - 示例：`new instance puppy`， `new instance hash map dot entry`, `new instance puppy with` => `new Puppy<>()`, `new instance puppy with question mark` => `new Puppy<?>()`, `new instance puppy with cat and dog` => `new Puppy<cat, dog>()`
 
 20. 抛出异常：
 
