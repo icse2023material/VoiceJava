@@ -1,0 +1,9 @@
+define public class hello world
+type T
+type BaseFilter
+move next
+type Greeting
+move next
+type Bonjour with T
+move next
+define private variable counter

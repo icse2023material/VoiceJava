@@ -20,7 +20,9 @@ import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
 import com.github.javaparser.ast.body.FieldDeclaration;
 import com.github.javaparser.ast.body.MethodDeclaration;
 import com.github.javaparser.ast.body.Parameter;
+import com.github.javaparser.ast.type.ClassOrInterfaceType;
 import com.github.javaparser.ast.type.Type;
+import com.github.javaparser.ast.type.TypeParameter;
 import com.github.javaparser.ast.body.VariableDeclarator;
 import com.github.javaparser.ast.expr.AssignExpr;
 import com.github.javaparser.ast.expr.BinaryExpr;
@@ -174,7 +176,19 @@ public class Text2CompilationUnit {
 					stmtsHole.set(HoleType.Statements, false);
 					currentHole.addChild(stmtsHole);
 					stmtsHole.addChild(new HoleNode());
-				} else {
+				} else if (parentHole.getHoleTypeOfOptionsIfOnlyOne()!=null && parentHole.getHoleTypeOfOptionsIfOnlyOne().equals(HoleType.ClassDeclaration)){
+          if(parentHole.getChildListSize()==1){
+            currentHole.set(HoleType.TypeParameters, false);
+            parentHole.addChild(new HoleNode());
+          } else if(parentHole.getChildListSize()==2){
+            currentHole.set(HoleType.ExtendedTypes, false);
+            parentHole.addChild(new HoleNode());
+          } else if (parentHole.getChildListSize()==3){
+            currentHole.set(HoleType.ImplementedTypes, false);
+            parentHole.addChild(new HoleNode());
+          }
+        }
+        else {
 					// TODO: small step move. Not syntax-directed.
 					parentHole.deleteHole(holeIndex);
 					parentOfParentHole.addChild(exprHole);
@@ -225,7 +239,7 @@ public class Text2CompilationUnit {
 					currentHole.set(HoleType.TypeDeclarations, false);
 					exprHole = new HoleNode(HoleType.Wrapper, false, HoleType.ClassDeclaration);
 					currentHole.addChild(exprHole);
-					exprHole.addChild(new HoleNode(HoleType.BodyDeclaration));
+					exprHole.addChild(new HoleNode());
 				} else {
 					NodeList<ClassOrInterfaceDeclaration> classOrInterfaceDeclarations = (NodeList<ClassOrInterfaceDeclaration>) parent
 							.get().get();
@@ -397,6 +411,47 @@ public class Text2CompilationUnit {
           currentHole.set(HoleType.Type, false);
           parentHole.addChild(new HoleNode());
         } else if(parentNodeClassStr != null && parentNodeClassStr.equals("VariableDeclarationExpr")){
+        } else if(parentNodeClassStr != null && parentNodeClassStr.equals("ClassOrInterfaceDeclaration")){
+          ClassOrInterfaceDeclaration classOrInterfaceDeclaration = (ClassOrInterfaceDeclaration)parent.getLeft();
+          if(parentHole.getChildListSize()==1){ // TypeParameters
+            NodeList<TypeParameter> typeParameters = classOrInterfaceDeclaration.getTypeParameters();
+            ClassOrInterfaceType t = (ClassOrInterfaceType)node;
+            TypeParameter typeParameter = new TypeParameter(t.getNameAsString());
+            typeParameters.add(typeParameter);
+            currentHole.set(HoleType.TypeParameters, false);
+            HoleNode typeParameterHole = new HoleNode(HoleType.Type, false);
+            currentHole.addChild(typeParameterHole);
+            currentHole.addChild(new HoleNode());
+          } else if (parentHole.getChildListSize()==2){ // extends part
+            NodeList<ClassOrInterfaceType> extendedTypes = classOrInterfaceDeclaration.getExtendedTypes();
+            ClassOrInterfaceType t = (ClassOrInterfaceType)node;
+            extendedTypes.add(t);
+            currentHole.set(HoleType.ExtendedTypes, false);
+            HoleNode extendedTypeHole = new HoleNode(HoleType.Type, false);
+            currentHole.addChild(extendedTypeHole);
+            currentHole.addChild(new HoleNode());
+          } else if (parentHole.getChildListSize()==3){ // implements part
+            NodeList<ClassOrInterfaceType> implementedType = classOrInterfaceDeclaration.getImplementedTypes();
+            ClassOrInterfaceType t = (ClassOrInterfaceType)node;
+            implementedType.add(t);
+            currentHole.set(HoleType.ImplementedTypes, false);
+            HoleNode implementedTypeHole = new HoleNode(HoleType.Type, false);
+            currentHole.addChild(implementedTypeHole);
+            currentHole.addChild(new HoleNode());
+          }
+
+			  } else if (parentHoleType.equals(HoleType.TypeParameters)) {
+          NodeList<TypeParameter> typeParameters =(NodeList<TypeParameter>)parent.get().get();
+          ClassOrInterfaceType t = (ClassOrInterfaceType)node;
+          TypeParameter typeParameter = new TypeParameter(t.getNameAsString());
+          typeParameters.add(typeParameter);
+          currentHole.set(HoleType.Type, false);
+          parentHole.addChild(new HoleNode());
+			  } else if (parentHoleType.equals(HoleType.ExtendedTypes)) {
+          NodeList<ClassOrInterfaceType> extendedTypes = (NodeList<ClassOrInterfaceType>)parent.get().get();
+          extendedTypes.add((ClassOrInterfaceType)node);
+          currentHole.set(HoleType.Type, false);
+          currentHole.addChild(new HoleNode());
         }
         break;
 			case "for":

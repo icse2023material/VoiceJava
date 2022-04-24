@@ -15,5 +15,6 @@ public enum HoleType {
   MethodCallExprChain, NameDotChain,
   ConditionalExprCondition, ConditionalExprThen, ConditionalExprElse,
   UnaryExprExpression,
-  NewInstance
+  NewInstance,
+  TypeParameters, ExtendedTypes, ImplementedTypes,
 }

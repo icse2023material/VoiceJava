@@ -1,1 +1,5 @@
-define protected class hello world extends greeting implements bonjour
+define protected class hello world
+move next
+type greeting
+move next
+type bonjour

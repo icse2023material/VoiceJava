@@ -13,8 +13,13 @@
     - 语法：`define (Annotation | public | protected | private | abstract | static | final | strictfp )? interface Name`
     - 示例: `define interface hello world`, `define interface hello`
 4.  定义`class`：
-    - 语法：`define (Annotation | public | protected | private | abstract | static | final | strictfp )* class Name [extends Name]? [implements Name]?`
-    - 示例: `define public class hello world`， `define public class hello world extends greeting implements good morning`
+    - 语法：`define (Annotation | public | protected | private | abstract | static | final | strictfp )* class Name`
+    - 示例: `define public class hello world`， `define public class hello world`
+    - 定义一个class，class name可能带参数，可能extends something，可能implements something。因此需要很多的`move next`。
+    - 可以考虑实现`move to body`这样的语法来快速跳转。
+    - 完整示例: 
+      - 期望结果`public class HelloWorld<T, Filter> extends Greeting implements Invoker<T>`
+      - 语句: `define public class hello world, type t, type filter, move next, type greeting, move next, type invoker with t`
 5.  定义构造函数
     - 语法：`define constructor`
     - 备注: 还未实现。
@@ -71,8 +76,8 @@
 
 19. 构建新实例：
 
-    - 语法： `new instance Name [dot Name]* [with Name [and Name]*]?`
-    - 示例：`new instance puppy`， `new instance hash map dot entry`, `new instance puppy with` => `new Puppy<>()`, `new instance puppy with question mark` => `new Puppy<?>()`, `new instance puppy with cat and dog` => `new Puppy<cat, dog>()`
+    - 语法： `new instance Name [dot Name]* [with Name [and Name]*]?` 
+    - 示例：`new instance puppy`， `new instance hash map dot entry`, `new instance puppy with` => `new Puppy<>()`, `new instance puppy with question mark` => `new Puppy<?>()`, `new instance puppy with cat and dog` => `new Puppy<Cat, Dog>()`
 
 20. 抛出异常：
 

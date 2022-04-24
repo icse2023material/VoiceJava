@@ -1,1 +1,5 @@
-define private class hello world extends greeting
+define private class hello world
+move next
+type greeting
+move next
+move next
