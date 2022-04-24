@@ -1,4 +1,5 @@
 define public class test
+move next body
 define public static function main
 type void
 type list of String

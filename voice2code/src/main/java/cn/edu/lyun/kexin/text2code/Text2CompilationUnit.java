@@ -2,7 +2,6 @@ package cn.edu.lyun.kexin.text2code;
 
 import java.io.FileWriter;
 import java.io.IOException;
-import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.*;
@@ -33,10 +32,8 @@ import com.github.javaparser.ast.expr.Expression;
 import com.github.javaparser.ast.expr.FieldAccessExpr;
 import com.github.javaparser.ast.expr.LambdaExpr;
 import com.github.javaparser.ast.expr.MethodCallExpr;
-import com.github.javaparser.ast.expr.Name;
 import com.github.javaparser.ast.expr.NameExpr;
 import com.github.javaparser.ast.expr.ObjectCreationExpr;
-import com.github.javaparser.ast.expr.SimpleName;
 import com.github.javaparser.ast.expr.UnaryExpr;
 import com.github.javaparser.ast.expr.VariableDeclarationExpr;
 import com.github.javaparser.ast.stmt.BlockStmt;
@@ -61,7 +58,6 @@ import cn.edu.lyun.kexin.text2pattern.pattern.Pattern;
 import cn.edu.lyun.kexin.text2pattern.pattern.PatternSet;
 
 import io.vavr.control.Either;
-import javassist.compiler.ast.Expr;
 
 public class Text2CompilationUnit {
 
@@ -194,7 +190,23 @@ public class Text2CompilationUnit {
 					parentOfParentHole.addChild(exprHole);
 				}
 				break;
-			case "package":
+      case "moveNextBody":
+        if(parentNodeClassStr!=null && parentNodeClassStr.equals("ClassOrInterfaceDeclaration")){
+          if(parentHole.getChildListSize()==1){
+            currentHole.set(HoleType.TypeParameters, false);
+            parentHole.addChild(new HoleNode(HoleType.ExtendedTypes, false));
+            parentHole.addChild(new HoleNode(HoleType.ImplementedTypes, false));
+          } else if(parentHole.getChildListSize()==2){
+            currentHole.set(HoleType.ExtendedTypes, false);
+            parentHole.addChild(new HoleNode(HoleType.ImplementedTypes, false));
+          } else if(parentHole.getChildListSize()==3){
+            currentHole.set(HoleType.ImplementedTypes, false);
+            parentHole.addChild(new HoleNode(HoleType.ImplementedTypes, false));
+          }
+         parentHole.addChild(new HoleNode());
+        }  
+        break;
+      case "package":
 				CompilationUnit parentNode = (CompilationUnit) parent.getLeft();
 				parentNode.setPackageDeclaration((PackageDeclaration) node);
 				currentHole.set(HoleType.PackageDeclaration, false);

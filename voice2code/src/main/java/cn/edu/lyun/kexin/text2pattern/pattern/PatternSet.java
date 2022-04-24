@@ -119,6 +119,9 @@ public class PatternSet {
 		Pattern throwPat = new Pattern("throw", "throw new [_]+", new Unit[] { new Unit("throw"), new Unit("new"), Name });
 		patSet.add(throwPat);
 
+		Pattern moveNextBodyPat = new Pattern("moveNextBody", "move next body", new Unit[] { new Unit("move"), new Unit("next"), new Unit("body") });
+    patSet.add(moveNextBodyPat);
+
 		Pattern moveNextPat = new Pattern("moveNext", "move next", new Unit[] { new Unit("move"), new Unit("next") });
 		patSet.add(moveNextPat);
 

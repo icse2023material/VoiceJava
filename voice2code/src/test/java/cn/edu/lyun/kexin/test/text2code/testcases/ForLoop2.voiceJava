@@ -3,6 +3,7 @@ import java dot util dot star
 import java dot lang dot reflect dot star
 move next
 define public class hello
+move next body
 define public variable count
 type int
 int zero

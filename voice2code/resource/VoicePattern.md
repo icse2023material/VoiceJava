@@ -120,6 +120,7 @@
 
 25. 常用指令：
     - `move next`
+    - `move next body`
     - `jump out`
     - `jump before _`
       - 示例：`jump before hello`

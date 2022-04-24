@@ -1,5 +1,5 @@
 define protected class hello world
 move next
-type greeting
+type Greeting
 move next
-type bonjour
+type Bonjour

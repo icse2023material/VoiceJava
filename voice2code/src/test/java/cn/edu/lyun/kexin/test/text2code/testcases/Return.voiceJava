@@ -3,6 +3,7 @@ import java dot uitl dot star
 import java dot lang dot reflect dot star
 move next
 define public class hello
+move next body
 define private variable greeting
 type int
 int two

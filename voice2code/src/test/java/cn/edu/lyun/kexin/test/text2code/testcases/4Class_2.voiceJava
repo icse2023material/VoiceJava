@@ -1,5 +1,5 @@
 define private class hello world
 move next
-type greeting
+type Greeting
 move next
 move next

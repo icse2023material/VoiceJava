@@ -1,3 +1,4 @@
 define public class HelloWorld
+move next body
 define public variable nodelist
 type Node with Integer and String 
