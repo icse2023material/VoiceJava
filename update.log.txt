@@ -1,0 +1,5 @@
+2022.4.28
+
+1. Class拆分extends,implements部分，参考`testcases/4Class_6.voiceJava`
+2. 增加`move next body`，可以直接跳转到`Class`的body，不用连续调用多个`move next`
+2. 增加InstanceOfExpr: `expression? Name instance of`, 参考`24Expression_41.voiceJava`

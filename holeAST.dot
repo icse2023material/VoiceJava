@@ -1,24 +1,16 @@
 digraph {
-CompilationUnit_1192404815 -> TypeDeclarations_1937689893
-TypeDeclarations_1937689893 -> Wrapper_ClassDeclaration_409838744
-Wrapper_ClassDeclaration_409838744 -> TypeParameters_542962809
-Wrapper_ClassDeclaration_409838744 -> ExtendedTypes_1915099106
-Wrapper_ClassDeclaration_409838744 -> ImplementedTypes_2008349542
-Wrapper_ClassDeclaration_409838744 -> BodyDeclarations_42522732
-BodyDeclarations_42522732 -> Wrapper_MethodDeclaration_1160780664
-Wrapper_MethodDeclaration_1160780664 -> Type_124489019
-Wrapper_MethodDeclaration_1160780664 -> Parameters_1473526139
-Wrapper_MethodDeclaration_1160780664 -> Body_333168725
-Parameters_1473526139 -> Wrapper_Parameter_1458958989
-Body_333168725 -> Statements_221036349
-Wrapper_Parameter_1458958989 -> Type_2076524546
-Wrapper_Parameter_1458958989 -> Name_919727687
-Statements_221036349 -> Wrapper_IfStmt_1338577802
-Wrapper_IfStmt_1338577802 -> IfCondition_661952537
-Wrapper_IfStmt_1338577802 -> Undefined_1986005413 [color = red] 
-IfCondition_661952537 -> Wrapper_Expr10_1333420792
-Wrapper_Expr10_1333420792 -> LeftSubExpr_1210613214
-Wrapper_Expr10_1333420792 -> RightSubExpr_1260359826
-LeftSubExpr_1210613214 -> Expr4_1036289397
-RightSubExpr_1260359826 -> Expr5_557141399
+CompilationUnit_226744878 -> TypeDeclarations_172032696
+TypeDeclarations_172032696 -> Wrapper_ClassDeclaration_299644693
+Wrapper_ClassDeclaration_299644693 -> TypeParameters_1771243284
+Wrapper_ClassDeclaration_299644693 -> ExtendedTypes_1033917063
+Wrapper_ClassDeclaration_299644693 -> ImplementedTypes_1893563925
+Wrapper_ClassDeclaration_299644693 -> BodyDeclarations_98974893
+TypeParameters_1771243284 -> Type_959629210
+TypeParameters_1771243284 -> Type_125994398
+ExtendedTypes_1033917063 -> Type_632475595
+ImplementedTypes_1893563925 -> Type_1526305386
+BodyDeclarations_98974893 -> Wrapper_FieldDeclaration_1220524164
+Wrapper_FieldDeclaration_1220524164 -> VariableDeclarators_291847739
+VariableDeclarators_291847739 -> Wrapper_VariableDeclarator_118881143
+Wrapper_VariableDeclarator_118881143 -> Undefined_463215441 [color = red] 
 }

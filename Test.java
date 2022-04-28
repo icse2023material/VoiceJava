@@ -1,7 +1,4 @@
-public class HelloWorld {
+public class HelloWorld<T, BaseFilter> extends Greeting implements Bonjour<T> {
 
-    public void sayHello(Name[] names) {
-        if (counter < 10)
-            return;
-    }
+    private empty counter;
 }
