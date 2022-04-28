@@ -20,6 +20,7 @@ import com.github.javaparser.ast.body.FieldDeclaration;
 import com.github.javaparser.ast.body.MethodDeclaration;
 import com.github.javaparser.ast.body.Parameter;
 import com.github.javaparser.ast.type.ClassOrInterfaceType;
+import com.github.javaparser.ast.type.ReferenceType;
 import com.github.javaparser.ast.type.Type;
 import com.github.javaparser.ast.type.TypeParameter;
 import com.github.javaparser.ast.body.VariableDeclarator;
@@ -30,6 +31,7 @@ import com.github.javaparser.ast.expr.ConditionalExpr;
 import com.github.javaparser.ast.expr.EnclosedExpr;
 import com.github.javaparser.ast.expr.Expression;
 import com.github.javaparser.ast.expr.FieldAccessExpr;
+import com.github.javaparser.ast.expr.InstanceOfExpr;
 import com.github.javaparser.ast.expr.LambdaExpr;
 import com.github.javaparser.ast.expr.MethodCallExpr;
 import com.github.javaparser.ast.expr.NameExpr;
@@ -372,6 +374,32 @@ public class Text2CompilationUnit {
           HoleNode variableHole = new HoleNode(HoleType.Wrapper, false, HoleType.VariableDeclarator);
           variablesHole.addChild(variableHole);
           variableHole.addChild(new HoleNode());
+				} else if (parentNodeClassStr != null && parentNodeClassStr.equals("IfStmt")) {
+					node = new FieldAST().generateVariableDeclarationExpr(pattern);
+          IfStmt ifStmt = (IfStmt)parent.getLeft();
+          Statement thenStmt = ifStmt.getThenStmt();
+          String thenStmtStr = StringHelper.getClassName(thenStmt.getClass().toString());
+          if (thenStmtStr.equals("ReturnStmt")) {
+            BlockStmt blockStmt = new BlockStmt();
+            NodeList<Statement> statements = new NodeList<Statement>();
+            statements.add((Statement) node);
+            blockStmt.setStatements(statements);
+            ifStmt.setThenStmt(blockStmt);
+
+            currentHole.set(HoleType.ThenStatement, false);
+            HoleNode stmtsHole = new HoleNode(HoleType.Statements, false);
+            currentHole.addChild(stmtsHole);
+            HoleNode stmtWrapperHole = new HoleNode(HoleType.Wrapper, false, HoleType.Statement);
+            stmtsHole.addChild(stmtWrapperHole);
+            HoleNode exprHoleNode = new HoleNode(HoleType.Expression, false);
+            stmtWrapperHole.addChild(exprHoleNode);
+            HoleNode variableDeclaratorsHole = new HoleNode(HoleType.VariableDeclarators, false);
+						exprHoleNode.addChild(variableDeclaratorsHole);
+            HoleNode variableDeclaratorHole = new HoleNode(HoleType.Wrapper, false, HoleType.VariableDeclarator);
+            variableDeclaratorsHole.addChild(variableDeclaratorHole);
+            variableDeclaratorHole.addChild(new HoleNode());
+          }
+
 				} else if (parentHoleType.equals(HoleType.Statements)) {
 					node = new FieldAST().generateVariableDeclarationExpr(pattern);
 					NodeList<Statement> statements = (NodeList<Statement>) parent.get().get();
@@ -464,6 +492,11 @@ public class Text2CompilationUnit {
           extendedTypes.add((ClassOrInterfaceType)node);
           currentHole.set(HoleType.Type, false);
           currentHole.addChild(new HoleNode());
+        } else if(parentNodeClassStr != null && parentNodeClassStr.equals("InstanceOfExpr")){
+          InstanceOfExpr instanceOfExpr = (InstanceOfExpr)parent.getLeft();
+          instanceOfExpr.setType((ReferenceType)node);
+          currentHole.set(HoleType.Type, false);
+          parentOfParentHole.addChild(new HoleNode());
         }
         break;
 			case "for":
@@ -1976,6 +2009,31 @@ public class Text2CompilationUnit {
           exprWrapperHole.addChild(parasHole);
           parasHole.addChild(new HoleNode());
         }
+      case "expr18":
+        holeTypeExpr = HoleType.Expr18;
+        if(parentNodeClassStr !=null && parentNodeClassStr.equals("IfStmt")){
+          IfStmt ifStmt = (IfStmt)parent.getLeft();
+          ifStmt.setCondition((Expression)node);
+          currentHole.set(HoleType.IfCondition, false);
+          HoleNode expr18Wrapper = new HoleNode(HoleType.Wrapper, false, holeTypeExpr);
+          currentHole.addChild(expr18Wrapper);
+          expr18Wrapper.addChild(new HoleNode());
+        } else if(parentNodeClassStr !=null && parentNodeClassStr.equals("AssignExpr")){
+          AssignExpr assignExpr = (AssignExpr)parent.getLeft();
+          assignExpr.setValue((Expression)node);
+          currentHole.set(HoleType.AssignExprValue, false);
+          HoleNode expr18Wrapper = new HoleNode(HoleType.Wrapper, false, holeTypeExpr);
+          currentHole.addChild(expr18Wrapper);
+          expr18Wrapper.addChild(new HoleNode());
+        } else if(parentNodeClassStr !=null && parentNodeClassStr.equals("VariableDeclarator")){
+          VariableDeclarator variableDeclarator = (VariableDeclarator)parent.getLeft();
+          variableDeclarator.setInitializer((Expression)node);
+          currentHole.set(HoleType.VariableInitializer, false);
+          HoleNode expr18Wrapper = new HoleNode(HoleType.Wrapper, false, holeTypeExpr);
+          currentHole.addChild(expr18Wrapper);
+          expr18Wrapper.addChild(new HoleNode());
+        }
+        break;
       }
 
 		// this.holeAST.generateDotAndPNGOfHoleAST();

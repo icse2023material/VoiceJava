@@ -89,6 +89,8 @@ public class ASTManager {
         return new ExprAST16().generate(pattern);
       case "expr17":
         return new ExprAST17().generate(pattern);
+      case "expr18":
+        return new ExprAST18().generate(pattern);
 		}
 
 		return null;

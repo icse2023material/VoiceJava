@@ -71,8 +71,16 @@
 <li>
 <p>定义<code>class</code>：</p>
 <ul>
-<li>语法：<code>define (Annotation | public | protected | private | abstract | static | final | strictfp )* class Name [extends Name]? [implements Name]?</code></li>
-<li>示例: <code>define public class hello world</code>， <code>define public class hello world extends greeting implements good morning</code></li>
+<li>语法：<code>define (Annotation | public | protected | private | abstract | static | final | strictfp )* class Name</code></li>
+<li>示例: <code>define public class hello world</code>， <code>define public class hello world</code></li>
+<li>定义一个class，class name可能带参数，可能extends something，可能implements something。因此需要很多的<code>move next</code>。</li>
+<li>可以考虑实现<code>move to body</code>这样的语法来快速跳转。</li>
+<li>完整示例:
+<ul>
+<li>期望结果<code>public class HelloWorld&lt;T, Filter&gt; extends Greeting implements Invoker&lt;T&gt;</code></li>
+<li>语句: <code>define public class hello world, type t, type filter, move next, type greeting, move next, type invoker with t</code></li>
+</ul>
+</li>
 </ul>
 </li>
 <li>
@@ -167,7 +175,7 @@
 <p>构建新实例：</p>
 <ul>
 <li>语法： <code>new instance Name [dot Name]* [with Name [and Name]*]?</code></li>
-<li>示例：<code>new instance puppy</code>， <code>new instance hash map dot entry</code>, <code>new instance puppy with</code> =&gt; <code>new Puppy&lt;&gt;()</code>, <code>new instance puppy with question mark</code> =&gt; <code>new Puppy&lt;?&gt;()</code>, <code>new instance puppy with cat and dog</code> =&gt; <code>new Puppy&lt;cat, dog&gt;()</code></li>
+<li>示例：<code>new instance puppy</code>， <code>new instance hash map dot entry</code>, <code>new instance puppy with</code> =&gt; <code>new Puppy&lt;&gt;()</code>, <code>new instance puppy with question mark</code> =&gt; <code>new Puppy&lt;?&gt;()</code>, <code>new instance puppy with cat and dog</code> =&gt; <code>new Puppy&lt;Cat, Dog&gt;()</code></li>
 </ul>
 </li>
 <li>
@@ -197,6 +205,7 @@
 <li>
 <p>12 种表达式</p>
 <ul>
+<li><code>expression? Name instance of </code> // Instance Expression, followed by command <code>type xxx</code>, 比如: <code>obj instance of InvokerCluster</code> =&gt; <code>obj instance of</code>, <code>type invoker cluster</code></li>
 <li><code>expression? lambda expression</code> // lambda expression</li>
 <li><code>expression? not expression</code> // unary not expression</li>
 <li><code>expression? dot Name</code> // 仅可作用于 <code>Name [dot Name]+</code>, 暂不支持其它。</li>
@@ -235,6 +244,7 @@
 <p>常用指令：</p>
 <ul>
 <li><code>move next</code></li>
+<li><code>move next body</code></li>
 <li><code>jump out</code></li>
 <li><code>jump before _</code>
 <ul>

@@ -93,7 +93,7 @@
    - `return [expression]?`
 
 24. 12 种表达式
-
+    - `expression? Name instance of ` // Instance Expression, followed by command `type xxx`, 比如: `obj instance of InvokerCluster` => `obj instance of`, `type invoker cluster`
     - `expression? lambda expression` // lambda expression
     - `expression? not expression` // unary not expression
     - `expression? dot Name` // 仅可作用于 `Name [dot Name]+`, 暂不支持其它。

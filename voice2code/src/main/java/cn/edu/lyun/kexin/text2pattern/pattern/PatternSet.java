@@ -165,6 +165,9 @@ public class PatternSet {
 				new Unit[] { new Unit("conditional"), new Unit("expression") });
 		patSet.add(expr15Pat);
 
+    Pattern expr18pat = new Pattern("expr18", "expression? Name instance of type",new Unit[]{new Unit("question", new Unit("expression")), Name, new Unit("instance"), new Unit("of")});
+    patSet.add(expr18pat);
+
 		Pattern expr1Pat = new Pattern("expr1", "[expression]? call [_]+",
 				new Unit[] { new Unit("question", new Unit("expression")), new Unit("call"), Name });
 		patSet.add(expr1Pat);
