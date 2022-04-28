@@ -399,7 +399,32 @@ public class Text2CompilationUnit {
             variableDeclaratorsHole.addChild(variableDeclaratorHole);
             variableDeclaratorHole.addChild(new HoleNode());
           }
-
+				} else if (parentNodeClassStr != null && parentNodeClassStr.equals("WhileStmt")) {
+					node = new FieldAST().generateVariableDeclarationExpr(pattern);
+          WhileStmt whileStmt = (WhileStmt)parent.getLeft();
+          Statement body = whileStmt.getBody();
+					String bodyClassStr = StringHelper.getClassName(body.getClass().toString());
+					if (bodyClassStr.equals("ReturnStmt")) {
+						BlockStmt blockStmt = new BlockStmt();
+						NodeList<Statement> statements = new NodeList<Statement>();
+						statements.add((Statement) node);
+						blockStmt.setStatements(statements);
+						whileStmt.setBody(blockStmt);
+						currentHole.set(HoleType.Body, false);
+						HoleNode stmtsHole = new HoleNode(HoleType.Statements, false);
+						currentHole.addChild(stmtsHole);
+						HoleNode stmtHole = new HoleNode(HoleType.Wrapper, false, HoleType.Statement);
+						stmtsHole.addChild(stmtHole);
+            HoleNode exprHoleNode = new HoleNode(HoleType.Expression, false);
+            stmtHole.addChild(exprHoleNode);
+            HoleNode variableDeclaratorsHole = new HoleNode(HoleType.VariableDeclarators, false);
+						exprHoleNode.addChild(variableDeclaratorsHole);
+            HoleNode variableDeclaratorHole = new HoleNode(HoleType.Wrapper, false, HoleType.VariableDeclarator);
+            variableDeclaratorsHole.addChild(variableDeclaratorHole);
+            variableDeclaratorHole.addChild(new HoleNode());
+					} else {
+						System.out.println("Shall not go into this branch");
+					} 
 				} else if (parentHoleType.equals(HoleType.Statements)) {
 					node = new FieldAST().generateVariableDeclarationExpr(pattern);
 					NodeList<Statement> statements = (NodeList<Statement>) parent.get().get();
