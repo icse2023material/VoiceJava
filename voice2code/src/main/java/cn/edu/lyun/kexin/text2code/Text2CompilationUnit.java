@@ -425,6 +425,22 @@ public class Text2CompilationUnit {
 					} else {
 						System.out.println("Shall not go into this branch");
 					} 
+				} else if (parentNodeClassStr != null && parentNodeClassStr.equals("SwitchEntry")) {
+					node = new FieldAST().generateVariableDeclarationExpr(pattern);
+          SwitchEntry switchEntry = (SwitchEntry)parent.getLeft();
+          NodeList<Statement> statements = switchEntry.getStatements();
+          statements.add((Statement) node);
+
+          currentHole.set(HoleType.Statements, false);
+          HoleNode stmtHole = new HoleNode(HoleType.Wrapper, false, HoleType.Statement);
+          currentHole.addChild(stmtHole);
+          HoleNode exprHoleNode = new HoleNode(HoleType.Expression, false);
+          stmtHole.addChild(exprHoleNode);
+          HoleNode variableDeclaratorsHole = new HoleNode(HoleType.VariableDeclarators, false);
+				  exprHoleNode.addChild(variableDeclaratorsHole);
+          HoleNode variableDeclaratorHole = new HoleNode(HoleType.Wrapper, false, HoleType.VariableDeclarator);
+          variableDeclaratorsHole.addChild(variableDeclaratorHole);
+          variableDeclaratorHole.addChild(new HoleNode());
 				} else if (parentHoleType.equals(HoleType.Statements)) {
 					node = new FieldAST().generateVariableDeclarationExpr(pattern);
 					NodeList<Statement> statements = (NodeList<Statement>) parent.get().get();
