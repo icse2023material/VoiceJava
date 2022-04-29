@@ -1,0 +1,14 @@
+define public class hello world
+move next body
+define public function say hello
+type void
+move next body
+let cluster invoker equal expression
+cast expression
+type Cluster invoker with question mark
+invoker dot sub invoker
+dot sub sub invoker
+let cluster invoker equal expression
+cast expression
+type Cluster invoker with question mark
+variable invoker

@@ -11,7 +11,7 @@ public class KeyWordSet {
 			"do",
 			"while", "if", "switch", "try", "catch", "at", "override", "let", "equal", "return", "plus", "minus", "call",
 			"plus", "times", "divide", "mod", "less", "than", "greater", "double", "and", "subexpression", "break",
-			"continue", "new", "instance", "throw",
+			"continue", "new", "instance", "throw", "cast",
 			"new", "move", "next", "jump", "out", "before", "after", "to", "line", "start", "end", "up", "lines", "down",
 			"left", "right", "select", "line", "body", "replace", "delete", "expression", "index", "null","conditional", "not", "lambda", "or" }));
 

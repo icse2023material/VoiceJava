@@ -94,6 +94,8 @@
    - `return [expression]?`
 
 24. 12 种表达式
+    - `conditional expression` // 三目运算 ?:
+    - `cast expression` // type cast, cast expression由类型和表达式组成
     - `expression? Name instance of ` // Instance Expression, followed by command `type xxx`, 比如: `obj instance of InvokerCluster` => `obj instance of`, `type invoker cluster`
     - `expression? lambda expression` // lambda expression
     - `expression? not expression` // unary not expression
@@ -113,7 +115,6 @@
     - `expression? string Name`
       - 示例：`string hello world`，支持多个单词。
       - 注意: 和前面重复。
-    - `conditional expression` 三目运算 ?:
     - 备注：
       - `op ::= plus | minus | times | divide | mod`
       - `compare ::= less than | less equal | greater than | greater equal | double equal | and | doube and | double or`

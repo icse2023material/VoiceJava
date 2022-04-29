@@ -1,0 +1,7 @@
+public class HelloWorld {
+
+    public void sayHello() {
+        clusterInvoker = (ClusterInvoker<?>) invoker(name);
+        clusterInvoker = (ClusterInvoker<?>) invoker(name).register();
+    }
+}

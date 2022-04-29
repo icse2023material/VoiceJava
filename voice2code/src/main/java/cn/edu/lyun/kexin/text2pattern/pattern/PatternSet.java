@@ -174,6 +174,9 @@ public class PatternSet {
     Pattern expr18pat = new Pattern("expr18", "expression? Name instance of type",new Unit[]{new Unit("question", new Unit("expression")), Name, new Unit("instance"), new Unit("of")});
     patSet.add(expr18pat);
 
+
+
+
 		Pattern expr1Pat = new Pattern("expr1", "[expression]? call [_]+",
 				new Unit[] { new Unit("question", new Unit("expression")), new Unit("call"), Name });
 		patSet.add(expr1Pat);
@@ -195,6 +198,11 @@ public class PatternSet {
 				"[expression]? (int | byte | short | long | char | float | double | boolean | String) [_]+",
 				new Unit[] { new Unit("question", new Unit("expression")), typeUnit, Name });
 		patSet.add(expr5Pat);
+
+ 		Pattern expr19Pat = new Pattern("expr19cast", "cast expression",
+		new Unit[] { new Unit("cast"), new Unit("expression") });
+		patSet.add(expr19Pat);
+
 
 		// expr13 must be put before expr4
 		Pattern expr13Pat = new Pattern("expr13", "[expression]? variable [_]+ index [_]+", new Unit[] {
