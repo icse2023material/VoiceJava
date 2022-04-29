@@ -48,9 +48,9 @@ public class PatternSet {
 												new Unit("or", new Unit("static"), new Unit("or", new Unit("final"), new Unit("or",
 														new Unit("synchronized"), new Unit("or", new Unit("native"), new Unit("strictfp"))))))))));
 		Pattern methodPat = new Pattern("method",
-				"define [Annotation|public|protected|private|abstract|static|final|synchronized|native|strictfp]* function [_]+ [throws Exception]?",
+				"define [Annotation|public|protected|private|abstract|static|final|synchronized|native|strictfp]* function [_]+",
 				new Unit[] { new Unit("define"), new Unit("asterisk", methodModifier), new Unit("function"), Name,
-						new Unit("question", new Unit("throws"), new Unit("exception")) });
+						 });
 		patSet.add(methodPat);
 
 		Pattern arrowFunctionPat = new Pattern("arrowFunction", "define arrow function",
@@ -115,6 +115,9 @@ public class PatternSet {
 		Pattern newInstancePat = new Pattern("newInstance", "new instance (list of [_]+  | [_]+ [dot [_]+]? [with [_]+ [and [_]+]*]?)",
 				new Unit[] { new Unit("new"), new Unit("instance"), typePatPat });
 		patSet.add(newInstancePat);
+
+		Pattern throwDeclPat = new Pattern("throwDecl", "throw [_]+", new Unit[] { new Unit("throw"),  Name });
+    patSet.add(throwDeclPat);
 
 		Pattern throwPat = new Pattern("throw", "throw new [_]+", new Unit[] { new Unit("throw"), new Unit("new"), Name });
 		patSet.add(throwPat);

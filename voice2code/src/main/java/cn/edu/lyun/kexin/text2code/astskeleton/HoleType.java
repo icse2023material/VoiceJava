@@ -11,10 +11,11 @@ public enum HoleType {
 	Expr8, Expr9,
 	Expr10, Expr11, Expr12, Expr13, Expr14, Expr15, Expr16, Expr17, Expr18, SubExpr, LeftSubExpr, RightSubExpr, AssignExprTarget, AssignExprValue,
 	MethodCallExpr, VariableInitializer, Arguments, Argument, ForExpression, Break, Continue, MoveNext,
-	InnerExpr, Throw, WhileCondition, SwitchSelector, SwitchEntryLabels, SwitchEntryLabel,
+	InnerExpr, Throw, ThrowDecl, WhileCondition, SwitchSelector, SwitchEntryLabels, SwitchEntryLabel,
   MethodCallExprChain, NameDotChain,
   ConditionalExprCondition, ConditionalExprThen, ConditionalExprElse,
   UnaryExprExpression,
   NewInstance,
   TypeParameters, ExtendedTypes, ImplementedTypes,
+  ThrownExceptions,
 }

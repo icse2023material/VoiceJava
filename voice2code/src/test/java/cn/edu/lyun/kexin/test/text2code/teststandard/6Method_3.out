@@ -1,0 +1,6 @@
+public class HelloWorld {
+
+    public void sayHello() throws IllegalArgumentException, IONotFoundException {
+        counter = 1;
+    }
+}

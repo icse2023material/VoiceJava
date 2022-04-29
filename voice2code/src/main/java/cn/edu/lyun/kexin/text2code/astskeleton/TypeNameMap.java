@@ -42,6 +42,7 @@ public class TypeNameMap {
     map.put(HoleType.TypeParameters, "getTypeParameters");
     map.put(HoleType.ExtendedTypes, "getExtendedTypes");
     map.put(HoleType.ImplementedTypes, "getImplementedTypes");
+    map.put(HoleType.ThrownExceptions, "getThrownExceptions");
 		return map;
 	}
 }

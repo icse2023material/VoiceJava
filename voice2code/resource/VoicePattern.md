@@ -18,70 +18,70 @@
     - 定义一个class，class name可能带参数，可能extends something，可能implements something。因此需要很多的`move next`。
     - 可以考虑实现`move to body`这样的语法来快速跳转。
     - 完整示例: 
-      - 期望结果`public class HelloWorld<T, Filter> extends Greeting implements Invoker<T>`
+      - 期望结果`public class HelloWorld<T, Filter> extends Greeting implements Invoker<T> `
       - 语句: `define public class hello world, type t, type filter, move next, type greeting, move next, type invoker with t`
 5.  定义构造函数
     - 语法：`define constructor`
     - 备注: 还未实现。
 6.  定义方法`method`:
-    - 语法：`define (Annotation | public | protected | private | abstract | static | final | synchronized | native | strictfp)* function Name [throws Exception]?`
-    - 示例: `define public function say hello`， `define public function say hello throws Exception`
-7.  定义箭头函数：
-    - 语法：`define arrow function`
-    - 示例：备注: 还未实现。
-8.  属性/变量定义：
+    - 语法：`define (Annotation | public | protected | private | abstract | static | final | synchronized | native | strictfp)* function Name`
+    - 示例: `define public function say hello`， `define public function say hello`
+
+7.  属性/变量定义：
     - 语法：`define (Annotation | public | protected |private | static | final | transient | volatile)* variable Name`
     - 示例：`define private variable count`， `define variable list`
-9.  定义类型：
+8.  定义类型：
 
     - 语法：`type (list of Name | Name [dot Name]? [with Name? [and Name]*]?) [extends _]?`
     - 示例: `type int`， `type void`, `type Node with Integer` => `Node<Integer>`, `type Node with` => `Node<>`
     - 注意: 若`Name`为`question mark`，则转换为`?`，比如: `type Node with question mark` => `Node<?>`
 
-10. 定义`for`循环：
+9.  定义`for`循环：
 
     - 语法：`define [enchanced]? for`
     - 备注: `enhanced`还未实现。
 
-11. 定义`while`循环：
+10. 定义`while`循环：
 
     - 语法：`define [do]? while`
     - 备注: `do`还未实现
 
-12. 定义`if`:
+11. 定义`if`:
 
     - 语法：`define if`
 
-13. 定义`switch`:
+12. 定义`switch`:
 
     - 语法：`define switch`
 
-14. 定义`try-catch`:
+13. 定义`try-catch`:
 
     - 语法：`define try catch`
     - 备注: 还未实现。
 
-15. 定义`@Override`
+14. 定义`@Override`
 
     - 语法：`define at override`
     - 备注：还未实现。
 
-16. 定义子表达式，即括号。
+15. 定义子表达式，即括号。
 
     - 语法：`subexpression`
 
-17. `break`
+16. `break`
 
-18. `continue`
+17. `continue`
 
-19. 构建新实例：
+18. 构建新实例：
 
     - 语法： `new instance Name [dot Name]* [with Name [and Name]*]?` 
     - 示例：`new instance puppy`， `new instance hash map dot entry`, `new instance puppy with` => `new Puppy<>()`, `new instance puppy with question mark` => `new Puppy<?>()`, `new instance puppy with cat and dog` => `new Puppy<Cat, Dog>()`
 
-20. 抛出异常：
+19. 定义抛出异常
+    - 语法: `throw Name`: throw IOException // 用于Method定义
 
-    - 语法：`throw new Name`
+20. 抛出异常：
+    - 语法：`throw new Name` : throw new IOException(); // 用于真的抛出异常
 
 21. let赋值：
 

@@ -25,7 +25,7 @@ public class ASTManager {
 				return new FieldAST().generate(pattern);
 			case "type":
 				return new TypeExtendAST().generate(pattern);
-			case "typeVariable":
+		  case "typeVariable":
 				return new TypeVariableAST().generate(pattern);
 			case "for":
 				return new ForAST().generate(pattern);
@@ -47,6 +47,8 @@ public class ASTManager {
 				return new ContinueAST().generate(pattern);
 			case "newInstance":
 				return new NewInstanceAST().generate(pattern);
+ 			case "throwDecl":
+        return new ThrowDeclAST().generate(pattern);
 			case "throw":
 				return new ThrowAST().generate(pattern);
 			case "let":

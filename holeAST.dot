@@ -1,31 +1,18 @@
 digraph {
-CompilationUnit_306123060 -> TypeDeclarations_2104028992
-TypeDeclarations_2104028992 -> Wrapper_ClassDeclaration_1527430292
-Wrapper_ClassDeclaration_1527430292 -> TypeParameters_1975546571
-Wrapper_ClassDeclaration_1527430292 -> ExtendedTypes_208866101
-Wrapper_ClassDeclaration_1527430292 -> ImplementedTypes_543846639
-Wrapper_ClassDeclaration_1527430292 -> BodyDeclarations_690686166
-BodyDeclarations_690686166 -> Wrapper_MethodDeclaration_599984672
-Wrapper_MethodDeclaration_599984672 -> Type_505021446
-Wrapper_MethodDeclaration_599984672 -> Parameters_816798571
-Wrapper_MethodDeclaration_599984672 -> Body_1768952842
-Parameters_816798571 -> Wrapper_Parameter_1544614339
-Body_1768952842 -> Statements_402207819
-Wrapper_Parameter_1544614339 -> Type_2059592603
-Wrapper_Parameter_1544614339 -> Name_2016828666
-Statements_402207819 -> Wrapper_SwitchStmt_670084377
-Wrapper_SwitchStmt_670084377 -> SwitchSelector_1424497441
-Wrapper_SwitchStmt_670084377 -> SwitchEntries_1329897103
-SwitchSelector_1424497441 -> Expr4_1091736037
-SwitchEntries_1329897103 -> Wrapper_SwitchEntry_1465126864
-Wrapper_SwitchEntry_1465126864 -> SwitchEntryLabels_1559817679
-Wrapper_SwitchEntry_1465126864 -> Statements_1489946715
-SwitchEntryLabels_1559817679 -> Expression_1654589039
-Statements_1489946715 -> Wrapper_Statement_2092066079
-Statements_1489946715 -> Undefined_201069753 [color = red] 
-Wrapper_Statement_2092066079 -> Expression_1145165159
-Expression_1145165159 -> VariableDeclarators_1041638599
-VariableDeclarators_1041638599 -> Wrapper_VariableDeclarator_1656318404
-Wrapper_VariableDeclarator_1656318404 -> Type_231498257
-Wrapper_VariableDeclarator_1656318404 -> Expr5_1280959582
+CompilationUnit_2104028992 -> TypeDeclarations_1527430292
+TypeDeclarations_1527430292 -> Wrapper_ClassDeclaration_1975546571
+Wrapper_ClassDeclaration_1975546571 -> TypeParameters_521960438
+Wrapper_ClassDeclaration_1975546571 -> ExtendedTypes_576020159
+Wrapper_ClassDeclaration_1975546571 -> ImplementedTypes_921420643
+Wrapper_ClassDeclaration_1975546571 -> BodyDeclarations_1165303897
+BodyDeclarations_1165303897 -> Wrapper_MethodDeclaration_688005825
+Wrapper_MethodDeclaration_688005825 -> Type_1744189907
+Wrapper_MethodDeclaration_688005825 -> Body_1107530534
+Body_1107530534 -> Statements_749981943
+Statements_749981943 -> Wrapper_Statement_1313960293
+Statements_749981943 -> Undefined_1298380324 [color = red] 
+Wrapper_Statement_1313960293 -> Expression_1155757579
+Expression_1155757579 -> Wrapper_LetExpr_1785111044
+Wrapper_LetExpr_1785111044 -> AssignExprValue_1482748887
+AssignExprValue_1482748887 -> Expr5_1181545730
 }

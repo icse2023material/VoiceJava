@@ -1,0 +1,10 @@
+define public class hello world
+move next body
+define public function say hello
+type void
+move next
+throw Illegal argument exception
+type IO not found exception
+move next
+let counter equal expression
+int one

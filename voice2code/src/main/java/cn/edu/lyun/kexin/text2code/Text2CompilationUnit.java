@@ -4,6 +4,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.sql.Ref;
 import java.util.*;
 
 import cn.edu.lyun.util.Pair;
@@ -143,6 +144,15 @@ public class Text2CompilationUnit {
 						parentHole.deleteHole(holeIndex);
 						parentOfParentHole.addChild(exprHole);
 					}
+        } else if(parentHole.getHoleTypeOfOptionsIfOnlyOne()!=null && parentHole.getHoleTypeOfOptionsIfOnlyOne().equals(HoleType.MethodDeclaration)){
+          if(parentHole.getChildListSize()==1){
+            currentHole.set(HoleType.Type, false);
+          } else if(parentHole.getChildListSize()==2){
+            currentHole.set(HoleType.Parameters, false);
+          } else if(parentHole.getChildListSize()==3){
+            currentHole.set(HoleType.ThrownExceptions, false);
+          }          
+          parentHole.addChild(new HoleNode());
 				} else if (parentHoleType.equals(HoleType.SwitchEntries)) {
 					HoleNode elderBrother = parentHole.getIthChild(holeIndex - 1);
 					// Not has default case yet, then add a default case
@@ -538,6 +548,11 @@ public class Text2CompilationUnit {
           instanceOfExpr.setType((ReferenceType)node);
           currentHole.set(HoleType.Type, false);
           parentOfParentHole.addChild(new HoleNode());
+        } else if (parentHoleType.equals(HoleType.ThrownExceptions)){
+          NodeList<ReferenceType> thrownExceptions = (NodeList<ReferenceType>)parent.get().get();
+          thrownExceptions.add((ReferenceType)node);
+          currentHole.set(HoleType.Type, false);
+          parentHole.addChild(new HoleNode());
         }
         break;
 			case "for":
@@ -1069,7 +1084,17 @@ public class Text2CompilationUnit {
             argsHole.addChild(new HoleNode());
 					} 
         }
-        
+        break;
+      case "throwDecl":
+        holeTypeExpr = HoleType.ThrowDecl;
+        if(parentNodeClassStr!=null && parentNodeClassStr.equals("MethodDeclaration")){
+          MethodDeclaration methodDeclaration = (MethodDeclaration)parent.getLeft();
+          NodeList<ReferenceType> throwsExceptions = methodDeclaration.getThrownExceptions();
+          throwsExceptions.add((ReferenceType)node);
+          currentHole.set(HoleType.ThrownExceptions, false);
+          currentHole.addChild(new HoleNode(HoleType.Type, false));
+          currentHole.addChild(new HoleNode());
+        }
         break;
 			case "throw":
 				holeTypeExpr = HoleType.Throw;
