@@ -101,7 +101,7 @@
     - `expression? not expression` // unary not expression
     - `expression? dot Name` // 仅可作用于 `Name [dot Name]+`, 暂不支持其它。
     - `expression? call Name` // 后可`move next`, 然后继续`call Name`
-    - `expression? Name [dot Name]* [call Name]` // 后可`move next`, 然后继续`call Name`
+    - `expression? Name [dot Name]* [call Name]` 
     - `expression? Name [dot Name]*`
     - `expression? variable Name`
     - `expression? (int | byte | short | long | char | float | double | boolean | string) Name`
@@ -123,6 +123,7 @@
 25. 常用指令：
     - `move next`
     - `move next body`
+    - `move next statement`
     - `jump out`
     - `jump before _`
       - 示例：`jump before hello`

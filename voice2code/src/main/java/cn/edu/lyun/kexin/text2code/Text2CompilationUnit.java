@@ -38,6 +38,7 @@ import com.github.javaparser.ast.expr.LambdaExpr;
 import com.github.javaparser.ast.expr.MethodCallExpr;
 import com.github.javaparser.ast.expr.NameExpr;
 import com.github.javaparser.ast.expr.ObjectCreationExpr;
+import com.github.javaparser.ast.expr.SimpleName;
 import com.github.javaparser.ast.expr.UnaryExpr;
 import com.github.javaparser.ast.expr.VariableDeclarationExpr;
 import com.github.javaparser.ast.stmt.BlockStmt;
@@ -236,6 +237,13 @@ public class Text2CompilationUnit {
 						parentHole.deleteHole(holeIndex);
             parentOfParentHole.addChild(new HoleNode());
         }
+        break;
+      case "moveNextStmt":
+        parentHole.deleteHole(holeIndex);
+        while(!parentHole.getHoleType().equals(HoleType.Statements)){
+          parentHole = parentHole.getParent();
+        }
+        parentHole.addChild(new HoleNode());
         break;
       case "package":
 				CompilationUnit parentNode = (CompilationUnit) parent.getLeft();
@@ -2501,53 +2509,54 @@ public class Text2CompilationUnit {
 		return --count;
 	}
 
-	private void generateExpInMethodBody(Either<Node, Either<List<?>, NodeList<?>>> parent, HoleNode currentHole,
-			Node node, HoleType exprHoleType) {
-		MethodDeclaration mNode = (MethodDeclaration) parent.getLeft();
-		Optional<BlockStmt> optionalBody = mNode.getBody();
-		currentHole.set(HoleType.Body, false);
+  private void generateExpInMethodBody(Either<Node, Either<List<?>, NodeList<?>>> parent, HoleNode currentHole,
+  Node node, HoleType exprHoleType) {
+MethodDeclaration mNode = (MethodDeclaration) parent.getLeft();
+Optional<BlockStmt> optionalBody = mNode.getBody();
+currentHole.set(HoleType.Body, false);
 
-		HoleNode anotherCurrentHole = new HoleNode();
-		currentHole.addChild(anotherCurrentHole);
+HoleNode anotherCurrentHole = new HoleNode();
+currentHole.addChild(anotherCurrentHole);
 
-		BlockStmt blockStmt = optionalBody.get();
-		NodeList<Statement> statements = blockStmt.getStatements();
-		if (statements.size() == 0) {
-			ExpressionStmt expressionStmt = new ExpressionStmt((Expression) node);
-			statements.add(expressionStmt);
+BlockStmt blockStmt = optionalBody.get();
+NodeList<Statement> statements = blockStmt.getStatements();
+if (statements.size() == 0) {
+  ExpressionStmt expressionStmt = new ExpressionStmt((Expression) node);
+  statements.add(expressionStmt);
 
-			anotherCurrentHole.set(HoleType.Statements, false);
+  anotherCurrentHole.set(HoleType.Statements, false);
 
-			HoleNode holeNode = new HoleNode(HoleType.Wrapper, false);
-			holeNode.setHoleTypeOptions(new HoleType[] { exprHoleType });
-			anotherCurrentHole.addChild(holeNode);
+  HoleNode holeNode = new HoleNode(HoleType.Wrapper, false);
+  holeNode.setHoleTypeOptions(new HoleType[] { exprHoleType });
+  anotherCurrentHole.addChild(holeNode);
 
-			HoleNode holdeNodeChild0 = new HoleNode(HoleType.Expression, false);
-			holeNode.addChild(holdeNodeChild0);
+  HoleNode holdeNodeChild0 = new HoleNode(HoleType.Expression, false);
+  holeNode.addChild(holdeNodeChild0);
 
-			HoleNode holeNodeChild = new HoleNode();
-			holeNodeChild.setHoleTypeOptions(new HoleType[] { HoleType.Expression });
-			anotherCurrentHole.addChild(holeNodeChild);
-		} else {
-			// TODO
-		}
-	}
+  HoleNode holeNodeChild = new HoleNode();
+  holeNodeChild.setHoleTypeOptions(new HoleType[] { HoleType.Expression });
+  anotherCurrentHole.addChild(holeNodeChild);
+} else {
+  // TODO
+}
+}
 
-	private void generateExpInStatements(Either<Node, Either<List<?>, NodeList<?>>> parent, int holeIndex, Node node,
-			HoleNode currentHole, HoleNode parentHole, HoleType exprHoleType) {
-		NodeList<Statement> statements = (NodeList<Statement>) parent.get().get();
-		if (holeIndex < statements.size()) {
-			// TODO
-		} else {
-			statements.add(new ExpressionStmt((Expression) node));
 
-			currentHole.set(HoleType.Expression, false);
-			HoleNode holdeNodeChild0 = new HoleNode(HoleType.Wrapper, false);
-			holdeNodeChild0.setHoleTypeOptionsOfOnlyOne(exprHoleType);
-			currentHole.addChild(holdeNodeChild0);
-			parentHole.addChild(new HoleNode());
-		}
-	}
+private void generateExpInStatements(Either<Node, Either<List<?>, NodeList<?>>> parent, int holeIndex, Node node,
+HoleNode currentHole, HoleNode parentHole, HoleType exprHoleType) {
+NodeList<Statement> statements = (NodeList<Statement>) parent.get().get();
+if (holeIndex < statements.size()) {
+// TODO
+} else {
+statements.add(new ExpressionStmt((Expression) node));
+
+currentHole.set(HoleType.Expression, false);
+HoleNode holdeNodeChild0 = new HoleNode(HoleType.Wrapper, false);
+holdeNodeChild0.setHoleTypeOptionsOfOnlyOne(exprHoleType);
+currentHole.addChild(holdeNodeChild0);
+parentHole.addChild(new HoleNode());
+}
+}
 
 	private void generateBinarExprInExpr(Either<Node, Either<List<?>, NodeList<?>>> parent, int holeIndex, Node node,
 			HoleNode currentHole, HoleNode parentHole, HoleNode parentOfParentHole, HoleNode parentOfParentOfParentHole,
@@ -3095,8 +3104,27 @@ public class Text2CompilationUnit {
       HoleNode argsHole = new HoleNode(HoleType.Arguments, false);
       currentHole.addChild(argsHole);
 			argsHole.addChild(new HoleNode());
-    }
-    else if (parentHoleType.equals(HoleType.Statements)) {
+    // }
+    // TODO: this part not workable.
+    // a dot b; call c
+		// else if(parentHole.getHoleTypeOfOptionsIfOnlyOne()!=null && parentHole.getHoleTypeOfOptionsIfOnlyOne().equals(HoleType.NameDotChain)){
+    //   FieldAccessExpr fieldAccessExpr = (FieldAccessExpr)parent.getLeft();
+    //   Expression scope = fieldAccessExpr.getScope();
+    //   String name = fieldAccessExpr.getName().getIdentifier();
+    //   FieldAccessExpr newFieldAccessExpr = new FieldAccessExpr(scope, name);
+    //   MethodCallExpr methodCallExpr = new MethodCallExpr();
+    //   MethodCallExpr eNode = (MethodCallExpr)node;
+    //   methodCallExpr.setScope((Expression)newFieldAccessExpr);
+    //   methodCallExpr.setName(eNode.getName());
+    //   fieldAccessExpr.setScope((Expression)methodCallExpr);
+    //   SimpleName oldName = fieldAccessExpr.getName();
+    //   fieldAccessExpr.remove(oldName);
+
+    //   currentHole.set(HoleType.Wrapper, false, holeTypeExpr);
+    //   HoleNode argsHole = new HoleNode(HoleType.Arguments, false);
+    //   currentHole.addChild(argsHole);
+		// 	argsHole.addChild(new HoleNode());
+    } else if (parentHoleType.equals(HoleType.Statements)) {
 			NodeList<Statement> statements = (NodeList<Statement>) parent.get().get();
 			if (holeIndex < statements.size()) {
 				// TODO
