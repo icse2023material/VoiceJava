@@ -1,24 +1,13 @@
 digraph {
-CompilationUnit_1248674246 -> TypeDeclarations_1770980520
-TypeDeclarations_1770980520 -> Wrapper_ClassDeclaration_217534352
-Wrapper_ClassDeclaration_217534352 -> TypeParameters_1941637659
-Wrapper_ClassDeclaration_217534352 -> ExtendedTypes_1408763611
-Wrapper_ClassDeclaration_217534352 -> ImplementedTypes_1120137800
-Wrapper_ClassDeclaration_217534352 -> BodyDeclarations_1962851919
-BodyDeclarations_1962851919 -> Wrapper_MethodDeclaration_1597937945
-Wrapper_MethodDeclaration_1597937945 -> Type_1289982715
-Wrapper_MethodDeclaration_1597937945 -> Parameters_300902557
-Wrapper_MethodDeclaration_1597937945 -> Body_283291689
-Parameters_300902557 -> Wrapper_Parameter_993985917
-Body_283291689 -> Statements_1805331627
-Wrapper_Parameter_993985917 -> Type_31066821
-Wrapper_Parameter_993985917 -> Name_71074095
-Statements_1805331627 -> Wrapper_IfStmt_1198225464
-Wrapper_IfStmt_1198225464 -> IfCondition_1965554186
-Wrapper_IfStmt_1198225464 -> Undefined_620382793 [color = red] 
-IfCondition_1965554186 -> Wrapper_Expr10_1143968256
-Wrapper_Expr10_1143968256 -> LeftSubExpr_1486456837
-Wrapper_Expr10_1143968256 -> RightSubExpr_312794806
-LeftSubExpr_1486456837 -> Expr4_1685743273
-RightSubExpr_312794806 -> Expr5_1560106932
+CompilationUnit_315860201 -> TypeDeclarations_604125138
+TypeDeclarations_604125138 -> Wrapper_ClassDeclaration_631659383
+Wrapper_ClassDeclaration_631659383 -> TypeParameters_785447854
+Wrapper_ClassDeclaration_631659383 -> ExtendedTypes_359922172
+Wrapper_ClassDeclaration_631659383 -> ImplementedTypes_1632682988
+Wrapper_ClassDeclaration_631659383 -> BodyDeclarations_1153447573
+BodyDeclarations_1153447573 -> Wrapper_MethodDeclaration_1219273867
+Wrapper_MethodDeclaration_1219273867 -> Type_335359181
+Wrapper_MethodDeclaration_1219273867 -> Parameters_768415370
+Wrapper_MethodDeclaration_1219273867 -> ThrownExceptions_1317375498
+Wrapper_MethodDeclaration_1219273867 -> Undefined_1130346421 [color = red] 
 }
