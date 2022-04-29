@@ -72,9 +72,12 @@ public class PatternSet {
 		Pattern switchPat = new Pattern("switch", "define switch", new Unit[] { new Unit("define"), new Unit("switch") });
 		patSet.add(switchPat);
 
-		Pattern tryCatchPat = new Pattern("tryCatch", "define try catch",
-				new Unit[] { new Unit("define"), new Unit("try"), new Unit("catch") });
+		Pattern tryCatchPat = new Pattern("tryCatch", "define try",
+				new Unit[] { new Unit("define"), new Unit("try") });
 		patSet.add(tryCatchPat);
+
+    Pattern catchPat = new Pattern("Catch", "define catch", new Unit[]{new Unit("define"), new Unit("catch")});
+    patSet.add(catchPat);
 
 		Pattern atOverridePat = new Pattern("override", "define at override",
 				new Unit[] { new Unit("define"), new Unit("at"), new Unit("override") });

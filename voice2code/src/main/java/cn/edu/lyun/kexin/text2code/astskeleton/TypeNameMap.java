@@ -15,6 +15,7 @@ public class TypeNameMap {
 		map.put(HoleType.FieldDeclarations, "getFields");
 		map.put(HoleType.MethodDeclaration, "getMethods");
 		map.put(HoleType.Parameters, "getParameters");
+		map.put(HoleType.Parameter, "getParameter");
 		map.put(HoleType.VariableDeclarators, "getVariables");
 		map.put(HoleType.Type, "getType");
 		map.put(HoleType.Body, "getBody");
@@ -43,6 +44,8 @@ public class TypeNameMap {
     map.put(HoleType.ExtendedTypes, "getExtendedTypes");
     map.put(HoleType.ImplementedTypes, "getImplementedTypes");
     map.put(HoleType.ThrownExceptions, "getThrownExceptions");
+    map.put(HoleType.TryBlock, "getTryBlock");
+    map.put(HoleType.CatchClauses, "getCatchClauses");
 		return map;
 	}
 }

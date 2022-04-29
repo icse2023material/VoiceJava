@@ -37,6 +37,8 @@ public class ASTManager {
 				return new SwitchAST().generate(pattern);
 			case "tryCatch":
 				return new TryAST().generate(pattern);
+			case "Catch":
+				return new CatchAST().generate(pattern);
 			case "override":
 				return null;
 			case "subexpression":

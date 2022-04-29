@@ -1,0 +1,11 @@
+public class HelloWorld {
+
+    public void sayHello() {
+        try {
+            hello();
+        } catch (IOException e) {
+            out();
+        } catch (NotFoundException e) {
+        }
+    }
+}

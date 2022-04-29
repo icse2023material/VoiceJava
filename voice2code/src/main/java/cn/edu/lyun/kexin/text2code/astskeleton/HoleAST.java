@@ -185,7 +185,7 @@ public class HoleAST {
 				HoleType.Expression, HoleType.Body, HoleType.Statement, HoleType.VariableInitializer, HoleType.ForInitialization, HoleType.IfCondition,
 				HoleType.Expr1, HoleType.Expr2, HoleType.ThenStatement, HoleType.AssignExprValue, HoleType.Expr16, HoleType.Return,
         HoleType.Argument, HoleType.ConditionalExprThen, HoleType.ConditionalExprElse, HoleType.ConditionalExprCondition, HoleType.NewInstance,
-				HoleType.RightSubExpr, HoleType.LeftSubExpr, HoleType.InnerExpr));
+				HoleType.RightSubExpr, HoleType.LeftSubExpr, HoleType.InnerExpr, HoleType.TryBlock));
 		return holeNode.getNonUndefinedChildListSize() == 1 && set.contains(holeNode.getHoleType());
 	}
 
@@ -193,8 +193,8 @@ public class HoleAST {
 		Set<HoleType> oneChildSet = new HashSet<HoleType>(Arrays.asList(HoleType.Statement, HoleType.VariableDeclarators, HoleType.VariableDeclarationExpr,
 				HoleType.Expr1, HoleType.Expr2, HoleType.MethodCallExpr, HoleType.LetExpr, HoleType.ForInitialization,HoleType.ConditionalExprThen, HoleType.ConditionalExprElse, HoleType.ConditionalExprCondition,
         HoleType.Argument, HoleType.LeftSubExpr, HoleType.RightSubExpr, HoleType.Expr16, HoleType.Return, HoleType.IfCondition, HoleType.NewInstance,
-				HoleType.Expr11, HoleType.InnerExpr, HoleType.FieldDeclaration));
-		Set<HoleType> twoChildrenSet = new HashSet<HoleType>(Arrays.asList(HoleType.LetExpr,
+				HoleType.Expr11, HoleType.InnerExpr, HoleType.FieldDeclaration, HoleType.TryBlock));
+		Set<HoleType> twoChildrenSet = new HashSet<HoleType>(Arrays.asList(HoleType.LetExpr, HoleType.CatchClause,
 				HoleType.SwitchEntry, HoleType.SwitchStmt, HoleType.Expr10, HoleType.WhileStmt, HoleType.VariableDeclarator, HoleType.Expr17));
 		Set<HoleType> threeChildrenSet = new HashSet<HoleType>(Arrays.asList(HoleType.BodyDeclaration, HoleType.Expr15));
 		if (holeNode.getHoleType().equals(HoleType.Wrapper)) {

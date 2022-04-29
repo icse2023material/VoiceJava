@@ -40,6 +40,7 @@ import com.github.javaparser.ast.expr.ObjectCreationExpr;
 import com.github.javaparser.ast.expr.UnaryExpr;
 import com.github.javaparser.ast.expr.VariableDeclarationExpr;
 import com.github.javaparser.ast.stmt.BlockStmt;
+import com.github.javaparser.ast.stmt.CatchClause;
 import com.github.javaparser.ast.stmt.ExpressionStmt;
 import com.github.javaparser.ast.stmt.ForStmt;
 import com.github.javaparser.ast.stmt.IfStmt;
@@ -47,6 +48,7 @@ import com.github.javaparser.ast.stmt.ReturnStmt;
 import com.github.javaparser.ast.stmt.Statement;
 import com.github.javaparser.ast.stmt.SwitchEntry;
 import com.github.javaparser.ast.stmt.SwitchStmt;
+import com.github.javaparser.ast.stmt.TryStmt;
 import com.github.javaparser.ast.stmt.WhileStmt;
 import com.github.javaparser.printer.lexicalpreservation.LexicalPreservingPrinter;
 
@@ -59,8 +61,9 @@ import cn.edu.lyun.kexin.text2code.astskeleton.TypeNameMap;
 import cn.edu.lyun.kexin.text2pattern.nfa.RegexSet;
 import cn.edu.lyun.kexin.text2pattern.pattern.Pattern;
 import cn.edu.lyun.kexin.text2pattern.pattern.PatternSet;
-
+import io.vavr.PartialFunction;
 import io.vavr.control.Either;
+import javassist.bytecode.stackmap.BasicBlock.Catch;
 
 public class Text2CompilationUnit {
 
@@ -568,6 +571,15 @@ public class Text2CompilationUnit {
           thrownExceptions.add((ReferenceType)node);
           currentHole.set(HoleType.Type, false);
           parentHole.addChild(new HoleNode());
+        } else if(parentNodeClassStr != null && parentNodeClassStr.equals("CatchClause")){
+          CatchClause catchClause = (CatchClause)parent.getLeft();
+          Parameter parameter = new Parameter();
+          parameter.setType((Type)(node));
+          catchClause.setParameter(parameter);
+
+          currentHole.set(HoleType.Parameter, false);
+          currentHole.addChild(new HoleNode(HoleType.Type, false));
+          currentHole.addChild(new HoleNode());
         }
         break;
 			case "for":
@@ -952,7 +964,53 @@ public class Text2CompilationUnit {
 				}
 				break;
 			case "tryCatch":
-				break;
+        if(parentHoleType.equals(HoleType.Statements)){
+          NodeList<Statement> statements = (NodeList<Statement>)parent.get().get();
+          statements.add((Statement)node);
+          currentHole.set(HoleType.Wrapper, false, HoleType.TryCatchStmt);
+          HoleNode tryBlockHole = new HoleNode(HoleType.TryBlock, false);
+          currentHole.addChild(tryBlockHole);
+          HoleNode stmtsHole = new HoleNode(HoleType.Statements, false);
+          tryBlockHole.addChild(stmtsHole);
+          stmtsHole.addChild(new HoleNode());
+        } else if(parentNodeClassStr != null && parentNodeClassStr.equals("MethodDeclaration")){
+          MethodDeclaration mNode = (MethodDeclaration) parent.getLeft();
+					Optional<BlockStmt> optionalBody = mNode.getBody();
+					currentHole.set(HoleType.Body, false);
+
+					HoleNode stmtsHole = new HoleNode(HoleType.Statements, false);
+					currentHole.addChild(stmtsHole);
+
+					BlockStmt blockStmt = optionalBody.get();
+					NodeList<Statement> statements = blockStmt.getStatements();
+					if (statements.size() == 0) { 
+            statements.add((Statement)node);
+            HoleNode stmtHole = new HoleNode(HoleType.Wrapper, false, HoleType.TryCatchStmt);
+            stmtsHole.addChild(stmtHole);
+            HoleNode tryBlockHole = new HoleNode(HoleType.TryBlock, false);
+            stmtHole.addChild(tryBlockHole);
+            HoleNode tryBlockStmtsHole = new HoleNode(HoleType.Statements, false);
+            tryBlockHole.addChild(tryBlockStmtsHole);
+            tryBlockStmtsHole.addChild(new HoleNode());
+          }
+        }
+        break;
+      case "Catch":
+        if(parentNodeClassStr != null && parentNodeClassStr.equals("TryStmt")){
+          TryStmt tryStmt = (TryStmt)parent.getLeft();
+          NodeList<CatchClause> catchClauses = tryStmt.getCatchClauses();
+          catchClauses.add((CatchClause)node);
+          currentHole.set(HoleType.CatchClauses, false);
+          HoleNode catchClauseHole = new HoleNode(HoleType.Wrapper,false,HoleType.CatchClause);
+          currentHole.addChild(catchClauseHole);
+          catchClauseHole.addChild(new HoleNode());
+        } else if (parentHoleType.equals(HoleType.CatchClauses)){
+          NodeList<CatchClause> catchClauses = (NodeList<CatchClause>)parent.get().get();
+          catchClauses.add((CatchClause)node);
+          currentHole.set(HoleType.Wrapper,false,HoleType.CatchClause);
+          currentHole.addChild(new HoleNode());
+        }
+        break;
 			case "override":
 				break;
 			case "subexpression":
@@ -1563,7 +1621,16 @@ public class Text2CompilationUnit {
           NameExpr nameExpr = (NameExpr)node;
           parameter.setName(nameExpr.getName());
           currentHole.set(HoleType.Name, false);
-          parentOfParentHole.addChild(new HoleNode());
+          // Try's CatchClause only has one parameter, pre-gegenrates body part
+          if(parentOfParentHole.getHoleTypeOfOptionsIfOnlyOne()!=null && parentOfParentHole.getHoleTypeOfOptionsIfOnlyOne().equals(HoleType.CatchClause)){
+            HoleNode bodyHole = new HoleNode(HoleType.Body, false);
+            parentOfParentHole.addChild(bodyHole);
+            HoleNode stmtsHole = new HoleNode(HoleType.Statements, false);
+            bodyHole.addChild(stmtsHole);
+            stmtsHole.addChild(new HoleNode());
+          } else {
+            parentOfParentHole.addChild(new HoleNode());
+          }
 				} else if (parentNodeClassStr != null && parentNodeClassStr.equals("VariableDeclarator")){
           this.generateExpressionForVariableDecalator(parent, node, currentHole, parentOfParentHole, holeTypeExpr);
         }
@@ -3193,7 +3260,7 @@ public class Text2CompilationUnit {
 				methodCallExprChainHole.addChild(exprHole);
 
 				HoleNode holeNode = new HoleNode(HoleType.Arguments, false);
-				parentHole.addChild(holeNode);
+				exprHole.addChild(holeNode);
 				holeNode.addChild(new HoleNode());
 			}
 		} else if (parentNodeClassStr != null && parentNodeClassStr.equals("SwitchEntry")) {
@@ -3377,7 +3444,6 @@ public class Text2CompilationUnit {
       } else {
         System.out.println("Should not go to this branch");
       }
-
     }
   }
 

@@ -1,0 +1,23 @@
+define public class hello world
+move next body
+define public function say hello
+type void
+move next body
+call hello 
+move next
+move next
+define try
+call hello
+move next
+move next
+move next
+define catch
+type IO exception
+variable e
+call out
+move next
+move next
+move next
+define catch
+type Not found exception
+variable e

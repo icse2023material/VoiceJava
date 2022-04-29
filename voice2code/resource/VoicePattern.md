@@ -55,9 +55,10 @@
     - 语法：`define switch`
 
 13. 定义`try-catch`:
-
-    - 语法：`define try catch`
-    - 备注: 还未实现。
+    - 语法：`define try`
+    
+14. 定义`catch clause`
+    - 语法: `define catch`
 
 14. 定义`@Override`
 

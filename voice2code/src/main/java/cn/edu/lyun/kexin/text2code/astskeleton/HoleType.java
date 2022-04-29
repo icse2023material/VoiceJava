@@ -18,4 +18,5 @@ public enum HoleType {
   NewInstance,
   TypeParameters, ExtendedTypes, ImplementedTypes,
   ThrownExceptions,
+  TryCatchStmt, TryBlock, CatchClauses, CatchClause
 }
