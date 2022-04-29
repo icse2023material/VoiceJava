@@ -3,6 +3,7 @@
 1. Method定义后，支持继续定义throws Exception， 参考: `testcases/6Method_3.voiceJava`
 2. `move next body`支持Method，快速跳转到body，参考：`testcases/6Method_5.voiceJava`
 3. 支持try-catch, `define try` + `define catch`，参考: `testcases/26Trycatch_1.voiceJava`
+4. 类型转换 `cast expression`，参考: `testcases/24Expression_42.voiceJava`
 
 2022.4.28
 
