@@ -2515,32 +2515,25 @@ public class Text2CompilationUnit {
       Node node, HoleType exprHoleType) {
     MethodDeclaration mNode = (MethodDeclaration) parent.getLeft();
     Optional<BlockStmt> optionalBody = mNode.getBody();
-    currentHole.set(HoleType.Body, false);
 
-    HoleNode anotherCurrentHole = new HoleNode();
-    currentHole.addChild(anotherCurrentHole);
+    currentHole.set(HoleType.Body, false);
+    HoleNode stmtsHole = new HoleNode(HoleType.Statements, false);
+    currentHole.addChild(stmtsHole);
 
     BlockStmt blockStmt = optionalBody.get();
     NodeList<Statement> statements = blockStmt.getStatements();
-    if (statements.size() == 0) {
-      ExpressionStmt expressionStmt = new ExpressionStmt((Expression) node);
-      statements.add(expressionStmt);
+    statements.add(new ExpressionStmt((Expression) node));
 
-      anotherCurrentHole.set(HoleType.Statements, false);
+    HoleNode stmtHole = new HoleNode(HoleType.Wrapper, false, HoleType.Statement);
+    stmtsHole.addChild(stmtHole);
 
-      HoleNode holeNode = new HoleNode(HoleType.Wrapper, false);
-      holeNode.setHoleTypeOptions(new HoleType[] { exprHoleType });
-      anotherCurrentHole.addChild(holeNode);
+    HoleNode expressionHole = new HoleNode(HoleType.Expression, false);
+    stmtHole.addChild(expressionHole);
 
-      HoleNode holdeNodeChild0 = new HoleNode(HoleType.Expression, false);
-      holeNode.addChild(holdeNodeChild0);
-
-      HoleNode holeNodeChild = new HoleNode();
-      holeNodeChild.setHoleTypeOptions(new HoleType[] { HoleType.Expression });
-      anotherCurrentHole.addChild(holeNodeChild);
-    } else {
-      // TODO
-    }
+    HoleNode nameDotChainHole = new HoleNode(HoleType.Wrapper, false, HoleType.NameDotChain);
+    expressionHole.addChild(nameDotChainHole);
+    nameDotChainHole.addChild(new HoleNode(exprHoleType, false));
+    nameDotChainHole.addChild(new HoleNode());
   }
 
   private void generateExpInStatements(Either<Node, Either<List<?>, NodeList<?>>> parent, int holeIndex, Node node,
