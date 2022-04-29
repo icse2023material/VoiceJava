@@ -3,6 +3,7 @@ move next body
 define public function say hello
 type void
 move next
+move next
 define while
 expression less than expression
 variable i 

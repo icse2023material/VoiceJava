@@ -1,18 +1,24 @@
 digraph {
-CompilationUnit_2104028992 -> TypeDeclarations_1527430292
-TypeDeclarations_1527430292 -> Wrapper_ClassDeclaration_1975546571
-Wrapper_ClassDeclaration_1975546571 -> TypeParameters_521960438
-Wrapper_ClassDeclaration_1975546571 -> ExtendedTypes_576020159
-Wrapper_ClassDeclaration_1975546571 -> ImplementedTypes_921420643
-Wrapper_ClassDeclaration_1975546571 -> BodyDeclarations_1165303897
-BodyDeclarations_1165303897 -> Wrapper_MethodDeclaration_688005825
-Wrapper_MethodDeclaration_688005825 -> Type_1744189907
-Wrapper_MethodDeclaration_688005825 -> Body_1107530534
-Body_1107530534 -> Statements_749981943
-Statements_749981943 -> Wrapper_Statement_1313960293
-Statements_749981943 -> Undefined_1298380324 [color = red] 
-Wrapper_Statement_1313960293 -> Expression_1155757579
-Expression_1155757579 -> Wrapper_LetExpr_1785111044
-Wrapper_LetExpr_1785111044 -> AssignExprValue_1482748887
-AssignExprValue_1482748887 -> Expr5_1181545730
+CompilationUnit_281961028 -> TypeDeclarations_576379276
+TypeDeclarations_576379276 -> Wrapper_ClassDeclaration_881399628
+Wrapper_ClassDeclaration_881399628 -> TypeParameters_2123169287
+Wrapper_ClassDeclaration_881399628 -> ExtendedTypes_489910224
+Wrapper_ClassDeclaration_881399628 -> ImplementedTypes_1766933315
+Wrapper_ClassDeclaration_881399628 -> BodyDeclarations_354294354
+BodyDeclarations_354294354 -> Wrapper_MethodDeclaration_209433136
+Wrapper_MethodDeclaration_209433136 -> Type_179306880
+Wrapper_MethodDeclaration_209433136 -> Parameters_1771573454
+Wrapper_MethodDeclaration_209433136 -> Body_204561189
+Parameters_1771573454 -> Wrapper_Parameter_1569358497
+Body_204561189 -> Statements_1471952017
+Wrapper_Parameter_1569358497 -> Type_2114670792
+Wrapper_Parameter_1569358497 -> Name_2019935327
+Statements_1471952017 -> Wrapper_IfStmt_1911803512
+Wrapper_IfStmt_1911803512 -> IfCondition_1205695595
+Wrapper_IfStmt_1911803512 -> Undefined_1668608328 [color = red] 
+IfCondition_1205695595 -> Wrapper_Expr10_904238661
+Wrapper_Expr10_904238661 -> LeftSubExpr_1510612623
+Wrapper_Expr10_904238661 -> RightSubExpr_1985496969
+LeftSubExpr_1510612623 -> Expr4_853673659
+RightSubExpr_1985496969 -> Expr5_732752156
 }

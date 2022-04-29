@@ -1,3 +1,8 @@
+2022.4.29
+
+1. Method定义后，支持继续定义throws Exception， 参考: `testcases/6Method_3.voiceJava`
+2. `move next body`支持Method，快速跳转到body，参考：`testcases/6Method_5.voiceJava`
+
 2022.4.28
 
 1. Class拆分extends,implements部分，参考`testcases/4Class_6.voiceJava`

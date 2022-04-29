@@ -1,6 +1,6 @@
 public class HelloWorld {
 
     public void sayHello() {
-        counter = "empty";
+        counter = 1;
     }
 }

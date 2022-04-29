@@ -216,7 +216,22 @@ public class Text2CompilationUnit {
             parentHole.addChild(new HoleNode(HoleType.ImplementedTypes, false));
           }
          parentHole.addChild(new HoleNode());
-        }  
+        } else if(parentNodeClassStr!=null && parentNodeClassStr.equals("MethodDeclaration")){
+          if(parentHole.getChildListSize()==1){
+            currentHole.set(HoleType.Type, false);
+            parentHole.addChild(new HoleNode(HoleType.Parameters, false));
+            parentHole.addChild(new HoleNode(HoleType.ThrownExceptions, false));
+          } else if(parentHole.getChildListSize()==2){
+            currentHole.set(HoleType.Parameters, false);
+            parentHole.addChild(new HoleNode(HoleType.ThrownExceptions, false));
+          } else if(parentHole.getChildListSize()==3){
+            currentHole.set(HoleType.ThrownExceptions, false);
+          }          
+          parentHole.addChild(new HoleNode()); 
+        } else if (parentHoleType.equals(HoleType.Parameters)){ // Method parameters part
+						parentHole.deleteHole(holeIndex);
+            parentOfParentHole.addChild(new HoleNode());
+        }
         break;
       case "package":
 				CompilationUnit parentNode = (CompilationUnit) parent.getLeft();

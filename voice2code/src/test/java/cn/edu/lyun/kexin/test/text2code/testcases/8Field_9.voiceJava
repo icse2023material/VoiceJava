@@ -4,7 +4,7 @@ define public function say hello
 type void
 type list of Name
 variable names
-move next
+move next body
 define switch
 variable option
 int one

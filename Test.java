@@ -1,6 +1,7 @@
 public class HelloWorld {
 
-    public void sayHello() {
-        counter = 1;
+    public void sayHello(Name[] names) {
+        if (counter < 10)
+            return;
     }
 }
