@@ -5,12 +5,8 @@ import cn.edu.lyun.kexin.text2pattern.pattern.Pattern;
 import cn.edu.lyun.kexin.text2pattern.pattern.Unit;
 import cn.edu.lyun.util.*;
 import java.util.*;
-
 import com.github.javaparser.ast.expr.InstanceOfExpr;
-import com.github.javaparser.ast.expr.LambdaExpr;
 import com.github.javaparser.ast.expr.NameExpr;
-import com.github.javaparser.ast.type.ReferenceType;
-import com.github.javaparser.ast.type.Type;
 
 // expression? Name instance of ReferenceType
 public class ExprAST18 implements AST {

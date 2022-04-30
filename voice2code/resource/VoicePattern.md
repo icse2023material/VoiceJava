@@ -119,12 +119,12 @@
     - 备注：
       - `op ::= plus | minus | times | divide | mod`
       - `compare ::= less than | less equal | greater than | greater equal | double equal | and | doube and | double or`
-      - 备注: `and`还不支持
 
 25. 常用指令：
     - `move next`
     - `move next body`
     - `move next statement`
+    - 下面的还未支持
     - `jump out`
     - `jump before _`
       - 示例：`jump before hello`
