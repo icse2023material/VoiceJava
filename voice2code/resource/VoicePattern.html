@@ -77,7 +77,7 @@
 <li>可以考虑实现<code>move to body</code>这样的语法来快速跳转。</li>
 <li>完整示例:
 <ul>
-<li>期望结果<code>public class HelloWorld&lt;T, Filter&gt; extends Greeting implements Invoker&lt;T&gt;</code></li>
+<li>期望结果<code>public class HelloWorld&lt;T, Filter&gt; extends Greeting implements Invoker&lt;T&gt; </code></li>
 <li>语句: <code>define public class hello world, type t, type filter, move next, type greeting, move next, type invoker with t</code></li>
 </ul>
 </li>
@@ -93,15 +93,8 @@
 <li>
 <p>定义方法<code>method</code>:</p>
 <ul>
-<li>语法：<code>define (Annotation | public | protected | private | abstract | static | final | synchronized | native | strictfp)* function Name [throws Exception]?</code></li>
-<li>示例: <code>define public function say hello</code>， <code>define public function say hello throws Exception</code></li>
-</ul>
-</li>
-<li>
-<p>定义箭头函数：</p>
-<ul>
-<li>语法：<code>define arrow function</code></li>
-<li>示例：备注: 还未实现。</li>
+<li>语法：<code>define (Annotation | public | protected | private | abstract | static | final | synchronized | native | strictfp)* function Name</code></li>
+<li>示例: <code>define public function say hello</code>， <code>define public function say hello</code></li>
 </ul>
 </li>
 <li>
@@ -148,8 +141,13 @@
 <li>
 <p>定义<code>try-catch</code>:</p>
 <ul>
-<li>语法：<code>define try catch</code></li>
-<li>备注: 还未实现。</li>
+<li>语法：<code>define try</code></li>
+</ul>
+</li>
+<li>
+<p>定义<code>catch clause</code></p>
+<ul>
+<li>语法: <code>define catch</code></li>
 </ul>
 </li>
 <li>
@@ -179,9 +177,15 @@
 </ul>
 </li>
 <li>
+<p>定义抛出异常</p>
+<ul>
+<li>语法: <code>throw Name</code>: <code>throw IO exception</code> =&gt; public void sayHello() throws IOException {}</li>
+</ul>
+</li>
+<li>
 <p>抛出异常：</p>
 <ul>
-<li>语法：<code>throw new Name</code></li>
+<li>语法：<code>throw new Name</code> : <code>throw new IO exception</code> =&gt; throw new IOException();</li>
 </ul>
 </li>
 <li>
@@ -205,33 +209,68 @@
 <li>
 <p>12 种表达式</p>
 <ul>
-<li><code>expression? Name instance of </code> // Instance Expression, followed by command <code>type xxx</code>, 比如: <code>obj instance of InvokerCluster</code> =&gt; <code>obj instance of</code>, <code>type invoker cluster</code></li>
-<li><code>expression? lambda expression</code> // lambda expression</li>
-<li><code>expression? not expression</code> // unary not expression</li>
-<li><code>expression? dot Name</code> // 仅可作用于 <code>Name [dot Name]+</code>, 暂不支持其它。</li>
-<li><code>expression? call Name</code> // 后可<code>move next</code>, 然后继续<code>call Name</code></li>
-<li><code>expression? Name [dot Name]* [call Name]</code> // 后可<code>move next</code>, 然后继续<code>call Name</code></li>
-<li><code>expression? Name [dot Name]*</code></li>
-<li><code>expression? variable Name</code></li>
-<li><code>expression? (int | byte | short | long | char | float | double | boolean | string) Name</code></li>
-<li><code>expression? Name plus plus</code></li>
-<li><code>expression? Name minus minus</code></li>
-<li><code>expression? plus plus Name</code></li>
-<li><code>expression? minus minus Name</code></li>
-<li><code>expression? expression (op | compare) expression</code></li>
-<li><code>expression? variable Name index Name</code>
+<li>
+<p><code>expression? Name [dot Name]* [call Name]</code></p>
+</li>
+<li>
+<p><code>expression? Name [dot Name]*</code></p>
+</li>
+<li>
+<p><code>expression? dot Name</code> // 仅可作用于 <code>Name [dot Name]+</code>, 暂不支持接着<code>call Name</code></p>
+</li>
+<li>
+<p><code>expression? call Name</code> // 后可<code>move next</code>, 然后继续<code>call Name</code></p>
+</li>
+<li>
+<p><code>expression? variable Name</code></p>
+</li>
+<li>
+<p><code>expression? (int | byte | short | long | char | float | double | boolean) Name</code></p>
+</li>
+<li>
+<p><code>expression? string Name</code></p>
+<ul>
+<li>示例：<code>string hello world</code>，支持多个单词。</li>
+</ul>
+</li>
+<li>
+<p><code>expression? Name plus plus</code></p>
+</li>
+<li>
+<p><code>expression? Name minus minus</code></p>
+</li>
+<li>
+<p><code>expression? plus plus Name</code></p>
+</li>
+<li>
+<p><code>expression? minus minus Name</code></p>
+</li>
+<li>
+<p><code>expression? expression (op | compare) expression</code></p>
+</li>
+<li>
+<p><code>expression? variable Name index Name</code></p>
 <ul>
 <li>示例: <code>expression variable name list index index</code>, 数组索引</li>
 </ul>
 </li>
-<li><code>expression? string Name</code>
-<ul>
-<li>示例：<code>string hello world</code>，支持多个单词。</li>
-<li>注意: 和前面重复。</li>
-</ul>
+<li>
+<p><code>conditional expression</code> // 三目运算 ?:</p>
 </li>
-<li><code>conditional expression</code> 三目运算 ?:</li>
-<li>备注：
+<li>
+<p><code>cast expression</code> // type cast, cast expression由类型和表达式组成</p>
+</li>
+<li>
+<p><code>expression? Name instance of </code> // Instance Expression, followed by command <code>type xxx</code>, 比如: <code>obj instance of InvokerCluster</code> =&gt; <code>obj instance of</code>, <code>type invoker cluster</code></p>
+</li>
+<li>
+<p><code>expression? lambda expression</code> // lambda expression</p>
+</li>
+<li>
+<p><code>expression? not expression</code> // unary not expression</p>
+</li>
+<li>
+<p>备注：</p>
 <ul>
 <li><code>op ::= plus | minus | times | divide | mod</code></li>
 <li><code>compare ::= less than | less equal | greater than | greater equal | double equal | and | doube and | double or</code></li>
@@ -245,6 +284,7 @@
 <ul>
 <li><code>move next</code></li>
 <li><code>move next body</code></li>
+<li><code>move next statement</code></li>
 <li><code>jump out</code></li>
 <li><code>jump before _</code>
 <ul>

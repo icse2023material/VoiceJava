@@ -79,10 +79,10 @@
     - 示例：`new instance puppy`， `new instance hash map dot entry`, `new instance puppy with` => `new Puppy<>()`, `new instance puppy with question mark` => `new Puppy<?>()`, `new instance puppy with cat and dog` => `new Puppy<Cat, Dog>()`
 
 19. 定义抛出异常
-    - 语法: `throw Name`: throw IOException // 用于Method定义
+    - 语法: `throw Name`: `throw IO exception` => public void sayHello() throws IOException {}
 
 20. 抛出异常：
-    - 语法：`throw new Name` : throw new IOException(); // 用于真的抛出异常
+    - 语法：`throw new Name` : `throw new IO exception` => throw new IOException(); 
 
 21. let赋值：
 
@@ -94,17 +94,14 @@
    - `return [expression]?`
 
 24. 12 种表达式
-    - `conditional expression` // 三目运算 ?:
-    - `cast expression` // type cast, cast expression由类型和表达式组成
-    - `expression? Name instance of ` // Instance Expression, followed by command `type xxx`, 比如: `obj instance of InvokerCluster` => `obj instance of`, `type invoker cluster`
-    - `expression? lambda expression` // lambda expression
-    - `expression? not expression` // unary not expression
-    - `expression? dot Name` // 仅可作用于 `Name [dot Name]+`, 暂不支持接着`call Name`
-    - `expression? call Name` // 后可`move next`, 然后继续`call Name`
     - `expression? Name [dot Name]* [call Name]` 
     - `expression? Name [dot Name]*`
+    - `expression? dot Name` // 仅可作用于 `Name [dot Name]+`, 暂不支持接着`call Name`
+    - `expression? call Name` // 后可`move next`, 然后继续`call Name`
     - `expression? variable Name`
-    - `expression? (int | byte | short | long | char | float | double | boolean | string) Name`
+    - `expression? (int | byte | short | long | char | float | double | boolean) Name`
+    - `expression? string Name`
+      - 示例：`string hello world`，支持多个单词。
     - `expression? Name plus plus`
     - `expression? Name minus minus`
     - `expression? plus plus Name`
@@ -112,9 +109,12 @@
     - `expression? expression (op | compare) expression`
     - `expression? variable Name index Name`
       - 示例: `expression variable name list index index`, 数组索引
-    - `expression? string Name`
-      - 示例：`string hello world`，支持多个单词。
-      - 注意: 和前面重复。
+    - `conditional expression` // 三目运算 ?:
+    - `cast expression` // type cast, cast expression由类型和表达式组成
+    - `expression? Name instance of ` // Instance Expression, followed by command `type xxx`, 比如: `obj instance of InvokerCluster` => `obj instance of`, `type invoker cluster`
+    - `expression? lambda expression` // lambda expression
+    - `expression? not expression` // unary not expression
+ 
     - 备注：
       - `op ::= plus | minus | times | divide | mod`
       - `compare ::= less than | less equal | greater than | greater equal | double equal | and | doube and | double or`
