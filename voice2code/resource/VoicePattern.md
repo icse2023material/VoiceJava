@@ -99,7 +99,7 @@
     - `expression? Name instance of ` // Instance Expression, followed by command `type xxx`, 比如: `obj instance of InvokerCluster` => `obj instance of`, `type invoker cluster`
     - `expression? lambda expression` // lambda expression
     - `expression? not expression` // unary not expression
-    - `expression? dot Name` // 仅可作用于 `Name [dot Name]+`, 暂不支持其它。
+    - `expression? dot Name` // 仅可作用于 `Name [dot Name]+`, 暂不支持接着`call Name`
     - `expression? call Name` // 后可`move next`, 然后继续`call Name`
     - `expression? Name [dot Name]* [call Name]` 
     - `expression? Name [dot Name]*`
