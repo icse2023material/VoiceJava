@@ -11,7 +11,7 @@ public class ExprAST5Test {
 	public static void main(String[] args) {
 		// String[] textList = { "expression int five", "string hello" };
 		String[] textList = { "expression int five", "expression int fifty five",
-				"expression int one hundred two", "int zero" };
+				"expression int one hundred two", "int zero", "int one hundred twenty five", "int one thousand five hundred seventy six" };
 		for (String text : textList) {
 			Pattern pattern = RegexSet.compile(new PatternSet()).matchPattern(text);
 			System.out.println(pattern.showInstance());

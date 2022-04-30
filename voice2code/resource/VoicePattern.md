@@ -100,6 +100,7 @@
     - `expression? call Name` // 后可`move next`, 然后继续`call Name`
     - `expression? variable Name`
     - `expression? (int | byte | short | long | char | float | double | boolean) Name`
+      - 数字示例: `expression int five, expression int fifty five, expression int one hundred two, int zero, int one hundred twenty five, int one thousand five hundred seventy six` => `5, 55, 102, 0, 125, 1576`
     - `expression? string Name`
       - 示例：`string hello world`，支持多个单词。
     - `expression? Name plus plus`
