@@ -1,5 +1,7 @@
 public class HelloWorld {
 
-    public AST.Node<MethodDeclaration, Integer> sayHello() {
+    public void sayHello(Name[] names) {
+        if (counter < 10)
+            return;
     }
 }

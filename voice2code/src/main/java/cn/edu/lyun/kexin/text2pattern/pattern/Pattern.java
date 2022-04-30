@@ -57,7 +57,7 @@ public class Pattern {
 	private Unit createUnit(List<Unit> temp) {
 		if (name.equals("package") || name.equals("import")) {
 			return createUnitWithNotCamelString(temp);
-		} else if (name.equals("class") || name.equals("interface") || name.equals("newInstance") || name.equals("throw")) {
+		} else if (name.equals("type") || name.equals("class") || name.equals("interface") || name.equals("newInstance") || name.equals("throw")) {
 			return createUnitWithCamelStringForClassOrInterface(temp);
 		} else {
 			return createUnitWithCamelString(temp);
@@ -113,9 +113,13 @@ public class Pattern {
 	}
 
 	private Unit createUnitWithCamelStringForClassOrInterface(List<Unit> units) {
-		Unit any = new Unit();
-		any.setAnyValue(concatFullCamelString(units));
-		return any;
+    if(units.size()==1 && units.get(0).getKeyword().equals("void")){
+      return units.get(0);
+    } else {
+		  Unit any = new Unit();
+		  any.setAnyValue(concatFullCamelString(units));
+		  return any;
+    }
 	}
 
 	private String concatFullCamelString(List<Unit> units) {
