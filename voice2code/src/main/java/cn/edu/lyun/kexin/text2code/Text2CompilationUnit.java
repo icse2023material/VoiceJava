@@ -1171,6 +1171,16 @@ public class Text2CompilationUnit {
             argsHole.addChild(new HoleNode());
           }
         }
+        else if (parentNodeClassStr != null && parentNodeClassStr.equals("ReturnStmt")){
+          ReturnStmt returnStmt = (ReturnStmt)parent.getLeft();
+          returnStmt.setExpression((Expression)node);
+          currentHole.set(HoleType.Expression, false);
+          HoleNode exprWrapperHole = new HoleNode(HoleType.Wrapper, false, holeTypeExpr);
+          currentHole.addChild(exprWrapperHole);
+          HoleNode argumentsHole = new HoleNode(HoleType.Arguments, false);
+          exprWrapperHole.addChild(argumentsHole);
+          argumentsHole.addChild(new HoleNode());
+        }
         break;
       case "throwDecl":
         holeTypeExpr = HoleType.ThrowDecl;
