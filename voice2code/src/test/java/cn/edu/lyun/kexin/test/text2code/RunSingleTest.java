@@ -19,6 +19,9 @@ public class RunSingleTest {
 		BufferedReader br = new BufferedReader(new FileReader(filePath));
 		for (String line; (line = br.readLine()) != null;) {
       System.out.println(line);
+      if(line.equals("call parse object")){
+        System.out.println("break point");
+      }
 			text2CompilationUnit.generate(line);
 
 			if (RunSingleTest.isDebug) {

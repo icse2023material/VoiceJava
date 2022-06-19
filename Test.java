@@ -1,12 +1,15 @@
-package org.apache.dubbo.rpc.cluster.configurator.absent;
+public class ConfigParser {
 
-import org.apache.dubbo.common.url;
-import org.apache.dubbo.rpc.cluster.configurator;
-import org.apache.dubbo.rpc.cluster.configuratorfactory;
+    private static ConfiguratorConfig parseObject(string rawConfig) {
+        Yaml yaml = new Yaml(new SafeConstructor());
+        Map<string, Object> map = yaml.load(rawConfig);
+        return ConfiguratorConfig.parseFromMap(map);
+    }
 
-public class AbsentConfiguratorFactory implements ConfiguratorFactory {
-
-    public Configurator getConfigurator(Url url) {
-        return new AbsentConfigurator(url);
+    private static List<Url> serviceItemToUrls(ConfigItem item, ConfiguratorConfig config) {
+        List<Url> urls = new ArrayList<>();
+        List<string> addresses = parseAddresses(item);
+        addresses.forEach((empty addr) -> return;);
+        return;
     }
 }

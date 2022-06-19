@@ -1,20 +1,330 @@
-define package org dot apache dot dubbo dot rpc dot cluster dot configurator dot absent
-import org dot apache dot dubbo dot common dot url
-import org dot apache dot dubbo dot rpc dot cluster dot configurator
-import org dot apache dot dubbo dot rpc dot cluster dot configurator factory
-move next
-define public class absent configurator factory
-move next
-move next
-type configurator factory
-move next
-define public function get configurator 
-type configurator 
-type url
-variable url
+define public class config parser
 move next body
-return expression
-new instance absent configurator
-variable url
+define private static function parse object 
+type configurator config 
+type string
+variable rawConfig
+move next body
+define variable yaml
+type yaml
+new instance yaml
+new instance safe constructor
 move next
+move next
+define variable map
+type map with string and object
+yaml call load
+variable raw config
+move next
+move next
+return expression
+ConfiguratorConfig call parse from map
+variable map
+move next
+move next
+move next
+define private static function service item to urls 
+type list< url> 
+type config item
+variable item
+type configurator config
+variable config
+move next body
+define variable urls
+type list with url
+new instance array list with 
+move next
+define variable addresses
+type list with string
+call parse addresses
+variable item
+move next
+move next
+addresses call for each
+lambda expression
+variable addr
+return expression
+variable urls
+move next
+define private static function app item to urls 
+type list< url> 
+type config item
+variable item
+type configurator config
+variable config
+move next body
+define variable urls
+type list with url
+new instance array list with 
+move next
+define variable addresses
+type list with string
+call parse addresses
+variable item
+move next
+move next
+return expression
+variable urls
+move next
+define private static function to parameter string 
+type string 
+type config item
+variable item
+move next body
+define variable sb
+type string builder
+new instance string builder
+move next
+sb call append
+string category=
+move next statement
+sb call append
+variable dynamic_configurators_category
+move next statement
+define if
+expression not equal expression
+item call get side
+move next
+move next
+move next
+sb call append
+string &side=
+move next statement
+sb call append
+item call get side
+move next statement
+
+define variable parameters
+type map with string and string
+item call get parameters
+move next
+move next
+define if
+CollectionUtils call is empty map
+variable parameters
+move next
+move next
+move next
+
+parameters call for each
+lambda expression
+variable k
+variable v
+move next statement
+define if
+CollectionUtils call is not empty
+item call get provider addresses
+move next
+move next
+move next
+move next
+move next
+sb call append
+move next statement
+sb call append
+variable override_providers_key
+move next statement
+sb call append
+move next statement
+sb call append
+CollectionUtils call join
+item call get provider addresses
+move next
+move next
+string ,
+move next statement
+
+return expression
+sb call to string
+move next
+move next
+move next
+define private static function append service 
+type string 
+type string
+variable serviceKey
+move next body
+define variable sb
+type string builder
+new instance string builder
+move next
+define if
+StringUtils call is empty
+variable service key
+move next
+move next
+move next
+
+define variable interface name
+type string
+variable service key
+define variable i
+type int
+interfaceName call index of
+move next
+move next
+define if
+expression greater than expression
+variable i
+int 0
+move next
+sb call append
+string group=
+move next statement
+sb call append
+variable interface name
+int 0
+variable i
+move next statement
+sb call append
+move next statement
+let variable interface name
+equal expression
+interfaceName call substring
+expression plus expression
+variable i
+int one
+move next
+move next
+
+
+define variable j
+type int
+interfaceName call index of
+move next
+move next
+define if
+expression greater than expression
+variable j
+int 0
+move next
+sb call append
+string version=
+move next statement
+sb call append
+interfaceName call substring
+expression plus expression
+variable j
+int one
+move next statement
+sb call append
+move next statement
+let variable interface name
+equal expression
+interfaceName call substring
+int 0
+variable j
+move next
+move next
+
+
+sb call insert
+int 0
+expression plus expression
+variable interface name
+string ?
+move next statement
+return expression
+sb call to string
+move next
+move next
+move next
+define private static function parse enabled 
+type void 
+type config item
+variable item
+type configurator config
+variable config
+type string builder
+variable urlBuilder
+move next body
+urlBuilder call append
+string &enabled=
+move next statement
+define if
+expression double or expression
+expression double equal expression
+item call get type
+move next
+move next
+config item dot general_type
+equals
+item call get type
+move next
+move next
+move next
+move next
+move next
+urlBuilder call append
+config call get enabled
+move next statement
+
+move next
+urlBuilder call append
+item call get enabled
+move next statement
+
+move next
+define private static function parse addresses 
+type list< string> 
+type config item
+variable item
+move next body
+define variable addresses
+type list with string
+item call get addresses
+move next
+move next
+define if
+expression double equal expression
+variable addresses
+move next
+let variable addresses
+equal expression
+new instance array list with 
+move next
+
+
+define if
+addresses call is empty
+move next
+move next
+move next
+addresses call add
+variable anyhost_value
+move next statement
+
+return expression
+variable addresses
+move next
+define private static function is json array 
+type boolean 
+type string
+variable rawConfig
+move next body
+define try
+define variable validator
+type jsonvalidator
+JSONValidator call from
+variable raw config
+move next
+move next
+return expression
+expression double and expression
+validator call validate
+move next
+move next
+expression double equal expression
+validator call get type
+move next
+move next
+jsonvalidator dot type dot array
+move next
+define catch
+type exception
+variable e
+comment
+move next
+return expression
+boolean false
 move next
