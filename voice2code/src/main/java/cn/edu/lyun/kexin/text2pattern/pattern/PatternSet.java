@@ -159,8 +159,9 @@ public class PatternSet {
 						new Unit("or", new Unit("normal", new Unit("greater"), new Unit("than")),
 								new Unit("or", new Unit("normal", new Unit("greater"), new Unit("equal")),
 										new Unit("or", new Unit("normal", new Unit("double"), new Unit("equal")),
+										  new Unit("or", new Unit("normal", new Unit("not"), new Unit("equal")),
 												new Unit("or", new Unit("and"), 
-                          new Unit("or", new Unit("normal", new Unit("double"), new Unit("or")), new Unit("normal", new Unit("double"), new Unit("and")))))))));
+                          new Unit("or", new Unit("normal", new Unit("double"), new Unit("or")), new Unit("normal", new Unit("double"), new Unit("and"))))))))));
 
                         
     Pattern expr16Pat = new Pattern("expr16", "expression? not expression",

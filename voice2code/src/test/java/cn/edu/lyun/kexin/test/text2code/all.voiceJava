@@ -1,330 +1,154 @@
-define public class config parser
+define package cn dot edu dot lyun dot util
+import java dot util dot star
+import java dot util dot function dot predicate
+import cn dot edu dot lyun dot kexin dot text2pattern dot pattern dot unit
+move next
+define public class list helper
 move next body
-define private static function parse object 
-type configurator config 
-type string
-variable rawConfig
+define public function split list at last keyword 
+type pair with List<Unit> and List<Unit>
+type list with unit
+variable units
+type String
+variable keyword
 move next body
-define variable yaml
-type yaml
-new instance yaml
-new instance safe constructor
-move next
-move next
-define variable map
-type map with string and object
-yaml call load
-variable raw config
-move next
-move next
-return expression
-ConfiguratorConfig call parse from map
-variable map
-move next
-move next
-move next
-define private static function service item to urls 
-type list< url> 
-type config item
-variable item
-type configurator config
-variable config
-move next body
-define variable urls
-type list with url
-new instance array list with 
-move next
-define variable addresses
-type list with string
-call parse addresses
-variable item
-move next
-move next
-addresses call for each
-lambda expression
-variable addr
-return expression
-variable urls
-move next
-define private static function app item to urls 
-type list< url> 
-type config item
-variable item
-type configurator config
-variable config
-move next body
-define variable urls
-type list with url
-new instance array list with 
-move next
-define variable addresses
-type list with string
-call parse addresses
-variable item
-move next
-move next
-return expression
-variable urls
-move next
-define private static function to parameter string 
-type string 
-type config item
-variable item
-move next body
-define variable sb
-type string builder
-new instance string builder
-move next
-sb call append
-string category=
-move next statement
-sb call append
-variable dynamic_configurators_category
-move next statement
-define if
-expression not equal expression
-item call get side
-move next
-move next
-move next
-sb call append
-string &side=
-move next statement
-sb call append
-item call get side
-move next statement
-
-define variable parameters
-type map with string and string
-item call get parameters
-move next
-move next
-define if
-CollectionUtils call is empty map
-variable parameters
-move next
-move next
-move next
-
-parameters call for each
-lambda expression
-variable k
-variable v
-move next statement
-define if
-CollectionUtils call is not empty
-item call get provider addresses
-move next
-move next
-move next
-move next
-move next
-sb call append
-move next statement
-sb call append
-variable override_providers_key
-move next statement
-sb call append
-move next statement
-sb call append
-CollectionUtils call join
-item call get provider addresses
-move next
-move next
-string ,
-move next statement
-
-return expression
-sb call to string
-move next
-move next
-move next
-define private static function append service 
-type string 
-type string
-variable serviceKey
-move next body
-define variable sb
-type string builder
-new instance string builder
-move next
-define if
-StringUtils call is empty
-variable service key
-move next
-move next
-move next
-
-define variable interface name
-type string
-variable service key
+define variable split at index
+type int
+int one
+define for
 define variable i
 type int
-interfaceName call index of
+expression minus expression
+units call size
 move next
 move next
+int one
+expression greater equal expression
+variable i
+int zero
+i minus minus
 define if
-expression greater than expression
+not expression
+units call get
 variable i
-int 0
 move next
-sb call append
-string group=
-move next statement
-sb call append
-variable interface name
-int 0
-variable i
-move next statement
-sb call append
-move next statement
-let variable interface name
-equal expression
-interfaceName call substring
+call get keyword
+move next
+call equals
+variable keyword
+move next
+move next
+continue
+move next
+let split at index equal expression
 expression plus expression
 variable i
 int one
+break
 move next
 move next
-
-
-define variable j
+define variable left
+type list with unit
+new instance array list with Unit
+move next
+define for
+define variable i
 type int
-interfaceName call index of
+int zero
+expression less equal expression
+variable i
+variable split at index
+i plus plus
+left call add
+units call get
+variable i
 move next
 move next
-define if
-expression greater than expression
-variable j
-int 0
 move next
-sb call append
-string version=
+move next
+move next
+define for
+define variable i
+type int
+int zero
+expression less equal expression
+variable i
+variable split at index
+i plus plus
+units call remove
+int zero
 move next statement
-sb call append
-interfaceName call substring
-expression plus expression
-variable j
-int one
-move next statement
-sb call append
-move next statement
-let variable interface name
-equal expression
-interfaceName call substring
-int 0
-variable j
 move next
-move next
-
-
-sb call insert
-int 0
-expression plus expression
-variable interface name
-string ?
-move next statement
 return expression
-sb call to string
+new instance pair with List<Unit> and List<Unit>
+variable left
+variable units
 move next
 move next
-move next
-define private static function parse enabled 
-type void 
-type config item
-variable item
-type configurator config
-variable config
-type string builder
-variable urlBuilder
+define public function split list into list 
+type List with List<Unit>
+type list with unit
+variable units
+type String
+variable splitAt
 move next body
-urlBuilder call append
-string &enabled=
-move next statement
+define variable result
+type List with List<Unit>
+new instance array list with List<Unit>
+move next
+define variable segment
+type list with unit
+new instance array list with Unit
+move next
+define for
+define variable i
+type int
+int zero
+expression less than expression
+variable i
+units call size
+move next
+move next
+i plus plus
 define if
-expression double or expression
-expression double equal expression
-item call get type
+not expression
+units call get
+variable i
+move next
+call get keyword
+move next
+call equals
+variable split at
 move next
 move next
-config item dot general_type
-equals
-item call get type
+segment call add
+units call get
+variable i
 move next
 move next
 move next
 move next
 move next
-urlBuilder call append
-config call get enabled
+move next
+result call add
+variable segment
 move next statement
-
-move next
-urlBuilder call append
-item call get enabled
-move next statement
-
-move next
-define private static function parse addresses 
-type list< string> 
-type config item
-variable item
-move next body
-define variable addresses
-type list with string
-item call get addresses
+let segment equal expression
+new instance array list with Unit
 move next
 move next
 define if
-expression double equal expression
-variable addresses
-move next
-let variable addresses
-equal expression
-new instance array list with 
-move next
-
-
-define if
-addresses call is empty
+expression not equal expression
+segment call size
 move next
 move next
-move next
-addresses call add
-variable anyhost_value
+int zero
+result call add
+variable segment
 move next statement
-
-return expression
-variable addresses
 move next
-define private static function is json array 
-type boolean 
-type string
-variable rawConfig
-move next body
-define try
-define variable validator
-type jsonvalidator
-JSONValidator call from
-variable raw config
 move next
 move next
 return expression
-expression double and expression
-validator call validate
-move next
-move next
-expression double equal expression
-validator call get type
-move next
-move next
-jsonvalidator dot type dot array
-move next
-define catch
-type exception
-variable e
-comment
-move next
-return expression
-boolean false
+variable result
 move next

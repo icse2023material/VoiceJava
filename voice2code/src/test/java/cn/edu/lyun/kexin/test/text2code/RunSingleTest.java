@@ -3,34 +3,51 @@ package cn.edu.lyun.kexin.test.text2code;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 import cn.edu.lyun.kexin.text2code.Text2CompilationUnit;
 
 public class RunSingleTest {
-	private static boolean isDebug = true;
+  private static boolean isDebug = false;
 
-	public static void main(String[] args) throws IOException {
-		String dir = System.getProperty("user.dir");
-		Text2CompilationUnit text2CompilationUnit = new Text2CompilationUnit();
-		String filePath = dir
-				+
-				// "/voice2code/src/test/java/cn/edu/lyun/kexin/test/text2code/testcases/4Class_9.voiceJava";
-				"/voice2code/src/test/java/cn/edu/lyun/kexin/test/text2code/all.voiceJava";
-		BufferedReader br = new BufferedReader(new FileReader(filePath));
-		for (String line; (line = br.readLine()) != null;) {
-      System.out.println(line);
-      if(line.equals("call parse object")){
-        System.out.println("break point");
+  public static void main(String[] args) throws IOException {
+    // RunSingleTest.isDebug = true;
+    String dir = System.getProperty("user.dir");
+    Text2CompilationUnit text2CompilationUnit = new Text2CompilationUnit();
+    String filePath = dir
+        +
+        // "/voice2code/src/test/java/cn/edu/lyun/kexin/test/text2code/testcases/11For_4.voiceJava";
+        "/voice2code/src/test/java/cn/edu/lyun/kexin/test/text2code/all.voiceJava";
+    filePath =
+    "/Users/stefanzan/Research/2021/voice2CodeInVoiceJava/util/ListHelper.voiceJava";
+    BufferedReader br = new BufferedReader(new FileReader(filePath));
+    int counter = 1;
+    for (String line; (line = br.readLine()) != null;) {
+      System.out.println(counter + ": " + line);
+      counter++;
+      // skip empty line
+      if (line.equals("")) {
+        continue;
       }
-			text2CompilationUnit.generate(line);
+      if(counter == 47){
+        System.out.println("stop for inspection");
+      }
+      text2CompilationUnit.generate(line);
 
-			if (RunSingleTest.isDebug) {
-				text2CompilationUnit.generatePNGofHoleAST();
-			}
-		}
-		br.close();
+      if (RunSingleTest.isDebug) {
+        text2CompilationUnit.generatePNGofHoleAST();
+      }
+      if (!RunSingleTest.isDebug) {
+        try {
+          TimeUnit.SECONDS.sleep(1);
+        } catch (InterruptedException e) {
+          e.printStackTrace();
+        }
+      }
+    }
+    br.close();
 
-		text2CompilationUnit.generatePNGofHoleAST();
-		System.out.println("done");
-	}
+    text2CompilationUnit.generatePNGofHoleAST();
+    System.out.println("done");
+  }
 }

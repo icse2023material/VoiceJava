@@ -179,7 +179,7 @@ public class Text2CompilationUnit {
             parentOfParentHole.addChild(exprHole);
           }
         } else if (parentHoleType.equals(HoleType.ElseStatement) || (parentHole.getHoleTypeOfOptionsIfOnlyOne() != null
-            && parentHole.getHoleTypeOfOptionsIfOnlyOne().equals(HoleType.IfStmt))) {
+            && parentHole.getHoleTypeOfOptionsIfOnlyOne().equals(HoleType.IfStmt)&& !parentHole.getIthChild(parentHole.getChildListSize()-2).getHoleType().equals(HoleType.ElseStatement))) {
           // default else case
           BlockStmt blockStmt = new BlockStmt();
           IfStmt ifStmt = (IfStmt) parent.getLeft();

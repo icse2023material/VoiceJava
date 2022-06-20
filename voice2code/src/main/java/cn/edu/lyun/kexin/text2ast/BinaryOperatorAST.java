@@ -44,6 +44,8 @@ public class BinaryOperatorAST {
 			return BinaryExpr.Operator.AND;
     case "double or":
       return BinaryExpr.Operator.OR;
+    case "not equal":
+      return BinaryExpr.Operator.NOT_EQUALS;
 		}
 		return null;
 	}
