@@ -1110,6 +1110,47 @@ public class Text2CompilationUnit {
             currentHole.set(HoleType.Continue, false);
             parentOfParentHole.addChild(new HoleNode());
           }
+        } else if(parentNodeClassStr != null && parentNodeClassStr.equals("ForStmt")){
+          ForStmt forStmt = (ForStmt)(parent.getLeft());
+          Statement body = forStmt.getBody();
+          String bodyClassStr = body.getClass().toString();
+          bodyClassStr = StringHelper.getClassName(bodyClassStr); 
+          if (bodyClassStr.equals("ReturnStmt")) {
+            BlockStmt blockStmt = new BlockStmt();
+            NodeList<Statement> statements = new NodeList<Statement>();
+            statements.add((Statement)node);
+            blockStmt.setStatements(statements);
+            forStmt.setBody(blockStmt);
+
+            currentHole.set(HoleType.Body, false);
+            HoleNode stmtsHole = new HoleNode(HoleType.Statements, false);
+            currentHole.addChild(stmtsHole);
+            HoleNode stmtHole = new HoleNode(HoleType.Continue, false);
+            stmtsHole.addChild(stmtHole);
+            parentOfParentHole.addChild(new HoleNode());
+          } else {
+            System.out.println("Should not go to this branch");
+          }
+        } else if (parentNodeClassStr != null && parentNodeClassStr.equals("IfStmt")){
+          IfStmt ifStmt = (IfStmt)parent.getLeft();
+          Statement thenStmt = ifStmt.getThenStmt();
+          String thenStmtStr = StringHelper.getClassName(thenStmt.getClass().toString());
+          if (thenStmtStr.equals("ReturnStmt")) {
+            BlockStmt blockStmt = new BlockStmt();
+            NodeList<Statement> statements = new NodeList<Statement>();
+            statements.add((Statement)node);
+            blockStmt.setStatements(statements);
+            ifStmt.setThenStmt(blockStmt);
+      
+            // [condition,then, else, else]
+            currentHole.set(HoleType.ThenStatement, false);
+            HoleNode stmtsNode = new HoleNode(HoleType.Statements, false);
+            currentHole.addChild(stmtsNode);
+            HoleNode stmtNode = new HoleNode(HoleType.Continue, false);
+            stmtsNode.addChild(stmtNode);
+            parentHole.addChild(new HoleNode());
+          } else if (thenStmtStr.equals("BlockStmt")) {
+          } 
         }
         break;
       case "newInstance":

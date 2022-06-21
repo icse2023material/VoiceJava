@@ -11,15 +11,15 @@ public class RunSingleTest {
   private static boolean isDebug = false;
 
   public static void main(String[] args) throws IOException {
-    // RunSingleTest.isDebug = true;
+    RunSingleTest.isDebug = true;
     String dir = System.getProperty("user.dir");
     Text2CompilationUnit text2CompilationUnit = new Text2CompilationUnit();
     String filePath = dir
         +
-        // "/voice2code/src/test/java/cn/edu/lyun/kexin/test/text2code/testcases/11For_4.voiceJava";
-        "/voice2code/src/test/java/cn/edu/lyun/kexin/test/text2code/all.voiceJava";
-    filePath =
-    "/Users/stefanzan/Research/2021/voice2CodeInVoiceJava/util/ListHelper.voiceJava";
+        "/voice2code/src/test/java/cn/edu/lyun/kexin/test/text2code/testcases/29Continue_3.voiceJava";
+        // "/voice2code/src/test/java/cn/edu/lyun/kexin/test/text2code/all.voiceJava";
+    // filePath =
+    // "/Users/stefanzan/Research/2021/voice2CodeInVoiceJava/util/ListHelper.voiceJava";
     BufferedReader br = new BufferedReader(new FileReader(filePath));
     int counter = 1;
     for (String line; (line = br.readLine()) != null;) {
@@ -29,7 +29,7 @@ public class RunSingleTest {
       if (line.equals("")) {
         continue;
       }
-      if(counter == 47){
+      if(counter == 17){
         System.out.println("stop for inspection");
       }
       text2CompilationUnit.generate(line);
@@ -39,7 +39,7 @@ public class RunSingleTest {
       }
       if (!RunSingleTest.isDebug) {
         try {
-          TimeUnit.SECONDS.sleep(1);
+          TimeUnit.SECONDS.sleep((long) 0.5);
         } catch (InterruptedException e) {
           e.printStackTrace();
         }
