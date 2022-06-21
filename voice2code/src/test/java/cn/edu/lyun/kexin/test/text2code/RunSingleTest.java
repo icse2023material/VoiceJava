@@ -18,8 +18,9 @@ public class RunSingleTest {
         +
         "/voice2code/src/test/java/cn/edu/lyun/kexin/test/text2code/testcases/29Continue_3.voiceJava";
         // "/voice2code/src/test/java/cn/edu/lyun/kexin/test/text2code/all.voiceJava";
-    // filePath =
+    filePath =
     // "/Users/stefanzan/Research/2021/voice2CodeInVoiceJava/util/ListHelper.voiceJava";
+    "/Users/stefanzan/Research/2021/voice2CodeInVoiceJava/util/Pair.voiceJava";
     BufferedReader br = new BufferedReader(new FileReader(filePath));
     int counter = 1;
     for (String line; (line = br.readLine()) != null;) {
@@ -29,7 +30,7 @@ public class RunSingleTest {
       if (line.equals("")) {
         continue;
       }
-      if(counter == 17){
+      if(counter == 68){
         System.out.println("stop for inspection");
       }
       text2CompilationUnit.generate(line);
@@ -39,7 +40,7 @@ public class RunSingleTest {
       }
       if (!RunSingleTest.isDebug) {
         try {
-          TimeUnit.SECONDS.sleep((long) 0.5);
+          TimeUnit.MILLISECONDS.sleep(500);
         } catch (InterruptedException e) {
           e.printStackTrace();
         }

@@ -2172,9 +2172,15 @@ public class Text2CompilationUnit {
           HoleNode exprWrapperHole = new HoleNode(HoleType.Wrapper, false, holeTypeExpr);
           currentHole.addChild(exprWrapperHole);
           exprWrapperHole.addChild(new HoleNode());
+        } else if (parentNodeClassStr != null && parentNodeClassStr.equals("VariableDeclarator")){
+          VariableDeclarator variableDeclarator = (VariableDeclarator) parent.getLeft();
+          variableDeclarator.setInitializer((Expression) node);
+          currentHole.set(HoleType.VariableInitializer, false);
+          HoleNode exprWrapper = new HoleNode(HoleType.Wrapper, false, holeTypeExpr);
+          currentHole.addChild(exprWrapper);
+          exprWrapper.addChild(new HoleNode());
         }
         break;
-
       case "expr16":
         holeTypeExpr = HoleType.Expr16;
         if (parentNodeClassStr != null && parentNodeClassStr.equals("AssignExpr")) {
