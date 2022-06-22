@@ -46,6 +46,7 @@ public class TypeNameMap {
     map.put(HoleType.ThrownExceptions, "getThrownExceptions");
     map.put(HoleType.TryBlock, "getTryBlock");
     map.put(HoleType.CatchClauses, "getCatchClauses");
+    map.put(HoleType.TypeArguments, "getTypeArguments");
 		return map;
 	}
 }

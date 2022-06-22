@@ -500,9 +500,27 @@ public class Text2CompilationUnit {
           MethodDeclaration mNode = (MethodDeclaration) parent.getLeft();
           if (parentHole.getChildListSize() == 1) {
             mNode.setType((Type) node);
-            currentHole.set(HoleType.Type, false);
-            // arguments
-            parentHole.addChild(new HoleNode(HoleType.Parameters));
+
+            if(node instanceof ClassOrInterfaceType){
+              Optional<NodeList<Type>> optional = ((ClassOrInterfaceType)node).getTypeArguments();
+              if(optional.isPresent()){
+                if(optional.get().size()==0){
+                  currentHole.set(HoleType.Type, false);
+                  HoleNode typeArgumentsNode = new HoleNode(HoleType.TypeArguments, false);
+                  currentHole.addChild(typeArgumentsNode);
+                  typeArgumentsNode.addChild(new HoleNode());
+                } else {
+                currentHole.set(HoleType.Type, false);
+                // arguments
+                parentHole.addChild(new HoleNode(HoleType.Parameters)); 
+                }
+              } else {
+              }
+            } else {
+              currentHole.set(HoleType.Type, false);
+              // arguments
+              parentHole.addChild(new HoleNode(HoleType.Parameters));
+            }
           } else {
             NodeList<Parameter> nodeList = new NodeList<Parameter>();
             Parameter parameter = new Parameter();
@@ -523,6 +541,11 @@ public class Text2CompilationUnit {
           currentHole.set(HoleType.Wrapper, false, HoleType.Parameter);
           currentHole.addChild(new HoleNode(HoleType.Type, false));
           currentHole.addChild(new HoleNode());
+        } else if (parentHoleType.equals(HoleType.TypeArguments)){
+          NodeList<Type> nodeList = (NodeList<Type>)parent.get().get();
+          nodeList.add((Type)node);
+          currentHole.set(HoleType.Type, false);
+          parentHole.addChild(new HoleNode());
         } else if (parentNodeClassStr != null && parentNodeClassStr.equals("VariableDeclarator")) {
           VariableDeclarator variableDeclarator = (VariableDeclarator) parent.getLeft();
           variableDeclarator.setType((Type) node);
@@ -2519,7 +2542,12 @@ public class Text2CompilationUnit {
           } catch (Exception e2) {
             try {
               Optional<?> optionalData = (Optional<?>) method.invoke(parent);
-              parent = (Node) optionalData.get();
+              try{
+                parent = (Node) optionalData.get();
+              } catch(Exception e25){
+                Either<List<?>, NodeList<?>> either = Either.right((NodeList<Type>)optionalData.get());
+                return new Pair<Either<Node, Either<List<?>, NodeList<?>>>, Integer>(Either.right(either), indexOfHole);
+              }
             } catch (Exception e3) {
               parent = (Node) method.invoke(parent);
             }

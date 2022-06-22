@@ -1,154 +1,21 @@
-define package cn dot edu dot lyun dot util
-import java dot util dot star
-import java dot util dot function dot predicate
-import cn dot edu dot lyun dot kexin dot text2pattern dot pattern dot unit
-move next
 define public class list helper
 move next body
-define public function split list at last keyword 
-type pair with List<Unit> and List<Unit>
+define public function split list 
+type pair with
+type list with unit
+type list with unit
+move next
 type list with unit
 variable units
-type String
-variable keyword
+type string
+variable splitAt
 move next body
-define variable split at index
-type int
-int one
-define for
-define variable i
-type int
-expression minus expression
-units call size
-move next
-move next
-int one
-expression greater equal expression
-variable i
-int zero
-i minus minus
-define if
-not expression
-units call get
-variable i
-move next
-call get keyword
-move next
-call equals
-variable keyword
-move next
-move next
-continue
-move next
-let split at index equal expression
-expression plus expression
-variable i
-int one
-break
-move next
-move next
 define variable left
 type list with unit
 new instance array list with Unit
-move next
-define for
-define variable i
-type int
-int zero
-expression less equal expression
-variable i
-variable split at index
-i plus plus
-left call add
-units call get
-variable i
-move next
-move next
-move next
-move next
-move next
-define for
-define variable i
-type int
-int zero
-expression less equal expression
-variable i
-variable split at index
-i plus plus
-units call remove
-int zero
-move next statement
 move next
 return expression
 new instance pair with List<Unit> and List<Unit>
 variable left
 variable units
-move next
-move next
-define public function split list into list 
-type List with List<Unit>
-type list with unit
-variable units
-type String
-variable splitAt
-move next body
-define variable result
-type List with List<Unit>
-new instance array list with List<Unit>
-move next
-define variable segment
-type list with unit
-new instance array list with Unit
-move next
-define for
-define variable i
-type int
-int zero
-expression less than expression
-variable i
-units call size
-move next
-move next
-i plus plus
-define if
-not expression
-units call get
-variable i
-move next
-call get keyword
-move next
-call equals
-variable split at
-move next
-move next
-segment call add
-units call get
-variable i
-move next
-move next
-move next
-move next
-move next
-move next
-result call add
-variable segment
-move next statement
-let segment equal expression
-new instance array list with Unit
-move next
-move next
-define if
-expression not equal expression
-segment call size
-move next
-move next
-int zero
-result call add
-variable segment
-move next statement
-move next
-move next
-move next
-return expression
-variable result
 move next
