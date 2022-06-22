@@ -162,7 +162,7 @@ public class HoleAST {
 		List<Integer> path = pair.getSecond();
 
 		boolean deleted = false;
-		while (hashOnlyOneChild(parentHole) || isNodeChildrenFull(parentHole)) {
+		while (hashOnlyOneChild(parentHole) || isNodeChildrenFull(parentHole) || isChildIsReturnHole(parentHole)) {
 			int index = path.remove(path.size() - 1);
 			if (!deleted) {
 				deleted = true;
@@ -179,6 +179,16 @@ public class HoleAST {
 			parentHole.addChild(newHole);
 		}
 	}
+
+  public boolean isChildIsReturnHole(HoleNode holeNode){
+    HoleNode lastChildNode = holeNode.getIthChild(holeNode.getChildListSize()-1);
+    HoleType holeType = lastChildNode.getHoleTypeOfOptionsIfOnlyOne();
+    if(holeType != null && holeType.equals(HoleType.Return)){
+      return true;
+    } else {
+      return false;
+    }
+  }
 
 	public boolean hashOnlyOneChild(HoleNode holeNode) {
 		Set<HoleType> set = new HashSet<HoleType>(Arrays.asList(HoleType.ImportDeclaration, HoleType.TypeDeclaration, HoleType.VariableDeclarators, HoleType.VariableDeclarationExpr,

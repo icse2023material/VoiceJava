@@ -8,10 +8,10 @@ import java.util.concurrent.TimeUnit;
 import cn.edu.lyun.kexin.text2code.Text2CompilationUnit;
 
 public class RunSingleTest {
-  private static boolean isDebug = false;
+  private static boolean isDebug = true;
 
   public static void main(String[] args) throws IOException {
-    RunSingleTest.isDebug = true;
+    RunSingleTest.isDebug = false;
     String dir = System.getProperty("user.dir");
     Text2CompilationUnit text2CompilationUnit = new Text2CompilationUnit();
     String filePath = dir
@@ -30,7 +30,7 @@ public class RunSingleTest {
       if (line.equals("")) {
         continue;
       }
-      if(counter == 68){
+      if(counter == 45){
         System.out.println("stop for inspection");
       }
       text2CompilationUnit.generate(line);
