@@ -2,8 +2,6 @@ define public class list helper
 move next body
 define public function split list 
 type pair with
-type list with unit
-type list with unit
 move next
 type list with unit
 variable units

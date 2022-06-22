@@ -11,7 +11,7 @@ public class RunSingleTest {
   private static boolean isDebug = true;
 
   public static void main(String[] args) throws IOException {
-    // RunSingleTest.isDebug = false;
+    RunSingleTest.isDebug = false;
     String dir = System.getProperty("user.dir");
     Text2CompilationUnit text2CompilationUnit = new Text2CompilationUnit();
     String filePath = dir

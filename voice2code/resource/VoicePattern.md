@@ -33,7 +33,7 @@
 8.  定义类型：
 
     - 语法：`type (list of Name | Name [dot Name]? [with Name? [and Name]*]?) [extends _]?`
-    - 示例: `type int`， `type void`, `type Node with Integer` => `Node<Integer>`, `type Node with` => `Node<>`
+    - 示例: `type int`， `type void`, `type Node with Integer` => `Node<Integer>`, `type Node with, type A, type B` => `Node<A, B>`
     - 注意: 若`Name`为`question mark`，则转换为`?`，比如: `type Node with question mark` => `Node<?>`
 
 9.  定义`for`循环：

@@ -1,7 +1,7 @@
-public class HelloWorld {
+public class ListHelper {
 
-    public void sayHello(Name[] names) {
-        if (counter < 10)
-            return;
+    public Pair<> splitList(List<Unit> units, string splitAt) {
+        List<Unit> left = new ArrayList<Unit>();
+        return new Pair<List<Unit>, List<Unit>>(left, units);
     }
 }
