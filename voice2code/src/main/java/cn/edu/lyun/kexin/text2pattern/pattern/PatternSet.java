@@ -208,9 +208,9 @@ public class PatternSet {
 		new Unit[] { new Unit("cast"), new Unit("expression") });
 		patSet.add(expr19Pat);
 
-    Pattern expr20Pat = new Pattern("expr20Null", "expression? null", 
-      new Unit[]{new Unit("question", new Unit("expression")), new Unit("null")});
-    patSet.add(expr20Pat);
+    // Pattern expr20Pat = new Pattern("expr20Null", "expression? null", 
+    //   new Unit[]{new Unit("question", new Unit("expression")), new Unit("null")});
+    // patSet.add(expr20Pat);
 
 		// expr13 must be put before expr4
 		Pattern expr13Pat = new Pattern("expr13", "[expression]? variable [_]+ index [_]+", new Unit[] {
