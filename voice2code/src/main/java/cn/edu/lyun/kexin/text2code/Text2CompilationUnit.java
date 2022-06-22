@@ -37,6 +37,7 @@ import com.github.javaparser.ast.expr.InstanceOfExpr;
 import com.github.javaparser.ast.expr.LambdaExpr;
 import com.github.javaparser.ast.expr.MethodCallExpr;
 import com.github.javaparser.ast.expr.NameExpr;
+import com.github.javaparser.ast.expr.NullLiteralExpr;
 import com.github.javaparser.ast.expr.ObjectCreationExpr;
 import com.github.javaparser.ast.expr.SimpleName;
 import com.github.javaparser.ast.expr.UnaryExpr;
@@ -2327,6 +2328,24 @@ public class Text2CompilationUnit {
           exprWrapper.addChild(new HoleNode());
         }
         break;
+      case "expr20Null":
+        holeTypeExpr = HoleType.Expr20Null;
+        this.generateExprForExpr5AndExpr14AndExpr15(parent, node, parentNodeClassStr, holeIndex, currentHole,
+        parentHole,
+        parentOfParentHole, parentOfParentOfParentHole, parentHoleType, holeTypeExpr);
+        // if(parentNodeClassStr != null && parentNodeClassStr.equals("ReturnStmt")){
+        //   ReturnStmt returnStmt = (ReturnStmt)parent.getLeft();
+        //   returnStmt.setExpression((Expression)node);
+        //   currentHole.set(holeTypeExpr, false);
+        //   parentHole.addChild(new HoleNode());
+        //   // parentOfParentOkfParentHole.addChild(new HoleNode());
+        // } else if (parentNodeClassStr != null && parentNodeClassStr.equals("BinaryExpr")){
+        //   System.out.println("Not supported in JavaParser");
+        //   // this.generateBinarExprInExpr(parent, holeIndex, node, currentHole, parentHole, parentOfParentHole,
+        //   // parentOfParentOfParentHole, holeTypeExpr);
+        // } else if (parentNodeClassStr != null && parentNodeClassStr.equals("VariableDeclarator")){
+          
+        // }
     }
 
     // this.holeAST.generateDotAndPNGOfHoleAST();
@@ -2674,7 +2693,12 @@ public class Text2CompilationUnit {
             && parentOfParentHole.getHoleTypeOfOptionsIfOnlyOne().equals(HoleType.Expr10))) {
       if (holeIndex == 0) {
         // left
-        binaryExpr.setLeft((Expression) node);
+        // 20220622: setLeft, setRight cannot be null expr.
+        // if(node instanceof NullLiteralExpr){
+        //   binaryExpr.setLeft(new NullLiteralExpr());
+        // } else {
+          binaryExpr.setLeft((Expression) node);
+        // }
 
         currentHole.set(HoleType.LeftSubExpr, false);
         HoleNode exprWrapperHole = new HoleNode(exprHoleType, false);
@@ -2682,7 +2706,11 @@ public class Text2CompilationUnit {
         parentHole.addChild(new HoleNode());
       } else {
         // right
-        binaryExpr.setRight((Expression) node);
+        // if(node instanceof NullLiteralExpr){
+        //   binaryExpr.setRight(new NullLiteralExpr());
+        // } else {
+          binaryExpr.setRight((Expression) node);
+        // }
 
         currentHole.set(HoleType.RightSubExpr, false);
         HoleNode anotherCurrentHole = new HoleNode(exprHoleType, false);

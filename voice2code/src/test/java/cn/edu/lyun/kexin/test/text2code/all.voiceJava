@@ -1,19 +1,6 @@
 define public class list helper
 move next body
 define public function split list 
-type pair with
-move next
-type list with unit
-variable units
-type string
-variable splitAt
 move next body
-define variable left
-type list with unit
-new instance array list with Unit
-move next
-return expression
-new instance pair with List<Unit> and List<Unit>
-variable left
-variable units
-move next
+return expression 
+expression null

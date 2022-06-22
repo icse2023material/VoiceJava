@@ -24,7 +24,11 @@ public class RegexTest {
 
     Pattern packagePat = new Pattern("package", "define package [_]+ [dot [_]+]*",
             new Unit[] { new Unit("define"), new Unit("package"), Name, new Unit("asterisk", new Unit("dot"), Name) });
-		Regex regex = new Regex(packagePat);
+            Pattern expr20Pat = new Pattern("expr20Null", "expression? null", 
+            new Unit[]{new Unit("question", new Unit("expression")), new Unit("null")});
+     
+            
+		Regex regex = new Regex(expr20Pat);
 		regex.writeDotFile();
 		Runtime rt = Runtime.getRuntime();
 		try {
@@ -33,7 +37,7 @@ public class RegexTest {
 			e.printStackTrace();
 		}
 
-		String text = "define package hello dot world";
+		String text = "null";
 		Pair<Boolean, Pattern> result = regex.isMatch(text);
 		if (result.getFirst()) {
 			System.out.println("Matched:");

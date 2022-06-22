@@ -97,6 +97,8 @@ public class ASTManager {
         return new ExprAST18().generate(pattern);
       case "expr19cast":
         return new Expr19CastAST().generate(pattern);
+      case "expr20null":
+        return new ExprAST20NullAST().generate(pattern);
 		}
 
 		return null;

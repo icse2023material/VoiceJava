@@ -11,13 +11,13 @@ public class RunSingleTest {
   private static boolean isDebug = true;
 
   public static void main(String[] args) throws IOException {
-    RunSingleTest.isDebug = false;
+    // RunSingleTest.isDebug = false;
     String dir = System.getProperty("user.dir");
     Text2CompilationUnit text2CompilationUnit = new Text2CompilationUnit();
     String filePath = dir
         +
-        // "/voice2code/src/test/java/cn/edu/lyun/kexin/test/text2code/testcases/29Continue_3.voiceJava";
-        "/voice2code/src/test/java/cn/edu/lyun/kexin/test/text2code/all.voiceJava";
+        "/voice2code/src/test/java/cn/edu/lyun/kexin/test/text2code/testcases/24Expression_47.voiceJava";
+        // "/voice2code/src/test/java/cn/edu/lyun/kexin/test/text2code/all.voiceJava";
     // filePath =
     // "/Users/stefanzan/Research/2021/voice2CodeInVoiceJava/util/ListHelper.voiceJava";
     // "/Users/stefanzan/Research/2021/voice2CodeInVoiceJava/util/Pair.voiceJava";
@@ -30,7 +30,7 @@ public class RunSingleTest {
       if (line.equals("")) {
         continue;
       }
-      if(counter == 7){
+      if(counter == 10){
         System.out.println("stop for inspection");
       }
       text2CompilationUnit.generate(line);

@@ -115,6 +115,7 @@
     - `expression? Name instance of ` // Instance Expression, followed by command `type xxx`, 比如: `obj instance of InvokerCluster` => `obj instance of`, `type invoker cluster`
     - `expression? lambda expression` // lambda expression
     - `expression? not expression` // unary not expression
+    - `expression? null`
  
     - 备注：
       - `op ::= plus | minus | times | divide | mod`
