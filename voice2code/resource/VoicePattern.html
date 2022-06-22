@@ -27,6 +27,41 @@
 	color: var(--vscode-editorError-foreground);
 }
 
+/* From extension ms-toolsai.jupyter */
+/* These classnames are inherited from bootstrap, but are present in most notebook renderers */
+
+.alert {
+    width: auto;
+    padding: 1em;
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+.alert > *:last-child {
+    margin-bottom: 0;
+}
+#preview > .alert:last-child {
+    /* Prevent this being set to zero by the default notebook stylesheet */
+    padding-bottom: 1em;
+}
+
+.alert-success {
+    /* Note there is no suitable color available, so we just copy "info" */
+    background-color: var(--theme-info-background);
+    color: var(--theme-info-foreground);
+}
+.alert-info {
+    background-color: var(--theme-info-background);
+    color: var(--theme-info-foreground);
+}
+.alert-warning {
+    background-color: var(--theme-warning-background);
+    color: var(--theme-warning-foreground);
+}
+.alert-danger {
+    background-color: var(--theme-error-background);
+    color: var(--theme-error-foreground);
+}
+
 </style>
         
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
@@ -108,7 +143,7 @@
 <p>定义类型：</p>
 <ul>
 <li>语法：<code>type (list of Name | Name [dot Name]? [with Name? [and Name]*]?) [extends _]?</code></li>
-<li>示例: <code>type int</code>， <code>type void</code>, <code>type Node with Integer</code> =&gt; <code>Node&lt;Integer&gt;</code>, <code>type Node with</code> =&gt; <code>Node&lt;&gt;</code></li>
+<li>示例: <code>type int</code>， <code>type void</code>, <code>type Node with Integer</code> =&gt; <code>Node&lt;Integer&gt;</code>, <code>type Node with, type A, type B</code> =&gt; <code>Node&lt;A, B&gt;</code></li>
 <li>注意: 若<code>Name</code>为<code>question mark</code>，则转换为<code>?</code>，比如: <code>type Node with question mark</code> =&gt; <code>Node&lt;?&gt;</code></li>
 </ul>
 </li>
@@ -226,6 +261,9 @@
 </li>
 <li>
 <p><code>expression? (int | byte | short | long | char | float | double | boolean) Name</code></p>
+<ul>
+<li>数字示例: <code>expression int five, expression int fifty five, expression int one hundred two, int zero, int one hundred twenty five, int one thousand five hundred seventy six</code> =&gt; <code>5, 55, 102, 0, 125, 1576</code></li>
+</ul>
 </li>
 <li>
 <p><code>expression? string Name</code></p>
@@ -274,7 +312,6 @@
 <ul>
 <li><code>op ::= plus | minus | times | divide | mod</code></li>
 <li><code>compare ::= less than | less equal | greater than | greater equal | double equal | and | doube and | double or</code></li>
-<li>备注: <code>and</code>还不支持</li>
 </ul>
 </li>
 </ul>
@@ -285,6 +322,7 @@
 <li><code>move next</code></li>
 <li><code>move next body</code></li>
 <li><code>move next statement</code></li>
+<li>下面的还未支持</li>
 <li><code>jump out</code></li>
 <li><code>jump before _</code>
 <ul>
