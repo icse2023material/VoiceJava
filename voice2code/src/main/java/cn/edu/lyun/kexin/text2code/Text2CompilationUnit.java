@@ -3690,7 +3690,20 @@ public class Text2CompilationUnit {
       HoleNode argsHole = new HoleNode(HoleType.Arguments, false);
       exprWrapperHole.addChild(argsHole);
       argsHole.addChild(new HoleNode());
+    } else if (parentNodeClassStr != null && parentNodeClassStr.equals("SwitchStmt")){
+      SwitchStmt switchStmt = (SwitchStmt)parent.getLeft();
+      switchStmt.setSelector((Expression)node);
+      currentHole.set(HoleType.SwitchSelector, false);
+      HoleNode callChainHole = new HoleNode(HoleType.Wrapper, false, HoleType.MethodCallExprChain);
+      currentHole.addChild(callChainHole);
+
+      HoleNode exprWrapperHole = new HoleNode(HoleType.Wrapper, false, holeTypeExpr);
+      callChainHole.addChild(exprWrapperHole);
+      HoleNode argsHole = new HoleNode(HoleType.Arguments, false);
+      exprWrapperHole.addChild(argsHole);
+      argsHole.addChild(new HoleNode()); 
     }
+  
   }
 
   private void generateConditionExprThenElseForCall(Either<Node, Either<List<?>, NodeList<?>>> parent, Node node,

@@ -18,11 +18,12 @@ public class RunSingleTest {
     String filePath = dir
         +
         // "/voice2code/src/test/java/cn/edu/lyun/kexin/test/text2code/testcases/24Expression_47.voiceJava";
-        "/voice2code/src/test/java/cn/edu/lyun/kexin/test/text2code/all.voiceJava";
-    filePath =
+        "/voice2code/src/test/java/cn/edu/lyun/kexin/test/text2code/testcases/14Switch_15.voiceJava";
+    // filePath =
     // "/Users/stefanzan/Research/2021/voice2CodeInVoiceJava/util/ListHelper.voiceJava";
-    "/Users/stefanzan/Research/2021/voice2CodeInVoiceJava/util/Pair.voiceJava";
+    // "/Users/stefanzan/Research/2021/voice2CodeInVoiceJava/util/Pair.voiceJava";
     // "/Users/stefanzan/Research/2021/voice2CodeInVoiceJava/util/StringHelper.voiceJava";
+    // "/Users/stefanzan/Research/2021/voice2CodeInVoiceJava/kexin/text2code/Text2CompilationUnit.voiceJava";
     BufferedReader br = new BufferedReader(new FileReader(filePath));
     int counter = 1;
     for (String line; (line = br.readLine()) != null;) {
