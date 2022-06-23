@@ -76,7 +76,7 @@ public class Pattern {
 		List<Unit> temp = new ArrayList<Unit>();
 		while (unitList.size() != 0) {
 			Unit unit = unitList.remove(0);
-			if (unit.getType().equals("keyword") || TypeWordSet.isTypeWord(unit.getKeyword())) {
+			if (unit.getType().equals("keyword") || (TypeWordSet.isTypeWord(unit.getKeyword())&& (!this.getName().equals("class")&&!this.getName().equals("method")))) {
 				if (temp.size() != 0) {
 					result.add(createUnit(temp));
 					temp.clear();

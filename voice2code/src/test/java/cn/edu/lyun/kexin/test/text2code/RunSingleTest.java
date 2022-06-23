@@ -21,7 +21,8 @@ public class RunSingleTest {
         "/voice2code/src/test/java/cn/edu/lyun/kexin/test/text2code/all.voiceJava";
     filePath =
     // "/Users/stefanzan/Research/2021/voice2CodeInVoiceJava/util/ListHelper.voiceJava";
-    "/Users/stefanzan/Research/2021/voice2CodeInVoiceJava/util/PairCorrect.voiceJava";
+    "/Users/stefanzan/Research/2021/voice2CodeInVoiceJava/util/Pair.voiceJava";
+    // "/Users/stefanzan/Research/2021/voice2CodeInVoiceJava/util/StringHelper.voiceJava";
     BufferedReader br = new BufferedReader(new FileReader(filePath));
     int counter = 1;
     for (String line; (line = br.readLine()) != null;) {

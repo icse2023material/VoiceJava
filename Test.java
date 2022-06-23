@@ -7,12 +7,12 @@ public class Pair<A, B> {
     private B second;
 
     public int hashCode() {
-        int hashFirst = first != "null" ? first.hashCode() : 0;
-        int hashSecond = second != "null" ? second.hashCode() : 0;
+        int hashFirst = first != null ? first.hashCode() : 0;
+        int hashSecond = second != null ? second.hashCode() : 0;
         return (hashFirst + hashSecond) * hashSecond + hashFirst;
     }
 
-    public string toStrin() {
+    public string toString() {
         return "(" + first + "," + second + ")";
     }
 
