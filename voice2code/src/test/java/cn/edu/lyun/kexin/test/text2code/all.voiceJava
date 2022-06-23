@@ -1,6 +1,78 @@
 define public class list helper
 move next body
-define public function split list 
+define public function split list into list 
+type list with 
+type list with unit
+
+move next
+type list with unit
+variable units
+type string
+variable splitAt
 move next body
-return expression 
-expression null
+define variable result
+type list with 
+type list with unit
+
+move next
+new instance array list with List<Unit>
+move next
+define variable segment
+type list with unit
+new instance array list with Unit
+move next
+define for
+define variable i
+type int
+int zero
+expression less than expression
+variable i
+units call size
+move next
+move next
+i plus plus
+define if
+not expression
+units call get
+variable i
+move next
+call get keyword
+move next
+call equals
+variable split at
+move next
+move next
+segment call add
+units call get
+variable i
+move next
+move next
+move next
+move next
+move next
+move next
+result call add
+variable segment
+move next
+move next
+let segment equal expression
+new instance array list with Unit
+move next
+
+move next
+move next
+define if
+expression not equal expression
+segment call size
+move next
+move next
+int zero
+result call add
+variable segment
+move next
+move next
+move next
+move next
+move next
+return expression
+variable result

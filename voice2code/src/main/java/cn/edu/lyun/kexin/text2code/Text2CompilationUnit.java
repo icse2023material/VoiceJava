@@ -93,7 +93,7 @@ public class Text2CompilationUnit {
   }
 
   public CompilationUnit generate(String text) {
-    Pattern pattern = RegexSet.compile(new PatternSet()).matchPattern(text).concatNames();
+    Pattern pattern = RegexSet.compile(new PatternSet()).matchPattern(text.trim()).concatNames();
     if (pattern == null) {
       System.out.println("Match failed");
       return null;
@@ -516,6 +516,9 @@ public class Text2CompilationUnit {
                 parentHole.addChild(new HoleNode(HoleType.Parameters)); 
                 }
               } else {
+                currentHole.set(HoleType.Type, false);
+                // arguments
+                parentHole.addChild(new HoleNode(HoleType.Parameters)); 
               }
             } else {
               currentHole.set(HoleType.Type, false);
@@ -550,9 +553,26 @@ public class Text2CompilationUnit {
         } else if (parentNodeClassStr != null && parentNodeClassStr.equals("VariableDeclarator")) {
           VariableDeclarator variableDeclarator = (VariableDeclarator) parent.getLeft();
           variableDeclarator.setType((Type) node);
-          // currentHole.set(HoleType.Wrapper, false, HoleType.VariableDeclarator);
-          currentHole.set(HoleType.Type, false);
-          parentHole.addChild(new HoleNode());
+          if(node instanceof ClassOrInterfaceType){
+            Optional<NodeList<Type>> optional = ((ClassOrInterfaceType)node).getTypeArguments();
+            if(optional.isPresent()){
+              if(optional.get().size()==0){
+                currentHole.set(HoleType.Type, false);
+                HoleNode typeArgumentsNode = new HoleNode(HoleType.TypeArguments, false);
+                currentHole.addChild(typeArgumentsNode);
+                typeArgumentsNode.addChild(new HoleNode());
+              } else {
+                currentHole.set(HoleType.Type, false);
+                parentHole.addChild(new HoleNode()); 
+              }
+            } else {
+              currentHole.set(HoleType.Type, false);
+              parentHole.addChild(new HoleNode()); 
+            }
+          } else {
+            currentHole.set(HoleType.Type, false);
+            parentHole.addChild(new HoleNode());
+          }
         } else if (parentNodeClassStr != null && parentNodeClassStr.equals("VariableDeclarationExpr")) {
         } else if (parentNodeClassStr != null && parentNodeClassStr.equals("ClassOrInterfaceDeclaration")) {
           ClassOrInterfaceDeclaration classOrInterfaceDeclaration = (ClassOrInterfaceDeclaration) parent.getLeft();
