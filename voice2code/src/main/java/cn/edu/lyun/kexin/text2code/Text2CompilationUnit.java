@@ -3614,8 +3614,10 @@ public class Text2CompilationUnit {
         ifStmt.setElseStmt(elseBranch);
   
         currentHole.set(HoleType.ElseStatement, false);
+        HoleNode ifStmtHole = new HoleNode(HoleType.Wrapper, false, HoleType.IfStmt);
+        currentHole.addChild(ifStmtHole);
         HoleNode conditionHole = new HoleNode(HoleType.IfCondition, false);
-        currentHole.addChild(conditionHole);
+        ifStmtHole.addChild(conditionHole);
         HoleNode methodCallExprChainHole = new HoleNode(HoleType.Wrapper, false, HoleType.MethodCallExprChain);
         conditionHole.addChild(methodCallExprChainHole);
         HoleNode exprWrapperHole = new HoleNode(HoleType.Wrapper, false, holeTypeExpr);
