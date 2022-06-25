@@ -77,6 +77,10 @@ public class Pattern {
       List<Unit> result = forExpr4(unitList);
 		  units = result.toArray(new Unit[result.size()]);
       return this;
+    } else if (this.name.equals("expr1")){
+      List<Unit> result = forExpr1(unitList);
+		  units = result.toArray(new Unit[result.size()]);
+      return this;
     }
 
 		List<Unit> result = new ArrayList<Unit>();
@@ -110,6 +114,20 @@ public class Pattern {
       unit = unitList.remove(0);
     }
     if(unit.getKeyword().equals("variable")){
+      result.add(unit);
+    }
+    result.add(createUnit(unitList));
+    return result;
+  }
+
+  private List<Unit> forExpr1(List<Unit> unitList){
+    List<Unit> result = new ArrayList<Unit>();
+    Unit unit = unitList.remove(0);
+    if(unit.getKeyword().equals("expression")){
+      result.add(unit);
+      unit = unitList.remove(0);
+    }
+    if(unit.getKeyword().equals("call")){
       result.add(unit);
     }
     result.add(createUnit(unitList));

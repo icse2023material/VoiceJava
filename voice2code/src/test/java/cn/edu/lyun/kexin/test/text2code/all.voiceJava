@@ -3,8 +3,9 @@ move next body
 define public function generate png of hole ast 
 type void
 move next
-currentHole call add child
-variable variable declarators hole
+thenStmt call get class
+move next
+call to string
 move next
 move next
 move next

@@ -1,6 +1,7 @@
-public class Pair {
+public class HelloWorld {
 
-    public void generatePngOfHoleAst() {
-        currentHole.addChild(variableDeclaratorsHole);
+    public void sayHello(Name[] names) {
+        if (counter < 10)
+            return;
     }
 }
