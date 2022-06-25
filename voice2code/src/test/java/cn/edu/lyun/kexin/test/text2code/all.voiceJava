@@ -3,19 +3,8 @@ move next body
 define public function generate png of hole ast 
 type void
 move next
-define while
-not expression
-parentHole call get hole type
-move next
-call equals
-hole type dot statements
-move next
-move next
-let parent hole equal expression
-parentHole call get parent
-move next
-move next
-
+currentHole call add child
+variable variable declarators hole
 move next
 move next
 move next

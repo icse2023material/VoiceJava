@@ -71,6 +71,14 @@ public class Pattern {
 			return this;
 		}
 		List<Unit> unitList = new ArrayList<Unit>(Arrays.asList(units));
+    
+    // temporary workaround 
+    if(this.name.equals("expr4")){
+      List<Unit> result = forExpr4(unitList);
+		  units = result.toArray(new Unit[result.size()]);
+      return this;
+    }
+
 		List<Unit> result = new ArrayList<Unit>();
 
 		List<Unit> temp = new ArrayList<Unit>();
@@ -93,6 +101,20 @@ public class Pattern {
 		units = result.toArray(new Unit[result.size()]);
 		return this;
 	}
+
+  private List<Unit> forExpr4(List<Unit> unitList){
+    List<Unit> result = new ArrayList<Unit>();
+    Unit unit = unitList.remove(0);
+    if(unit.getKeyword().equals("expression")){
+      result.add(unit);
+      unit = unitList.remove(0);
+    }
+    if(unit.getKeyword().equals("variable")){
+      result.add(unit);
+    }
+    result.add(createUnit(unitList));
+    return result;
+  }
 
 	private Unit createUnitWithCamelString(List<Unit> units) {
 		Unit any = new Unit();
