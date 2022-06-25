@@ -3,9 +3,13 @@ move next body
 define public function generate png of hole ast 
 type void
 move next
-thenStmt call get class
+define if
+variable a
 move next
-call to string
+variable b
+move next
+variable c
+move next
 move next
 move next
 move next
