@@ -1,0 +1,7 @@
+public class Pair {
+    public void generatePngOfHoleAst() {
+        while (!parentHole.getHoleType().equals(holeType.statements)) {
+            parentHole = parentHole.getParent();
+        }
+    }
+}

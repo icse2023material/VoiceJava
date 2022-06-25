@@ -2350,6 +2350,18 @@ public class Text2CompilationUnit {
               exprWrapper.addChild(new HoleNode());
             }
           }
+        } else if (parentNodeClassStr != null && parentNodeClassStr.equals("WhileStmt")){
+          if (holeIndex == 0) {
+            // !expr in while(!expr){}
+            WhileStmt whileStmt = (WhileStmt) parent.getLeft();
+            whileStmt.setCondition((Expression)node);
+            currentHole.set(HoleType.WhileCondition, false);
+            HoleNode exprWrapperHole = new HoleNode(HoleType.Wrapper, false, holeTypeExpr);
+            currentHole.addChild(exprWrapperHole);
+            exprWrapperHole.addChild(new HoleNode());
+          } else {
+            System.out.println("Not supported yet");
+          }
         }
         break;
       case "expr17":

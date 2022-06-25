@@ -26,7 +26,7 @@ public class RunSingleTest {
     // "/Users/stefanzan/Research/2021/voice2CodeInVoiceJava/kexin/text2code/Text2CompilationUnit.voiceJava";
     BufferedReader br = new BufferedReader(new FileReader(filePath));
     int counter = 1;
-    int debugLogStartLine = 731;
+    int debugLogStartLine = 8;
     for (String line; (line = br.readLine()) != null;) {
       System.out.println(counter + ": " + line);
       counter++;
