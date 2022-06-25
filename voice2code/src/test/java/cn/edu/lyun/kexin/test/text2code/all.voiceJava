@@ -3,57 +3,25 @@ move next body
 define public function generate png of hole ast 
 type void
 move next
+define variable body declarations
+type node list with 
+type body declaration with question mark
 
-define if
-expression not equal expression
-currentHole call get hole type of options if only one
+move next
+cast expression
+type node list with 
+type body declaration with question mark
+
+move next
+parent call get
+move next
+call get
 move next
 move next
-expression null
-define if
-holeType call equals
-hole type dot parameters
-move next
-move next
-currentHole call set
-hole type dot parameters
-boolean false
-move next
-move next
-parentHole call add child
-variable expr hole
-move next
-move next
-move next
-holeType call equals
-hole type dot for initialization
-move next
-move next
-currentHole call set
-hole type dot for initialization
-boolean false
-move next
-move next
-exprHole call set hole type options of only one
-hole type dot for compare
-move next
-move next
-parentHole call add child
-variable expr hole
-move next
-move next
-move next
-move next
-parentHole call delete hole
-variable hole index
-move next
-move next
-parentOfParentHole call add child
-variable expr hole
-move next
-move next
-move next
-move next
+bodyDeclarations call add
+cast expression
+type body declaration with question mark
+variable node
 move next
 move next
 move next

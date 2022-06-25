@@ -636,8 +636,29 @@ public class Text2CompilationUnit {
         } else if (parentNodeClassStr != null && parentNodeClassStr.equals("CastExpr")) {
           CastExpr castExpr = (CastExpr) parent.getLeft();
           castExpr.setType((Type) node);
-          currentHole.set(HoleType.Type, false);
-          parentHole.addChild(new HoleNode());
+          if(node instanceof ClassOrInterfaceType){
+            Optional<NodeList<Type>> optional = ((ClassOrInterfaceType)node).getTypeArguments();
+            if(optional.isPresent()){
+              if(optional.get().size()==0){
+                currentHole.set(HoleType.Type, false);
+                HoleNode typeArgumentsNode = new HoleNode(HoleType.TypeArguments, false);
+                currentHole.addChild(typeArgumentsNode);
+                typeArgumentsNode.addChild(new HoleNode());
+              } else {
+              currentHole.set(HoleType.Type, false);
+              // arguments
+              parentHole.addChild(new HoleNode(HoleType.Parameters)); 
+              }
+            } else {
+              currentHole.set(HoleType.Type, false);
+              // arguments
+              parentHole.addChild(new HoleNode(HoleType.Parameters)); 
+            }
+          } else {
+            currentHole.set(HoleType.Type, false);
+            // arguments
+            parentHole.addChild(new HoleNode(HoleType.Parameters));
+          }
         }
         break;
       case "for":
@@ -2372,6 +2393,13 @@ public class Text2CompilationUnit {
           VariableDeclarator variableDeclarator = (VariableDeclarator) parent.getLeft();
           variableDeclarator.setInitializer((Expression) node);
           currentHole.set(HoleType.VariableInitializer, false);
+          HoleNode exprWrapper = new HoleNode(HoleType.Wrapper, false, holeTypeExpr);
+          currentHole.addChild(exprWrapper);
+          exprWrapper.addChild(new HoleNode());
+        } else if (parentHoleType.equals(HoleType.Arguments)){
+          NodeList<Expression> arguments = (NodeList<Expression>) parent.get().get();
+          arguments.add((Expression) node);
+          currentHole.set(HoleType.Wrapper, false, HoleType.Argument);
           HoleNode exprWrapper = new HoleNode(HoleType.Wrapper, false, holeTypeExpr);
           currentHole.addChild(exprWrapper);
           exprWrapper.addChild(new HoleNode());
