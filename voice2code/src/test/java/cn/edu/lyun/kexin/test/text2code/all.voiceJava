@@ -3,25 +3,14 @@ move next body
 define public function generate png of hole ast 
 type void
 move next
-define variable body declarations
-type node list with 
-type body declaration with question mark
+define variable field ast
+type filed ast
+new instance field ast
+move next
+let node equal expression
+fieldAST call generate variable declaration expr
+variable pattern
+move next
+move next
 
-move next
-cast expression
-type node list with 
-type body declaration with question mark
-
-move next
-parent call get
-move next
-call get
-move next
-move next
-bodyDeclarations call add
-cast expression
-type body declaration with question mark
-variable node
-move next
-move next
 move next

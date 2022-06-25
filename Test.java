@@ -1,7 +1,7 @@
-public class Pair {
+public class HelloWorld {
 
-    public void generatePngOfHoleAst() {
-        NodeList<BodyDeclaration<?>> bodyDeclarations = (NodeList<BodyDeclaration<?>>) parent.get().get();
-        bodyDeclarations.add((BodyDeclaration<?>) node);
+    public void sayHello(Name[] names) {
+        if (counter < 10)
+            return;
     }
 }

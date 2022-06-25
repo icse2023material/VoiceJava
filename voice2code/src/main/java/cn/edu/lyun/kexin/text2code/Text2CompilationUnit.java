@@ -309,7 +309,9 @@ public class Text2CompilationUnit {
           ClassOrInterfaceDeclaration classOrInterfaceDeclaration = (ClassOrInterfaceDeclaration) parent.getLeft();
           // If Interface, no body
           if (classOrInterfaceDeclaration.isInterface()) {
-            ((MethodDeclaration) node).removeBody();
+            // ((MethodDeclaration) node).removeBody();
+            MethodDeclaration mnode = (MethodDeclaration)node;
+            mnode.removeBody();
           }
           classOrInterfaceDeclaration.addMember((BodyDeclaration<?>) node);
 
@@ -324,7 +326,9 @@ public class Text2CompilationUnit {
           String firstBodyDeclarationType = StringHelper.getClassName(bodyDeclaration0.getClass().toString());
           if (firstBodyDeclarationType.equals("MethodDeclaration")
               && ((MethodDeclaration) bodyDeclaration0).getBody().isEmpty()) {
-            ((MethodDeclaration) node).removeBody();
+            // ((MethodDeclaration) node).removeBody();
+            MethodDeclaration mnode = (MethodDeclaration)node;
+            mnode.removeBody();
           }
           bodyDeclarations.add((BodyDeclaration<?>) node);
 
@@ -361,7 +365,9 @@ public class Text2CompilationUnit {
         } else if (parentNodeClassStr != null && parentNodeClassStr.equals("MethodDeclaration")) {
           // variable declaration inside body. i.e. VariableDeclarationExpr
           // Regenerate VariableDeclarationExpr.
-          node = new FieldAST().generateVariableDeclarationExpr(pattern);
+          // node = new FieldAST().generateVariableDeclarationExpr(pattern);
+          FieldAST fieldAST = new FieldAST();
+          node = fieldAST.generateVariableDeclarationExpr(pattern);
           MethodDeclaration mNode = (MethodDeclaration) parent.getLeft();
           Optional<BlockStmt> optionalBody = mNode.getBody();
 
@@ -391,7 +397,9 @@ public class Text2CompilationUnit {
           // variable declaration inside body. i.e. VariableDeclarationExpr
           // regenerate VariableDeclarationExpr.
           // TODO: later may according to index to insert to specific location.
-          node = new FieldAST().generateVariableDeclarationExpr(pattern);
+          // node = new FieldAST().generateVariableDeclarationExpr(pattern);
+          FieldAST fieldAST = new FieldAST();
+          node = fieldAST.generateVariableDeclarationExpr(pattern);
           BlockStmt blockStmt = (BlockStmt) parent.getLeft();
           NodeList<Statement> statements = blockStmt.getStatements();
           statements.add((Statement) node);
@@ -400,7 +408,9 @@ public class Text2CompilationUnit {
           currentHole.addChild(new HoleNode());
         } else if (parentNodeClassStr != null && parentNodeClassStr.equals("ForStmt")) {
           ForStmt forStmt = (ForStmt) parent.getLeft();
-          ExpressionStmt expressionStmt = (ExpressionStmt) new FieldAST().generateVariableDeclarationExpr(pattern);
+          // ExpressionStmt expressionStmt = (ExpressionStmt) new FieldAST().generateVariableDeclarationExpr(pattern);
+          FieldAST fieldAST = new FieldAST();
+          ExpressionStmt expressionStmt = (ExpressionStmt) fieldAST.generateVariableDeclarationExpr(pattern);
           NodeList<Expression> initializationList = new NodeList<Expression>();
           initializationList.add(expressionStmt.getExpression());
           forStmt.setInitialization(initializationList);
@@ -415,7 +425,9 @@ public class Text2CompilationUnit {
           variablesHole.addChild(variableHole);
           variableHole.addChild(new HoleNode());
         } else if (parentNodeClassStr != null && parentNodeClassStr.equals("IfStmt")) {
-          node = new FieldAST().generateVariableDeclarationExpr(pattern);
+          // node = new FieldAST().generateVariableDeclarationExpr(pattern);
+          FieldAST fieldAST = new FieldAST();
+          node = fieldAST.generateVariableDeclarationExpr(pattern);
           IfStmt ifStmt = (IfStmt) parent.getLeft();
           Statement thenStmt = ifStmt.getThenStmt();
           String thenStmtStr = StringHelper.getClassName(thenStmt.getClass().toString());
@@ -440,7 +452,9 @@ public class Text2CompilationUnit {
             variableDeclaratorHole.addChild(new HoleNode());
           }
         } else if (parentNodeClassStr != null && parentNodeClassStr.equals("WhileStmt")) {
-          node = new FieldAST().generateVariableDeclarationExpr(pattern);
+          // node = new FieldAST().generateVariableDeclarationExpr(pattern);
+          FieldAST fieldAST = new FieldAST();
+          node = fieldAST.generateVariableDeclarationExpr(pattern);
           WhileStmt whileStmt = (WhileStmt) parent.getLeft();
           Statement body = whileStmt.getBody();
           String bodyClassStr = StringHelper.getClassName(body.getClass().toString());
@@ -466,7 +480,9 @@ public class Text2CompilationUnit {
             System.out.println("Shall not go into this branch");
           }
         } else if (parentNodeClassStr != null && parentNodeClassStr.equals("SwitchEntry")) {
-          node = new FieldAST().generateVariableDeclarationExpr(pattern);
+          // node = new FieldAST().generateVariableDeclarationExpr(pattern);
+          FieldAST fieldAST = new FieldAST();
+          node = fieldAST.generateVariableDeclarationExpr(pattern);
           SwitchEntry switchEntry = (SwitchEntry) parent.getLeft();
           NodeList<Statement> statements = switchEntry.getStatements();
           statements.add((Statement) node);
@@ -482,7 +498,9 @@ public class Text2CompilationUnit {
           variableDeclaratorsHole.addChild(variableDeclaratorHole);
           variableDeclaratorHole.addChild(new HoleNode());
         } else if (parentHoleType.equals(HoleType.Statements)) {
-          node = new FieldAST().generateVariableDeclarationExpr(pattern);
+          // node = new FieldAST().generateVariableDeclarationExpr(pattern);
+          FieldAST fieldAST = new FieldAST();
+          node = fieldAST.generateVariableDeclarationExpr(pattern);
           NodeList<Statement> statements = (NodeList<Statement>) parent.get().get();
           statements.add((Statement) node);
 
