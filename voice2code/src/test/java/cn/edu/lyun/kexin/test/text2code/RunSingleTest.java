@@ -17,8 +17,8 @@ public class RunSingleTest {
     Text2CompilationUnit text2CompilationUnit = new Text2CompilationUnit();
     String filePath = dir
         +
-        // "/voice2code/src/test/java/cn/edu/lyun/kexin/test/text2code/testcases/24Expression_47.voiceJava";
-        "/voice2code/src/test/java/cn/edu/lyun/kexin/test/text2code/testcases/14Switch_15.voiceJava";
+        // "/voice2code/src/test/java/cn/edu/lyun/kexin/test/text2code/testcases/13If_17.voiceJava";
+        "/voice2code/src/test/java/cn/edu/lyun/kexin/test/text2code/all.voiceJava";
     // filePath =
     // "/Users/stefanzan/Research/2021/voice2CodeInVoiceJava/util/ListHelper.voiceJava";
     // "/Users/stefanzan/Research/2021/voice2CodeInVoiceJava/util/Pair.voiceJava";
@@ -33,7 +33,7 @@ public class RunSingleTest {
       if (line.equals("")) {
         continue;
       }
-      if(counter == 45){
+      if(counter == 25){
         System.out.println("stop for inspection");
       }
       text2CompilationUnit.generate(line);

@@ -1,78 +1,55 @@
-define public class list helper
+define public class pair
 move next body
-define public function split list into list 
-type list with 
-type list with unit
-
+define public function generate png of hole ast 
+type void
 move next
-type list with unit
-variable units
-type string
-variable splitAt
-move next body
-define variable result
-type list with 
-type list with unit
-
-move next
-new instance array list with List<Unit>
-move next
-define variable segment
-type list with unit
-new instance array list with Unit
-move next
-define for
-define variable i
-type int
-int zero
-expression less than expression
-variable i
-units call size
-move next
-move next
-i plus plus
-define if
-not expression
-units call get
-variable i
-move next
-call get keyword
-move next
-call equals
-variable split at
-move next
-move next
-segment call add
-units call get
-variable i
-move next
-move next
-move next
-move next
-move next
-move next
-result call add
-variable segment
-move next
-move next
-let segment equal expression
-new instance array list with Unit
-move next
-
-move next
+define variable expr hole
+type hole node
+new instance hole node
+hole type dot undefined
+boolean true
 move next
 define if
-expression not equal expression
-segment call size
+holeType call equals
+hole type dot parameters
 move next
 move next
-int zero
-result call add
-variable segment
+currentHole call set
+hole type dot parameters
+boolean false
+move next
+move next
+parentHole call add child
+variable expr hole
+move next
+move next
+move next
+holeType call equals
+hole type dot for initialization
+move next
+move next
+currentHole call set
+hole type dot for initialization
+boolean false
+move next
+move next
+exprHole call set hole type options of only one
+hole type dot for compare
+move next
+move next
+parentHole call add child
+variable expr hole
 move next
 move next
 move next
 move next
+parentHole call delete hole
+variable hole index
 move next
-return expression
-variable result
+move next
+parentOfParentHole call add child
+variable expr hole
+move next
+move next
+move next
+move next

@@ -3438,7 +3438,8 @@ public class Text2CompilationUnit {
         HoleNode argsHole = new HoleNode(HoleType.Arguments, false);
         exprWrapperHole.addChild(argsHole);
         argsHole.addChild(new HoleNode());
-      } else {
+      } else if (parentHole.getChildList().size() == 2) {
+        // then branch
         Statement thenStmt = ifStmt.getThenStmt();
         String thenStmtStr = StringHelper.getClassName(thenStmt.getClass().toString());
         if (thenStmtStr.equals("ReturnStmt")) {
@@ -3473,6 +3474,22 @@ public class Text2CompilationUnit {
         } else {
           System.out.println("Should not go to this branch");
         }
+      } else if (parentHole.getChildList().size() > 2) {
+        // else branch
+        IfStmt elseBranch = new IfStmt();
+        elseBranch.setCondition((Expression) node);
+        ifStmt.setElseStmt(elseBranch);
+  
+        currentHole.set(HoleType.ElseStatement, false);
+        HoleNode conditionHole = new HoleNode(HoleType.IfCondition, false);
+        currentHole.addChild(conditionHole);
+        HoleNode methodCallExprChainHole = new HoleNode(HoleType.Wrapper, false, HoleType.MethodCallExprChain);
+        conditionHole.addChild(methodCallExprChainHole);
+        HoleNode exprWrapperHole = new HoleNode(HoleType.Wrapper, false, holeTypeExpr);
+        methodCallExprChainHole.addChild(exprWrapperHole);
+        HoleNode argsHole = new HoleNode(HoleType.Arguments, false);
+        exprWrapperHole.addChild(argsHole);
+        argsHole.addChild(new HoleNode());
       }
     } else if (parentNodeClassStr != null && parentNodeClassStr.equals("BlockStmt")) {
       BlockStmt blockStmt = (BlockStmt) parent.getLeft();
