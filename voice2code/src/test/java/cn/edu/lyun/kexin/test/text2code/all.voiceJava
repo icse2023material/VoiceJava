@@ -3,12 +3,13 @@ move next body
 define public function generate png of hole ast 
 type void
 move next
-define variable expr hole
-type hole node
-new instance hole node
-hole type dot undefined
-boolean true
+
+define if
+expression not equal expression
+currentHole call get hole type of options if only one
 move next
+move next
+expression null
 define if
 holeType call equals
 hole type dot parameters
@@ -49,6 +50,9 @@ move next
 move next
 parentOfParentHole call add child
 variable expr hole
+move next
+move next
+move next
 move next
 move next
 move next

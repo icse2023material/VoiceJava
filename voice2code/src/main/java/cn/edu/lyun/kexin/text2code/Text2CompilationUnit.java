@@ -921,15 +921,33 @@ public class Text2CompilationUnit {
           String bodyClassStr = stmt.getClass().toString();
           bodyClassStr = StringHelper.getClassName(bodyClassStr);
           if (bodyClassStr.equals("ReturnStmt")) {
-            ifStmt.setThenStmt((Statement) node);
+            BlockStmt blockStmt = new BlockStmt();
+            NodeList<Statement> statements = new NodeList<Statement>();
+            statements.add((Statement) node);
+            blockStmt.setStatements(statements);
+            ifStmt.setThenStmt(blockStmt);
+            HoleNode stmtsHole = new HoleNode(HoleType.Statements, false);
+            currentHole.addChild(stmtsHole);
             HoleNode ifStmtWrapperHole = new HoleNode(HoleType.Wrapper, false, HoleType.IfStmt);
-            currentHole.addChild(ifStmtWrapperHole);
+            stmtsHole.addChild(ifStmtWrapperHole);
             ifStmtWrapperHole.addChild(new HoleNode(HoleType.Expression));
           } else if (bodyClassStr.equals("BlockStmt")) {
-
+            System.out.println("Sh go to this branch");
           } else {
             System.out.println("Should not go to this branch");
           }
+        } else if (parentNodeClassStr != null && parentNodeClassStr.equals("SwitchEntry")){
+          SwitchEntry switchEntry = (SwitchEntry) parent.getLeft();
+          NodeList<Statement> statements = switchEntry.getStatements();
+          currentHole.set(HoleType.Statements, false);
+          if (holeIndex < statements.size()) {
+            // TODO
+          } else {
+            statements.add((Statement) node);
+            HoleNode ifStmtWrapperHole = new HoleNode(HoleType.Wrapper, false, HoleType.IfStmt);
+            currentHole.addChild(ifStmtWrapperHole);
+            ifStmtWrapperHole.addChild(new HoleNode(HoleType.Expression));
+          } 
         }
         break;
       case "switch":
@@ -1142,6 +1160,17 @@ public class Text2CompilationUnit {
             currentHole.set(HoleType.Break, false);
             parentOfParentHole.addChild(new HoleNode());
           }
+        } else if(parentNodeClassStr != null && parentNodeClassStr.equals("SwitchEntry")){
+          SwitchEntry switchEntry = (SwitchEntry)parent.getLeft();
+          NodeList<Statement> statements = switchEntry.getStatements();
+          if (holeIndex < statements.size()) {
+          } else {
+            statements.add((Statement) node);
+            currentHole.set(HoleType.Statements, false);
+            HoleNode childHoleNode = new HoleNode(HoleType.Break, false);
+            currentHole.addChild(childHoleNode);
+            parentOfParentHole.addChild(new HoleNode());
+          } 
         }
         break;
       case "continue":

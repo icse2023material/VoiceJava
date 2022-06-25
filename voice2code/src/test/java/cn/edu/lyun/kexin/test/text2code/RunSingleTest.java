@@ -17,8 +17,8 @@ public class RunSingleTest {
     Text2CompilationUnit text2CompilationUnit = new Text2CompilationUnit();
     String filePath = dir
         +
-        // "/voice2code/src/test/java/cn/edu/lyun/kexin/test/text2code/testcases/13If_17.voiceJava";
-        "/voice2code/src/test/java/cn/edu/lyun/kexin/test/text2code/all.voiceJava";
+        "/voice2code/src/test/java/cn/edu/lyun/kexin/test/text2code/testcases/14Switch_16.voiceJava";
+        // "/voice2code/src/test/java/cn/edu/lyun/kexin/test/text2code/all.voiceJava";
     // filePath =
     // "/Users/stefanzan/Research/2021/voice2CodeInVoiceJava/util/ListHelper.voiceJava";
     // "/Users/stefanzan/Research/2021/voice2CodeInVoiceJava/util/Pair.voiceJava";
@@ -26,6 +26,7 @@ public class RunSingleTest {
     // "/Users/stefanzan/Research/2021/voice2CodeInVoiceJava/kexin/text2code/Text2CompilationUnit.voiceJava";
     BufferedReader br = new BufferedReader(new FileReader(filePath));
     int counter = 1;
+    int debugLogStartLine = 731;
     for (String line; (line = br.readLine()) != null;) {
       System.out.println(counter + ": " + line);
       counter++;
@@ -33,12 +34,12 @@ public class RunSingleTest {
       if (line.equals("")) {
         continue;
       }
-      if(counter == 25){
+      if(counter == debugLogStartLine){
         System.out.println("stop for inspection");
       }
       text2CompilationUnit.generate(line);
 
-      if (RunSingleTest.isDebug) {
+      if (RunSingleTest.isDebug && counter >= debugLogStartLine) {
         text2CompilationUnit.generatePNGofHoleAST();
       }
       if (!RunSingleTest.isDebug) {
