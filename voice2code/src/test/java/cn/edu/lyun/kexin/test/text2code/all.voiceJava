@@ -3,36 +3,8 @@ move next body
 define public function generate png of hole ast 
 type void
 move next
-define if
-call is true
-move next
-move next
-define if
-bodyClassStr call equals
-string ReturnStmt
-move next
-move next
-define variable block stmt
-type block stmt
-new instance block stmt
-move next
-move next
-bodyClassStr call equals
-string BlockStmt
-move next
-move next
-move next
-move next
-system dot out call println
-string Should not go to this branch
-move next
-move next
-move next
-move next
-call is not trye
-move next
-move next
-move next
-move next
-move next
+define switch
+variable name
+string if
+break
 move next

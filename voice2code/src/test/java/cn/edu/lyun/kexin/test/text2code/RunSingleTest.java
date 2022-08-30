@@ -19,11 +19,11 @@ public class RunSingleTest {
         +
         // "/voice2code/src/test/java/cn/edu/lyun/kexin/test/text2code/testcases/If2.voiceJava";
         "/voice2code/src/test/java/cn/edu/lyun/kexin/test/text2code/all.voiceJava";
-    // filePath =
+    filePath =
     // "/Users/stefanzan/Research/2021/voice2CodeInVoiceJava/util/ListHelper.voiceJava";
     // "/Users/stefanzan/Research/2021/voice2CodeInVoiceJava/util/Pair.voiceJava";
     // "/Users/stefanzan/Research/2021/voice2CodeInVoiceJava/util/StringHelper.voiceJava";
-    // "/Users/stefanzan/Research/2021/voice2CodeInVoiceJava/kexin/text2code/Text2CompilationUnit.voiceJava";
+    "/Users/stefanzan/Research/2021/voice2CodeInVoiceJava/kexin/text2code/Text2CompilationUnit.voiceJava";
     BufferedReader br = new BufferedReader(new FileReader(filePath));
     int counter = 1;
     int debugLogStartLine = 21;

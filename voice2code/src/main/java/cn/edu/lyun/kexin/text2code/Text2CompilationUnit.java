@@ -4,7 +4,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.sql.Ref;
 import java.util.*;
 
 import cn.edu.lyun.util.Pair;
@@ -37,9 +36,7 @@ import com.github.javaparser.ast.expr.InstanceOfExpr;
 import com.github.javaparser.ast.expr.LambdaExpr;
 import com.github.javaparser.ast.expr.MethodCallExpr;
 import com.github.javaparser.ast.expr.NameExpr;
-import com.github.javaparser.ast.expr.NullLiteralExpr;
 import com.github.javaparser.ast.expr.ObjectCreationExpr;
-import com.github.javaparser.ast.expr.SimpleName;
 import com.github.javaparser.ast.expr.UnaryExpr;
 import com.github.javaparser.ast.expr.VariableDeclarationExpr;
 import com.github.javaparser.ast.stmt.BlockStmt;
@@ -64,9 +61,7 @@ import cn.edu.lyun.kexin.text2code.astskeleton.TypeNameMap;
 import cn.edu.lyun.kexin.text2pattern.nfa.RegexSet;
 import cn.edu.lyun.kexin.text2pattern.pattern.Pattern;
 import cn.edu.lyun.kexin.text2pattern.pattern.PatternSet;
-import io.vavr.PartialFunction;
 import io.vavr.control.Either;
-import javassist.bytecode.stackmap.BasicBlock.Catch;
 
 public class Text2CompilationUnit {
 
